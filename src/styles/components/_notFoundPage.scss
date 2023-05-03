@@ -1,0 +1,12 @@
+
+#notFoundPage{
+    font-size: $calcFontSizeLarge;
+    text-align: center;
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    #notFoundPage{
+        font-size: $calcFontSize;
+        text-align: center;
+    }
+}
