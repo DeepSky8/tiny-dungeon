@@ -1,9 +1,0 @@
-const defaultScroll = {
-    sID: '',
-    sName: '',
-    sText: '',
-}
-
-const scrollReducer = (state, action) => {
-    
-}

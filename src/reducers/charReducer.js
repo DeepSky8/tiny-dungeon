@@ -5,45 +5,42 @@ const defaultChar = {
     charID: '',
     userID: '',
     charName: '',
-    heritage: '',       // Select from Heritages array, identify by ID
-    hTrait: '',         // Heritage trait determined by Heritage
-    hp: '',             // HP determined by Heritage
-    armorHP: '',        // HP from armor determined by Trait and worn items
-    trade: '',          // Trade is user-defined text
-    belief: '',         // Belief is user-defined text
+    heritage: '',           // Select from Heritages array, identify by hID
+    hTrait: '',             // Heritage trait determined by Heritage, identified by htID
+    healthHP: '',           // HP determined by Heritage and trait: Toughness
+    currentHealthHP: '',    // HP current number
+    armorHP: '',            // HP from armor determined by Trait and worn items
+    currentArmorHP:'',      // HP from armor current number
+    trade: '',              // Trade is user-defined text
+    belief: '',             // Belief is user-defined text
 
-    weaponGroups: [''],
-    // Weapon Groups
-    //  Light Melee     l
-    //      Includes Powerful Claws Karhu Heritage Trait
-    //  Heavy Melee     h
-    //  Ranged          r
-    //  Improvised      i
-    //  Unarmed         u
-    //  Shield          s
+    weaponGroups: [''],     // Identified by wgID
 
-    weaponsMastered: [   // Mastered weapon type is user-defined text
-
-        {
-            wGroup: '',     // Corresponds to weaponGroup letter
-            wType: '',      // Select from weapon type array determined by group, identify by ID
-            wName: '',      // User-defined text, if any
-            wDepletion: '', // Interact with depletion counters in later update, set initial depletion counters by wType object
-        },
-    ],
+    weaponsMastered: [''],  // Identified by wID
 
     // Wearing select from non-statted descriptions
-    // Implement array of wearable items, use item ID
+    // Implement array of wearable items, use wID
     // Add specialized armor/wearable items in later update
     wearing: [''],
 
     gold: 10,
     gear: defaultGear,
 
-    traits: [''],           // Select and identify by ID
-    familiar: {
-
-    },           // 
+    traits: [''],           // Select and identify by tID
+    familiar: '',           // Reference by fID
     XP: 0,
-
+    scrolls: [''],          // Identified by sID
 }
+
+
+
+
+
+// const userReducer = (state, action) => {
+//     switch (action.type) {
+//         case 'LOAD_USER':
+
+// case '':
+//     return {
+        
+//     }
