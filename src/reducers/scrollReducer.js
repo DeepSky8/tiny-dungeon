@@ -2,7 +2,6 @@ const defaultScroll = {
     sID: '',
     sName: '',
     sText: '',
-    sCount: 1,
 }
 
 const scrollReducer = (state, action) => {
@@ -30,16 +29,6 @@ const scrollReducer = (state, action) => {
             return {
                 ...state,
                 sCount: action.sCount
-            }
-        case 'INCREMENT_COUNT':
-            return {
-                ...state,
-                sCount: state.sCount + 1
-            }
-        case 'DECREMENT_COUNT':
-            return {
-                ...state,
-                sCount: state.sCount - 1
             }
         default:
             return {

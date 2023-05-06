@@ -40,6 +40,7 @@ const defaultWeaponGroup = {
     wgAttackTurn: 0,
     wgRange: [''],      // c,n,f
     wgDisRange: [''],   // c,n,f
+    wgHTrait: false,    // Set by Heritage
 }
 
 const defaultWeaponMastered = {
@@ -49,6 +50,7 @@ const defaultWeaponMastered = {
     wName: '',          // User-defined text, if any
     wDescription: '',   // User-defined text, if any
     wDepletion: '',     // Interact with depletion counters in later update, set initial depletion counters by wType object
+    wHTrait: false,     // Set by Heritage
 }
 
 const rangeSort = (a, b) => {
@@ -62,6 +64,7 @@ const rangeSort = (a, b) => {
         return 1
     }
 }
+
 
 const weaponGroupReducer = (state, action) => {
     switch (action.type) {
@@ -109,7 +112,7 @@ const weaponGroupReducer = (state, action) => {
             return {
                 ...state,
                 wgRange: newWGRange
-                
+
             }
         case 'UPDATE_WGDISRANGE':
             const wgDisExists = state.wgDisRange.contains(action.wgDisRange)
@@ -122,6 +125,11 @@ const weaponGroupReducer = (state, action) => {
                 ...state,
                 wgDisRange: newWGDisRange
             }
+        case 'UPDATE_WGHTRAIT':
+            return {
+                ...state,
+                wgHTrait: action.wgHTrait
+            }
         default:
             return {
                 ...state
@@ -133,33 +141,56 @@ const weaponGroupReducer = (state, action) => {
 
 const weaponsMasteredReducer = (state, action) => {
     switch (action.type) {
-        case '':
+        case 'LOAD_WEAPON':
             return {
-
+                ...action.weapon
             }
-        case '':
+        case 'UPDATE_WID':
             return {
                 ...state,
-
+                wID: action.wID
             }
-        case '':
+        case 'UPDATE_WGROUP':
             return {
                 ...state,
-
+                wGroup: action.wGroup
             }
-        case '':
+        case 'UPDATE_WTYPE':
             return {
                 ...state,
-
+                wType: action.wType
             }
-        case '':
+        case 'UPDATE_WNAME':
             return {
                 ...state,
-
+                wName: action.wName
+            }
+        case 'UPDATE_WDESC':
+            return {
+                ...state,
+                wDescription: action.wDescription
+            }
+        case 'UPDATE_WDEPLETE':
+            return {
+                ...state,
+                wDepletion: action.wDepletion
+            }
+        case 'UPDATE_WHTRAIT':
+            return {
+                ...state,
+                wHTrait: action.wHTrait
             }
         default:
             return {
                 ...state
             }
     }
+}
+
+
+export {
+    defaultWeaponGroup,
+    defaultWeaponMastered,
+    weaponGroupReducer,
+    weaponsMasteredReducer
 }
