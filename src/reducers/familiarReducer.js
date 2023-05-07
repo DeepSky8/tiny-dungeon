@@ -1,7 +1,7 @@
 const defaultFamiliar = {
     fID: '',
     fName: '',
-    charID: '',
+    fCharID: '',
     fDescription: ''
 }
 
@@ -21,10 +21,10 @@ const familiarReducer = (state, action) => {
                 ...state,
                 fName: action.fName
             }
-        case 'UPDATE_CHARID':
+        case 'UPDATE_FCHARID':
             return {
                 ...state,
-                charID: action.charID
+                fCharID: action.fCharID
             }
         case 'UPDATE_FDESCRIPTION':
             return {

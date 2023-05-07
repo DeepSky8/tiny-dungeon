@@ -25,11 +25,6 @@ const scrollReducer = (state, action) => {
                 ...state,
                 sText: action.sText
             }
-        case 'UPDATE_COUNT':
-            return {
-                ...state,
-                sCount: action.sCount
-            }
         default:
             return {
                 ...state
