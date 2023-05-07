@@ -99,20 +99,30 @@ const charReducer = (state, action) => {
                 ...state,
                 maxHP: action.maxHP
             }
-        case 'UPDATE_CURRENTHP':
+        case 'DECREASE_CURRENTHP':
             return {
                 ...state,
-                currentHP: action.currentHP
+                currentHP: state.currentHP - 1
+            }
+        case 'INCREASE_CURRENTHP':
+            return {
+                ...state,
+                currentHP: state.currentHP + 1
             }
         case 'UPDATE_MAXARMOR':
             return {
                 ...state,
                 maxArmor: action.maxArmor
             }
-        case 'UPDATE_CURRENTARMOR':
+        case 'DECREASE_CURRENTARMOR':
             return {
                 ...state,
-                currentArmor: action.currentArmor
+                currentArmor: state.currentArmor - 1
+            }
+        case 'INCRASE_CURRENTARMOR':
+            return {
+                ...state,
+                currentArmor: state.currentArmor + 1
             }
         case 'UPDATE_TRADE':
             return {

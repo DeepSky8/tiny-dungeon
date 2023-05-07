@@ -2,7 +2,7 @@
 
 const defaultTrait = {
     tID: '',
-    hTrait: false,
+    tHTrait: false,
     tTitle: '',
     tDescription: '',
     tSpecial: false,
@@ -25,10 +25,10 @@ const traitReducer = (state, action) => {
                 ...state,
                 tId: action.tID
             }
-        case 'UPDATE_HTRAIT':
+        case 'UPDATE_THTRAIT':
             return {
                 ...state,
-                hTrait: !state.hTrait
+                tHTrait: !state.tHTrait
             }
         case 'UPDATE_TTITLE':
             return {
