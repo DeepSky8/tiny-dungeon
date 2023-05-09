@@ -32,6 +32,12 @@ const defaultChar = {
     scrollIDs: [],          // Identified by sID
 }
 
+const charPlaceholders = {
+    namePlace: 'Character Name',
+    tradePlace: "'s family trade",
+    beliefPlace: "'s personal creed"
+}
+
 
 const charReducer = (state, action) => {
     switch (action.type) {
@@ -255,4 +261,4 @@ const charReducer = (state, action) => {
     }
 }
 
-export { defaultChar, charReducer }
+export { defaultChar, charReducer, charPlaceholders }
