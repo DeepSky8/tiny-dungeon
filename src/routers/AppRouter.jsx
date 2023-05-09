@@ -2,9 +2,9 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import NotFoundPage from "../components/NotFoundPage.jsx";
 import Home from "../components/home/Home.jsx";
-import CreateTrait from "../components/createItems/createTrait.jsx";
-import CreateScroll from "../components/createItems/createScroll.jsx";
-import CreateWeaponGroup from "../components/createItems/createWeaponGroup.jsx";
+import CreateTrait from "../components/createItems/CreateTrait.jsx";
+import CreateScroll from "../components/createItems/CreateScroll.jsx";
+import CreateWeaponGroup from "../components/createItems/CreateWeaponGroup.jsx";
 
 const AppRouter = createBrowserRouter([
     {
