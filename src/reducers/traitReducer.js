@@ -2,9 +2,9 @@
 
 const defaultTrait = {
     tID: '',
-    tHTrait: false,
     tTitle: '',
     tDescription: '',
+    tHTrait: false,
     tSpecial: false,
     tHP: 0,
     tShield: false,
@@ -43,37 +43,51 @@ const traitReducer = (state, action) => {
         case 'UPDATE_TSPECIAL':
             return {
                 ...state,
-                tSpecial: !state.tSpecial
+                tSpecial: !state.tSpecial,
+                tHP: state.tSpecial ? 0 : state.tHP,
+                tShield: state.tSpecial ? false : state.tShield,
+                tSpell: state.tSpecial ? false : state.tSpell,
+                tImprovised: state.tSpecial ? false : state.tImprovised,
+                tUnarmed: state.tSpecial ? false : state.tUnarmed,
+                tFamiliar: state.tSpecial ? false : state.tFamiliar,
             }
         case 'UPDATE_THP':
             return {
                 ...state,
-                tHP: action.tHP
+                tHP: action.tHP,
+                tSpecial: action.tHP === 0 ? false : true
             }
         case 'UPDATE_TSHIELD':
             return {
                 ...state,
-                tShield: !state.tShield
+                tShield: !state.tShield,
+                tSpecial: state.tShield ? false : true
+
             }
         case 'UPDATE_TSPELL':
             return {
                 ...state,
-                tSpell: !state.tSpell
+                tSpell: !state.tSpell,
+                tSpecial: state.tSpell ? false : true
             }
         case 'UPDATE_TIMPROVISED':
             return {
                 ...state,
-                tImprovised: !state.tImprovised
+                tImprovised: !state.tImprovised,
+                tSpecial: state.tImprovised ? false : true
             }
         case 'UPDATE_TUNARMED':
             return {
                 ...state,
-                tUnarmed: !state.tUnarmed
+                tUnarmed: !state.tUnarmed,
+                tSpecial: state.tUnarmed ? false : true
+
             }
         case 'UPDATE_TFAMILIAR':
             return {
                 ...state,
-                tFamiliar: !state.tFamiliar
+                tFamiliar: !state.tFamiliar,
+                tSpecial: state.tFamiliar ? false : true
             }
         default:
             return {
