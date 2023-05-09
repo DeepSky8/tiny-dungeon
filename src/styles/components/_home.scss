@@ -6,3 +6,10 @@
     font-weight: 600;
     color: $text-brown;
 }
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .home__container {
+        background-image: url("../../../src/assets/parchment_large.png");
+        font-size: $calcFontSize;
+    }
+}
