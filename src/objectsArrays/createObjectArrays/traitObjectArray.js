@@ -105,6 +105,15 @@ const traitObjectArray = [
             // Need to add blur save command
         },
     },
+    {
+        label: 'Powerful Claws ',
+        id: 'tClaws',            // Must match the field name on the default object
+        type: 'checkbox',
+        action: updateTFamiliar,
+        blur: () => {
+            // Need to add blur save command
+        },
+    },
 
 ]
 

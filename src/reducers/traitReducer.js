@@ -11,7 +11,8 @@ const defaultTrait = {
     tSpell: false,
     tImprovised: false,
     tUnarmed: false,
-    tFamiliar: false
+    tFamiliar: false,
+    tClaws: false,
 }
 
 const traitReducer = (state, action) => {
@@ -88,6 +89,12 @@ const traitReducer = (state, action) => {
                 ...state,
                 tFamiliar: !state.tFamiliar,
                 tSpecial: state.tFamiliar ? false : true
+            }
+        case 'UPDATE_TCLAWS':
+            return {
+                ...state,
+                tClaws: !state.tClaws,
+                tSpecial: state.tClaws ? false : true
             }
         default:
             return {

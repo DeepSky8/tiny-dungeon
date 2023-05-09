@@ -61,6 +61,11 @@ export const updateTFamiliar = (tFamiliar) => ({
     tFamiliar
 })
 
+export const updateTClaws = (tClaws) => ({
+    type: 'UPDATE_TCLAWS',
+    tClaws
+})
+
 
 export const startSaveTrait = async ({
     tID,
@@ -73,7 +78,8 @@ export const startSaveTrait = async ({
     tSpell,
     tImprovised,
     tUnarmed,
-    tFamiliar
+    tFamiliar,
+    tClaws
 }) => {
     const updates = {}
 
@@ -87,6 +93,8 @@ export const startSaveTrait = async ({
     updates[`traits/${tID}/tImprovised`] = tImprovised
     updates[`traits/${tID}/tUnarmed`] = tUnarmed
     updates[`traits/${tID}/tFamiliar`] = tFamiliar
+    updates[`traits/${tID}/tClaws`] = tClaws
+
 
     update(ref(db), updates)
         .catch((error) => {
