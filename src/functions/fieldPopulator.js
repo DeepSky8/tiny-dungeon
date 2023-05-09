@@ -11,7 +11,12 @@ const fieldPopulator = ({ state, dispatchState, objectArray }) => {
             change: (e) => {
                 dispatchState(action(e.target.value))
             },
-            blur
+            blur: () => {
+                if (id === 'tDescription') {
+                    const formatValue = state.tDescription.replace(/[\n\r]/gm, ' ');
+                    dispatchState(action(formatValue))
+                }
+            },
         }
         fieldFieldsArray.push(fieldFieldsObject)
     })

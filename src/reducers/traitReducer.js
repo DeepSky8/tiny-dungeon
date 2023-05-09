@@ -19,6 +19,7 @@ const traitReducer = (state, action) => {
     switch (action.type) {
         case 'LOAD_TRAIT':
             return {
+                ...defaultTrait,
                 ...action.trait
             }
         case 'UPDATE_TID':

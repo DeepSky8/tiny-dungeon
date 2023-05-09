@@ -1,4 +1,5 @@
 import {
+    updateTClaws,
     updateTDescription,
     updateTFamiliar,
     updateTHP,
@@ -109,7 +110,7 @@ const traitObjectArray = [
         label: 'Powerful Claws ',
         id: 'tClaws',            // Must match the field name on the default object
         type: 'checkbox',
-        action: updateTFamiliar,
+        action: updateTClaws,
         blur: () => {
             // Need to add blur save command
         },
