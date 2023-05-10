@@ -1,53 +1,22 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { defaultHeritage, heritageReducer } from "../../reducers/heritageReducer";
-import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
-import Field from "./Field";
+import React, { useReducer } from "react";
+import { heritageReducer } from "../../reducers/heritageReducer";
 import {
-    loadHeritage,
     removeHTraitID,
-    startNewHeritageKey,
+    startSaveHeritage,
     updateHDescription,
     updateHHP,
     updateHPhysical,
     updateHTitle,
     updateHTraitIDs
 } from "../../actions/heritageActions";
-import Menu from "./Menu";
+import Field from "../createItems/Field";
+import Menu from "../createItems/Menu";
 
-const CreateHeritage = () => {
-    const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
-    const [hTraits, setHTraits] = useState([])
-
-    useEffect(() => {
-
-        onValue(ref(db, 'traits'), snapshot => {
-            const tempHTraits = []
-            if (snapshot.exists()) {
-                snapshot
-                    .forEach(snap => {
-                        snap.val().tHTrait
-                            ?
-                            tempHTraits.push(snap.val())
-                            :
-                            ''
-                    })
-            }
-            setHTraits(tempHTraits)
-        }, {
-            onlyOnce: true
-        })
-
-        return () => {
-            off(ref(db, 'traits'))
-        }
-    }, [])
+const DisplayHeritage = ({ heritageData, hTraitData }) => {
+    const [heritage, dispatchHeritage] = useReducer(heritageReducer, heritageData)
 
     const handleSave = () => {
-        startNewHeritageKey({ heritageData: heritage })
-            .then(() => {
-                dispatchHeritage(loadHeritage(defaultHeritage))
-            })
+        startSaveHeritage({ ...heritage })
     }
 
     const handleRemoveHTrait = (id) => {
@@ -55,7 +24,7 @@ const CreateHeritage = () => {
     }
 
     return (
-        <div className="createHeritage__container">
+        <div className="displayHeritage__container">
             <Field
                 label={'Heritage Title'}
                 id={'hTitle'}
@@ -64,9 +33,7 @@ const CreateHeritage = () => {
                 change={(e) => {
                     dispatchHeritage(updateHTitle(e.target.value))
                 }}
-                blur={() => {
-
-                }}
+                blur={handleSave}
                 theme={''}
             />
 
@@ -76,12 +43,10 @@ const CreateHeritage = () => {
                 type={'textarea'}
                 value={heritage.hDescription}
                 change={(e) => {
-                    dispatchHeritage(updateHDescription(e.target.value))
-                }}
-                blur={() => {
-                    const formatValue = heritage.hDescription.replace(/[\n\r]/gm, ' ');
+                    const formatValue = e.target.value.replace(/[\n\r]/gm, ' ');
                     dispatchHeritage(updateHDescription(formatValue))
                 }}
+                blur={handleSave}
                 theme={''}
             />
 
@@ -91,12 +56,10 @@ const CreateHeritage = () => {
                 type={'textarea'}
                 value={heritage.hPhysical}
                 change={(e) => {
-                    dispatchHeritage(updateHPhysical(e.target.value))
-                }}
-                blur={() => {
-                    const formatValue = heritage.hPhysical.replace(/[\n\r]/gm, ' ');
+                    const formatValue = e.target.value.replace(/[\n\r]/gm, ' ');
                     dispatchHeritage(updateHPhysical(formatValue))
                 }}
+                blur={handleSave}
                 theme={''}
             />
 
@@ -108,9 +71,7 @@ const CreateHeritage = () => {
                 change={(e) => {
                     dispatchHeritage(updateHHP(e.target.value))
                 }}
-                blur={() => {
-
-                }}
+                blur={handleSave}
                 theme={''}
             />
 
@@ -120,18 +81,16 @@ const CreateHeritage = () => {
                 change={(e) => {
                     dispatchHeritage(updateHTraitIDs(e.target.value))
                 }}
-                blur={() => {
-
-                }}
+                blur={handleSave}
                 theme={''}
-                array={hTraits}
+                array={hTraitData}
             />
 
             {
                 heritage.hTraitIDs.length > 0 &&
                 <ul>
                     {
-                        hTraits
+                        hTraitData
                             .filter(htObject =>
                                 heritage
                                     .hTraitIDs
@@ -164,7 +123,7 @@ const CreateHeritage = () => {
     )
 }
 
-export default CreateHeritage
+export default DisplayHeritage
 
 // <Field
 // label={''}

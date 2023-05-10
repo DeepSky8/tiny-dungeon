@@ -22,6 +22,11 @@ export const updateHDescription = (hDescription) => ({
     hDescription
 })
 
+export const updateHPhysical = (hPhysical) => ({
+    type: 'UPDATE_HPHYSICAL',
+    hPhysical
+})
+
 export const updateHHP = (hHP) => ({
     type: 'UPDATE_HHP',
     hHP
@@ -40,18 +45,20 @@ export const removeHTraitID = (hTraitID) => ({
 
 export const startSaveHeritage = async ({
     hID,
-    hName,
+    hTitle,
     hDescription,
+    hPhysical,
     hHP,
-    hTraitID
+    hTraitIDs
 }) => {
     const updates = {}
 
     updates[`heritages/${hID}/hID`] = hID
     updates[`heritages/${hID}/hTitle`] = hTitle
     updates[`heritages/${hID}/hDescription`] = hDescription
+    updates[`heritages/${hID}/hPhysical`] = hPhysical
     updates[`heritages/${hID}/hHP`] = hHP
-    updates[`heritages/${hID}/hTraitID`] = hTraitID
+    updates[`heritages/${hID}/hTraitIDs`] = hTraitIDs
 
     update(ref(db), updates)
         .catch((error) => {

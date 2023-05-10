@@ -4,6 +4,7 @@ const defaultHeritage = {
     hID: '',
     hTitle: '',
     hDescription: '',
+    hPhysical: '',
     hHP: 0,
     hTraitIDs: [],
 }
@@ -29,6 +30,11 @@ const heritageReducer = (state, action) => {
             return {
                 ...state,
                 hDescription: action.hDescription
+            }
+        case 'UPDATE_HPHYSICAL':
+            return {
+                ...state,
+                hPhysical: action.hPhysical
             }
         case 'UPDATE_HHP':
             return {
