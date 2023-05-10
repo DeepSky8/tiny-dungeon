@@ -33,35 +33,38 @@
 
 const defaultWeaponGroup = {
     wgID: '',
-    wgType: '',
-    wgName: '',
+    wgType: 'l',
+    wgTitle: '',
     wgDescription: '',
     wgDamage: 0,
     wgAttackTurn: 0,
-    wgRange: [''],      // c,n,f
-    wgDisRange: [''],   // c,n,f
-    wgHTrait: false,    // Set by Heritage
+    wgRangeIDs: [],      // c,n,f
+    wgDisRangeIDs: [],   // c,n,f
+    wgHTrait: false,     // Set by Heritage
+    wgTrait: false,      // Set by Trait
 }
 
 const defaultWeaponMastered = {
     wID: '',
     wGroup: '',         // Corresponds to weaponGroup letter
     wType: '',          // Select from weapon type array determined by group, identify by ID
-    wName: '',          // User-defined text, if any
+    wTitle: '',         // User-defined text, if any
     wDescription: '',   // User-defined text, if any
     wDepletion: '',     // Interact with depletion counters in later update, set initial depletion counters by wType object
     wHTrait: false,     // Set by Heritage
+    wTrait: false,      // Set by Trait
+
 }
 
 const rangeSort = (a, b) => {
     if (a === 'c') {
-        return 1
+        return -1
     } else if (a === 'f') {
-        return -1
-    } else if (a === 'n' && b === 'c') {
-        return -1
-    } else if (a === 'n' && b === 'f') {
         return 1
+    } else if (a === 'n' && b === 'c') {
+        return 1
+    } else if (a === 'n' && b === 'f') {
+        return -1
     }
 }
 
@@ -82,10 +85,10 @@ const weaponGroupReducer = (state, action) => {
                 ...state,
                 wgType: action.wgType
             }
-        case 'UPDATE_WGNAME':
+        case 'UPDATE_WGTITLE':
             return {
                 ...state,
-                wgName: action.wgName
+                wgTitle: action.wgTitle
             }
         case 'UPDATE_WGDESCRIPTION':
             return {
@@ -102,33 +105,73 @@ const weaponGroupReducer = (state, action) => {
                 ...state,
                 wgAttackTurn: action.wgAttackTurn
             }
-        case 'UPDATE_WGRANGE':
-            const wgExists = state.wgRange.contains(action.wgRange)
-            const newWGRange = wgExists
-                ?
-                state.wgRange.filter(element => element !== action.wgRange)
-                :
-                state.wgRange.push(action.wgRange).sort(rangeSort)
+        case 'UPDATE_WGRANGEIDS':
+            const newWGRangeIDs = (
+                state
+                    .wgRangeIDs
+                    .includes(action.wgRangeID)
+                    ?
+                    state
+                        .wgRangeIDs
+                        .sort(rangeSort)
+                    :
+                    state.
+                        wgRangeIDs
+                        .concat(action.wgRangeID)
+                        .sort(rangeSort)
+            )
             return {
                 ...state,
-                wgRange: newWGRange
+                wgRangeIDs: newWGRangeIDs
 
             }
-        case 'UPDATE_WGDISRANGE':
-            const wgDisExists = state.wgDisRange.contains(action.wgDisRange)
-            const newWGDisRange = wgDisExists
-                ?
-                state.wgRange.filter(element => element !== action.wgRange)
-                :
-                state.wgRange.push(action.wgRange).sort(rangeSort)
+        case 'REMOVE_WGRANGEID':
             return {
                 ...state,
-                wgDisRange: newWGDisRange
+                wgRangeIDs: state
+                    .wgRangeIDs
+                    .filter(item => item !== action.wgRangeID)
+                    .sort(rangeSort)
+
+            }
+        case 'UPDATE_WGDISRANGEIDS':
+            const newWGDisRangeIDs = (
+                state
+                    .wgDisRangeIDs
+                    .includes(action.wgRangeID)
+                    ?
+                    state.wgDisRangeIDs
+                        .sort(rangeSort)
+                    :
+                    state.
+                        wgDisRangeIDs
+                        .concat(action.wgRangeID)
+                        .sort(rangeSort)
+            )
+            return {
+                ...state,
+                wgDisRangeIDs: newWGDisRangeIDs
+            }
+        case 'REMOVE_WGDISRANGEID':
+            return {
+                ...state,
+                wgDisRangeIDs: state
+                    .wgDisRangeIDs
+                    .filter(item => item !== action.wgRangeID)
+                    .sort(rangeSort)
+
             }
         case 'UPDATE_WGHTRAIT':
             return {
                 ...state,
-                wgHTrait: action.wgHTrait
+                wgHTrait: !state.wgHTrait,
+                wgTrait: !state.wgHTrait ? false : state.wgTrait
+            }
+        case 'UPDATE_WGTRAIT':
+            return {
+                ...state,
+                wgTrait: !state.wgTrait,
+                wgHTrait: !state.wgTrait ? false : state.wgHTrait
             }
         default:
             return {
@@ -160,10 +203,10 @@ const weaponsMasteredReducer = (state, action) => {
                 ...state,
                 wType: action.wType
             }
-        case 'UPDATE_WNAME':
+        case 'UPDATE_WTITLE':
             return {
                 ...state,
-                wName: action.wName
+                wTitle: action.wTitle
             }
         case 'UPDATE_WDESC':
             return {

@@ -14,6 +14,7 @@ import {
     updateHTraitIDs
 } from "../../actions/heritageActions";
 import Menu from "./Menu";
+import Bulleted from "./Bulleted";
 
 const CreateHeritage = () => {
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
@@ -125,36 +126,18 @@ const CreateHeritage = () => {
                 }}
                 theme={''}
                 array={hTraits}
+                keyID={'tID'}
+                displayID={'tTitle'}
             />
 
-            {
-                heritage.hTraitIDs.length > 0 &&
-                <ul>
-                    {
-                        hTraits
-                            .filter(htObject =>
-                                heritage
-                                    .hTraitIDs
-                                    .includes(htObject.tID)
-                            ).map(
-                                hTrait => {
-                                    return (
-                                        <li
-                                            key={hTrait.tID}
-                                        >
-                                            {hTrait.tTitle} - {hTrait.tDescription}
-                                            <button
-                                                onClick={() => {
-                                                    handleRemoveHTrait(hTrait.tID)
-                                                }}
-                                            >Remove</button>
-                                        </li>
-                                    )
-
-                                })
-                    }
-                </ul>
-            }
+            <Bulleted
+                objectArray={hTraits}
+                IDArray={heritage.hTraitIDs}
+                IDKey={'tID'}
+                IDTitle={'tTitle'}
+                IDDescription={'tDescription'}
+                remove={handleRemoveHTrait}
+            />
 
             <button
                 onClick={handleSave}
@@ -187,3 +170,33 @@ export default CreateHeritage
 // blur={''}
 // theme={''}
 // />
+
+
+// {
+//     heritage.hTraitIDs.length > 0 &&
+//     <ul>
+//         {
+//             hTraits
+//                 .filter(htObject =>
+//                     heritage
+//                         .hTraitIDs
+//                         .includes(htObject.tID)
+//                 ).map(
+//                     hTrait => {
+//                         return (
+//                             <li
+//                                 key={hTrait.tID}
+//                             >
+//                                 {hTrait.tTitle} - {hTrait.tDescription}
+//                                 <button
+//                                     onClick={() => {
+//                                         handleRemoveHTrait(hTrait.tID)
+//                                     }}
+//                                 >Remove</button>
+//                             </li>
+//                         )
+
+//                     })
+//         }
+//     </ul>
+// }

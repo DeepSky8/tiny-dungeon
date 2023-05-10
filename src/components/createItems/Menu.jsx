@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Menu = ({ label, id, change, blur, theme, array }) => {
+const Menu = ({ label, id, change, blur, theme, array, keyID, displayID }) => {
     return (
         <div className="field__container">
             <span className={`field__container--description ${theme}`}>
@@ -15,12 +15,13 @@ const Menu = ({ label, id, change, blur, theme, array }) => {
             >
                 {array.length > 0 &&
                     (array.map((option) => {
+
                         return (
                             <option
-                                key={option.tID}
-                                value={option.tID}
+                                key={option[`${keyID}`]}
+                                value={option[`${keyID}`]}
                             >
-                                {option.tTitle}
+                                {option[`${displayID}`]}
                             </option>
                         )
                     }))}
