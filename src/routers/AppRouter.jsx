@@ -7,6 +7,8 @@ import CreateScroll from "../components/createItems/CreateScroll.jsx";
 import CreateWeaponGroup from "../components/createItems/CreateWeaponGroup.jsx";
 import NewCharacter from "../components/createCharacter/NewCharacter.jsx";
 import CharName from "../components/createCharacter/CharName.jsx";
+import DisplayTraits from "../components/editItems/DisplayTraits.jsx";
+import CreateHeritage from "../components/createItems/CreateHeritage.jsx";
 
 const AppRouter = createBrowserRouter([
     {
@@ -33,6 +35,16 @@ const AppRouter = createBrowserRouter([
         path: "/createTrait",
         errorElement: <NotFoundPage />,
         element: <CreateTrait />
+    },
+    {
+        path: "/createHeritage",
+        errorElement: <NotFoundPage />,
+        element: <CreateHeritage />
+    },
+    {
+        path: "/displayTraits",
+        errorElement: <NotFoundPage />,
+        element: <DisplayTraits />
     },
     {
         path: "/createScroll",

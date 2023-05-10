@@ -83,6 +83,7 @@ export const startSaveTrait = async ({
 }) => {
     const updates = {}
 
+    updates[`traits/${tID}/tID`] = tID
     updates[`traits/${tID}/tTitle`] = tTitle
     updates[`traits/${tID}/tDescription`] = tDescription
     updates[`traits/${tID}/tHTrait`] = tHTrait
