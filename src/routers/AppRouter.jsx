@@ -5,17 +5,52 @@ import Home from "../components/home/Home.jsx";
 import CreateTrait from "../components/createItems/CreateTrait.jsx";
 import CreateScroll from "../components/createItems/CreateScroll.jsx";
 import CreateWeaponGroup from "../components/createItems/CreateWeaponGroup.jsx";
+import NewCharacter from "../components/createCharacter/NewCharacter.jsx";
+import CharName from "../components/createCharacter/CharName.jsx";
+import DisplayTraits from "../components/editItems/DisplayTraits.jsx";
+import CreateHeritage from "../components/createItems/CreateHeritage.jsx";
+import DisplayHeritages from "../components/editItems/DisplayHeritages.jsx";
 
 const AppRouter = createBrowserRouter([
     {
         path: "/",
         errorElement: <NotFoundPage />,
-        element: <Home />
+        element: <Home />,
+        children: [
+            {
+                path: "/newCharacter",
+                errorElement: <NotFoundPage />,
+                element: <NewCharacter />,
+                children: [
+                    {
+                        path: "/newCharacter/name",
+                        errorElement: <NotFoundPage />,
+                        element: <CharName />,
+                    }
+                ]
+            },
+
+        ]
     },
     {
         path: "/createTrait",
         errorElement: <NotFoundPage />,
         element: <CreateTrait />
+    },
+    {
+        path: "/createHeritage",
+        errorElement: <NotFoundPage />,
+        element: <CreateHeritage />
+    },
+    {
+        path: "/displayTraits",
+        errorElement: <NotFoundPage />,
+        element: <DisplayTraits />
+    },
+    {
+        path: "/displayHeritages",
+        errorElement: <NotFoundPage />,
+        element: <DisplayHeritages />
     },
     {
         path: "/createScroll",

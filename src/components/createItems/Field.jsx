@@ -8,8 +8,20 @@ const Field = ({ label, id, type, value, change, blur, theme }) => {
                 <label htmlFor={id}>{label}</label>
             </span>
             <span className="field__container--input">
-                {type === 'textarea'
-                    ?
+
+                {type === 'checkbox' &&
+                    <input
+                        id={id}
+                        className={`field--input ${theme}`}
+                        type={type}
+                        checked={value}
+                        onChange={change}
+                        onBlur={blur}
+                    />
+                }
+
+
+                {type === 'textarea' &&
                     <textarea
                         rows='6'
                         cols='50'
@@ -19,7 +31,9 @@ const Field = ({ label, id, type, value, change, blur, theme }) => {
                         onChange={change}
                         onBlur={blur}
                     />
-                    :
+                }
+
+                {type === 'text' &&
                     <input
                         id={id}
                         className={`field--input ${theme}`}
@@ -29,6 +43,18 @@ const Field = ({ label, id, type, value, change, blur, theme }) => {
                         onBlur={blur}
                     />
                 }
+
+                {type === 'number' &&
+                    <input
+                        id={id}
+                        className={`field--input ${theme}`}
+                        type={type}
+                        value={value}
+                        onChange={change}
+                        onBlur={blur}
+                    />
+                }
+
 
             </span>
         </div>
