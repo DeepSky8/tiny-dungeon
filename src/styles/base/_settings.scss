@@ -1,4 +1,3 @@
-
 // Yellow used for the Android Splash screen
 $splash-yellow: #e7cc7b;
 // Yellow used for the Safari pinned tab and Touch Bar
@@ -9,6 +8,12 @@ $background-blue: #151517;
 
 // Text dark brown
 $text-brown: #221802;
+$text-brown-faded: transparentize($text-brown, 0.5);
+
+// Menu Background
+$menu-yellow: #bb9f44;
+$menu-yellow-hover: darken($menu-yellow, 10%);
+// (214, 183, 79)
 
 
 

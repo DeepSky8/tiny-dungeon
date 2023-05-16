@@ -28,7 +28,7 @@ export const updateTraitIDs = (traitID) => ({
     traitID
 })
 
-export const updateHTrait = (hTraitID) => ({
+export const updateHTraitID = (hTraitID) => ({
     type: 'UPDATE_HTRAITID',
     hTraitID
 })

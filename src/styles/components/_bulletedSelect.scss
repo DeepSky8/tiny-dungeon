@@ -1,0 +1,29 @@
+.bulletedSelect__container {
+    margin-top: 5px;
+    user-select: none;
+}
+
+.bulletedSelect__header {
+    font-weight: bold;
+    text-align: center;
+}
+
+.bulletedSelect__container--button {
+    text-align: center;
+    margin-bottom: $s-size;
+}
+
+.bulletedSelect__button {
+    background-color: $menu-yellow;
+    @include button--border;
+    font-size: $calcFontSizeLarge;
+}
+
+.bulletedSelect__container--text {
+    padding: 0 $xs-size;
+    color: $text-brown;
+
+    &.notSelected {
+        color: $text-brown-faded;
+    }
+}

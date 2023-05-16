@@ -7,6 +7,8 @@ const defaultHeritage = {
     hPhysical: '',
     hHP: 0,
     hTraitIDs: [],
+    hImageURL: '',
+    hAltText: '',
 }
 
 const heritageReducer = (state, action) => {
@@ -61,7 +63,18 @@ const heritageReducer = (state, action) => {
                 ...state,
                 hTraitIDs: state.hTraitIDs.filter(hTraitID => hTraitID !== action.hTraitID)
             }
-
+        case 'UPDATE_HIMAGEURL':
+            return {
+                ...defaultHeritage,
+                ...state,
+                hImageURL: action.hImageURL
+            }
+        case 'UPDATE_HALTTEXT':
+            return {
+                ...defaultHeritage,
+                ...state,
+                hAltText: action.hAltText
+            }
         default:
             return {
                 ...state

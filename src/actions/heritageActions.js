@@ -42,6 +42,15 @@ export const removeHTraitID = (hTraitID) => ({
     hTraitID
 })
 
+export const updateHImageURL = (hImageURL) => ({
+    type: 'UPDATE_HIMAGEURL',
+    hImageURL
+})
+
+export const updateHAltText = (hAltText) => ({
+    type: 'UPDATE_HALTTEXT',
+    hAltText
+})
 
 export const startSaveHeritage = async ({
     hID,
@@ -49,7 +58,9 @@ export const startSaveHeritage = async ({
     hDescription,
     hPhysical,
     hHP,
-    hTraitIDs
+    hTraitIDs,
+    hImageURL,
+    hAltText
 }) => {
     const updates = {}
 
@@ -59,6 +70,8 @@ export const startSaveHeritage = async ({
     updates[`heritages/${hID}/hPhysical`] = hPhysical
     updates[`heritages/${hID}/hHP`] = hHP
     updates[`heritages/${hID}/hTraitIDs`] = hTraitIDs
+    updates[`heritages/${hID}/hImageURL`] = hImageURL
+    updates[`heritages/${hID}/hAltText`] = hAltText
 
     update(ref(db), updates)
         .catch((error) => {

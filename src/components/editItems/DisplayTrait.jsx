@@ -3,7 +3,8 @@ import { defaultTrait, traitReducer } from "../../reducers/traitReducer";
 import fieldPopulator from "../../functions/fieldPopulator";
 import traitObjectArray from "../../objectsArrays/createObjectArrays/traitObjectArray";
 import { loadTrait, startSaveTrait } from "../../actions/traitActions";
-import Field from "../createItems/Field";
+import Field from "../display/Field";
+
 
 const DisplayTrait = ({ traitData }) => {
     const [traitState, dispatchTraitState] = useReducer(traitReducer, defaultTrait)

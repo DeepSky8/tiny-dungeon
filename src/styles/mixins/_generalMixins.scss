@@ -1,0 +1,5 @@
+@mixin button--border {
+    border-style: solid;
+    border-width: 1px;
+    border-color: $text-brown;
+}

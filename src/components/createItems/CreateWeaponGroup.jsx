@@ -1,7 +1,8 @@
 import React, { useReducer } from "react";
 import { defaultWeaponGroup, weaponGroupReducer } from "../../reducers/weaponReducer";
-import Field from "./Field";
-import Menu from "./Menu";
+import Field from "../display/Field";
+import Menu from "../display/Menu";
+import BulletedRemove from "../display/BulletedRemove";
 import {
     loadWG,
     removeWGDisRangeID,
@@ -18,7 +19,7 @@ import {
     updateWGType
 } from "../../actions/weaponActions";
 import { wgRange, wgTypes } from "../../objectsArrays/createObjectArrays/weaponGroupObjectArray";
-import Bulleted from "./Bulleted";
+
 
 const CreateWeaponGroup = () => {
     const [wGroup, dispatchWGroup] = useReducer(weaponGroupReducer, defaultWeaponGroup)
@@ -133,7 +134,7 @@ const CreateWeaponGroup = () => {
                 displayID={'wgRangeTitle'}
             />
 
-            <Bulleted
+            <BulletedRemove
                 objectArray={wgRange}
                 IDArray={wGroup.wgRangeIDs}
                 IDKey={'wgRangeID'}
@@ -157,7 +158,7 @@ const CreateWeaponGroup = () => {
                 displayID={'wgRangeTitle'}
             />
 
-            <Bulleted
+            <BulletedRemove
                 objectArray={wgRange}
                 IDArray={wGroup.wgDisRangeIDs}
                 IDKey={'wgRangeID'}

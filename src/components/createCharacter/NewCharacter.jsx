@@ -7,7 +7,11 @@ const NewCharacter = () => {
 
     return (
         <div className="newC__container">
-            <Outlet />
+            <div className="newC__spacer">
+                <Outlet
+                    context={[char, dispatchChar]}
+                />
+            </div>
         </div>
     )
 }

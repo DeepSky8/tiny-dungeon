@@ -6,10 +6,14 @@ import CreateTrait from "../components/createItems/CreateTrait.jsx";
 import CreateScroll from "../components/createItems/CreateScroll.jsx";
 import CreateWeaponGroup from "../components/createItems/CreateWeaponGroup.jsx";
 import NewCharacter from "../components/createCharacter/NewCharacter.jsx";
-import CharName from "../components/createCharacter/CharName.jsx";
 import DisplayTraits from "../components/editItems/DisplayTraits.jsx";
 import CreateHeritage from "../components/createItems/CreateHeritage.jsx";
 import DisplayHeritages from "../components/editItems/DisplayHeritages.jsx";
+import CharHeritage from "../components/createCharacter/CharHeritage.jsx";
+import CharTraits from "../components/createCharacter/CharTraits.jsx";
+import CharWeaponGroup from "../components/createCharacter/CharWeaponGroup.jsx";
+import CharWeapon from "../components/createCharacter/CharWeapon.jsx";
+import CharBackstory from "../components/createCharacter/CharBackstory.jsx";
 
 const AppRouter = createBrowserRouter([
     {
@@ -23,10 +27,30 @@ const AppRouter = createBrowserRouter([
                 element: <NewCharacter />,
                 children: [
                     {
-                        path: "/newCharacter/name",
+                        path: "/newCharacter/heritage",
                         errorElement: <NotFoundPage />,
-                        element: <CharName />,
-                    }
+                        element: <CharHeritage />,
+                    },
+                    {
+                        path: "/newCharacter/traits",
+                        errorElement: <NotFoundPage />,
+                        element: <CharTraits />,
+                    },
+                    {
+                        path: "/newCharacter/weaponGroup",
+                        errorElement: <NotFoundPage />,
+                        element: <CharWeaponGroup />,
+                    },
+                    {
+                        path: "/newCharacter/weapon",
+                        errorElement: <NotFoundPage />,
+                        element: <CharWeapon />,
+                    },
+                    {
+                        path: "/newCharacter/backstory",
+                        errorElement: <NotFoundPage />,
+                        element: <CharBackstory />,
+                    },
                 ]
             },
 

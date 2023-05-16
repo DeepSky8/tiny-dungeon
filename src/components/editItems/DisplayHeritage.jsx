@@ -3,14 +3,16 @@ import { heritageReducer } from "../../reducers/heritageReducer";
 import {
     removeHTraitID,
     startSaveHeritage,
+    updateHAltText,
     updateHDescription,
     updateHHP,
+    updateHImageURL,
     updateHPhysical,
     updateHTitle,
     updateHTraitIDs
 } from "../../actions/heritageActions";
-import Field from "../createItems/Field";
-import Menu from "../createItems/Menu";
+import Field from "../display/Field";
+import Menu from "../display/Menu";
 
 const DisplayHeritage = ({ heritageData, hTraitData }) => {
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, heritageData)
@@ -77,13 +79,22 @@ const DisplayHeritage = ({ heritageData, hTraitData }) => {
 
             <Menu
                 label={'Heritage Trait'}
+                aria={'Heritage Trait menu'}
                 id={'hTraitID'}
                 change={(e) => {
                     dispatchHeritage(updateHTraitIDs(e.target.value))
                 }}
                 blur={handleSave}
                 theme={''}
+                selectObject={
+                    {
+                        tID: `menuDefault${heritage.hID}`,
+                        tTitle: "--Please select a heritage--"
+                    }
+                }
                 array={hTraitData}
+                keyID={'tID'}
+                displayID={'tTitle'}
             />
 
             {
@@ -114,6 +125,30 @@ const DisplayHeritage = ({ heritageData, hTraitData }) => {
                     }
                 </ul>
             }
+
+            <Field
+                label={'Heritage Image URL'}
+                id={'hImageURL'}
+                type={'text'}
+                value={heritage.hImageURL}
+                change={(e) => {
+                    dispatchHeritage(updateHImageURL(e.target.value))
+                }}
+                blur={handleSave}
+                theme={''}
+            />
+
+            <Field
+                label={'Heritage Image Alt Text'}
+                id={'hAltText'}
+                type={'text'}
+                value={heritage.hAltText}
+                change={(e) => {
+                    dispatchHeritage(updateHAltText(e.target.value))
+                }}
+                blur={handleSave}
+                theme={''}
+            />
 
             <button
                 onClick={handleSave}

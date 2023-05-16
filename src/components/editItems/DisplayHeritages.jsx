@@ -63,6 +63,7 @@ const DisplayHeritages = () => {
                     )
                 }))
             }
+            <hr />
         </div>
     )
 }

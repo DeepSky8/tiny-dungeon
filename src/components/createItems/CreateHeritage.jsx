@@ -2,7 +2,6 @@ import React, { useEffect, useReducer, useState } from "react";
 import { defaultHeritage, heritageReducer } from "../../reducers/heritageReducer";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../api/firebase";
-import Field from "./Field";
 import {
     loadHeritage,
     removeHTraitID,
@@ -13,8 +12,9 @@ import {
     updateHTitle,
     updateHTraitIDs
 } from "../../actions/heritageActions";
-import Menu from "./Menu";
-import Bulleted from "./Bulleted";
+import Field from "../display/Field";
+import Menu from "../display/Menu";
+import BulletedRemove from "../display/BulletedRemove";
 
 const CreateHeritage = () => {
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
@@ -125,12 +125,18 @@ const CreateHeritage = () => {
 
                 }}
                 theme={''}
+                selectObject={
+                    {
+                        tID: `menuDefault${Math.random()}`,
+                        tTitle: `--Please select a Heritage Trait--`
+                    }
+                }
                 array={hTraits}
                 keyID={'tID'}
                 displayID={'tTitle'}
             />
 
-            <Bulleted
+            <BulletedRemove
                 objectArray={hTraits}
                 IDArray={heritage.hTraitIDs}
                 IDKey={'tID'}

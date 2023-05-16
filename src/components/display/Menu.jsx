@@ -1,24 +1,49 @@
 import React from "react";
 
 
-const Menu = ({ label, id, change, blur, theme, array, keyID, displayID }) => {
+const Menu = (
+    {
+        label,
+        aria = label,
+        id,
+        change,
+        blur,
+        theme,
+        selectObject = {},
+        array,
+        keyID,
+        displayID
+    }
+) => {
+    const fullArray = (
+        selectObject[`${keyID}`].slice(0, 11) === 'menuDefault'
+            ?
+            [selectObject].concat(array)
+            :
+            array
+    )
     return (
-        <div className="field__container">
-            <span className={`field__container--description ${theme}`}>
-                <label htmlFor={id}>{label}</label>
+        <div className="menu__container">
+            <span className={`menu__container--description ${theme}`}>
+                <label
+                    aria-label={aria}
+                    htmlFor={id}>
+                    {label}
+                </label>
             </span>
             <select
+                className="menu__select"
                 name={id}
                 id={id}
                 onChange={change}
                 onBlur={blur}
             >
                 {array.length > 0 &&
-                    (array.map((option) => {
-
+                    (fullArray.map((option) => {
                         return (
                             <option
                                 key={option[`${keyID}`]}
+                                id={option[`${keyID}`]}
                                 value={option[`${keyID}`]}
                             >
                                 {option[`${displayID}`]}

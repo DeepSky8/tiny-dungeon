@@ -1,6 +1,6 @@
 import React from "react";
 
-const Bulleted = ({ objectArray, IDArray, IDKey, IDTitle, IDDescription, remove }) => {
+const BulletedRemove = ({ objectArray, IDArray, IDKey, IDTitle, IDDescription, remove }) => {
     return (
         <div>
 
@@ -18,11 +18,14 @@ const Bulleted = ({ objectArray, IDArray, IDKey, IDTitle, IDDescription, remove 
                                             key={object[`${IDKey}`]}
                                         >
                                             {object[`${IDTitle}`]} - {object[`${IDDescription}`]}
+
                                             <button
                                                 onClick={() => {
                                                     remove(object[`${IDKey}`])
                                                 }}
                                             >Remove</button>
+
+
                                         </li>
                                     )
 
@@ -34,4 +37,4 @@ const Bulleted = ({ objectArray, IDArray, IDKey, IDTitle, IDDescription, remove 
     )
 }
 
-export default Bulleted
+export default BulletedRemove
