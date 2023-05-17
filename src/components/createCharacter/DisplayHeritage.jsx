@@ -90,23 +90,26 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                             dispatch(openThree())
                     }}
                 >{show.display3 ? "" : clickFor}Stats</div>
-                {show.display3 &&
-                    <span className="clickDescription__description">
-                        <div>Hit points: {hHP}</div>
-                        <div>Heritage Trait:</div>
-                        <BulletedSelect
-                            objectArray={traits}
-                            IDArray={hTraitIDs}
-                            IDKey={'tID'}
-                            IDTitle={'tTitle'}
-                            IDDescription={'tDescription'}
-                            selectText={'Select '}
-                            dispatchCharHeritageID={dispatchCharHeritageID}
-                            selectedHTraitID={hTraitID}
-                        />
-                    </span>
 
-                }
+                <div className="clickDescription__container--description">
+                    {show.display3 &&
+                        <div className="clickDescription--description">
+                            <div>Hit points: {hHP}</div>
+                            <div>Heritage Trait:</div>
+                            <BulletedSelect
+                                objectArray={traits}
+                                IDArray={hTraitIDs}
+                                IDKey={'tID'}
+                                IDTitle={'tTitle'}
+                                IDDescription={'tDescription'}
+                                selectText={'Select '}
+                                dispatchCharHeritageID={dispatchCharHeritageID}
+                                selectedHTraitID={hTraitID}
+                            />
+                        </div>
+
+                    }
+                </div>
 
             </span>
 

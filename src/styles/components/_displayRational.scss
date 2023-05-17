@@ -1,5 +1,5 @@
 .displayRational__container {
-        user-select: none;
+    user-select: none;
 }
 
 .displayRational__header--clickable {
@@ -9,4 +9,10 @@
     display: block;
     padding: 2px;
     text-align: center;
+}
+
+.displayRational__container--text {
+    border-left: 1px solid $text-brown;
+    border-right: 1px solid $text-brown;
+    border-bottom: 1px solid $text-brown;
 }

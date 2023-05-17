@@ -1,3 +1,7 @@
+.clickDescription__container {
+    user-select: none;
+}
+
 .clickDescription__heading {
     @include button--border;
     background-color: $menu-yellow;
@@ -8,6 +12,13 @@
     user-select: none;
 }
 
-.clickDescription__description {
-    user-select: none;
+.clickDescription__container--description {
+    border-left: 1px solid $text-brown;
+    border-right: 1px solid $text-brown;
+}
+
+.clickDescription--description {
+    // border-left: 1px solid $text-brown;
+    // border-right: 1px solid $text-brown;
+    border-bottom: 1px solid $text-brown;
 }

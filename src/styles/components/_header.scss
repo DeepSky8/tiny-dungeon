@@ -1,7 +1,18 @@
 .header__container {
-    border-style: solid;
-    border-width: 0 0 5px 0;
-    border-color: $text-brown;
+    border-bottom: 5px solid $text-brown;
+    // border-style: solid;
+    // border-width: 0 0 5px 0;
+    // border-color: $text-brown;
+
+    // position: fixed;
+    top: 0;
+    left: 0;
+    // z-index: 50;
+    width: 100%;
+    background-color: $menu-yellow;
+    background-image: url("../../../src/assets/parchment_footer.png");
+    background-size: 100%;
+    // border-top: 1px solid $text-brown;
 }
 
 h3 {

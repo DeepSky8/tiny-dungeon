@@ -24,12 +24,16 @@ const ClickDescription = (
                         :
                         dispatch(openAction())
                 }}
-            >{show[display] ? "" : clickFor}{headerText}</div>
-            {show[display] &&
-                <span className="clickDescription__description">
-                    {bodyText}
-                </span>
-            }
+            >{show[display] ? "" : clickFor}{headerText}
+            </div>
+
+            <div className="clickDescription__container--description">
+                {show[display] &&
+                    <span className="clickDescription__description">
+                        {bodyText}
+                    </span>
+                }
+            </div>
         </div>
     )
 }

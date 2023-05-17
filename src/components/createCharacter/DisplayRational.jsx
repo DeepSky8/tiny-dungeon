@@ -45,12 +45,12 @@ const DisplayRational = () => {
                 {displayText[stage].title}
             </div>
             {show &&
-                <div className="displayational__container--text">
+                <div className="displayRational__container--text">
                     <div className="displayational__text">
                         {displayText[stage][1]}
                     </div>
                     <div className="spacer" />
-                    <div className="displayational__text">
+                    <div className="displayRational__text">
                         {displayText[stage][2]}
                     </div>
                 </div>
