@@ -26,21 +26,6 @@ const check = {
 
 }
 
-// const weaponGroups = {
-//     // Light - l
-//     light: '-NV6VaDJd7zza5i0UR9z',
-//     // Heavy - h
-//     heavy: '-NV6XSrebaRiCHw-FfI1',
-//     // Ranged - r
-//     ranged: '-NV6Xo0B7lwELzzOnYkm',
-//     // Improvised - i
-//     improvised: '-NV6YTDUDqbxgKFzc47H',
-//     // Unarmed - u
-//     unarmed: '-NV6Yyve_GUxV4OsizI2',
-//     // Shields - s
-//     shield: '-NV6ZmJQi2ryBeRC_lv2',
-// }
-
 const wgTraits = [
     check.bowMasteryID,
     check.karhuClawID,
@@ -51,20 +36,18 @@ const wgTraits = [
 
 ]
 
-
-
 const returnsURLStub = ({ char }) => {
     const {
-        charID,
-        userID,
+        // charID,
+        // userID,
         charName,
         heritageID,         // Select from Heritages array, identify by hID
         hTraitID,           // Heritage trait determined by Heritage, identified by htID
         traitIDs,           // Select and identify by tID
-        maxHP,              // HP determined by Heritage and trait: Toughness
-        currentHP,          // HP current number
-        maxArmor,           // HP from armor determined by Trait and worn items
-        currentArmor,       // HP from armor current number
+        // maxHP,              // HP determined by Heritage and trait: Toughness
+        // currentHP,          // HP current number
+        // maxArmor,           // HP from armor determined by Trait and worn items
+        // currentArmor,       // HP from armor current number
         trade,              // Trade is user-defined text
         belief,             // Belief is user-defined text
 
@@ -75,14 +58,14 @@ const returnsURLStub = ({ char }) => {
         // Wearing select from non-statted descriptions
         // Implement array of wearable items, use oID
         // Add specialized armor/wearable items in later update
-        outfitIDs,
-        gearIDs,
+        // outfitIDs,
+        // gearIDs,
 
-        gold,
+        // gold,
 
         familiarID,         // Reference by fID
-        XP,
-        scrollIDs,          // Identified by sID
+        // XP,
+        // scrollIDs,          // Identified by sID
     } = char
 
     // arrays used in evaluations

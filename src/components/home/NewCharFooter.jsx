@@ -5,6 +5,7 @@ const NewCharFooter = ({ nextStep, handleClickNext }) => {
     return (
         <div className="newCharFooter__container">
             <button
+                className="newCharFooter__button"
                 onClick={handleClickNext}
             >{nextStep.buttonText}</button>
 

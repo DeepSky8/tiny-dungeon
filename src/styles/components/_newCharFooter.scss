@@ -1,5 +1,6 @@
 .newCharFooter__container {
     position: fixed;
+    // display: flex;
     bottom: 0;
     left: 0;
     z-index: 50;
@@ -10,3 +11,16 @@
     border-top: 1px solid $text-brown;
 }
 
+.newCharFooter__button {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    font-size: $calcFontSize;
+    font-weight: bold;
+    padding: $xs-size;
+    width: 50%;
+    margin: $xs-size;
+    float: right;
+    text-align: center;
+    user-select: none;
+}
