@@ -41,6 +41,11 @@ export const updateTShield = (tShield) => ({
     tShield
 })
 
+export const updateTScroll = (tScroll) => ({
+    type: 'UPDATE_TSCROLL',
+    tScroll
+})
+
 export const updateTSpell = (tSpell) => ({
     type: 'UPDATE_TSPELL',
     tSpell
@@ -75,6 +80,7 @@ export const startSaveTrait = async ({
     tSpecial,
     tHP,
     tShield,
+    tScroll,
     tSpell,
     tImprovised,
     tUnarmed,
@@ -90,6 +96,7 @@ export const startSaveTrait = async ({
     updates[`traits/${tID}/tSpecial`] = tSpecial
     updates[`traits/${tID}/tHP`] = tHP
     updates[`traits/${tID}/tShield`] = tShield
+    updates[`traits/${tID}/tScroll`] = tScroll
     updates[`traits/${tID}/tSpell`] = tSpell
     updates[`traits/${tID}/tImprovised`] = tImprovised
     updates[`traits/${tID}/tUnarmed`] = tUnarmed

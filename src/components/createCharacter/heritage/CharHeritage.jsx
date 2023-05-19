@@ -1,11 +1,11 @@
 import { off, onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
-import { db } from "../../api/firebase";
-import StyledMenu from "../display/StyledMenu";
+import { db } from "../../../api/firebase";
+import StyledMenu from "../../display/StyledMenu";
 import DisplayHeritage from "./DisplayHeritage";
-import DisplayRational from "./DisplayRational";
-import { updateHTraitID } from "../../actions/charActions";
+import DisplayRational from "../DisplayRational";
+import { updateHTraitID } from "../../../actions/charActions";
 
 const CharHeritage = () => {
     const [char, dispatchChar] = useOutletContext();

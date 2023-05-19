@@ -9,11 +9,13 @@ import NewCharacter from "../components/createCharacter/NewCharacter.jsx";
 import DisplayTraits from "../components/editItems/DisplayTraits.jsx";
 import CreateHeritage from "../components/createItems/CreateHeritage.jsx";
 import DisplayHeritages from "../components/editItems/DisplayHeritages.jsx";
-import CharHeritage from "../components/createCharacter/CharHeritage.jsx";
-import CharTraits from "../components/createCharacter/CharTraits.jsx";
-import CharWeaponGroup from "../components/createCharacter/CharWeaponGroup.jsx";
-import CharWeapon from "../components/createCharacter/CharWeapon.jsx";
-import CharBackstory from "../components/createCharacter/CharBackstory.jsx";
+import CharHeritage from "../components/createCharacter/heritage/CharHeritage.jsx";
+import CharTraits from "../components/createCharacter/traits/CharTraits.jsx";
+import CharWeaponGroup from "../components/createCharacter/weaponGroup/CharWeaponGroup.jsx";
+import CharWeapon from "../components/createCharacter/weaponGroup/CharWeapon.jsx";
+import CharBackstory from "../components/createCharacter/backstory/CharBackstory.jsx";
+import CharFamiliar from "../components/createCharacter/familiar/CharFamiliar.jsx";
+import DisplayCharacter from "../components/displayCharacter/DisplayCharacter.jsx";
 
 const AppRouter = createBrowserRouter([
     {
@@ -47,13 +49,23 @@ const AppRouter = createBrowserRouter([
                         element: <CharWeapon />,
                     },
                     {
+                        path: "/newCharacter/familiar",
+                        errorElement: <NotFoundPage />,
+                        element: <CharFamiliar />,
+                    },
+                    {
                         path: "/newCharacter/backstory",
                         errorElement: <NotFoundPage />,
                         element: <CharBackstory />,
                     },
                 ]
             },
+            {
+                path: "/displayCharacter",
+                errorElement: <NotFoundPage />,
+                element: <DisplayCharacter />,
 
+            },
         ]
     },
     {

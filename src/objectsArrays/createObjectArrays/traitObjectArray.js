@@ -5,6 +5,7 @@ import {
     updateTHP,
     updateTHTrait,
     updateTImprovised,
+    updateTScroll,
     updateTShield,
     updateTSpecial,
     updateTSpell,
@@ -66,6 +67,15 @@ const traitObjectArray = [
         id: 'tShield',            // Must match the field name on the default object
         type: 'checkbox',
         action: updateTShield,
+        blur: () => {
+            // Need to add blur save command
+        },
+    },
+    {
+        label: 'Spell Reader ',
+        id: 'tScroll',            // Must match the field name on the default object
+        type: 'checkbox',
+        action: updateTScroll,
         blur: () => {
             // Need to add blur save command
         },

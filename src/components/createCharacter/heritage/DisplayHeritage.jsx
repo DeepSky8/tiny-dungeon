@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { defaultDisplay, displayReducer } from "../../reducers/displayReducer";
+import { defaultDisplay, displayReducer } from "../../../reducers/displayReducer";
 import {
     closeOne,
     closeThree,
@@ -7,11 +7,11 @@ import {
     openOne,
     openThree,
     openTwo
-} from "../../actions/displayActions";
-import ClickDescription from "./ClickDescription";
-import BulletedSelect from "../display/BulletedSelect";
+} from "../../../actions/displayActions";
+import ClickDescription from "../ClickDescription";
+import BulletedSelect from "../../display/BulletedSelect";
 import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
+import { db } from "../../../api/firebase";
 
 
 const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTraitID }) => {
@@ -35,7 +35,6 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
             if (snapshot.exists()) {
                 snapshot.forEach(heritage => {
                     if (heritage.val().tHTrait) {
-                        console.log('heritage', heritage.val())
                         tempArray.push(heritage.val())
                     }
                 })
