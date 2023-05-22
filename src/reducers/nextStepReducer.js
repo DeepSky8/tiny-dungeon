@@ -1,3 +1,4 @@
+import returnsNewCharError from "../functions/returnsNewCharError"
 import returnsURLStub from "../functions/returnsURLStub"
 
 // // Adaptability - Heritage Trait
@@ -40,39 +41,6 @@ import returnsURLStub from "../functions/returnsURLStub"
 //     shield: '-NV6ZmJQi2ryBeRC_lv2',
 // }
 
-const chooseHeritage = 'heritage'
-const chooseTraits = 'traits'
-const chooseWeaponGroup = 'weaponGroup'
-const chooseWeapon = 'weapon'
-const chooseFamiliar = 'familiar'
-const chooseBackstory = 'backstory'
-
-const pleaseSelectA = 'Please select a '
-const pleaseSelect = 'Please select '
-const pleaseDesignA = 'Please design a '
-const weaponGroup = 'Weapon Group'
-
-
-const errorSelector = ({ urlStub }) => {
-    switch (urlStub) {
-        case chooseHeritage:
-            return (pleaseSelectA + chooseHeritage)
-        case chooseTraits:
-            return (pleaseSelect + chooseTraits)
-        case chooseWeaponGroup:
-            return (pleaseSelectA + weaponGroup)
-        case chooseWeapon:
-            return (pleaseDesignA + chooseWeapon)
-        case chooseFamiliar:
-            return (pleaseSelectA + chooseFamiliar)
-        case chooseBackstory:
-            return (pleaseDesignA + chooseBackstory)
-        default:
-            return ""
-    }
-
-}
-
 
 const defaultNextStep = {
     pathRoot: '/newCharacter',
@@ -81,20 +49,48 @@ const defaultNextStep = {
     error: '',
 }
 
+// Used to return URLStub for navigation
+const newCharStepOrder = [
+    'heritage',
+    'traits',
+    'weaponGroup',
+    'weapon',
+    'familiar',
+    'backstory',
+    'end'
+]
+
 const nextStepReducer = (state, action) => {
 
     switch (action.type) {
 
         case 'NEXT_STEP_CHECK':
 
-            const urlStub = returnsURLStub({ char: action.char })
+            const urlStub = returnsURLStub({ char: action.char, newCharStepOrder: newCharStepOrder })
+            const currentError = returnsNewCharError({ urlStub: urlStub })
 
             return {
                 pathRoot: urlStub === 'end' ? '/displayCharacter' : '/newCharacter',
                 buttonText: 'Next',
                 currentStep: urlStub === 'end' ? '' : urlStub,
-                error: state.currentStep === urlStub ? errorSelector({ urlStub }) : '',
+                error: state.currentStep === urlStub ? currentError : '',
             }
+
+        case 'PREV_STEP':
+            const currentStepIndex = newCharStepOrder.findIndex(step => step === state.currentStep)
+
+            return {
+                ...state,
+                pathRoot: '/newCharacter',
+                currentStep: newCharStepOrder[currentStepIndex - 1]
+            }
+
+        case 'CLEAR_ERROR':
+            return {
+                ...state,
+                error: ''
+            }
+
 
         default:
             return {

@@ -8,7 +8,7 @@ import {
     openThree,
     openTwo
 } from "../../../actions/displayActions";
-import ClickDescription from "../ClickDescription";
+import ClickDescription from "../../display/ClickDescription";
 import BulletedSelect from "../../display/BulletedSelect";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
@@ -33,9 +33,9 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
         onValue(ref(db, 'traits'), snapshot => {
             const tempArray = [];
             if (snapshot.exists()) {
-                snapshot.forEach(heritage => {
-                    if (heritage.val().tHTrait) {
-                        tempArray.push(heritage.val())
+                snapshot.forEach(trait => {
+                    if (trait.val().tHTrait) {
+                        tempArray.push(trait.val())
                     }
                 })
                 setTraits(tempArray)
@@ -63,7 +63,7 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                 <ClickDescription
                     show={show}
                     dispatch={dispatch}
-                    display={'display1'}
+                    displayKey={'display1'}
                     closeAction={closeOne}
                     openAction={openOne}
                     headerText={'Description'}
@@ -73,7 +73,7 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                 <ClickDescription
                     show={show}
                     dispatch={dispatch}
-                    display={'display2'}
+                    displayKey={'display2'}
                     closeAction={closeTwo}
                     openAction={openTwo}
                     headerText={'Physical Attributes'}

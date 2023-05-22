@@ -74,19 +74,24 @@ const charReducer = (state, action) => {
                 (
                     state
                         .traitIDs
-                        .contains(action.traitID)
+                        .includes(action.traitID)
                 )
                     ?
                     (
                         state
                             .traitIDs
-                            .filter(tID !== action.traitID)
+                            .filter(tID => tID !== action.traitID)
                     )
                     :
                     (
-                        state
-                            .traitIDs
-                            .push(action.traitID)
+                        [
+                            action
+                                .traitID
+                        ]
+                            .concat(
+                                state
+                                    .traitIDs
+                            )
                     )
             )
 

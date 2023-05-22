@@ -10,7 +10,7 @@ const displayText = {
     },
 
     traits: {
-        title: "--What are traits?",
+        title: "--What are traits?--",
         1: "Instead of predefined classes, Tiny Dungeon 2e uses Traits to express what your Adventurer excels at doing.",
         2: ""
     },
@@ -49,10 +49,14 @@ const DisplayRational = () => {
                     <div className="displayational__text">
                         {displayText[stage][1]}
                     </div>
-                    <div className="spacer" />
-                    <div className="displayRational__text">
-                        {displayText[stage][2]}
-                    </div>
+                    {displayText[stage][2] &&
+                        <span>
+                            <div className="spacer" />
+                            <div className="displayRational__text">
+                                {displayText[stage][2]}
+                            </div>
+                        </span>
+                    }
                 </div>
             }
 

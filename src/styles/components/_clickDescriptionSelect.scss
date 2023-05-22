@@ -1,0 +1,31 @@
+.clickDescriptionSelect__container {
+    user-select: none;
+}
+
+.clickDescriptionSelect__checkbox {
+    accent-color: $text-brown;
+    float: left;
+    width: $m-size;
+    height: $m-size;
+}
+
+.clickDescriptionSelect__heading--clickable {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    user-select: none;
+}
+
+.clickDescriptionSelect__heading--title {
+    margin-left: $xl-size;
+}
+
+.clickDescriptionSelect__container--description {
+    border-left: 1px solid $text-brown;
+    border-right: 1px solid $text-brown;
+    border-bottom: 1px solid $text-brown;
+}
+
+.clickDescriptionSelect__description {
+    padding: $xs-size;
+}

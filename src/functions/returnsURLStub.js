@@ -36,7 +36,7 @@ const wgTraits = [
 
 ]
 
-const returnsURLStub = ({ char }) => {
+const returnsURLStub = ({ char, newCharStepOrder }) => {
     const {
         // charID,
         // userID,
@@ -147,19 +147,8 @@ const returnsURLStub = ({ char }) => {
         false
     ]
 
-    // Return the URL stub corresponding to the first failed char data test
-    const createCharOrder = [
-        'heritage',
-        'traits',
-        'weaponGroup',
-        'weapon',
-        'familiar',
-        'backstory',
-        'end'
-    ]
-
     const indexOfFalse = trueIfComplete.indexOf(false)
-    return createCharOrder[indexOfFalse]
+    return newCharStepOrder[indexOfFalse]
 
 
 }

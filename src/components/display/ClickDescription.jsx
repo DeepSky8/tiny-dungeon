@@ -5,7 +5,7 @@ const ClickDescription = (
     {
         show,
         dispatch,
-        display,
+        display: displayKey,
         closeAction,
         openAction,
         headerText,
@@ -19,16 +19,16 @@ const ClickDescription = (
             <div
                 className="clickDescription__heading"
                 onClick={() => {
-                    show[display] ?
+                    show[displayKey] ?
                         dispatch(closeAction())
                         :
                         dispatch(openAction())
                 }}
-            >{show[display] ? "" : clickFor}{headerText}
+            >{show[displayKey] ? "" : clickFor}{headerText}
             </div>
 
             <div className="clickDescription__container--description">
-                {show[display] &&
+                {show[displayKey] &&
                     <span className="clickDescription__description">
                         {bodyText}
                     </span>
