@@ -85,20 +85,22 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
     }
 
     const selectedWeaponGroups = ({ wgTraits, hTraitID, weaponGroupIDs, specialTraitsSelected }) => {
-        // How many weapon groups currently?
-        const weaponGroupLength = weaponGroupIDs.length;
+        // // How many weapon groups currently?
+        // const weaponGroupLength = weaponGroupIDs.length;
 
-        // Does character have a heritage that adds a weapon group?
-        const weaponHeritage = wgTraits.includes(hTraitID) ? 1 : 0;
+        // // Does character have a heritage that adds a weapon group?
+        // const weaponHeritage = wgTraits.includes(hTraitID) ? 1 : 0;
 
-        // How many traits add a weapon group capability to the character?
-        const weaponTraits = specialTraitsSelected.filter(traitID => wgTraits.includes(traitID)).length;
+        // // How many traits add a weapon group capability to the character?
+        // const weaponTraits = specialTraitsSelected.filter(traitID => wgTraits.includes(traitID)).length;
 
-        // All characters should select a weapon group by default,
-        // in addition to heritage weapon groups and trait weapon groups
-        const wgTotalsMatch = weaponGroupLength === (weaponHeritage + weaponTraits + 1)
+        // // All characters should select a weapon group by default,
+        // // in addition to heritage weapon groups and trait weapon groups
+        // const wgTotalsMatch = weaponGroupLength === (weaponHeritage + weaponTraits + 1)
 
-        return wgTotalsMatch
+        // return wgTotalsMatch
+
+        return (weaponGroupIDs.length > 0)
     }
 
     const selectedWeapons = ({ weaponGroupIDs, weaponIDs }) => {

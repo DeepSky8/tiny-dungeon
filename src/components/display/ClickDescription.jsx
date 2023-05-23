@@ -5,7 +5,7 @@ const ClickDescription = (
     {
         show,
         dispatch,
-        display: displayKey,
+        displayKey,
         closeAction,
         openAction,
         headerText,

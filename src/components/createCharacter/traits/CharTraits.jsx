@@ -52,6 +52,9 @@ const CharTraits = () => {
                 </div>
             </div>
 
+            <div className="charTraits__text--reminder">
+                Click to open
+            </div>
 
             {traits.map(trait => {
                 return (
