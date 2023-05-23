@@ -70,9 +70,13 @@ export const updateBelief = (belief) => ({
     belief
 })
 
-export const updateWeaponGroupIDs = (weaponGroupID) => ({
+export const addRemoveWeaponGroupID = (weaponGroupID) => ({
     type: 'UPDATE_WEAPONGROUPIDS',
     weaponGroupID
+})
+
+export const clearWeaponGroupIDs = () => ({
+    type: 'CLEAR_WEAPONGROUPIDS'
 })
 
 export const updateWeaponIDs = (weaponID) => ({

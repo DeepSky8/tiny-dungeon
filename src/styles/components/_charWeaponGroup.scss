@@ -1,0 +1,15 @@
+.charWeaponGroup__container {
+    user-select: none;
+    margin-bottom: $s-size;
+}
+
+.charWeaponGroup__container--defaultWGs {
+    margin-bottom: $s-size;
+}
+
+.charWeaponGroup__text--reminder {
+    font-style: italic;
+    font-size: $calcFontSize;
+    justify-content: right;
+    display: flex;
+}

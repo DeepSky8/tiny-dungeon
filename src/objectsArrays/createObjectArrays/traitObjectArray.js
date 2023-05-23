@@ -10,7 +10,8 @@ import {
     updateTSpecial,
     updateTSpell,
     updateTTitle,
-    updateTUnarmed
+    updateTUnarmed,
+    updateTWeaponGroupID
 } from "../../actions/traitActions";
 
 
@@ -125,7 +126,15 @@ const traitObjectArray = [
             // Need to add blur save command
         },
     },
-
+    {
+        label: 'Associated Weapon Group ID? ',
+        id: 'tWeaponGroupID',            // Must match the field name on the default object
+        type: 'text',
+        action: updateTWeaponGroupID,
+        blur: () => {
+            // Need to add blur save command
+        },
+    },
 ]
 
 export default traitObjectArray

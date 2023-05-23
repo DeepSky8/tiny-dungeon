@@ -2,3 +2,14 @@
     padding-top: $s-size;
     padding-bottom: $m-size;
 }
+
+.charTraits__container--count {
+    margin-left: $xl-size;
+}
+
+.charTraits__text--reminder {
+    font-style: italic;
+    font-size: $calcFontSize;
+    justify-content: right;
+    display: flex;
+}

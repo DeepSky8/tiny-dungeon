@@ -153,7 +153,7 @@ const charReducer = (state, action) => {
                     // contain this wgID?
                     state
                         .weaponGroupIDs
-                        .contains(action.weaponGroupID)
+                        .includes(action.weaponGroupID)
                 )
                     ?
                     (
@@ -167,7 +167,7 @@ const charReducer = (state, action) => {
                         // If no, add the weapon group to the list
                         state
                             .weaponGroupIDs
-                            .push(action.weaponGroupID)
+                            .concat([action.weaponGroupID])
                     )
             )
 
@@ -175,6 +175,11 @@ const charReducer = (state, action) => {
                 ...state,
                 weaponGroupIDs: newWGIDs
 
+            }
+        case 'CLEAR_WEAPONGROUPIDS':
+            return {
+                ...state,
+                weaponGroupIDs: []
             }
         case 'UPDATE_WEAPONIDS':
             // PLEASE PASS IN action.weaponID <--- NOT WEAPONIDS
@@ -184,7 +189,7 @@ const charReducer = (state, action) => {
                     // Does the current array of weaponIDs contain this wID?
                     state
                         .weaponIDs
-                        .contains(action.weaponID)
+                        .includes(action.weaponID)
                 )
                     ?
                     (

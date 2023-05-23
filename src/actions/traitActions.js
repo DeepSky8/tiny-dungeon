@@ -71,6 +71,11 @@ export const updateTClaws = (tClaws) => ({
     tClaws
 })
 
+export const updateTWeaponGroupID = (tWeaponGroupID) => ({
+    type: 'UPDATE_TWEAPONGROUPID',
+    tWeaponGroupID
+})
+
 
 export const startSaveTrait = async ({
     tID,
@@ -85,7 +90,8 @@ export const startSaveTrait = async ({
     tImprovised,
     tUnarmed,
     tFamiliar,
-    tClaws
+    tClaws,
+    tWeaponGroupID,
 }) => {
     const updates = {}
 
@@ -102,6 +108,8 @@ export const startSaveTrait = async ({
     updates[`traits/${tID}/tUnarmed`] = tUnarmed
     updates[`traits/${tID}/tFamiliar`] = tFamiliar
     updates[`traits/${tID}/tClaws`] = tClaws
+    updates[`traits/${tID}/tWeaponGroupID`] = tWeaponGroupID
+    updates[`traits/${tID}/tWeaponGroup`] = null
 
 
     update(ref(db), updates)
@@ -109,6 +117,8 @@ export const startSaveTrait = async ({
             console.log('Did not save trait', error)
         })
 }
+
+
 
 // tID: '',
 // tTitle: '',

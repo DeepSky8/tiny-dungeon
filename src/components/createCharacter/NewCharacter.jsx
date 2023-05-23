@@ -10,9 +10,9 @@ const NewCharacter = () => {
     const [char, dispatchChar] = useReducer(charReducer, defaultChar)
     const [nextStep, dispatchNext] = useReducer(nextStepReducer, defaultNextStep)
 
-    // useEffect(() => {
-    //     console.log('char', char)
-    // }, [char])
+    useEffect(() => {
+        console.log('char', char)
+    }, [char])
 
     // useEffect(() => {
     //     console.log('nextStep', nextStep)

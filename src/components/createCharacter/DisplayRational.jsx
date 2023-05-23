@@ -16,8 +16,8 @@ const displayText = {
     },
 
     weaponGroup: {
-        title: "--What's a Weapon Group?--",
-        1: "There are three weapon categories: Light Melee (one-handed), Heavy Melee (two-handed), and Ranged (reach out and touch someone)",
+        title: "--Weapon Group?--",
+        1: "There are three main weapon categories: Light Melee (one-handed), Heavy Melee (two-handed), and Ranged (reach out and touch someone)",
         2: "From this group, you select one specific type of weapon that you have Mastered. For example, you can select Light Melee Weapons as your Proficient group, and from that, you can select daggers as your Mastered weapon",
     },
 

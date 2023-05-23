@@ -16,6 +16,7 @@ import CharWeapon from "../components/createCharacter/weaponGroup/CharWeapon.jsx
 import CharBackstory from "../components/createCharacter/backstory/CharBackstory.jsx";
 import CharFamiliar from "../components/createCharacter/familiar/CharFamiliar.jsx";
 import DisplayCharacter from "../components/displayCharacter/DisplayCharacter.jsx";
+import DisplayWeaponGroups from "../components/editItems/DisplayWeaponGroups.jsx";
 
 const AppRouter = createBrowserRouter([
     {
@@ -87,6 +88,11 @@ const AppRouter = createBrowserRouter([
         path: "/displayHeritages",
         errorElement: <NotFoundPage />,
         element: <DisplayHeritages />
+    },
+    {
+        path: "/displayWeaponGroups",
+        errorElement: <NotFoundPage />,
+        element: <DisplayWeaponGroups />
     },
     {
         path: "/createScroll",

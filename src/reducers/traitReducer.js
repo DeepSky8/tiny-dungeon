@@ -14,6 +14,7 @@ const defaultTrait = {
     tUnarmed: false,
     tFamiliar: false,
     tClaws: false,
+    tWeaponGroupID: '',
 }
 
 const traitReducer = (state, action) => {
@@ -104,6 +105,13 @@ const traitReducer = (state, action) => {
                 tClaws: !state.tClaws,
                 tSpecial: state.tClaws ? false : true
             }
+        case 'UPDATE_TWEAPONGROUPID':
+            return {
+                ...state,
+                tWeaponGroupID: action.tWeaponGroupID,
+                tSpecial: action.tWeaponGroupID.length > 0 ? true : false,
+            }
+
         default:
             return {
                 ...state
