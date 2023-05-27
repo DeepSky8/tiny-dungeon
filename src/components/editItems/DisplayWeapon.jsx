@@ -3,8 +3,8 @@ import Field from "../display/Field";
 import Menu from "../display/Menu";
 import { defaultWeaponMastered, weaponsMasteredReducer } from "../../reducers/weaponReducer";
 import {
-    clearWeapon,
     startNewWeaponKey,
+    startSaveWeapon,
     updateWDescription,
     updateWHTrait,
     updateWTitle,
@@ -15,38 +15,29 @@ import { wgTypes } from "../../objectsArrays/createObjectArrays/weaponGroupObjec
 
 
 
-const CreateWeapon = () => {
-    const [weapon, dispatchWeapon] = useReducer(weaponsMasteredReducer, defaultWeaponMastered)
+const DisplayWeapon = ({ weaponData }) => {
+    const [weapon, dispatchWeapon] = useReducer(weaponsMasteredReducer, weaponData)
 
     const handleSave = () => {
-        startNewWeaponKey({ weaponData: weapon })
-            .then(
-                dispatchWeapon(clearWeapon())
-            )
+        startSaveWeapon({ ...weapon })
     }
 
     return (
         <div className="createWeapon__container">
 
-            <Menu
-                label={'Weapon Group Type'}
+            <Field
+                label={'Weapon Group'}
                 id={'wType'}
+                type={'text'}
+                value={weapon.wType}
                 change={(e) => {
                     dispatchWeapon(updateWType(e.target.value))
                 }}
                 blur={() => {
+                    handleSave()
 
                 }}
                 theme={''}
-                selectObject={
-                    {
-                        wgTypeID: `menuDefault${weapon.wID}`,
-                        wgTypeTitle: "--Please select a weapon group--"
-                    }
-                }
-                array={wgTypes}
-                keyID={'wgTypeID'}
-                displayID={'wgTypeTitle'}
             />
 
             <Field
@@ -58,6 +49,7 @@ const CreateWeapon = () => {
                     dispatchWeapon(updateWTitle(e.target.value))
                 }}
                 blur={() => {
+                    handleSave()
 
                 }}
                 theme={''}
@@ -72,7 +64,7 @@ const CreateWeapon = () => {
                     dispatchWeapon(updateWDescription(e.target.value))
                 }}
                 blur={() => {
-                    const formatValue = weapon.wDescription.replace(/[\n\r]/gm, ' ');
+                    const formatValue = wGroup.wgDescription.replace(/[\n\r]/gm, ' ');
                     dispatchWeapon(updateWDescription(formatValue))
                 }}
                 theme={''}
@@ -87,6 +79,7 @@ const CreateWeapon = () => {
                     dispatchWeapon(updateWHTrait(e.target.value))
                 }}
                 blur={() => {
+                    handleSave()
 
                 }}
                 theme={''}
@@ -101,16 +94,15 @@ const CreateWeapon = () => {
                     dispatchWeapon(updateWTrait(e.target.value))
                 }}
                 blur={() => {
+                    handleSave()
 
                 }}
                 theme={''}
             />
 
-            <button
-                onClick={handleSave}
-            >Save</button>
+            <hr />
         </div>
     )
 }
 
-export default CreateWeapon
+export default DisplayWeapon
