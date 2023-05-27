@@ -10,7 +10,7 @@ const chooseFamiliar = 'familiar'
 const chooseBackstory = 'backstory'
 
 const pleaseSelectA = 'Please select a '
-const pleaseSelect = 'Please select '
+const pleaseDescribe = 'Please describe '
 const pleaseDesignA = 'Please design a '
 const pleaseCheck = 'Please double-check the number of selected '
 const weaponGroup = 'Weapon Group'

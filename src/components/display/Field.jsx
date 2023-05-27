@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Field = ({ label, id, type, value, change, blur, theme }) => {
+const Field = ({ label, id, type, value, change, blur, theme, placeholder = '' }) => {
     return (
         <div className="field__container">
             <span className={`field__container--description ${theme}`}>
@@ -27,6 +27,7 @@ const Field = ({ label, id, type, value, change, blur, theme }) => {
                         cols='50'
                         id={id}
                         className={`field--input ${theme}`}
+                        placeholder={placeholder}
                         value={value}
                         onChange={change}
                         onBlur={blur}
@@ -38,6 +39,7 @@ const Field = ({ label, id, type, value, change, blur, theme }) => {
                         id={id}
                         className={`field--input ${theme}`}
                         type={type}
+                        placeholder={placeholder}
                         value={value}
                         onChange={change}
                         onBlur={blur}

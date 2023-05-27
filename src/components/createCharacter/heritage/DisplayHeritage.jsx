@@ -92,9 +92,11 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
 
                 <div className="clickDescription__container--description">
                     {show.display3 &&
-                        <div className="clickDescription--description">
-                            <div>Hit points: {hHP}</div>
-                            <div>Heritage Trait:</div>
+                        <div>
+                            <span className="clickDescription--stats">
+                                <div>Hit points: {hHP}</div>
+                                <div>Heritage Trait:</div>
+                            </span>
                             <BulletedSelect
                                 objectArray={traits}
                                 IDArray={hTraitIDs}

@@ -1,5 +1,6 @@
 .displayRational__container {
     user-select: none;
+    margin-top: $m-size;
 }
 
 .displayRational__header--clickable {
@@ -15,4 +16,9 @@
     border-left: 1px solid $text-brown;
     border-right: 1px solid $text-brown;
     border-bottom: 1px solid $text-brown;
+    padding: 0 $s-size;
+}
+
+.displayRational__text {
+    padding: $s-size 0;
 }

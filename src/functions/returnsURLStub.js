@@ -24,6 +24,9 @@ const check = {
     // Tough - trait
     additionalHP: '-NV0CzfGuKHy24OMUfMN',
 
+    // Unarmed Weapon Group ID
+    unarmedWeaponGroup: '-NV6Yyve_GUxV4OsizI2'
+
 }
 
 const wgTraits = [
@@ -104,6 +107,10 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
     }
 
     const selectedWeapons = ({ weaponGroupIDs, weaponIDs }) => {
+        // if (weaponGroupIDs.includes(check.unarmedWeaponGroup)) {
+        //     return ((weaponGroupIDs.length - 1) === weaponIDs.length)
+        // } else {
+        // }
         return (weaponGroupIDs.length === weaponIDs.length)
     }
 

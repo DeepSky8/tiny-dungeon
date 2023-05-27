@@ -3,7 +3,6 @@
 //      1 damage
 //      * attacks per turn
 //      Close range standard test
-//      Includes Powerful Claws Karhu Heritage Trait
 //  Heavy Melee     h
 //      2 damage
 //      1 attack per turn
@@ -25,6 +24,7 @@
 //      1 damage
 //      * attacks per turn
 //      Close range standard test
+//      Includes Powerful Claws Karhu Heritage Trait
 //  Shield          s
 //      0 damage
 //      Effect as described by player
@@ -32,7 +32,7 @@
 //      Close range standard test
 
 const defaultWeaponGroup = {
-    wgID: '',
+    wgID: Math.random(),
     wgType: 'l',
     wgTitle: '',
     wgDescription: '',
@@ -45,9 +45,9 @@ const defaultWeaponGroup = {
 }
 
 const defaultWeaponMastered = {
-    wID: '',
-    wGroup: '',         // Corresponds to weaponGroup letter
-    wType: '',          // Select from weapon type array determined by group, identify by ID
+    wID: Math.random(),
+    // wGroup: '',         // Select from weapon type array determined by group, identify by ID
+    wType: '',          // Corresponds to weaponGroup letter
     wTitle: '',         // User-defined text, if any
     wDescription: '',   // User-defined text, if any
     wDepletion: '',     // Interact with depletion counters in later update, set initial depletion counters by wType object
@@ -193,11 +193,11 @@ const weaponsMasteredReducer = (state, action) => {
                 ...state,
                 wID: action.wID
             }
-        case 'UPDATE_WGROUP':
-            return {
-                ...state,
-                wGroup: action.wGroup
-            }
+        // case 'UPDATE_WGROUP':
+        //     return {
+        //         ...state,
+        //         wGroup: action.wGroup
+        //     }
         case 'UPDATE_WTYPE':
             return {
                 ...state,
@@ -222,6 +222,11 @@ const weaponsMasteredReducer = (state, action) => {
             return {
                 ...state,
                 wHTrait: action.wHTrait
+            }
+        case 'UPDATE_WTRAIT':
+            return {
+                ...state,
+                wTrait: action.wTrait
             }
         default:
             return {

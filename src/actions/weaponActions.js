@@ -110,6 +110,10 @@ export const updateWHTrait = (wHTrait) => ({
     wHTrait
 })
 
+export const updateWTrait = (wTrait) => ({
+    type: 'UPDATE_WTRAIT',
+    wTrait
+})
 
 export const startSaveWeaponGroup = async ({
     wgID,

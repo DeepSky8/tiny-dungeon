@@ -1,0 +1,58 @@
+// .displayWeapon__container {
+//     // user-select: none;
+// }
+
+.displayWeapon__heading--clickable {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    user-select: none;
+}
+
+.displayWeapon__heading--title {
+    text-align: center;
+    overflow: hidden;
+}
+
+.displayWeapon__container--body {
+    border-left: 1px solid $text-brown;
+    border-right: 1px solid $text-brown;
+    border-bottom: 1px solid $text-brown;
+}
+
+.displayWeapon__container--edit {
+    user-select: contain;
+    justify-content: center;
+    text-align: center;
+
+    .field--input {
+        background-color: $menu-yellow-faded;
+        font-size: $calcFontSizeLarge;
+        @include button--border;
+        max-width: 85%;
+        text-align: center;
+        user-select: contain;
+        overflow: hidden;
+    }
+    ::placeholder {
+        color: $text-brown-placeholder;
+    }
+}
+
+.displayWeapon__container--range{
+    margin: $xs-size 0;
+}
+
+.displayWeapon__range--title{
+    text-align: center;
+}
+
+.displayWeapon__range--body{
+    text-align: left;
+    margin: 0 0 0 $l-size;
+    
+}
+
+.displayWeapon__description {
+    padding: $xs-size;
+}

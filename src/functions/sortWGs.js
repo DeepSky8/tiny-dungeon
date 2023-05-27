@@ -23,7 +23,8 @@
 //     // Barfighter - trait
 //     improvisedWeaponGroup: '-NV03ETlxlqgMs5vFCrO',
 //     // Martial Artist - trait
-//     unarmedWeaponGroup: '-NV0Bbp1XgrfyHr7nha-',
+//     unarmedWeaponGroup: '-NV0Bbp1XgrfyHr7nha-',obs
+
 //     // Shield Bearer
 //     shield: '-NV0C_daHy4EQZHergVr',
 //     // Spell-Touched
@@ -47,6 +48,8 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
             defaultWGIDs.push(trait.tWeaponGroupID)
         }
     });
+
+
 
     // Find the weapon groups associated with the default weapon group IDs
     // and add those weapon groups to the defaultWGs array
