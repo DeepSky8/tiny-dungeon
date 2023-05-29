@@ -4,9 +4,8 @@ import DisplayRational from "../DisplayRational";
 import DisplayWeapon from "./DisplayWeapon";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
-import { defaultWeaponGroup } from "../../../reducers/weaponReducer";
-import { registerVersion } from "firebase/app";
 import returnsTitleText from "../../../functions/returnsTitleText";
+import DisplayUnarmed from "./DisplayUnarmed";
 
 
 // // Bow Mastery - Heritage Trait
@@ -47,53 +46,55 @@ import returnsTitleText from "../../../functions/returnsTitleText";
 //     shield: '-NV6ZmJQi2ryBeRC_lv2',
 // }
 
+
+
+
 const CharWeapon = () => {
     const [char, dispatchChar] = useOutletContext()
     // const selectedWGIDs = char.weaponGroupIDs
     const [weaponGroups, setWeaponGroups] = useState([])
-
+    const [weapons, setWeapons] = useState([])
 
 
 
     // Get Weapon Group object per selected Weapon Group ID
     useEffect(() => {
-        // let tempArray = [defaultWeaponGroup];
+        let tempArray = [];
 
-        // char.weaponGroupIDs.forEach(wgID => {
-        //     console.log('wgID', wgID)
-        //     onValue(ref(db, `weaponGroups/${wgID}`), snapshot => {
-        //         if (snapshot.exists()) {
-        //             tempArray.push(snapshot.val())
-        //         }
-        //     }, {
-        //         onlyOnce: true
-        //     })
-        // });
+        char.weaponGroupIDs.forEach(wgID => {
+            onValue(ref(db, `weaponGroups/${wgID}`), snapshot => {
+                if (snapshot.exists()) {
+                    tempArray.push(snapshot.val())
+                }
+            }, {
+                onlyOnce: true
+            })
+        });
 
-        // setWeaponGroups(tempArray)
+        setWeaponGroups(tempArray)
 
-        onValue(ref(db, `weaponGroups`), snapshot => {
-            const tempArray = [];
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => {
-                    if (
-                        (
-                            char.weaponGroupIDs.includes(snap.val().wgID)
-                        )
-                        // &&
-                        // (
-                        //     snap.val().wgID !== '-NV6Yyve_GUxV4OsizI2' // Unarmed weapon group does not create a weapon
-                        // )
-                    ) {
-                        tempArray.push(snap.val())
-                    }
-                })
-            }
-            // const tempFiltered = tempArray.filter(wg => char.weaponGroupIDs.includes(wg.wgID))
-            setWeaponGroups(tempArray)
-        }, {
-            onlyOnce: true
-        })
+        // onValue(ref(db, `weaponGroups`), snapshot => {
+        //     const tempArray = [];
+        //     if (snapshot.exists()) {
+        //         snapshot.forEach(snap => {
+        //             if (
+        //                 (
+        //                     char.weaponGroupIDs.includes(snap.val().wgID)
+        //                 )
+        //                 // &&
+        //                 // (
+        //                 //     snap.val().wgID !== '-NV6Yyve_GUxV4OsizI2' // Unarmed weapon group does not create a weapon
+        //                 // )
+        //             ) {
+        //                 tempArray.push(snap.val())
+        //             }
+        //         })
+        //     }
+        //     // const tempFiltered = tempArray.filter(wg => char.weaponGroupIDs.includes(wg.wgID))
+        //     setWeaponGroups(tempArray)
+        // }, {
+        //     onlyOnce: true
+        // })
 
         return (() => {
             off(ref(db, `weaponGroups`))
@@ -101,12 +102,25 @@ const CharWeapon = () => {
 
     }, [])
 
+    // Get all Weapons
+    useEffect(() => {
+        onValue(ref(db, 'weapons'), snapshot => {
+            const tempArray = [];
+            if (snapshot.exists()) {
+                snapshot.forEach(weapon => {
+                    tempArray.push(weapon.val())
+                })
+            }
+            setWeapons(tempArray)
+        }, {
+            onlyOnce: true
+        }
+        )
 
-
-    // useEffect(() => {
-    //     console.log('weaponGroups', weaponGroups)
-    // }, [weaponGroups])
-
+        return (() => {
+            off(ref(db, 'weapons'))
+        })
+    }, [])
 
     // For each (appropriate) weapon group, allow the user
     // to create/define a weapon in that group
@@ -115,25 +129,46 @@ const CharWeapon = () => {
 
     return (
         <div className="charWeapon__container">
-            <div className="charWeapon__text">
+            <div
+                className="charWeapon__text"
+                id="charWeapon__text"
+            >
                 Your character is proficient with {returnsTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Unarmed'] })} weapons
             </div>
             <div className="clickOpen__text--reminder">
                 Click to open
             </div>
-            {weaponGroups.length > 0
+            {
+                weaponGroups.length > 0
+                &&
+                weapons.length > 0
                 &&
                 <span>
 
                     {
                         weaponGroups.map(wg => {
-                            return (
-                                <DisplayWeapon
-                                    key={wg.wgID}
-                                    weaponGroup={wg}
-                                    dispatchChar={dispatchChar}
-                                />
+                            const jsx = (
+                                wg.wgType === 'u'
+                                    ?
+                                    (
+                                        <DisplayUnarmed
+                                            key={wg.wgID}
+                                            weaponGroup={wg}
+                                            weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                            dispatchChar={dispatchChar}
+                                        />
+                                    )
+                                    :
+                                    (
+                                        <DisplayWeapon
+                                            key={wg.wgID}
+                                            weaponGroup={wg}
+                                            weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                            dispatchChar={dispatchChar}
+                                        />
+                                    )
                             )
+                            return jsx
                         })
                     }
                 </span>

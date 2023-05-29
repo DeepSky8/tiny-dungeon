@@ -28,6 +28,10 @@ export const updateTraitIDs = (traitID) => ({
     traitID
 })
 
+export const clearTraitIDs = () => ({
+    type: 'CLEAR_TRAITIDS'
+})
+
 export const updateHTraitID = (hTraitID) => ({
     type: 'UPDATE_HTRAITID',
     hTraitID
@@ -53,7 +57,7 @@ export const updateMaxArmor = (maxArmor) => ({
 
 export const decreaseCurrentArmor = () => ({
     type: 'DECREASE_CURRENTARMOR',
-    
+
 })
 
 export const increaseCurrentArmor = () => ({
@@ -79,9 +83,9 @@ export const clearWeaponGroupIDs = () => ({
     type: 'CLEAR_WEAPONGROUPIDS'
 })
 
-export const updateWeaponIDs = (weaponID) => ({
-    type: 'UPDATE_WEAPONIDS',
-    weaponID
+export const addWeaponIDObject = (weaponIDObject) => ({
+    type: 'ADD_WEAPONIDOBJECT',
+    weaponIDObject
 })
 
 export const updateOutfitIDs = (outfitID) => ({

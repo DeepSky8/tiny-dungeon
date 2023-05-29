@@ -84,6 +84,20 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
                 // don't add this wgID to the list of available-
                 // to-pick Weapon Groups for this character
             )
+            &&
+            !(
+                // If the list of traits includes the
+                // Fey Bow Mastery trait ID
+                allTraits
+                    .map(trait => trait.tID)
+                    .includes('-NV0g5_XAfqCb0Y9079M')
+                &&
+                // AND evaluating the Ranged Weapon Group
+                wg.wgID === '-NV6Xo0B7lwELzzOnYkm'
+                // If both checks are true, negation flag means 
+                // don't add this wgID to the list of available-
+                // to-pick Weapon Groups for this character
+            )
         ) {
             availWGs.push(wg)
         }
@@ -93,15 +107,3 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
 }
 
 export default sortWGs
-
-
-// weaponGroups.forEach(wg => {
-//     if (hTraitID === karhuClawID) {
-//         if (wg.wgHTrait) {
-//             sortedWGs.default.push(wg)
-//         }
-//         if (wg.wgType === 'r') { }
-
-//     }
-
-// });

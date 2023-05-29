@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DisplayWeaponGroup from "./DisplayWeaponGroup";
+import { off, onValue, ref } from "firebase/database";
+import { db } from "../../api/firebase";
 
 const DisplayWeaponGroups = () => {
     const [weaponGroups, setWeaponGroups] = useState([]);
@@ -22,18 +24,25 @@ const DisplayWeaponGroups = () => {
         })
     }, [])
 
+    useEffect(() => {
+        console.log('weaponGroups', weaponGroups)
+    }, [weaponGroups])
+
     return (
         <div>
-            {weaponGroups.map(wg => {
-                return (
-                    <DisplayWeaponGroup
-                        key={wg.wgID}
-                        weaponGroup={wg}
-                    />
-                )
-            })}
+            {weaponGroups.length > 0
+                &&
+                weaponGroups.map(wg => {
+                    return (
+                        <DisplayWeaponGroup
+                            key={wg.wgID}
+                            weaponGroup={wg}
+                        />
+                    )
+                })}
         </div>
     )
 }
 
 export default DisplayWeaponGroups
+

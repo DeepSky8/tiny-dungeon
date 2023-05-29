@@ -20,6 +20,31 @@
     border-bottom: 1px solid $text-brown;
 }
 
+.displayWeapon__container--pick {
+    .sMenu__container {
+        margin-top: 0;
+        padding: $xs-size;
+    }
+
+    .sMenu__button {
+        @include button--border;
+        background-color: $menu-yellow;
+        color: $text-brown;
+        display: block;
+        font-weight: normal;
+        padding: 2px;
+    }
+
+    .sMenu__tray {
+        background-color: $menu-yellow;
+        position: absolute;
+        @include button--border;
+        transform: translateX(-50%);
+        top: $s-size;
+        z-index: 75;
+    }
+}
+
 .displayWeapon__container--edit {
     user-select: contain;
     justify-content: center;
@@ -39,18 +64,17 @@
     }
 }
 
-.displayWeapon__container--range{
+.displayWeapon__container--range {
     margin: $xs-size 0;
 }
 
-.displayWeapon__range--title{
+.displayWeapon__range--title {
     text-align: center;
 }
 
-.displayWeapon__range--body{
+.displayWeapon__range--body {
     text-align: left;
     margin: 0 0 0 $l-size;
-    
 }
 
 .displayWeapon__description {

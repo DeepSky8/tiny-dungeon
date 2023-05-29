@@ -1,6 +1,6 @@
 import React from "react";
 
-const BulletedRemove = ({ objectArray, IDArray, IDKey, IDTitle, IDDescription, remove }) => {
+const BulletedRemove = ({ objectArray, IDArray = [], IDKey, IDTitle, IDDescription, remove }) => {
     return (
         <div>
 

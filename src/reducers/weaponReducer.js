@@ -225,12 +225,12 @@ const weaponsMasteredReducer = (state, action) => {
         case 'UPDATE_WHTRAIT':
             return {
                 ...state,
-                wHTrait: action.wHTrait
+                wHTrait: !state.wHTrait
             }
         case 'UPDATE_WTRAIT':
             return {
                 ...state,
-                wTrait: action.wTrait
+                wTrait: !state.wTrait
             }
         default:
             return {

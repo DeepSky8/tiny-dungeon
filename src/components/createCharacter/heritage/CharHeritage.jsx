@@ -5,7 +5,7 @@ import { db } from "../../../api/firebase";
 import StyledMenu from "../../display/StyledMenu";
 import DisplayHeritage from "./DisplayHeritage";
 import DisplayRational from "../DisplayRational";
-import { updateHTraitID } from "../../../actions/charActions";
+import { clearTraitIDs, updateHTraitID, updateHeritageID } from "../../../actions/charActions";
 
 const CharHeritage = () => {
     const [char, dispatchChar] = useOutletContext();
@@ -15,6 +15,7 @@ const CharHeritage = () => {
         if (char.heritageID && heritages.length > 0) {
             const currentHeritage = heritages.filter(heritage => heritage.hID === char.heritageID)[0]
             dispatchChar(updateHTraitID(currentHeritage.hTraitIDs[0]))
+            dispatchChar(clearTraitIDs())
         }
     }, [char.heritageID, heritages])
 
@@ -50,6 +51,7 @@ const CharHeritage = () => {
                 arrayTitleRef={'hTitle'}
                 state={char}
                 dispatchState={dispatchChar}
+                dispatchAction={updateHeritageID}
                 stateIDRef={'heritageID'}
                 closeMenuArrayIDs={
                     [

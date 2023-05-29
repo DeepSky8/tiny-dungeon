@@ -9,18 +9,21 @@ const Menu = (
         change,
         blur,
         theme,
-        selectObject = {},
-        array,
         keyID,
+        selectObject = {
+            default: 'default',
+        },
+        array,
         displayID
     }
 ) => {
     const fullArray = (
-        selectObject[`${keyID}`].slice(0, 11) === 'menuDefault'
+        selectObject.default === undefined && selectObject[`${keyID}`].slice(0, 11) === 'menuDefault'
             ?
             [selectObject].concat(array)
             :
             array
+
     )
     return (
         <div className="menu__container">

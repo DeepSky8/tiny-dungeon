@@ -84,7 +84,7 @@ const CreateWeapon = () => {
                 type={'checkbox'}
                 value={weapon.wHTrait}
                 change={(e) => {
-                    dispatchWeapon(updateWHTrait(e.target.value))
+                    dispatchWeapon(updateWHTrait(!weapon.wHTrait))
                 }}
                 blur={() => {
 
@@ -98,7 +98,7 @@ const CreateWeapon = () => {
                 type={'checkbox'}
                 value={weapon.wTrait}
                 change={(e) => {
-                    dispatchWeapon(updateWTrait(e.target.value))
+                    dispatchWeapon(updateWTrait(!weapon.wTrait))
                 }}
                 blur={() => {
 
