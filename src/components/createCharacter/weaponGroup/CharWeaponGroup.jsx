@@ -1,52 +1,11 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 import { clearWeaponGroupIDs, addRemoveWeaponGroupID } from "../../../actions/charActions";
 import sortWGs from "../../../functions/sortWGs";
-import ClickDescription from "../../display/ClickDescription";
-import { defaultDisplay, displayReducer } from "../../../reducers/displayReducer";
 import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
 import DisplayRational from "../DisplayRational";
-
-
-// // Bow Mastery - Heritage Trait
-// const bowMasteryID = '-NV0g5_XAfqCb0Y9079M';
-// // Powerful Claws - Heritage Trait
-// const karhuClawID = '-NV0jYp3gMM1_J07zoU2';
-
-// // Armor Master - trait
-// const armorTraitID = '-NV-zX7BrjyyupnP8Zwc';
-// // Barfighter - trait
-// const improvisedWeaponGroup = '-NV03ETlxlqgMs5vFCrO';
-// // Familiar - trait
-// const hasFamiliar = '-NV0BAgAYVUBA8OA3_LE';
-// // Martial Artist - trait
-// const unarmedWeaponGroup = '-NV0Bbp1XgrfyHr7nha-';
-// // Shield Bearer
-// const shield = '-NV0C_daHy4EQZHergVr';
-// // Spell Reader - trait
-// const scrolls = '-NV0C_daHy4EQZHergVr';
-// // Spell-Touched
-// const spells = '-NV0Cozs0xp32U7L7cx8';
-// // Tough - trait
-// const additionalHP = '-NV0CzfGuKHy24OMUfMN';
-
-
-// const weaponGroups = {
-//     // Light - l
-//     light: '-NV6VaDJd7zza5i0UR9z',
-//     // Heavy - h
-//     heavy: '-NV6XSrebaRiCHw-FfI1',
-//     // Ranged - r
-//     ranged: '-NV6Xo0B7lwELzzOnYkm',
-//     // Improvised - i
-//     improvised: '-NV6YTDUDqbxgKFzc47H',
-//     // Unarmed - u
-//     unarmed: '-NV6Yyve_GUxV4OsizI2',
-//     // Shields - s
-//     shield: '-NV6ZmJQi2ryBeRC_lv2',
-// }
 
 
 const CharWeaponGroup = () => {
@@ -78,7 +37,7 @@ const CharWeaponGroup = () => {
         // })
     }, [])
 
-    // Get list of Weapon Groups
+    // Get Weapon Group objects
     useEffect(() => {
         onValue(ref(db, 'weaponGroups'), snapshot => {
             const tempArray = [];
@@ -92,9 +51,9 @@ const CharWeaponGroup = () => {
             onlyOnce: true
         })
 
-        return (() => {
-            off(ref(db, 'weaponGroups'))
-        })
+        // return (() => {
+        //     off(ref(db, 'weaponGroups'))
+        // })
     }, [])
 
     // Clear weapon group IDs on char
@@ -123,7 +82,6 @@ const CharWeaponGroup = () => {
     }, [selectedTraits, allWeaponGroups])
 
     const handleWGSelection = (wgID) => {
-        console.log('selectedWGID', selectedWGID)
         // If an available weapon group was selected
         // remove it from the char object
         if (selectedWGID) {
@@ -135,26 +93,13 @@ const CharWeaponGroup = () => {
         } else {
             // Set the new weapon group in temporary storage
             setSelectedWGID(wgID)
-            // and 
+            // and add it to the char object
             dispatchChar(addRemoveWeaponGroupID(wgID))
 
         }
 
 
     }
-
-    // useEffect(() => {
-    //     console.log('defaultWeaponGroups', defaultWeaponGroups)
-    // }, [defaultWeaponGroups])
-
-    // Need to evaluate what weapon groups are provided by hTraitIDs and regular traits,
-    // Powerful Claws prevents Ranged wg, and adds Unarmed wg
-    // The rest of these add the wg, and allow selecting an additional wg
-    // Bow Mastery adds Ranged wg
-    // Barfighter adds Improvised Weapons to the wg list
-    // Martial Artist adds Unarmed to the wg list
-    // Shield Bearer adds Shield to the wg list
-    // Spell-Touched adds Ranged to the wg list
 
     return (
         <div className="charWeaponGroup__container">
@@ -166,7 +111,7 @@ const CharWeaponGroup = () => {
                     <div className="charWeaponGroup__text--explanation">
                         Your character can use the following weapon groups due to trait selection:
                     </div>
-                    <div className="charWeaponGroup__text--reminder">
+                    <div className="clickOpen__text--reminder">
                         Click to open
                     </div>
                     {defaultWeaponGroups.map(wg => {
@@ -193,7 +138,7 @@ const CharWeaponGroup = () => {
                     <div className="charWeaponGroup__text--explanation">
                         The following Weapon Groups are available for your character:
                     </div>
-                    <div className="charWeaponGroup__text--reminder">
+                    <div className="clickOpen__text--reminder">
                         Click to open
                     </div>
                     {availWeaponGroups.map(wg => {

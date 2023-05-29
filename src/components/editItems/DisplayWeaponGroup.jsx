@@ -1,9 +1,26 @@
 import React, { useReducer } from "react";
 import Field from "../display/Field";
 import { weaponGroupReducer } from "../../reducers/weaponReducer";
+import {
+    removeWGDisRangeID,
+    removeWGRangeID,
+    updateWGAttackTurn,
+    updateWGDamage,
+    updateWGDescription,
+    updateWGDisRangeIDs,
+    updateWGHTrait,
+    updateWGRangeIDs,
+    updateWGTitle,
+    updateWGTrait,
+    updateWGType
+} from "../../actions/weaponActions";
+import Menu from "../display/Menu";
+import BulletedRemove from "../display/BulletedRemove";
+
+import { wgRange, wgTypes } from "../../objectsArrays/createObjectArrays/weaponGroupObjectArray";
 
 const DisplayWeaponGroup = ({ weaponGroup }) => {
-    const [WG, dispatchWG] = useReducer(weaponGroupReducer, weaponGroup)
+    const [wg, dispatchWG] = useReducer(weaponGroupReducer, weaponGroup)
 
     // wgAttackTurn,
     // wgDamage,
@@ -16,15 +33,23 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
     // wgType,
 
 
+    const handleRemoveWGroupRangeID = (id) => {
+        dispatchWG(removeWGRangeID(id))
+    }
+
+    const handleRemoveWGroupDisRangeID = (id) => {
+        dispatchWG(removeWGDisRangeID(id))
+    }
+
     return (
-        <div>
+        <div className="displayWeaponGroup__container">
             <Field
                 label={'Weapon Group Type'}
                 id={'wgType'}
                 type={'text'}
-                value={wGroup.wgTitle}
+                value={wg.wgType}
                 change={(e) => {
-                    dispatchWGroup(updateWGTitle(e.target.value))
+                    dispatchWG(updateWGType(e.target.value))
                 }}
                 blur={() => {
 
@@ -49,9 +74,9 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Weapon Group Title'}
                 id={'wgTitle'}
                 type={'text'}
-                value={wGroup.wgTitle}
+                value={wg.wgTitle}
                 change={(e) => {
-                    dispatchWGroup(updateWGTitle(e.target.value))
+                    dispatchWG(updateWGTitle(e.target.value))
                 }}
                 blur={() => {
 
@@ -63,13 +88,13 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Weapon Group Description'}
                 id={'wgDescription'}
                 type={'textarea'}
-                value={wGroup.wgDescription}
+                value={wg.wgDescription}
                 change={(e) => {
-                    dispatchWGroup(updateWGDescription(e.target.value))
+                    dispatchWG(updateWGDescription(e.target.value))
                 }}
                 blur={() => {
-                    const formatValue = wGroup.wgDescription.replace(/[\n\r]/gm, ' ');
-                    dispatchWGroup(updateWGDescription(formatValue))
+                    const formatValue = wg.wgDescription.replace(/[\n\r]/gm, ' ');
+                    dispatchWG(updateWGDescription(formatValue))
                 }}
                 theme={''}
             />
@@ -78,9 +103,9 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Weapon Group Damage'}
                 id={'wgDamage'}
                 type={'number'}
-                value={wGroup.wgDamage}
+                value={wg.wgDamage}
                 change={(e) => {
-                    dispatchWGroup(updateWGDamage(e.target.value))
+                    dispatchWG(updateWGDamage(e.target.value))
                 }}
                 blur={() => {
 
@@ -92,9 +117,9 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Weapon Group attacks per turn'}
                 id={'wgAttackTurn'}
                 type={'number'}
-                value={wGroup.wgAttackTurn}
+                value={wg.wgAttackTurn}
                 change={(e) => {
-                    dispatchWGroup(updateWGAttackTurn(e.target.value))
+                    dispatchWG(updateWGAttackTurn(e.target.value))
                 }}
                 blur={() => {
 
@@ -106,7 +131,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Weapon Group Range'}
                 id={'wgRangeIDs'}
                 change={(e) => {
-                    dispatchWGroup(updateWGRangeIDs(e.target.value))
+                    dispatchWG(updateWGRangeIDs(e.target.value))
                 }}
                 blur={() => {
 
@@ -119,7 +144,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
 
             <BulletedRemove
                 objectArray={wgRange}
-                IDArray={wGroup.wgRangeIDs}
+                IDArray={wg.wgRangeIDs}
                 IDKey={'wgRangeID'}
                 IDTitle={'wgRangeTitle'}
                 IDDescription={''}
@@ -130,7 +155,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Weapon Group Disadvantage Range'}
                 id={'wgDisRangeIDs'}
                 change={(e) => {
-                    dispatchWGroup(updateWGDisRangeIDs(e.target.value))
+                    dispatchWG(updateWGDisRangeIDs(e.target.value))
                 }}
                 blur={() => {
 
@@ -143,7 +168,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
 
             <BulletedRemove
                 objectArray={wgRange}
-                IDArray={wGroup.wgDisRangeIDs}
+                IDArray={wg.wgDisRangeIDs}
                 IDKey={'wgRangeID'}
                 IDTitle={'wgRangeTitle'}
                 IDDescription={''}
@@ -154,9 +179,9 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Acquired from Heritage Trait'}
                 id={'wgHTrait'}
                 type={'checkbox'}
-                value={wGroup.wgHTrait}
+                value={wg.wgHTrait}
                 change={(e) => {
-                    dispatchWGroup(updateWGHTrait(e.target.value))
+                    dispatchWG(updateWGHTrait(e.target.value))
                 }}
                 blur={() => {
 
@@ -168,9 +193,9 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                 label={'Acquired from Trait'}
                 id={'wgTrait'}
                 type={'checkbox'}
-                value={wGroup.wgTrait}
+                value={wg.wgTrait}
                 change={(e) => {
-                    dispatchWGroup(updateWGTrait(e.target.value))
+                    dispatchWG(updateWGTrait(e.target.value))
                 }}
                 blur={() => {
 

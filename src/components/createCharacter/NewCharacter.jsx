@@ -38,8 +38,15 @@ const NewCharacter = () => {
     }, [nextStep.currentStep])
 
     return (
-        <div className="newC__container">
-            <div className="newC__spacer">
+        <div
+            className="newC__container"
+            id="newC__container"
+        >
+            <div
+                className="newC__spacer"
+                id="newC__spacer"
+
+            >
                 <Outlet
                     context={[char, dispatchChar]}
                 />

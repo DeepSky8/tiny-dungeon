@@ -8,16 +8,21 @@ const defaultChar = {
     heritageID: '',         // Select from Heritages array, identify by hID
     hTraitID: '',           // Heritage trait determined by Heritage, identified by htID
     traitIDs: [],           // Select and identify by tID
-    maxHP: '',              // HP determined by Heritage and trait: Toughness
-    currentHP: '',          // HP current number
-    maxArmor: '',           // HP from armor determined by Trait and worn items
-    currentArmor: '',       // HP from armor current number
+    maxHP: 0,               // HP determined by Heritage and trait: Toughness
+    currentHP: 0,           // HP current number
+    maxArmor: 0,            // HP from armor determined by Trait and worn items
+    currentArmor: 0,        // HP from armor current number
     trade: '',              // Trade is user-defined text
     belief: '',             // Belief is user-defined text
 
     weaponGroupIDs: [],     // Identified by wgID
 
-    weaponIDs: [],          // Identified by wID
+    weaponIDObjects: [
+        // {
+        // wType: '',  // Single-letter l,h,r,u,i,s
+        // wID: ''     // Identified by wID
+        // }
+    ],
 
     // Wearing select from non-statted descriptions
     // Implement array of wearable items, use oID
@@ -62,8 +67,8 @@ const charReducer = (state, action) => {
             }
         case 'UPDATE_HERITAGEID':
             return {
-                ...state,
-                heritageID: action.heritageID
+                ...defaultChar,
+                heritageID: action.heritageID,
             }
         case 'UPDATE_TRAITIDS':
             // Consider adding logic to check hTrait for standard HP
@@ -97,7 +102,14 @@ const charReducer = (state, action) => {
 
             return {
                 ...state,
-                traitIDs: newTraitIDs
+                traitIDs: newTraitIDs,
+                weaponGroupIDs: [],
+                weaponIDObjects: [],
+            }
+        case 'CLEAR_TRAITIDS':
+            return {
+                ...state,
+                traitIDs: [],
             }
         case 'UPDATE_HTRAITID':
             return {
@@ -146,7 +158,7 @@ const charReducer = (state, action) => {
                 belief: action.belief
             }
         case 'UPDATE_WEAPONGROUPIDS':
-            // PLEASE PASS IN OBJECT action.weaponGroupID <--- NOTE SINGULAR
+            // PLEASE PASS IN action.weaponGroupID <--- NOTE SINGULAR
             const newWGIDs = (
                 (
                     // Does the current array of weapon group wgIDs
@@ -173,43 +185,35 @@ const charReducer = (state, action) => {
 
             return {
                 ...state,
-                weaponGroupIDs: newWGIDs
-
+                weaponGroupIDs: newWGIDs,
+                weaponIDObjects: [],
             }
         case 'CLEAR_WEAPONGROUPIDS':
             return {
                 ...state,
                 weaponGroupIDs: []
             }
-        case 'UPDATE_WEAPONIDS':
-            // PLEASE PASS IN action.weaponID <--- NOT WEAPONIDS
+        case 'ADD_WEAPONIDOBJECT':
+            // PLEASE PASS IN action.weaponIDObject <--- NOTE SINGULAR
+            // {
+            // wType: '',  // Single-letter l,h,r,u,i,s
+            // wID: ''     // Identified by wID
+            // }
 
-            const newWeaponIDs = (
-                (
-                    // Does the current array of weaponIDs contain this wID?
-                    state
-                        .weaponIDs
-                        .includes(action.weaponID)
-                )
-                    ?
-                    (
-                        // If yes, remove that weaponID from the array
-                        state
-                            .weaponIDs
-                            .filter(wID => wID !== action.weaponID)
+            const newWeaponIDObjects = (
+                state
+                    .weaponIDObjects
+                    .filter(weaponIDObject =>
+                        weaponIDObject.wType !== action.weaponIDObject.wType
                     )
-                    :
-                    (
-                        // If no, add weaponID to array
-                        state
-                            .weaponIDs
-                            .push(action.weaponID)
-                    )
+                    .concat([action.weaponIDObject])
+
             )
             return {
                 ...state,
-                weaponIDs: newWeaponIDs
+                weaponIDObjects: newWeaponIDObjects
             }
+
         case 'UPDATE_OUTFITIDS':
             return {
                 ...state,

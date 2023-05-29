@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { updateHeritageID } from "../../actions/charActions";
 
 const StyledMenu = ({
     menuID,
@@ -9,6 +8,7 @@ const StyledMenu = ({
     arrayTitleRef,
     state,
     dispatchState,
+    dispatchAction,
     stateIDRef,
     closeMenuArrayIDs,
 }) => {
@@ -31,6 +31,7 @@ const StyledMenu = ({
                         .addEventListener('click', closeMenu)
                 )
             }
+
         });
 
         return (() => {
@@ -42,18 +43,20 @@ const StyledMenu = ({
                             .removeEventListener('click', closeMenu)
                     )
                 }
+
             });
         })
     }, [])
 
     const handleClick = (id) => {
-        dispatchState(updateHeritageID(id))
+        dispatchState(dispatchAction(id))
         toggleMenu()
     }
 
     const getTitle = () => {
-        const objectIndex = array.map(object => object[`${arrayIDRef}`]).indexOf(state[`${stateIDRef}`])
-        const title = (objectIndex > -1 ? array[objectIndex][arrayTitleRef] : selectStatement)
+        const object = array.find(element => element[`${arrayIDRef}`] === state[`${stateIDRef}`])
+        // const objectIndex = array.map(object => object[`${arrayIDRef}`]).indexOf(state[`${stateIDRef}`])
+        const title = (object !== undefined ? object[arrayTitleRef] : selectStatement)
         return title
     }
 

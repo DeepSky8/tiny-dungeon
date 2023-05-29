@@ -24,6 +24,9 @@ const check = {
     // Tough - trait
     additionalHP: '-NV0CzfGuKHy24OMUfMN',
 
+    // Unarmed Weapon Group ID
+    unarmedWeaponGroup: '-NV6Yyve_GUxV4OsizI2'
+
 }
 
 const wgTraits = [
@@ -53,7 +56,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
 
         weaponGroupIDs,     // Identified by wgID
 
-        weaponIDs,          // Identified by wID
+        weaponIDObjects,    // Identified by wID and wType
 
         // Wearing select from non-statted descriptions
         // Implement array of wearable items, use oID
@@ -103,8 +106,12 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         return (weaponGroupIDs.length > 0)
     }
 
-    const selectedWeapons = ({ weaponGroupIDs, weaponIDs }) => {
-        return (weaponGroupIDs.length === weaponIDs.length)
+    const selectedWeapons = ({ weaponGroupIDs, weaponIDObjects }) => {
+        // if (weaponGroupIDs.includes(check.unarmedWeaponGroup)) {
+        //     return ((weaponGroupIDs.length - 1) === weaponIDs.length)
+        // } else {
+        // }
+        return (weaponGroupIDs.length === weaponIDObjects.length)
     }
 
     // const shouldSelectFamiliar = ({ specialTraitsSelected, familiarID, hasFamiliar }) => {
@@ -143,7 +150,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         selectedHeritage,
         selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID }),
         selectedWeaponGroups({ wgTraits, hTraitID, weaponGroupIDs, specialTraitsSelected }),
-        selectedWeapons({ weaponGroupIDs, weaponIDs }),
+        selectedWeapons({ weaponGroupIDs, weaponIDObjects }),
         selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }),
         selectedBackstory({ trade, belief, charName }),
         false

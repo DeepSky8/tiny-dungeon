@@ -56,6 +56,12 @@ const CreateWeaponGroup = () => {
 
                 }}
                 theme={''}
+                selectObject={
+                    {
+                        wgTypeID: `menuDefault${wGroup.wgID}`,
+                        wgTypeTitle: "--Please select a weapon group--"
+                    }
+                }
                 array={wgTypes}
                 keyID={'wgTypeID'}
                 displayID={'wgTypeTitle'}

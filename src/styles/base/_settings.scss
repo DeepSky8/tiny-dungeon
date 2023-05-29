@@ -9,6 +9,8 @@ $background-blue: #151517;
 // Text dark brown
 $text-brown: #221802;
 $text-brown-faded: transparentize($text-brown, 0.5);
+$text-brown-placeholder: transparentize($text-brown, 0.25);
+
 
 // Menu Background
 $menu-yellow: #bb9f44;

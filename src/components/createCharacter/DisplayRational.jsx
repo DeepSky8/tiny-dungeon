@@ -21,6 +21,16 @@ const displayText = {
         2: "From this group, you select one specific type of weapon that you have Mastered. For example, you can select Light Melee Weapons as your Proficient group, and from that, you can select daggers as your Mastered weapon",
     },
 
+    weapon: {
+        title: "--Weapon Ranges--",
+        1: "CLOSE: You can reach out and touch, strike, or aid without moving or unbalancing yourself.",
+        2: "NEAR: Just out of reach. You can use one action to move to bring someone at near range to close range.",
+        3: "FAR: Anything longer than near. It takes at least two actions to move and bring the closest enemies at Far into close range, though depending on how far they are it can take more move actions (the GM will tell you.)"
+    },
+
+    // All melee weapons can strike enemies at close range. You can use Ranged weapons at close range, but you have Disadvantage on the attack Test. You can use Magic at Close range.
+    //  Heavy Melee weapons can strike near enemies if you are willing to suffer Disadvantage on your attack (representing the ability of a larger weapon to reach.) You can use Ranged weapons and Magic at Near range.
+    //  Magic and Ranged weapons are the only weapons that can strike enemies in the Far range.
     backstory: {
         title: "--Why pick a Trade and Belief?--",
         1: "Your character wasn't born an Adventurer. No, really. They were probably exposed to a Family Trade growing up; perhaps Blacksmithing, or Weaving. This can give you Advantage on certain in-game tests.",
@@ -37,7 +47,6 @@ const DisplayRational = () => {
 
     return (
         <div className="displayRational__container">
-            <div className="spacer" />
             <div
                 className="displayRational__header--clickable"
                 onClick={toggleShow}
@@ -46,17 +55,26 @@ const DisplayRational = () => {
             </div>
             {show &&
                 <div className="displayRational__container--text">
-                    <div className="displayational__text">
+                    <div className="displayRational__text">
                         {displayText[stage][1]}
                     </div>
+
                     {displayText[stage][2] &&
                         <span>
-                            <div className="spacer" />
                             <div className="displayRational__text">
                                 {displayText[stage][2]}
                             </div>
                         </span>
                     }
+
+                    {displayText[stage][3] &&
+                        <span>
+                            <div className="displayRational__text">
+                                {displayText[stage][3]}
+                            </div>
+                        </span>
+                    }
+
                 </div>
             }
 

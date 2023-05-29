@@ -75,6 +75,10 @@ export const loadWeapon = (weapon) => ({
     weapon
 })
 
+export const clearWeapon = () => ({
+    type: 'CLEAR_WEAPON'
+})
+
 export const updateWID = (wID) => ({
     type: 'UPDATE_WID',
     wID
@@ -110,6 +114,10 @@ export const updateWHTrait = (wHTrait) => ({
     wHTrait
 })
 
+export const updateWTrait = (wTrait) => ({
+    type: 'UPDATE_WTRAIT',
+    wTrait
+})
 
 export const startSaveWeaponGroup = async ({
     wgID,
@@ -180,3 +188,35 @@ export const startNewWeaponGroupKey = async ({ wGroupData }) => {
 //     const hID = push(child(ref(db), 'heritages')).key
 //     startSaveHeritage({ ...heritageData, hID })
 // }
+
+export const startSaveWeapon = async ({
+    wID,
+    wType,          // Corresponds to weaponGroup letter
+    wTitle,         // User-defined text, if any
+    wDescription,   // User-defined text, if any
+    wDepletion,     // Interact with depletion counters in later update, set initial depletion counters by wType object
+    wHTrait,     // Set by Heritage
+    wTrait,      // Set by Trait
+
+}) => {
+    const updates = {}
+
+    updates[`weapons/${wID}/wID`] = wID
+    updates[`weapons/${wID}/wType`] = wType
+    updates[`weapons/${wID}/wTitle`] = wTitle
+    updates[`weapons/${wID}/wDescription`] = wDescription
+    updates[`weapons/${wID}/wDepletion`] = wDepletion
+    updates[`weapons/${wID}/wHTrait`] = wHTrait
+    updates[`weapons/${wID}/wTrait`] = wTrait
+
+    update(ref(db), updates)
+        .catch((error) => {
+            console.log('Did not save weapon', error)
+        })
+}
+
+
+export const startNewWeaponKey = async ({ weaponData }) => {
+    const wID = push(child(ref(db), 'weapons')).key
+    startSaveWeapon({ ...weaponData, wID })
+}
