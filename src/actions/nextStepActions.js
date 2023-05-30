@@ -3,8 +3,9 @@ export const takeNextStep = (char) => ({
     char
 })
 
-export const prevStep = () => ({
-    type: 'PREV_STEP'
+export const prevStep = (char) => ({
+    type: 'PREV_STEP',
+    char
 })
 
 export const clearNextError = () => ({

@@ -1,5 +1,6 @@
 import returnsNewCharError from "../functions/returnsNewCharError"
 import returnsURLStub from "../functions/returnsURLStub"
+import returnsURLStubBack from "../functions/returnsURLStubBack"
 
 // // Adaptability - Heritage Trait
 // const extraTraitID = '-NV0g1IzDJD22PtG_g-y';
@@ -55,7 +56,7 @@ const newCharStepOrder = [
     'traits',
     'weaponGroup',
     'weapon',
-    'familiar',
+    'familiar', // Only fires if Familiar trait is selected
     'backstory',
     'end'
 ]
@@ -77,12 +78,19 @@ const nextStepReducer = (state, action) => {
             }
 
         case 'PREV_STEP':
-            const currentStepIndex = newCharStepOrder.findIndex(step => step === state.currentStep)
+            // const currentStepIndex = newCharStepOrder.findIndex(step => step === state.currentStep)
+            const urlStubBack = returnsURLStubBack(
+                {
+                    char: action.char,
+                    newCharStepOrder: newCharStepOrder,
+                    currentStep: state.currentStep,
+                }
+            )
 
             return {
                 ...state,
                 pathRoot: '/newCharacter',
-                currentStep: newCharStepOrder[currentStepIndex - 1]
+                currentStep: urlStubBack,
             }
 
         case 'CLEAR_ERROR':
