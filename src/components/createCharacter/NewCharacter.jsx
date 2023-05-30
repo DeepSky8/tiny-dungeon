@@ -23,7 +23,7 @@ const NewCharacter = () => {
     }
 
     const handleClickBack = () => {
-        dispatchNext(prevStep())
+        dispatchNext(prevStep(char))
     }
 
     useEffect(() => {
