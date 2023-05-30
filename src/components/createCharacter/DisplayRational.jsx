@@ -28,6 +28,13 @@ const displayText = {
         3: "FAR: Anything longer than near. It takes at least two actions to move and bring the closest enemies at Far into close range, though depending on how far they are it can take more move actions (the GM will tell you.)"
     },
 
+    familiar: {
+        title: "--What's a familiar?--",
+        1: "Familiars are usually benevolent spirits that have attached themselves to another living spirit. Familiars are umbral (shadowy), but take the shape of a particular animal—typically no larger than a medium-sized dog—that is visible to anyone. Despite being able to be seen by anyone, familiars cannot speak, and instead communicate telepathically with their master. They have a movement of 30 feet and are able to remain manifested so long as they are within a 50-foot radius of their master.",
+        2: "Familiars are incorporeal to everything but their master, and as such, are unable to physically interact with other objects or individuals. That does not mean they are impervious to damage; when summoned, a familiar has 1 Hit Point, and can be damaged by magical effects. If a familiar’s Hit Points are reduced to 0, the familiar disappears and its master takes 1 point of damage.",
+        3: "Summoning and unsummoning a familiar is considered free and does not require a Test. When summoned, the familiar will appear on or within 5 feet of its master."
+    },
+
     // All melee weapons can strike enemies at close range. You can use Ranged weapons at close range, but you have Disadvantage on the attack Test. You can use Magic at Close range.
     //  Heavy Melee weapons can strike near enemies if you are willing to suffer Disadvantage on your attack (representing the ability of a larger weapon to reach.) You can use Ranged weapons and Magic at Near range.
     //  Magic and Ranged weapons are the only weapons that can strike enemies in the Far range.

@@ -2,7 +2,7 @@ import defaultGear from "../objectsArrays/defaultGear";
 
 
 const defaultChar = {
-    charID: '',
+    charID: Math.random(),
     userID: '',
     charName: '',
     heritageID: '',         // Select from Heritages array, identify by hID
