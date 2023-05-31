@@ -46,11 +46,12 @@ const defaultWeaponGroup = {
 
 const defaultWeaponMastered = {
     wID: '',
+    wCharID: '',         // Corresponds to charID
     // wGroup: '',         // Select from weapon type array determined by group, identify by ID
     wType: '',          // Corresponds to weaponGroup letter
     wTitle: '',         // User-defined text, if any
     wDescription: '',   // User-defined text, if any
-    wDepletion: 6,     // Interact with depletion counters in later update, set initial depletion counters by wType object
+    wDepletion: 6,      // Interact with depletion counters in later update, set initial depletion counters by wType object
     wHTrait: false,     // Set by Heritage
     wTrait: false,      // Set by Trait
 
@@ -79,6 +80,11 @@ const weaponGroupReducer = (state, action) => {
             return {
                 ...state,
                 wgID: action.wgID
+            }
+        case 'UPDATE_WCHARID':
+            return {
+                ...state,
+                wCharID: action.wCharID
             }
         case 'UPDATE_WGTYPE':
             return {

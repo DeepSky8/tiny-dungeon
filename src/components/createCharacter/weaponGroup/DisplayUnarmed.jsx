@@ -11,39 +11,67 @@ import {
 import Field from "../../display/Field";
 import { addWeaponIDObject } from "../../../actions/charActions";
 
+const weaponID = (wG, char, weapons) => {
+    const heritageWeaponID = (
+        wG.wgHTrait
+            ?
+            (weapons
+                .filter(weapon => weapon.wHTrait)
+                .find(weapon => weapon.wType === wG.wgType))
+                .wID
+            :
+            false
+    )
 
-const DisplayUnarmed = ({ weaponGroup: wG, weapons, dispatchChar }) => {
+    const wIDObject = (char.weaponIDObjects.find(wIDO => wIDO.wType === wG.wgType))
+
+    if (heritageWeaponID) {
+        return heritageWeaponID
+    } else if (wIDObject) {
+        return wIDObject.wID
+    } else {
+        return 'martialArtist'
+    }
+}
+
+const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
+
     const [wgName,] = useState(wG.wgTitle); // Will always be Unarmed
-    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, defaultWeaponMastered)
-    const [savedWeapon, setSavedWeapon] = useLocalStorageState(newWeapon.wID)
-    const [show, setShow] = useState(false)
-
+    const localWeaponID = weaponID(wG, char, weapons)
     const martialArtist = {
         wID: 'martialArtist',
+        wCharID: char.charID,
         // wGroup: '',          // Select from weapon type array determined by group, identify by ID
-        wType: 'u',              // Corresponds to weaponGroup letter
-        wTitle: 'Name your strike', // User-defined text
+        wType: 'u',             // Corresponds to weaponGroup letter
+        wTitle: '',             // User-defined text
         wDescription: '',       // User-defined text, if any
-        wDepletion: 99,          // Interact with depletion counters in later update, set initial depletion counters by wType object
+        wDepletion: 99,         // Interact with depletion counters in later update, set initial depletion counters by wType object
         wHTrait: false,         // Set by Heritage
         wTrait: false,          // Set by Trait
     }
+    const [localWeapon, setLocalWeapon] = useLocalStorageState(localWeaponID, { defaultValue: martialArtist })
+    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, localWeapon)
+    const [show, setShow] = useState(false)
 
     const handleSaveWeapon = () => {
         dispatchChar(addWeaponIDObject({ wID: newWeapon.wID, wType: wG.wgType }))
-        setSavedWeapon(newWeapon)
+        setLocalWeapon(newWeapon)
     }
 
     useEffect(() => {
-        if (wG.wgHTrait) {
+        if (wG.wgHTrait && localWeaponID === 'martialArtist') {
             const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
-            const matchesWeaponGroup = heritageWeapons.filter(weapon => weapon.wType === wG.wgType)
-            dispatchNewWeapon(loadWeapon(matchesWeaponGroup[0]))
-
+            const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
+            setLocalWeapon(matchesWeaponGroup)
+            dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
+            dispatchChar(addWeaponIDObject({ wID: matchesWeaponGroup.wID, wType: matchesWeaponGroup.wType }))
         } else {
-            dispatchNewWeapon(loadWeapon(martialArtist))
             dispatchNewWeapon(updateWHTrait(wG.wgHTrait)) // Set by Heritage Trait: boolean
             dispatchNewWeapon(updateWTrait(wG.wgTrait))   // Set by Trait: boolean
+        }
+
+        if (localWeapon.wTitle.length > 0) {
+            handleSaveWeapon()
         }
     }, [])
 

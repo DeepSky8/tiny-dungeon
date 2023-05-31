@@ -54,7 +54,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         trade,              // Trade is user-defined text
         belief,             // Belief is user-defined text
 
-        weaponGroupIDs,     // Identified by wgID
+        weaponGroupIDObjects,     // Identified by wgID and wgType
 
         weaponIDObjects,    // Identified by wID and wType
 
@@ -87,7 +87,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         )
     }
 
-    const selectedWeaponGroups = ({ wgTraits, hTraitID, weaponGroupIDs, specialTraitsSelected }) => {
+    const selectedWeaponGroups = ({ wgTraits, hTraitID, weaponGroupIDObjects, specialTraitsSelected }) => {
         // // How many weapon groups currently?
         // const weaponGroupLength = weaponGroupIDs.length;
 
@@ -103,15 +103,22 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
 
         // return wgTotalsMatch
 
-        return (weaponGroupIDs.length > 0)
+        return (weaponGroupIDObjects.length > 0)
     }
 
-    const selectedWeapons = ({ weaponGroupIDs, weaponIDObjects }) => {
+    const selectedWeapons = ({ weaponGroupIDObjects, weaponIDObjects }) => {
+        const wgTypes = weaponGroupIDObjects.map(wg => wg.wgType)
+        const wTypes = weaponIDObjects.map(w => w.wType)
+        const foundType = []
+
+        wgTypes.forEach(wgType => { foundType.push(wTypes.includes(wgType)) })
+
         // if (weaponGroupIDs.includes(check.unarmedWeaponGroup)) {
         //     return ((weaponGroupIDs.length - 1) === weaponIDs.length)
         // } else {
         // }
-        return (weaponGroupIDs.length === weaponIDObjects.length)
+        // return (weaponGroupIDObjects.length === weaponIDObjects.length)
+        return (!foundType.includes(false))
     }
 
     // const shouldSelectFamiliar = ({ specialTraitsSelected, familiarID, hasFamiliar }) => {
@@ -149,8 +156,8 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
     const trueIfComplete = [
         selectedHeritage,
         selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID }),
-        selectedWeaponGroups({ wgTraits, hTraitID, weaponGroupIDs, specialTraitsSelected }),
-        selectedWeapons({ weaponGroupIDs, weaponIDObjects }),
+        selectedWeaponGroups({ wgTraits, hTraitID, weaponGroupIDObjects, specialTraitsSelected }),
+        selectedWeapons({ weaponGroupIDObjects, weaponIDObjects }),
         selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }),
         selectedBackstory({ trade, belief, charName }),
         false

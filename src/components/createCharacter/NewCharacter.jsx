@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import useLocalStorageState from 'use-local-storage-state';
 import { charReducer, defaultChar } from "../../reducers/charReducer";
 import { Outlet, useNavigate } from "react-router";
 import NewCharFooter from "../home/NewCharFooter";
@@ -7,7 +8,8 @@ import { clearNextError, prevStep, takeNextStep } from "../../actions/nextStepAc
 
 const NewCharacter = () => {
     let navigate = useNavigate();
-    const [char, dispatchChar] = useReducer(charReducer, defaultChar)
+    const [localChar, setLocalChar] = useLocalStorageState('localChar', { defaultValue: defaultChar })
+    const [char, dispatchChar] = useReducer(charReducer, localChar)
     const [nextStep, dispatchNext] = useReducer(nextStepReducer, defaultNextStep)
 
     useEffect(() => {
@@ -19,10 +21,12 @@ const NewCharacter = () => {
     // }, [nextStep])
 
     const handleClickNext = () => {
+        setLocalChar(char)
         dispatchNext(takeNextStep(char))
     }
 
     const handleClickBack = () => {
+        setLocalChar(char)
         dispatchNext(prevStep(char))
     }
 

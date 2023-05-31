@@ -84,6 +84,11 @@ export const updateWID = (wID) => ({
     wID
 })
 
+export const updateWCharID = (wCharID) => ({
+    type: 'UPDATE_WCHARID',
+    wCharID
+})
+
 export const updateWGroup = (wGroup) => ({
     type: 'UPDATE_WGROUP',
     wGroup
@@ -126,10 +131,10 @@ export const startSaveWeaponGroup = async ({
     wgDescription,
     wgDamage,
     wgAttackTurn,
-    wgRangeIDs,       // c,n,f
-    wgDisRangeIDs,    // c,n,f
-    wgHTrait,      // Set by Heritage
-    wgTrait,       // Set by Trait
+    wgRangeIDs,     // c,n,f
+    wgDisRangeIDs,  // c,n,f
+    wgHTrait,       // Set by Heritage
+    wgTrait,        // Set by Trait
 
 }) => {
     const updates = {}

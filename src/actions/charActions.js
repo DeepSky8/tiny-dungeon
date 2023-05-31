@@ -74,19 +74,25 @@ export const updateBelief = (belief) => ({
     belief
 })
 
-export const addRemoveWeaponGroupID = (weaponGroupID) => ({
-    type: 'UPDATE_WEAPONGROUPIDS',
-    weaponGroupID
+export const addRemoveWeaponGroupIDObject = (weaponGroupIDObject) => ({
+    type: 'UPDATE_WEAPONGROUPIDOBJECTS',
+    weaponGroupIDObject
 })
 
-export const clearWeaponGroupIDs = () => ({
-    type: 'CLEAR_WEAPONGROUPIDS'
+export const clearWeaponGroupIDObjects = () => ({
+    type: 'CLEAR_WEAPONGROUPIDOBJECTfS'
 })
 
 export const addWeaponIDObject = (weaponIDObject) => ({
     type: 'ADD_WEAPONIDOBJECT',
     weaponIDObject
 })
+
+export const removeWeaponIDObject = (wgType) => ({
+    type: 'REMOVE_WEAPONIDOBJECT',
+    wgType
+})
+
 
 export const updateOutfitIDs = (outfitID) => ({
     type: 'UPDATE_OUTFITIDS',
