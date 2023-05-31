@@ -17,7 +17,7 @@ const CharHeritage = () => {
             dispatchChar(updateHTraitID(currentHeritage.hTraitIDs[0]))
             dispatchChar(clearTraitIDs())
         }
-    }, [char.heritageID, heritages])
+    }, [char.heritageID])
 
     useEffect(() => {
         onValue(ref(db, 'heritages'), snapshot => {

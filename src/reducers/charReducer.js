@@ -15,7 +15,12 @@ const defaultChar = {
     trade: '',              // Trade is user-defined text
     belief: '',             // Belief is user-defined text
 
-    weaponGroupIDs: [],     // Identified by wgID
+    weaponGroupIDObjects: [
+        // {
+        // wgType: '',  // Single-letter l,h,r,u,i,s
+        // wgID: ''     // Identified by wgID
+        // }
+    ],
 
     weaponIDObjects: [
         // {
@@ -103,7 +108,7 @@ const charReducer = (state, action) => {
             return {
                 ...state,
                 traitIDs: newTraitIDs,
-                weaponGroupIDs: [],
+                weaponGroupIDObjects: [],
                 weaponIDObjects: [],
             }
         case 'CLEAR_TRAITIDS':
@@ -157,41 +162,46 @@ const charReducer = (state, action) => {
                 ...state,
                 belief: action.belief
             }
-        case 'UPDATE_WEAPONGROUPIDS':
-            // PLEASE PASS IN action.weaponGroupID <--- NOTE SINGULAR
-            const newWGIDs = (
+        case 'UPDATE_WEAPONGROUPIDOBJECTS':
+            // PLEASE PASS IN action.weaponGroupIDObject <--- NOTE SINGULAR
+
+            // {
+            // wgType: '',  // Single-letter l,h,r,u,i,s
+            // wgID: ''     // Identified by wgID
+            // }
+            const newWGIDObjects = (
                 (
                     // Does the current array of weapon group wgIDs
                     // contain this wgID?
                     state
-                        .weaponGroupIDs
-                        .includes(action.weaponGroupID)
+                        .weaponGroupIDObjects
+                        .includes(action.weaponGroupIDObject)
                 )
                     ?
                     (
                         // If yes, remove that weapon group from the list
                         state
-                            .weaponGroupIDs
-                            .filter(wgID => wgID !== action.weaponGroupID)
+                            .weaponGroupIDObjects
+                            .filter(wgIDObject => wgIDObject !== action.weaponGroupIDObject)
                     )
                     :
                     (
                         // If no, add the weapon group to the list
                         state
-                            .weaponGroupIDs
-                            .concat([action.weaponGroupID])
+                            .weaponGroupIDObjects
+                            .concat([action.weaponGroupIDObject])
                     )
             )
 
             return {
                 ...state,
-                weaponGroupIDs: newWGIDs,
-                weaponIDObjects: [],
+                weaponGroupIDObjects: newWGIDObjects,
+                // weaponIDObjects: [],
             }
-        case 'CLEAR_WEAPONGROUPIDS':
+        case 'CLEAR_WEAPONGROUPIDOBJECTS':
             return {
                 ...state,
-                weaponGroupIDs: []
+                weaponGroupIDObjects: []
             }
         case 'ADD_WEAPONIDOBJECT':
             // PLEASE PASS IN action.weaponIDObject <--- NOTE SINGULAR
@@ -213,7 +223,17 @@ const charReducer = (state, action) => {
                 ...state,
                 weaponIDObjects: newWeaponIDObjects
             }
-
+        case 'REMOVE_WEAPONIDOBJECT':
+            // PLEASE PASS IN action.wgType <--- NOTE TYPE ONLY
+            const filteredIDObjects = (
+                state
+                    .weaponIDObjects
+                    .filter(wIDO => wIDO.wType !== action.wgType)
+            )
+            return {
+                ...state,
+                weaponIDObjects: filteredIDObjects
+            }
         case 'UPDATE_OUTFITIDS':
             return {
                 ...state,
@@ -245,7 +265,7 @@ const charReducer = (state, action) => {
             // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
             return {
                 ...state,
-                scrollIDs: state.scrollIDs.push(action.scrollID)
+                scrollIDs: state.scrollIDs.concat([action.scrollID])
             }
         case 'REMOVE_SCROLLID':
             // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR

@@ -61,8 +61,8 @@ const CharWeapon = () => {
     useEffect(() => {
         let tempArray = [];
 
-        char.weaponGroupIDs.forEach(wgID => {
-            onValue(ref(db, `weaponGroups/${wgID}`), snapshot => {
+        char.weaponGroupIDObjects.forEach(wgIDO => {
+            onValue(ref(db, `weaponGroups/${wgIDO.wgID}`), snapshot => {
                 if (snapshot.exists()) {
                     tempArray.push(snapshot.val())
                 }
@@ -155,6 +155,7 @@ const CharWeapon = () => {
                                             key={wg.wgID}
                                             weaponGroup={wg}
                                             weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                            char={char}
                                             dispatchChar={dispatchChar}
                                         />
                                     )
@@ -164,6 +165,7 @@ const CharWeapon = () => {
                                             key={wg.wgID}
                                             weaponGroup={wg}
                                             weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                            char={char}
                                             dispatchChar={dispatchChar}
                                         />
                                     )

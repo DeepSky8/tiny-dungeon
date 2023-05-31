@@ -6,14 +6,44 @@ import Field from "../../display/Field";
 import { addWeaponIDObject } from "../../../actions/charActions";
 import StyledMenu from "../../display/StyledMenu";
 
-const DisplayWeapon = ({ weaponGroup: wG, weapons, dispatchChar }) => {
+const weaponID = (wG, char, weapons) => {
+    const heritageWeaponID = (
+        wG.wgHTrait
+            ?
+            (weapons
+                .filter(weapon => weapon.wHTrait)
+                .find(weapon => weapon.wType === wG.wgType))
+                .wID
+            :
+            false
+    )
+
+    console.log('heritageWeaponID - weapon', heritageWeaponID)
+
+    const wIDObject = (char.weaponIDObjects.find(wIDO => wIDO.wType === wG.wgType))
+
+    console.log('wID - weapon', wIDObject)
+
+    if (heritageWeaponID) {
+        return heritageWeaponID
+    } else if (wIDObject) {
+        return wIDObject.wID
+    } else {
+        return 'temp'
+    }
+}
+
+
+const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     const [wgName,] = useState(wG.wgTitle);
-    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, defaultWeaponMastered)
-    const [savedWeapon, setSavedWeapon] = useLocalStorageState(newWeapon.wID)
+    const localWeaponID = weaponID(wG, char, weapons)
+    const [localWeapon, setLocalWeapon] = useLocalStorageState(localWeaponID, { defaultValue: defaultWeaponMastered })
+    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, (localWeaponID === 'temp' ? defaultWeaponMastered : localWeapon))
     const [show, setShow] = useState(false)
 
     const otherWeapon = {
         wID: `custom${wG.wgType}`,
+        wCharID: char.charID,
         // wGroup: '',          // Select from weapon type array determined by group, identify by ID
         wType: '',              // Corresponds to weaponGroup letter
         wTitle: 'Add your own', // User-defined text, if any
@@ -26,14 +56,16 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, dispatchChar }) => {
     useEffect(() => {
         if (wG.wgHTrait) {
             const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
-            const matchesWeaponGroup = heritageWeapons.filter(weapon => weapon.wType === wG.wgType)
-            dispatchNewWeapon(loadWeapon(matchesWeaponGroup[0]))
+            const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
+            setLocalWeapon(matchesWeaponGroup)
+            dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
+            dispatchChar(addWeaponIDObject({ wID: matchesWeaponGroup.wID, wType: matchesWeaponGroup.wType }))
         }
     }, [])
 
     const handleSaveWeapon = () => {
         dispatchChar(addWeaponIDObject({ wID: newWeapon.wID, wType: wG.wgType }))
-        setSavedWeapon(newWeapon)
+        setLocalWeapon(newWeapon)
     }
 
     useEffect(() => {

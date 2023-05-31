@@ -16,20 +16,11 @@ import { updateFamiliarID } from "../../../actions/charActions";
 
 const CharFamiliar = () => {
     const [char, dispatchChar] = useOutletContext();
-    const initialFamiliarID = char.familiarID ? char.familiarID : Math.random()
-    const [localFamiliar, setLocalFamiliar] = useLocalStorageState(initialFamiliarID)
-    const [familiar, dispatchFamiliar] = useReducer(familiarReducer, defaultFamiliar)
-    // && (localFamiliar.fCharID === char.charID)
-    useEffect(() => {
-        if (char.familiarID && (localFamiliar.fCharID === char.charID)) {
-            dispatchFamiliar(loadFamiliar(localFamiliar))
-        } else {
-            dispatchFamiliar(updateFCharID(char.charID))
-            dispatchFamiliar(updateFID(initialFamiliarID))
-        }
-    }, [])
+    const [localFamiliar, setLocalFamiliar] = useLocalStorageState('familiar', { defaultValue: defaultFamiliar })
+    const [familiar, dispatchFamiliar] = useReducer(familiarReducer, localFamiliar)
 
     const handleSaveFamiliar = () => {
+        console.log('familiar', familiar)
         dispatchChar(updateFamiliarID(familiar.fID))
         setLocalFamiliar(familiar)
     }

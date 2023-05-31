@@ -24,6 +24,7 @@
     .sMenu__container {
         margin-top: 0;
         padding: $xs-size;
+        position: relative;
     }
 
     .sMenu__button {
@@ -40,7 +41,6 @@
         position: absolute;
         @include button--border;
         transform: translateX(-50%);
-        top: $s-size;
         z-index: 75;
     }
 }

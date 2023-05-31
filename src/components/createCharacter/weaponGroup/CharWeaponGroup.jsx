@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
-import { clearWeaponGroupIDs, addRemoveWeaponGroupID } from "../../../actions/charActions";
+import {
+    clearWeaponGroupIDObjects,
+    addRemoveWeaponGroupIDObject,
+    removeWeaponIDObject
+} from "../../../actions/charActions";
 import sortWGs from "../../../functions/sortWGs";
 import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
 import { off, onValue, ref } from "firebase/database";
@@ -15,7 +19,7 @@ const CharWeaponGroup = () => {
     const [allWeaponGroups, setAllWeaponGroups] = useState([])
     const [defaultWeaponGroups, setDefaultWeaponGroups] = useState([]);
     const [availWeaponGroups, setAvailWeaponGroups] = useState([]);
-    const [selectedWGID, setSelectedWGID] = useState('')
+    const [selectedWGObject, setSelectedWGObject] = useState({ wgID: '', wgType: '' })
 
     // Get trait objects
     useEffect(() => {
@@ -61,7 +65,7 @@ const CharWeaponGroup = () => {
     // Add those weapon groups to char,
     // then provide the remaining weapon groups to the user to select one
     useEffect(() => {
-        dispatchChar(clearWeaponGroupIDs())
+        dispatchChar(clearWeaponGroupIDObjects())
         if (selectedTraits.length > 0 && allWeaponGroups.length > 0) {
             const sortedWGs = sortWGs(
                 {
@@ -73,7 +77,7 @@ const CharWeaponGroup = () => {
             sortedWGs
                 .defaultWGs
                 .forEach(wg => {
-                    dispatchChar(addRemoveWeaponGroupID(wg.wgID))
+                    dispatchChar(addRemoveWeaponGroupIDObject({ wgID: wg.wgID, wgType: wg.wgType }))
                 })
 
             setAvailWeaponGroups(sortedWGs.availWGs);
@@ -81,24 +85,23 @@ const CharWeaponGroup = () => {
 
     }, [selectedTraits, allWeaponGroups])
 
-    const handleWGSelection = (wgID) => {
-        // If an available weapon group was selected
-        // remove it from the char object
-        if (selectedWGID) {
-            dispatchChar(addRemoveWeaponGroupID(selectedWGID))
-        }
+    const handleWGSelection = (wgID, wgType) => {
+        // If the currently-selected optional weapon group was clicked
+        if (wgID === selectedWGObject.wgID) {
+            // remove it from char.weaponGroupIDs
+            dispatchChar(addRemoveWeaponGroupIDObject(selectedWGObject))
+            // and remove the associated weapon (if any) from char.weaponIDObjects 
+            dispatchChar(removeWeaponIDObject(selectedWGObject.wgType))
+            // and reset the object to default
+            setSelectedWGObject({ wgID: '', wgType: '' })
 
-        if (wgID === selectedWGID) {
-            setSelectedWGID('')
+            // Otherwise:
         } else {
-            // Set the new weapon group in temporary storage
-            setSelectedWGID(wgID)
+            // Set the new weapon group and type in temporary storage
+            setSelectedWGObject({ wgID, wgType })
             // and add it to the char object
-            dispatchChar(addRemoveWeaponGroupID(wgID))
-
+            dispatchChar(addRemoveWeaponGroupIDObject({ wgID, wgType }))
         }
-
-
     }
 
     return (
@@ -149,9 +152,9 @@ const CharWeaponGroup = () => {
                                 title={wg.wgTitle}
                                 description={wg.wgDescription}
                                 changeHandler={() => {
-                                    handleWGSelection(wg.wgID)
+                                    handleWGSelection(wg.wgID, wg.wgType)
                                 }}
-                                isSelected={char.weaponGroupIDs.includes(wg.wgID)}
+                                isSelected={char.weaponGroupIDObjects.map(wgIDO => wgIDO.wgID).includes(wg.wgID)}
                             />
                         )
                     })}
