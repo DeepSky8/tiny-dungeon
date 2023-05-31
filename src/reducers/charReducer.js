@@ -162,41 +162,46 @@ const charReducer = (state, action) => {
                 ...state,
                 belief: action.belief
             }
-        case 'UPDATE_WEAPONGROUPIDOBJECTS':
+        case 'ADD_WEAPONGROUPIDOBJECT':
             // PLEASE PASS IN action.weaponGroupIDObject <--- NOTE SINGULAR
 
             // {
             // wgType: '',  // Single-letter l,h,r,u,i,s
             // wgID: ''     // Identified by wgID
             // }
-            const newWGIDObjects = (
-                (
-                    // Does the current array of weapon group wgIDs
-                    // contain this wgID?
+            const newWGIDOs = (
+                [action.weaponGroupIDObject].concat(
                     state
                         .weaponGroupIDObjects
-                        .includes(action.weaponGroupIDObject)
+                        .filter(wgIDO =>
+                            wgIDO.wgType !== action.weaponGroupIDObject.wgType
+                        )
                 )
-                    ?
-                    (
-                        // If yes, remove that weapon group from the list
-                        state
-                            .weaponGroupIDObjects
-                            .filter(wgIDObject => wgIDObject !== action.weaponGroupIDObject)
-                    )
-                    :
-                    (
-                        // If no, add the weapon group to the list
-                        state
-                            .weaponGroupIDObjects
-                            .concat([action.weaponGroupIDObject])
+
+            )
+
+            return {
+                ...state,
+                weaponGroupIDObjects: newWGIDOs,
+            }
+        case 'REMOVE_WEAPONGROUPIDOBJECT':
+            // PLEASE PASS IN action.weaponGroupIDObject <--- NOTE SINGULAR
+
+            // {
+            // wgType: '',  // Single-letter l,h,r,u,i,s
+            // wgID: ''     // Identified by wgID
+            // }
+            const filteredWGIDOs = (
+                state
+                    .weaponGroupIDObjects
+                    .filter(wgIDO =>
+                        wgIDO.wgType !== action.weaponGroupIDObject.wgType
                     )
             )
 
             return {
                 ...state,
-                weaponGroupIDObjects: newWGIDObjects,
-                // weaponIDObjects: [],
+                weaponGroupIDObjects: filteredWGIDOs,
             }
         case 'CLEAR_WEAPONGROUPIDOBJECTS':
             return {

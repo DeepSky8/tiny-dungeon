@@ -11,14 +11,7 @@ const CharHeritage = () => {
     const [char, dispatchChar] = useOutletContext();
     const [heritages, setHeritages] = useState([]);
 
-    useEffect(() => {
-        if (char.heritageID && heritages.length > 0) {
-            const currentHeritage = heritages.filter(heritage => heritage.hID === char.heritageID)[0]
-            dispatchChar(updateHTraitID(currentHeritage.hTraitIDs[0]))
-            dispatchChar(clearTraitIDs())
-        }
-    }, [char.heritageID])
-
+    // Get a list of heritages from firebase
     useEffect(() => {
         onValue(ref(db, 'heritages'), snapshot => {
             const tempArray = [];
@@ -36,6 +29,17 @@ const CharHeritage = () => {
             off(ref(db, 'heritages'))
         })
     }, [])
+
+    // When the heritageID is updated, update char with the
+    // corresponding heritage trait
+    useEffect(() => {
+        if (char.heritageID && heritages.length > 0) {
+            const currentHeritage = heritages.filter(heritage => heritage.hID === char.heritageID)[0]
+            dispatchChar(updateHTraitID(currentHeritage.hTraitIDs[0]))
+            dispatchChar(clearTraitIDs())
+        }
+    }, [char.heritageID])
+
 
     return (
         <div
@@ -61,8 +65,6 @@ const CharHeritage = () => {
             />
 
             {
-
-
                 (
                     heritages
                         .map(heritage => heritage.hID)
@@ -77,8 +79,6 @@ const CharHeritage = () => {
                 />
             }
             <DisplayRational />
-
-
         </div>
     )
 }

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 import {
     clearWeaponGroupIDObjects,
-    addRemoveWeaponGroupIDObject,
-    removeWeaponIDObject
+    addWeaponGroupIDObject,
+    removeWeaponIDObject,
+    removeWeaponGroupIDObject
 } from "../../../actions/charActions";
 import sortWGs from "../../../functions/sortWGs";
 import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
@@ -77,7 +78,7 @@ const CharWeaponGroup = () => {
             sortedWGs
                 .defaultWGs
                 .forEach(wg => {
-                    dispatchChar(addRemoveWeaponGroupIDObject({ wgID: wg.wgID, wgType: wg.wgType }))
+                    dispatchChar(addWeaponGroupIDObject({ wgID: wg.wgID, wgType: wg.wgType }))
                 })
 
             setAvailWeaponGroups(sortedWGs.availWGs);
@@ -89,7 +90,7 @@ const CharWeaponGroup = () => {
         // If the currently-selected optional weapon group was clicked
         if (wgID === selectedWGObject.wgID) {
             // remove it from char.weaponGroupIDs
-            dispatchChar(addRemoveWeaponGroupIDObject(selectedWGObject))
+            dispatchChar(removeWeaponGroupIDObject(selectedWGObject))
             // and remove the associated weapon (if any) from char.weaponIDObjects 
             dispatchChar(removeWeaponIDObject(selectedWGObject.wgType))
             // and reset the object to default
@@ -97,10 +98,15 @@ const CharWeaponGroup = () => {
 
             // Otherwise:
         } else {
+            // Remove previously-selected weapon group from char
+            dispatchChar(removeWeaponGroupIDObject(selectedWGObject))
+            // and remove the associated weapon (if any) from char.weaponIDObjects 
+            dispatchChar(removeWeaponIDObject(selectedWGObject.wgType))
+
             // Set the new weapon group and type in temporary storage
             setSelectedWGObject({ wgID, wgType })
             // and add it to the char object
-            dispatchChar(addRemoveWeaponGroupIDObject({ wgID, wgType }))
+            dispatchChar(addWeaponGroupIDObject({ wgID, wgType }))
         }
     }
 

@@ -74,8 +74,13 @@ export const updateBelief = (belief) => ({
     belief
 })
 
-export const addRemoveWeaponGroupIDObject = (weaponGroupIDObject) => ({
-    type: 'UPDATE_WEAPONGROUPIDOBJECTS',
+export const addWeaponGroupIDObject = (weaponGroupIDObject) => ({
+    type: 'ADD_WEAPONGROUPIDOBJECT',
+    weaponGroupIDObject
+})
+
+export const removeWeaponGroupIDObject = (weaponGroupIDObject) => ({
+    type: 'REMOVE_WEAPONGROUPIDOBJECT',
     weaponGroupIDObject
 })
 

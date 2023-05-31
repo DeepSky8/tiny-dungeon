@@ -107,11 +107,28 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
     }
 
     const selectedWeapons = ({ weaponGroupIDObjects, weaponIDObjects }) => {
-        const wgTypes = weaponGroupIDObjects.map(wg => wg.wgType)
+        const wgTypes = (
+            weaponGroupIDObjects.length > 0
+                ?
+                weaponGroupIDObjects.map(wg => wg.wgType)
+                :
+                [
+                    // {
+                    //     wgType: '',  // Single-letter l,h,r,u,i,s
+                    //     wgID: ''     // Identified by wgID
+                    // }
+                ]
+        )
         const wTypes = weaponIDObjects.map(w => w.wType)
         const foundType = []
 
-        wgTypes.forEach(wgType => { foundType.push(wTypes.includes(wgType)) })
+
+        wgTypes.length > 0
+            ?
+            wgTypes.forEach(wgType => { foundType.push(wTypes.includes(wgType)) })
+            :
+            foundType.push(true)
+
 
         // if (weaponGroupIDs.includes(check.unarmedWeaponGroup)) {
         //     return ((weaponGroupIDs.length - 1) === weaponIDs.length)
