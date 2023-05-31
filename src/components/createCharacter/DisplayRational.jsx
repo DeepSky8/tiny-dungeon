@@ -39,7 +39,7 @@ const displayText = {
     //  Heavy Melee weapons can strike near enemies if you are willing to suffer Disadvantage on your attack (representing the ability of a larger weapon to reach.) You can use Ranged weapons and Magic at Near range.
     //  Magic and Ranged weapons are the only weapons that can strike enemies in the Far range.
     backstory: {
-        title: "--Why pick a Trade and Belief?--",
+        title: "--Trade and Belief?--",
         1: "Your character wasn't born an Adventurer. No, really. They were probably exposed to a Family Trade growing up; perhaps Blacksmithing, or Weaving. This can give you Advantage on certain in-game tests.",
         2: `All Adventurers have a driving principle called a Belief that should be noted on the Adventurer Sheet. This Belief is a simple statement used as a guiding force for your Adventurer. Their Belief may be, “I’ll always find a diplomatic solution,” “Gold can buy happiness,” or “I let my sword do the talking.” This Belief is not etched in stone, and can be changed or added to with the approval of your Game Master.`
     }
