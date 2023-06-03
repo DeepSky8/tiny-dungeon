@@ -1,5 +1,5 @@
 export const loadFamiliar = (familiar) => ({
-    type: 'LOAD_F',
+    type: 'LOAD_FAMILIAR',
     familiar
 })
 

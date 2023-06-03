@@ -20,3 +20,10 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+.clickOpen__text--reminder {
+  font-style: italic;
+  font-size: $calcFontSize;
+  justify-content: right;
+  display: flex;
+  margin-right: $xs-size;
+}

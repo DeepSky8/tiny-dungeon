@@ -7,11 +7,15 @@ const fieldPopulator = ({ state, dispatchState, objectArray }) => {
             id,
             type,
             value: state[`${id}`],
-            checked: state[`${id}`],
             change: (e) => {
                 dispatchState(action(e.target.value))
             },
-            blur
+            blur: () => {
+                if (id.replace(/^./,"") === 'Description') {
+                    const formatValue = state[`${id}`].replace(/[\n\r]/gm, ' ');
+                    dispatchState(action(formatValue))
+                }
+            },
         }
         fieldFieldsArray.push(fieldFieldsObject)
     })

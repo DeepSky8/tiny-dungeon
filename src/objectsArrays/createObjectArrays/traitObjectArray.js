@@ -1,14 +1,17 @@
 import {
+    updateTClaws,
     updateTDescription,
     updateTFamiliar,
     updateTHP,
     updateTHTrait,
     updateTImprovised,
+    updateTScroll,
     updateTShield,
     updateTSpecial,
     updateTSpell,
     updateTTitle,
-    updateTUnarmed
+    updateTUnarmed,
+    updateTWeaponGroupID
 } from "../../actions/traitActions";
 
 
@@ -70,6 +73,15 @@ const traitObjectArray = [
         },
     },
     {
+        label: 'Spell Reader ',
+        id: 'tScroll',            // Must match the field name on the default object
+        type: 'checkbox',
+        action: updateTScroll,
+        blur: () => {
+            // Need to add blur save command
+        },
+    },
+    {
         label: 'Spell-Touched ',
         id: 'tSpell',            // Must match the field name on the default object
         type: 'checkbox',
@@ -105,7 +117,24 @@ const traitObjectArray = [
             // Need to add blur save command
         },
     },
-
+    {
+        label: 'Powerful Claws ',
+        id: 'tClaws',            // Must match the field name on the default object
+        type: 'checkbox',
+        action: updateTClaws,
+        blur: () => {
+            // Need to add blur save command
+        },
+    },
+    {
+        label: 'Associated Weapon Group ID? ',
+        id: 'tWeaponGroupID',            // Must match the field name on the default object
+        type: 'text',
+        action: updateTWeaponGroupID,
+        blur: () => {
+            // Need to add blur save command
+        },
+    },
 ]
 
 export default traitObjectArray

@@ -1,0 +1,96 @@
+// .displayWeapon__container {
+//     // user-select: none;
+// }
+
+.displayWeapon__heading--clickable {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    user-select: none;
+}
+
+.displayWeapon__heading--title {
+    text-align: center;
+    overflow: hidden;
+}
+
+.displayWeapon__container--body {
+    border-left: 1px solid $text-brown;
+    border-right: 1px solid $text-brown;
+    border-bottom: 1px solid $text-brown;
+}
+
+.displayWeapon__container--pick {
+    .sMenu__container {
+        margin-top: 0;
+        padding: $xs-size;
+        position: relative;
+    }
+
+    .sMenu__button {
+        @include button--border;
+        background-color: $menu-yellow;
+        color: $text-brown;
+        display: block;
+        font-weight: normal;
+        padding: 2px;
+    }
+
+    .sMenu__tray {
+        background-color: $menu-yellow;
+        position: absolute;
+        @include button--border;
+        transform: translateX(-50%);
+        z-index: 75;
+    }
+}
+
+.displayWeapon__container--edit {
+    user-select: contain;
+    justify-content: center;
+    text-align: center;
+
+    .field--input {
+        background-color: $menu-yellow-faded;
+        font-size: $calcFontSizeLarge;
+        @include button--border;
+        max-width: 85%;
+        text-align: center;
+        user-select: contain;
+        overflow: hidden;
+    }
+    input:focus {
+        outline: none;
+        border-style: solid;
+        border-width: 2px;
+        border-color: $text-brown;
+        box-shadow: 0 0 10px $text-brown;
+    }
+    textarea:focus {
+        outline: none;
+        border-style: solid;
+        border-width: 2px;
+        border-color: $text-brown;
+        box-shadow: 0 0 10px $text-brown;
+    }
+    ::placeholder {
+        color: $text-brown-placeholder;
+    }
+}
+
+.displayWeapon__container--range {
+    margin: $xs-size 0;
+}
+
+.displayWeapon__range--title {
+    text-align: center;
+}
+
+.displayWeapon__range--body {
+    text-align: left;
+    margin: 0 0 0 $l-size;
+}
+
+.displayWeapon__description {
+    padding: $xs-size;
+}

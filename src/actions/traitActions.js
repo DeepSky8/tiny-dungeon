@@ -41,6 +41,11 @@ export const updateTShield = (tShield) => ({
     tShield
 })
 
+export const updateTScroll = (tScroll) => ({
+    type: 'UPDATE_TSCROLL',
+    tScroll
+})
+
 export const updateTSpell = (tSpell) => ({
     type: 'UPDATE_TSPELL',
     tSpell
@@ -61,6 +66,16 @@ export const updateTFamiliar = (tFamiliar) => ({
     tFamiliar
 })
 
+export const updateTClaws = (tClaws) => ({
+    type: 'UPDATE_TCLAWS',
+    tClaws
+})
+
+export const updateTWeaponGroupID = (tWeaponGroupID) => ({
+    type: 'UPDATE_TWEAPONGROUPID',
+    tWeaponGroupID
+})
+
 
 export const startSaveTrait = async ({
     tID,
@@ -70,29 +85,40 @@ export const startSaveTrait = async ({
     tSpecial,
     tHP,
     tShield,
+    tScroll,
     tSpell,
     tImprovised,
     tUnarmed,
-    tFamiliar
+    tFamiliar,
+    tClaws,
+    tWeaponGroupID,
 }) => {
     const updates = {}
 
+    updates[`traits/${tID}/tID`] = tID
     updates[`traits/${tID}/tTitle`] = tTitle
     updates[`traits/${tID}/tDescription`] = tDescription
     updates[`traits/${tID}/tHTrait`] = tHTrait
     updates[`traits/${tID}/tSpecial`] = tSpecial
     updates[`traits/${tID}/tHP`] = tHP
     updates[`traits/${tID}/tShield`] = tShield
+    updates[`traits/${tID}/tScroll`] = tScroll
     updates[`traits/${tID}/tSpell`] = tSpell
     updates[`traits/${tID}/tImprovised`] = tImprovised
     updates[`traits/${tID}/tUnarmed`] = tUnarmed
     updates[`traits/${tID}/tFamiliar`] = tFamiliar
+    updates[`traits/${tID}/tClaws`] = tClaws
+    updates[`traits/${tID}/tWeaponGroupID`] = tWeaponGroupID
+    updates[`traits/${tID}/tWeaponGroup`] = null
+
 
     update(ref(db), updates)
         .catch((error) => {
             console.log('Did not save trait', error)
         })
 }
+
+
 
 // tID: '',
 // tTitle: '',

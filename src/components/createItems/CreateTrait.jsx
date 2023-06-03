@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import { defaultTrait, traitReducer } from "../../reducers/traitReducer";
 import fieldPopulator from "../../functions/fieldPopulator";
 import traitObjectArray from "../../objectsArrays/createObjectArrays/traitObjectArray";
-import Field from "./Field";
+import Field from "../display/Field";
 import { loadTrait, startNewTraitKey } from "../../actions/traitActions";
 
 const CreateTrait = () => {

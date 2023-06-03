@@ -1,0 +1,34 @@
+.displayHeritage__container {
+    user-select: none;
+}
+
+.displayHeritage__container--image {
+    justify-content: center;
+    display: flex;
+}
+
+.displayHeritage__image {
+    max-height: 50vh;
+    max-width: 90vw;
+}
+
+.displayHeritage__heading--clickable {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    display: block;
+    padding: 2px;
+    text-align: center;
+}
+
+.displayHeritage__container--text {
+    width: 45vw;
+}
+
+// .displayHeritage--title{
+//     text-align: center;
+// }
+
+.displayHeritage--description {
+    font-size: $calcFontSizeLarge;
+}

@@ -2,22 +2,46 @@ import defaultGear from "../objectsArrays/defaultGear";
 
 
 const defaultChar = {
-    charID: '',
+    charID: Math.random(),
     userID: '',
     charName: '',
     heritageID: '',         // Select from Heritages array, identify by hID
     hTraitID: '',           // Heritage trait determined by Heritage, identified by htID
     traitIDs: [],           // Select and identify by tID
-    maxHP: '',              // HP determined by Heritage and trait: Toughness
-    currentHP: '',          // HP current number
-    maxArmor: '',           // HP from armor determined by Trait and worn items
-    currentArmor: '',       // HP from armor current number
+    maxHP: 0,               // HP determined by Heritage and trait: Toughness
+    currentHP: 0,           // HP current number
+    maxArmor: 0,            // HP from armor determined by Trait and worn items
+    currentArmor: 0,        // HP from armor current number
     trade: '',              // Trade is user-defined text
     belief: '',             // Belief is user-defined text
 
-    weaponGroupIDs: [],     // Identified by wgID
+    weaponGroupObjects: [
+        // {
+        //     wgID: Math.random(),
+        //     wgType: 'l',
+        //     wgTitle: '',
+        //     wgDescription: '',
+        //     wgDamage: 0,
+        //     wgAttackTurn: 0,
+        //     wgRangeIDs: [],      // c,n,f
+        //     wgDisRangeIDs: [],   // c,n,f
+        //     wgHTrait: false,     // Set by Heritage
+        //     wgTrait: false,      // Set by Trait
+        // }
+    ],
 
-    weaponIDs: [],          // Identified by wID
+    weaponObjects: [
+        // {
+        // wID: '',
+        // wCharID: '',        // Corresponds to charID
+        // wType: '',          // Corresponds to weaponGroup letter
+        // wTitle: '',         // User-defined text, if any
+        // wDescription: '',   // User-defined text, if any
+        // wDepletion: 6,      // Interact with depletion counters in later update, set initial depletion counters by wType object
+        // wHTrait: false,     // Set by Heritage
+        // wTrait: false,      // Set by Trait
+        // }
+    ],
 
     // Wearing select from non-statted descriptions
     // Implement array of wearable items, use oID
@@ -30,6 +54,12 @@ const defaultChar = {
     familiarID: '',         // Reference by fID
     XP: 0,
     scrollIDs: [],          // Identified by sID
+}
+
+const charPlaceholders = {
+    namePlace: 'Character Name',
+    tradePlace: "'s family trade",
+    beliefPlace: "'s personal creed"
 }
 
 
@@ -56,8 +86,16 @@ const charReducer = (state, action) => {
             }
         case 'UPDATE_HERITAGEID':
             return {
+                ...defaultChar,
+                heritageID: action.heritageID,
+                traitIDs: [],
+                weaponGroupObjects: [],
+                weaponObjects: [],
+            }
+        case 'UPDATE_HTRAITID':
+            return {
                 ...state,
-                heritageID: action.heritageID
+                hTraitID: action.hTraitID
             }
         case 'UPDATE_TRAITIDS':
             // Consider adding logic to check hTrait for standard HP
@@ -68,31 +106,39 @@ const charReducer = (state, action) => {
                 (
                     state
                         .traitIDs
-                        .contains(action.traitID)
+                        .includes(action.traitID)
                 )
                     ?
                     (
                         state
                             .traitIDs
-                            .filter(tID !== action.traitID)
+                            .filter(tID => tID !== action.traitID)
                     )
                     :
                     (
-                        state
-                            .traitIDs
-                            .push(action.traitID)
+                        [
+                            action
+                                .traitID
+                        ]
+                            .concat(
+                                state
+                                    .traitIDs
+                            )
                     )
             )
 
             return {
                 ...state,
-                traitIDs: newTraitIDs
+                traitIDs: newTraitIDs,
+                weaponGroupObjects: [],
+                weaponObjects: [],
             }
-        case 'UPDATE_HTRAITID':
+        case 'CLEAR_TRAITIDS':
             return {
                 ...state,
-                hTraitID: action.hTraitID
+                traitIDs: [],
             }
+
         case 'UPDATE_MAXHP':
             // Keep in mind that both Heritage and Trait impact max HP
             return {
@@ -134,65 +180,80 @@ const charReducer = (state, action) => {
                 ...state,
                 belief: action.belief
             }
-        case 'UPDATE_WEAPONGROUPIDS':
-            // PLEASE PASS IN OBJECT action.weaponGroupID <--- NOTE SINGULAR
-            const newWGIDs = (
-                (
-                    // Does the current array of weapon group wgIDs
-                    // contain this wgID?
-                    state
-                        .weaponGroupIDs
-                        .contains(action.weaponGroupID)
-                )
-                    ?
-                    (
-                        // If yes, remove that weapon group from the list
-                        state
-                            .weaponGroupIDs
-                            .filter(wgID => wgID !== action.weaponGroupID)
-                    )
-                    :
-                    (
-                        // If no, add the weapon group to the list
-                        state
-                            .weaponGroupIDs
-                            .push(action.weaponGroupID)
-                    )
-            )
-
+        case 'SET_WEAPONGROUPOBJECTS':
             return {
                 ...state,
-                weaponGroupIDs: newWGIDs
-
+                weaponGroupObjects: action.defaultWeaponGroupObjects
             }
-        case 'UPDATE_WEAPONIDS':
-            // PLEASE PASS IN action.weaponID <--- NOT WEAPONIDS
+        case 'ADD_WEAPONGROUPOBJECT':
+            // PLEASE PASS IN action.weaponGroupObject <--- NOTE SINGULAR
 
-            const newWeaponIDs = (
-                (
-                    // Does the current array of weaponIDs contain this wID?
+            const newWGOs = (
+                [action.weaponGroupObject].concat(
                     state
-                        .weaponIDs
-                        .contains(action.weaponID)
+                        .weaponGroupObjects
+                        .filter(wgO =>
+                            wgO.wgType !== action.weaponGroupObject.wgType
+                        )
                 )
-                    ?
-                    (
-                        // If yes, remove that weaponID from the array
-                        state
-                            .weaponIDs
-                            .filter(wID => wID !== action.weaponID)
+
+            )
+
+            return {
+                ...state,
+                weaponGroupObjects: newWGOs,
+            }
+        case 'REMOVE_WEAPONGROUPIDOBJECT':
+            // PLEASE PASS IN action.weaponGroupObject <--- NOTE SINGULAR
+
+            const filteredWGOs = (
+                state
+                    .weaponGroupObjects
+                    .filter(wgO =>
+                        wgO.wgType !== action.weaponGroupObject.wgType
                     )
-                    :
-                    (
-                        // If no, add weaponID to array
-                        state
-                            .weaponIDs
-                            .push(action.weaponID)
+            )
+
+            return {
+                ...state,
+                weaponGroupObjects: filteredWGOs,
+            }
+        case 'CLEAR_WEAPONGROUPOBJECTS':
+            return {
+                ...state,
+                weaponGroupObjects: []
+            }
+        case 'SET_WEAPONOBJECT':
+            return {
+                ...state,
+                weaponObjects: action.defaultWeaponObjects
+            }
+        case 'ADD_WEAPONOBJECT':
+            // PLEASE PASS IN action.weaponIDObject <--- NOTE SINGULAR
+
+            const newWeaponObjects = (
+                state
+                    .weaponObjects
+                    .filter(weaponObject =>
+                        weaponObject.wType !== action.weaponObject.wType
                     )
+                    .concat([action.weaponObject])
+
             )
             return {
                 ...state,
-                weaponIDs: newWeaponIDs
+                weaponObjects: newWeaponObjects
+            }
+        case 'REMOVE_WEAPONIDOBJECT':
+            // PLEASE PASS IN action.wgType <--- NOTE TYPE ONLY
+            const filteredObjects = (
+                state
+                    .weaponObjects
+                    .filter(wO => wO.wType !== action.wgType)
+            )
+            return {
+                ...state,
+                weaponObjects: filteredObjects
             }
         case 'UPDATE_OUTFITIDS':
             return {
@@ -225,7 +286,7 @@ const charReducer = (state, action) => {
             // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
             return {
                 ...state,
-                scrollIDs: state.scrollIDs.push(action.scrollID)
+                scrollIDs: state.scrollIDs.concat([action.scrollID])
             }
         case 'REMOVE_SCROLLID':
             // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
@@ -255,4 +316,4 @@ const charReducer = (state, action) => {
     }
 }
 
-export { defaultChar, charReducer }
+export { defaultChar, charReducer, charPlaceholders }

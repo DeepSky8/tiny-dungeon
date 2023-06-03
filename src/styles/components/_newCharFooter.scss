@@ -1,0 +1,47 @@
+.newCharFooter__container {
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    width: 100%;
+    background-color: $menu-yellow;
+    background-image: url("../../../src/assets/parchment_footer.png");
+    background-size: 100%;
+    border-top: 1px solid $text-brown;
+}
+
+.newCharFooter__button--back {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    font-size: $calcFontSize;
+    font-weight: bold;
+    padding: $xs-size;
+    width: 50%;
+    margin: $xs-size;
+    // float: right;
+    text-align: center;
+    user-select: none;
+    justify-content: space-around;
+
+    &.beginning {
+        background-color: $menu-yellow-faded;
+        color: $text-brown-faded;
+    }
+}
+
+.newCharFooter__button--next {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    font-size: $calcFontSize;
+    font-weight: bold;
+    padding: $xs-size;
+    width: 50%;
+    margin: $xs-size;
+    // float: right;
+    text-align: center;
+    user-select: none;
+    justify-content: space-around;
+}

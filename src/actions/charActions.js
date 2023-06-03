@@ -28,7 +28,11 @@ export const updateTraitIDs = (traitID) => ({
     traitID
 })
 
-export const updateHTrait = (hTraitID) => ({
+export const clearTraitIDs = () => ({
+    type: 'CLEAR_TRAITIDS'
+})
+
+export const updateHTraitID = (hTraitID) => ({
     type: 'UPDATE_HTRAITID',
     hTraitID
 })
@@ -53,7 +57,7 @@ export const updateMaxArmor = (maxArmor) => ({
 
 export const decreaseCurrentArmor = () => ({
     type: 'DECREASE_CURRENTARMOR',
-    
+
 })
 
 export const increaseCurrentArmor = () => ({
@@ -70,15 +74,40 @@ export const updateBelief = (belief) => ({
     belief
 })
 
-export const updateWeaponGroupIDs = (weaponGroupID) => ({
-    type: 'UPDATE_WEAPONGROUPIDS',
-    weaponGroupID
+export const setDefaultWeaponGroupObjects = (defaultWeaponGroupObjects) => ({
+    type: 'SET_WEAPONGROUPOBJECTS',
+    defaultWeaponGroupObjects
 })
 
-export const updateWeaponIDs = (weaponID) => ({
-    type: 'UPDATE_WEAPONIDS',
-    weaponID
+export const addWeaponGroupObject = (weaponGroupObject) => ({
+    type: 'ADD_WEAPONGROUPOBJECT',
+    weaponGroupObject
 })
+
+export const removeWeaponGroupObject = (weaponGroupObject) => ({
+    type: 'REMOVE_WEAPONGROUPOBJECT',
+    weaponGroupObject
+})
+
+export const clearWeaponGroupObjects = () => ({
+    type: 'CLEAR_WEAPONGROUPOBJECTS'
+})
+
+export const setDefaultWeaponObjects = (defaultWeaponObjects) => ({
+    type: 'SET_WEAPONOBJECTS',
+    defaultWeaponObjects
+})
+
+export const addWeaponObject = (weaponObject) => ({
+    type: 'ADD_WEAPONOBJECT',
+    weaponObject
+})
+
+export const removeWeaponObject = (wgType) => ({
+    type: 'REMOVE_WEAPONOBJECT',
+    wgType
+})
+
 
 export const updateOutfitIDs = (outfitID) => ({
     type: 'UPDATE_OUTFITIDS',

@@ -8,16 +8,20 @@ const defaultTrait = {
     tSpecial: false,
     tHP: 0,
     tShield: false,
+    tScroll: false,
     tSpell: false,
     tImprovised: false,
     tUnarmed: false,
-    tFamiliar: false
+    tFamiliar: false,
+    tClaws: false,
+    tWeaponGroupID: '',
 }
 
 const traitReducer = (state, action) => {
     switch (action.type) {
         case 'LOAD_TRAIT':
             return {
+                ...defaultTrait,
                 ...action.trait
             }
         case 'UPDATE_TID':
@@ -64,6 +68,12 @@ const traitReducer = (state, action) => {
                 tSpecial: state.tShield ? false : true
 
             }
+        case 'UPDATE_TSCROLL':
+            return {
+                ...state,
+                tScroll: !state.tScroll,
+                tSpecial: state.tScroll ? false : true
+            }
         case 'UPDATE_TSPELL':
             return {
                 ...state,
@@ -89,6 +99,19 @@ const traitReducer = (state, action) => {
                 tFamiliar: !state.tFamiliar,
                 tSpecial: state.tFamiliar ? false : true
             }
+        case 'UPDATE_TCLAWS':
+            return {
+                ...state,
+                tClaws: !state.tClaws,
+                tSpecial: state.tClaws ? false : true
+            }
+        case 'UPDATE_TWEAPONGROUPID':
+            return {
+                ...state,
+                tWeaponGroupID: action.tWeaponGroupID,
+                tSpecial: action.tWeaponGroupID.length > 0 ? true : false,
+            }
+
         default:
             return {
                 ...state
