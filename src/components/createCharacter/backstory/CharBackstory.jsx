@@ -46,7 +46,7 @@ const CharBackstory = () => {
                     handleSaveBackstory()
                 }}
                 theme={''}
-                placeholder={'Butcher? Baker? Bum?'}
+                placeholder={'"Trade" explained below'}
             />
 
             <Field
@@ -70,18 +70,3 @@ const CharBackstory = () => {
 }
 
 export default CharBackstory
-
-// <Field
-// label={'Familiar Name: '}
-// id={`name` + familiar.fID}
-// type={'text'}
-// value={familiar.fName}
-// change={(e) => {
-//     dispatchFamiliar(updateFName(e.target.value))
-// }}
-// blur={() => {
-//     handleSaveFamiliar()
-// }}
-// theme={'title'}
-// placeholder={'Django?'}
-// />

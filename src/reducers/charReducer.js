@@ -15,17 +15,31 @@ const defaultChar = {
     trade: '',              // Trade is user-defined text
     belief: '',             // Belief is user-defined text
 
-    weaponGroupIDObjects: [
+    weaponGroupObjects: [
         // {
-        // wgType: '',  // Single-letter l,h,r,u,i,s
-        // wgID: ''     // Identified by wgID
+        //     wgID: Math.random(),
+        //     wgType: 'l',
+        //     wgTitle: '',
+        //     wgDescription: '',
+        //     wgDamage: 0,
+        //     wgAttackTurn: 0,
+        //     wgRangeIDs: [],      // c,n,f
+        //     wgDisRangeIDs: [],   // c,n,f
+        //     wgHTrait: false,     // Set by Heritage
+        //     wgTrait: false,      // Set by Trait
         // }
     ],
 
-    weaponIDObjects: [
+    weaponObjects: [
         // {
-        // wType: '',  // Single-letter l,h,r,u,i,s
-        // wID: ''     // Identified by wID
+        // wID: '',
+        // wCharID: '',        // Corresponds to charID
+        // wType: '',          // Corresponds to weaponGroup letter
+        // wTitle: '',         // User-defined text, if any
+        // wDescription: '',   // User-defined text, if any
+        // wDepletion: 6,      // Interact with depletion counters in later update, set initial depletion counters by wType object
+        // wHTrait: false,     // Set by Heritage
+        // wTrait: false,      // Set by Trait
         // }
     ],
 
@@ -74,6 +88,14 @@ const charReducer = (state, action) => {
             return {
                 ...defaultChar,
                 heritageID: action.heritageID,
+                traitIDs: [],
+                weaponGroupObjects: [],
+                weaponObjects: [],
+            }
+        case 'UPDATE_HTRAITID':
+            return {
+                ...state,
+                hTraitID: action.hTraitID
             }
         case 'UPDATE_TRAITIDS':
             // Consider adding logic to check hTrait for standard HP
@@ -108,19 +130,15 @@ const charReducer = (state, action) => {
             return {
                 ...state,
                 traitIDs: newTraitIDs,
-                weaponGroupIDObjects: [],
-                weaponIDObjects: [],
+                weaponGroupObjects: [],
+                weaponObjects: [],
             }
         case 'CLEAR_TRAITIDS':
             return {
                 ...state,
                 traitIDs: [],
             }
-        case 'UPDATE_HTRAITID':
-            return {
-                ...state,
-                hTraitID: action.hTraitID
-            }
+
         case 'UPDATE_MAXHP':
             // Keep in mind that both Heritage and Trait impact max HP
             return {
@@ -162,77 +180,80 @@ const charReducer = (state, action) => {
                 ...state,
                 belief: action.belief
             }
-        case 'UPDATE_WEAPONGROUPIDOBJECTS':
-            // PLEASE PASS IN action.weaponGroupIDObject <--- NOTE SINGULAR
+        case 'SET_WEAPONGROUPOBJECTS':
+            return {
+                ...state,
+                weaponGroupObjects: action.defaultWeaponGroupObjects
+            }
+        case 'ADD_WEAPONGROUPOBJECT':
+            // PLEASE PASS IN action.weaponGroupObject <--- NOTE SINGULAR
 
-            // {
-            // wgType: '',  // Single-letter l,h,r,u,i,s
-            // wgID: ''     // Identified by wgID
-            // }
-            const newWGIDObjects = (
-                (
-                    // Does the current array of weapon group wgIDs
-                    // contain this wgID?
+            const newWGOs = (
+                [action.weaponGroupObject].concat(
                     state
-                        .weaponGroupIDObjects
-                        .includes(action.weaponGroupIDObject)
+                        .weaponGroupObjects
+                        .filter(wgO =>
+                            wgO.wgType !== action.weaponGroupObject.wgType
+                        )
                 )
-                    ?
-                    (
-                        // If yes, remove that weapon group from the list
-                        state
-                            .weaponGroupIDObjects
-                            .filter(wgIDObject => wgIDObject !== action.weaponGroupIDObject)
-                    )
-                    :
-                    (
-                        // If no, add the weapon group to the list
-                        state
-                            .weaponGroupIDObjects
-                            .concat([action.weaponGroupIDObject])
-                    )
+
             )
 
             return {
                 ...state,
-                weaponGroupIDObjects: newWGIDObjects,
-                // weaponIDObjects: [],
+                weaponGroupObjects: newWGOs,
             }
-        case 'CLEAR_WEAPONGROUPIDOBJECTS':
-            return {
-                ...state,
-                weaponGroupIDObjects: []
-            }
-        case 'ADD_WEAPONIDOBJECT':
-            // PLEASE PASS IN action.weaponIDObject <--- NOTE SINGULAR
-            // {
-            // wType: '',  // Single-letter l,h,r,u,i,s
-            // wID: ''     // Identified by wID
-            // }
+        case 'REMOVE_WEAPONGROUPIDOBJECT':
+            // PLEASE PASS IN action.weaponGroupObject <--- NOTE SINGULAR
 
-            const newWeaponIDObjects = (
+            const filteredWGOs = (
                 state
-                    .weaponIDObjects
-                    .filter(weaponIDObject =>
-                        weaponIDObject.wType !== action.weaponIDObject.wType
+                    .weaponGroupObjects
+                    .filter(wgO =>
+                        wgO.wgType !== action.weaponGroupObject.wgType
                     )
-                    .concat([action.weaponIDObject])
+            )
+
+            return {
+                ...state,
+                weaponGroupObjects: filteredWGOs,
+            }
+        case 'CLEAR_WEAPONGROUPOBJECTS':
+            return {
+                ...state,
+                weaponGroupObjects: []
+            }
+        case 'SET_WEAPONOBJECT':
+            return {
+                ...state,
+                weaponObjects: action.defaultWeaponObjects
+            }
+        case 'ADD_WEAPONOBJECT':
+            // PLEASE PASS IN action.weaponIDObject <--- NOTE SINGULAR
+
+            const newWeaponObjects = (
+                state
+                    .weaponObjects
+                    .filter(weaponObject =>
+                        weaponObject.wType !== action.weaponObject.wType
+                    )
+                    .concat([action.weaponObject])
 
             )
             return {
                 ...state,
-                weaponIDObjects: newWeaponIDObjects
+                weaponObjects: newWeaponObjects
             }
         case 'REMOVE_WEAPONIDOBJECT':
             // PLEASE PASS IN action.wgType <--- NOTE TYPE ONLY
-            const filteredIDObjects = (
+            const filteredObjects = (
                 state
-                    .weaponIDObjects
-                    .filter(wIDO => wIDO.wType !== action.wgType)
+                    .weaponObjects
+                    .filter(wO => wO.wType !== action.wgType)
             )
             return {
                 ...state,
-                weaponIDObjects: filteredIDObjects
+                weaponObjects: filteredObjects
             }
         case 'UPDATE_OUTFITIDS':
             return {

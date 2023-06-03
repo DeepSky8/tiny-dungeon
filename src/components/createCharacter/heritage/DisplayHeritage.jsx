@@ -103,7 +103,8 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                                 IDKey={'tID'}
                                 IDTitle={'tTitle'}
                                 IDDescription={'tDescription'}
-                                selectText={'Select '}
+                                selectedText={' selected'}
+                                unselectedText={`Select `}
                                 dispatchCharHeritageID={dispatchCharHeritageID}
                                 selectedHTraitID={hTraitID}
                             />

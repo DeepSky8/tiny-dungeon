@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const StyledMenu = ({
     menuID,
     selectStatement,
+    missingTitle,
     array,
     arrayIDRef,
     arrayTitleRef,
     state,
-    dispatchState,
-    dispatchAction,
     stateIDRef,
-    closeMenuArrayIDs,
+    onSelection
 }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -18,46 +17,42 @@ const StyledMenu = ({
         setMenuOpen(!menuOpen)
     }
 
-    const closeMenu = () => {
-        setMenuOpen(false)
-    }
+    // const closeMenu = () => {
+    //     setMenuOpen(false)
+    // }
 
-    useEffect(() => {
-        closeMenuArrayIDs.forEach(element => {
-            if (document.getElementById(element)) {
-                return (
-                    document
-                        .getElementById(element)
-                        .addEventListener('click', closeMenu)
-                )
-            }
+    // useEffect(() => {
+    //     closeMenuArrayIDs.forEach(element => {
+    //         if (document.getElementById(element)) {
+    //             return (
+    //                 document
+    //                     .getElementById(element)
+    //                     .addEventListener('click', closeMenu)
+    //             )
+    //         }
 
-        });
+    //     });
 
-        return (() => {
-            closeMenuArrayIDs.forEach(element => {
-                if (document.getElementById(element)) {
-                    return (
-                        document
-                            .getElementById(element)
-                            .removeEventListener('click', closeMenu)
-                    )
-                }
+    //     return (() => {
+    //         closeMenuArrayIDs.forEach(element => {
+    //             if (document.getElementById(element)) {
+    //                 return (
+    //                     document
+    //                         .getElementById(element)
+    //                         .removeEventListener('click', closeMenu)
+    //                 )
+    //             }
 
-            });
-        })
-    }, [])
+    //         });
+    //     })
+    // }, [])
 
-    const handleClick = (id) => {
-        dispatchState(dispatchAction(id))
-        toggleMenu()
-    }
 
     const getTitle = () => {
         const object = array.find(element => element[`${arrayIDRef}`] === state[`${stateIDRef}`])
         // const objectIndex = array.map(object => object[`${arrayIDRef}`]).indexOf(state[`${stateIDRef}`])
-        const title = (object !== undefined ? object[arrayTitleRef] : selectStatement)
-        return title
+        const title = (object === undefined ? selectStatement : object[arrayTitleRef])
+        return (title === '' ? missingTitle : title)
     }
 
 
@@ -78,10 +73,11 @@ const StyledMenu = ({
                             key={item[`${arrayIDRef}`]}
                             className={`sMenu__option`}
                             onClick={() => {
-                                handleClick(item[`${arrayIDRef}`])
+                                onSelection(item);
+                                toggleMenu();
                             }}
                         >
-                            {item[`${arrayTitleRef}`]}
+                            {(item[`${arrayTitleRef}`] === '' ? missingTitle : item[`${arrayTitleRef}`])}
                         </li>
                     )
                     )}

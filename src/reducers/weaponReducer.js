@@ -47,7 +47,6 @@ const defaultWeaponGroup = {
 const defaultWeaponMastered = {
     wID: '',
     wCharID: '',         // Corresponds to charID
-    // wGroup: '',         // Select from weapon type array determined by group, identify by ID
     wType: '',          // Corresponds to weaponGroup letter
     wTitle: '',         // User-defined text, if any
     wDescription: '',   // User-defined text, if any

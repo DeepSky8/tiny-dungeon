@@ -1,81 +1,42 @@
 import React, { useEffect, useReducer, useState } from "react";
-import useLocalStorageState from "use-local-storage-state";
-import { defaultWeaponMastered, weaponsMasteredReducer } from "../../../reducers/weaponReducer";
+import { weaponsMasteredReducer } from "../../../reducers/weaponReducer";
 import {
     loadWeapon,
     updateWDescription,
-    updateWHTrait,
     updateWTitle,
-    updateWTrait,
 } from "../../../actions/weaponActions";
 import Field from "../../display/Field";
-import { addWeaponIDObject } from "../../../actions/charActions";
-
-const weaponID = (wG, char, weapons) => {
-    const heritageWeaponID = (
-        wG.wgHTrait
-            ?
-            (weapons
-                .filter(weapon => weapon.wHTrait)
-                .find(weapon => weapon.wType === wG.wgType))
-                .wID
-            :
-            false
-    )
-
-    const wIDObject = (char.weaponIDObjects.find(wIDO => wIDO.wType === wG.wgType))
-
-    if (heritageWeaponID) {
-        return heritageWeaponID
-    } else if (wIDObject) {
-        return wIDObject.wID
-    } else {
-        return 'martialArtist'
-    }
-}
+import { addWeaponObject } from "../../../actions/charActions";
 
 const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
-
     const [wgName,] = useState(wG.wgTitle); // Will always be Unarmed
-    const localWeaponID = weaponID(wG, char, weapons)
+    const weaponMatch = (char.weaponObjects.find(wO => wO.wType === wG.wgType))
+
     const martialArtist = {
         wID: 'martialArtist',
         wCharID: char.charID,
-        // wGroup: '',          // Select from weapon type array determined by group, identify by ID
         wType: 'u',             // Corresponds to weaponGroup letter
         wTitle: '',             // User-defined text
         wDescription: '',       // User-defined text, if any
         wDepletion: 99,         // Interact with depletion counters in later update, set initial depletion counters by wType object
-        wHTrait: false,         // Set by Heritage
-        wTrait: false,          // Set by Trait
+        wHTrait: wG.wgHTrait,   // Set by Heritage
+        wTrait: wG.wgTrait,     // Set by Trait
     }
-    const [localWeapon, setLocalWeapon] = useLocalStorageState(localWeaponID, { defaultValue: martialArtist })
-    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, localWeapon)
+    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, (weaponMatch === undefined ? martialArtist : weaponMatch))
     const [show, setShow] = useState(false)
 
-    const handleSaveWeapon = () => {
-        dispatchChar(addWeaponIDObject({ wID: newWeapon.wID, wType: wG.wgType }))
-        setLocalWeapon(newWeapon)
+    const handleSaveWeapon = (weapon = newWeapon) => {
+        dispatchChar(addWeaponObject(weapon))
     }
 
     useEffect(() => {
-        if (wG.wgHTrait && localWeaponID === 'martialArtist') {
+        if (wG.wgHTrait && !weaponMatch) {
             const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
             const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
-            setLocalWeapon(matchesWeaponGroup)
             dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
-            dispatchChar(addWeaponIDObject({ wID: matchesWeaponGroup.wID, wType: matchesWeaponGroup.wType }))
-        } else {
-            dispatchNewWeapon(updateWHTrait(wG.wgHTrait)) // Set by Heritage Trait: boolean
-            dispatchNewWeapon(updateWTrait(wG.wgTrait))   // Set by Trait: boolean
-        }
-
-        if (localWeapon.wTitle.length > 0) {
-            handleSaveWeapon()
+            handleSaveWeapon(matchesWeaponGroup)
         }
     }, [])
-
-
 
     const rangeName = (range) => {
         switch (range) {
@@ -118,7 +79,7 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                     !weapons.map(weapon => weapon.wID).includes(newWeapon.wID)
                                     &&
                                     <Field
-                                        label={'Strike name: '}
+                                        label={'Signature Strike: '}
                                         id={'title'}
                                         type={'text'}
                                         placeholder="Crane Beak?"

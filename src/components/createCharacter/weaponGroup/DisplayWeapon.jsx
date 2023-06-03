@@ -1,92 +1,43 @@
 import React, { useEffect, useReducer, useState } from "react";
-import useLocalStorageState from "use-local-storage-state";
 import { defaultWeaponMastered, weaponsMasteredReducer } from "../../../reducers/weaponReducer";
-import { loadWeapon, updateWDescription, updateWGroup, updateWHTrait, updateWID, updateWTitle, updateWTrait, updateWType } from "../../../actions/weaponActions";
+import {
+    loadWeapon,
+    updateWDescription,
+    updateWTitle,
+} from "../../../actions/weaponActions";
 import Field from "../../display/Field";
-import { addWeaponIDObject } from "../../../actions/charActions";
+import { addWeaponObject } from "../../../actions/charActions";
 import StyledMenu from "../../display/StyledMenu";
-
-const weaponID = (wG, char, weapons) => {
-    const heritageWeaponID = (
-        wG.wgHTrait
-            ?
-            (weapons
-                .filter(weapon => weapon.wHTrait)
-                .find(weapon => weapon.wType === wG.wgType))
-                .wID
-            :
-            false
-    )
-
-    console.log('heritageWeaponID - weapon', heritageWeaponID)
-
-    const wIDObject = (char.weaponIDObjects.find(wIDO => wIDO.wType === wG.wgType))
-
-    console.log('wID - weapon', wIDObject)
-
-    if (heritageWeaponID) {
-        return heritageWeaponID
-    } else if (wIDObject) {
-        return wIDObject.wID
-    } else {
-        return 'temp'
-    }
-}
-
 
 const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     const [wgName,] = useState(wG.wgTitle);
-    const localWeaponID = weaponID(wG, char, weapons)
-    const [localWeapon, setLocalWeapon] = useLocalStorageState(localWeaponID, { defaultValue: defaultWeaponMastered })
-    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, (localWeaponID === 'temp' ? defaultWeaponMastered : localWeapon))
+    const weaponMatch = (char.weaponObjects.find(wO => wO.wType === wG.wgType))
+    const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, (weaponMatch === undefined ? defaultWeaponMastered : weaponMatch))
     const [show, setShow] = useState(false)
 
     const otherWeapon = {
         wID: `custom${wG.wgType}`,
         wCharID: char.charID,
-        // wGroup: '',          // Select from weapon type array determined by group, identify by ID
-        wType: '',              // Corresponds to weaponGroup letter
-        wTitle: 'Add your own', // User-defined text, if any
-        wDescription: '',       // User-defined text, if any
+        wType: wG.wgType,       // Corresponds to weaponGroup letter
+        wTitle: '',             // User-defined text
+        wDescription: '',       // User-defined text
         wDepletion: 6,          // Interact with depletion counters in later update, set initial depletion counters by wType object
-        wHTrait: false,         // Set by Heritage
-        wTrait: false,          // Set by Trait
+        wHTrait: wG.wgHTrait,   // Set by Heritage
+        wTrait: wG.wgTrait,     // Set by Trait
+    }
+
+    const handleSaveWeapon = (weapon = newWeapon) => {
+        dispatchChar(addWeaponObject(weapon))
     }
 
     useEffect(() => {
-        if (wG.wgHTrait) {
+        if (wG.wgHTrait && !weaponMatch) {
             const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
             const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
-            setLocalWeapon(matchesWeaponGroup)
             dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
-            dispatchChar(addWeaponIDObject({ wID: matchesWeaponGroup.wID, wType: matchesWeaponGroup.wType }))
+            handleSaveWeapon(matchesWeaponGroup)
         }
     }, [])
-
-    const handleSaveWeapon = () => {
-        dispatchChar(addWeaponIDObject({ wID: newWeapon.wID, wType: wG.wgType }))
-        setLocalWeapon(newWeapon)
-    }
-
-    useEffect(() => {
-        if (weapons.map(weapon => weapon.wID).includes(newWeapon.wID)) {
-            const newWeaponObject = weapons.find(weapon => weapon.wID === newWeapon.wID)
-            dispatchNewWeapon(loadWeapon(newWeaponObject))
-        } else if (newWeapon.wID === otherWeapon.wID) {
-            dispatchNewWeapon(loadWeapon(otherWeapon))
-            dispatchNewWeapon(updateWHTrait(wG.wgHTrait)) // Set by Heritage Trait: boolean
-            dispatchNewWeapon(updateWTrait(wG.wgTrait))   // Set by Trait: boolean
-            dispatchNewWeapon(updateWType(wG.wgType))     // Corresponds to weaponGroup letter
-        }
-    }, [newWeapon.wID])
-
-    useEffect(() => {
-        if (newWeapon.wID) {
-            handleSaveWeapon()
-        }
-
-    }, [newWeapon])
-
 
     const rangeName = (range) => {
         switch (range) {
@@ -99,7 +50,15 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
             default:
                 break;
         }
+    }
 
+    const selectWeapon = (weapon) => {
+        if (weapons.map(weapon => weapon.wID).includes(weapon.wID)) {
+            dispatchNewWeapon(loadWeapon(weapon))
+        } else if (weapon.wID === otherWeapon.wID) {
+            dispatchNewWeapon(loadWeapon(otherWeapon))
+        }
+        handleSaveWeapon(weapon)
     }
 
     return (
@@ -117,8 +76,6 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                 </div>
             </div>
 
-
-
             <div className="displayWeapon__container--body">
                 {show &&
                     <div className="displayWeapon__container--pick">
@@ -129,14 +86,13 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                             <StyledMenu
                                 menuID={'weaponMenu'}
                                 selectStatement={'--Select a Weapon--'}
+                                missingTitle={'Add your own'}
                                 array={weapons.filter(weapon => !weapon.wHTrait).concat([otherWeapon])}
                                 arrayIDRef={'wID'}
                                 arrayTitleRef={'wTitle'}
                                 state={newWeapon}
-                                dispatchState={dispatchNewWeapon}
-                                dispatchAction={updateWID}
                                 stateIDRef={'wID'}
-                                closeMenuArrayIDs={[]}
+                                onSelection={selectWeapon}
                             />
                         }
 
@@ -235,15 +191,10 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
 
                                     }
                                 </div>
-
-
-
-
                             </div>
                         }
                     </div>
                 }
-
             </div>
         </div>
     )

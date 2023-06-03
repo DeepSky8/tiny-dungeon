@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { updateHTraitID } from "../../actions/charActions";
 
 const BulletedSelect = (
@@ -7,8 +7,9 @@ const BulletedSelect = (
         IDArray,        // Match on these IDs
         IDKey,          // What is the object ID identifier (hID, charID, etc.)
         IDTitle,        // What is the address of the title in the ID (hTitle, charName)
-        IDDescription,  // what is the address of the description (hDescription, tDescription)
-        selectText,     // What does the button say?
+        IDDescription,  // What is the address of the description (hDescription, tDescription)
+        selectedText,   // When selected, what is the button text modifier?
+        unselectedText, // When unselected, what is the button text modifier?
         dispatchCharHeritageID,   // function passed down to choose a heritage ID
         selectedHTraitID,          // char.field passed down to display chosen heritage ID
     }
@@ -48,16 +49,25 @@ const BulletedSelect = (
                                             </div>
                                             <div>
                                                 {object[`${IDDescription}`]}
-                                            </div>                                        </div>
+                                            </div>
+                                        </div>
                                         <div className="bulletedSelect__container--button">
                                             <button
-                                                className="bulletedSelect__button"
+                                                className={`bulletedSelect__button ${notSelected}`}
                                                 onClick={() => {
                                                     dispatchCharHeritageID(
                                                         updateHTraitID(
                                                             object[`${IDKey}`]))
                                                 }}
-                                            >{selectText + object[`${IDTitle}`]}</button>
+                                            >
+                                                {
+                                                    (!notSelected)
+                                                        ?
+                                                        (object[`${IDTitle}`] + selectedText)
+                                                        :
+                                                        (unselectedText + object[`${IDTitle}`])
+                                                }
+                                            </button>
                                         </div>
                                     </div>
 
@@ -74,3 +84,5 @@ const BulletedSelect = (
 }
 
 export default BulletedSelect
+
+// selectText + object[`${IDTitle}`]

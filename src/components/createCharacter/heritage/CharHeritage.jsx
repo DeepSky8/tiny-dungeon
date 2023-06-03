@@ -5,20 +5,13 @@ import { db } from "../../../api/firebase";
 import StyledMenu from "../../display/StyledMenu";
 import DisplayHeritage from "./DisplayHeritage";
 import DisplayRational from "../DisplayRational";
-import { clearTraitIDs, updateHTraitID, updateHeritageID } from "../../../actions/charActions";
+import { updateHTraitID, updateHeritageID } from "../../../actions/charActions";
 
 const CharHeritage = () => {
     const [char, dispatchChar] = useOutletContext();
     const [heritages, setHeritages] = useState([]);
 
-    useEffect(() => {
-        if (char.heritageID && heritages.length > 0) {
-            const currentHeritage = heritages.filter(heritage => heritage.hID === char.heritageID)[0]
-            dispatchChar(updateHTraitID(currentHeritage.hTraitIDs[0]))
-            dispatchChar(clearTraitIDs())
-        }
-    }, [char.heritageID])
-
+    // Get a list of heritages from firebase
     useEffect(() => {
         onValue(ref(db, 'heritages'), snapshot => {
             const tempArray = [];
@@ -37,6 +30,14 @@ const CharHeritage = () => {
         })
     }, [])
 
+    const loadHeritage = (heritage) => {
+        dispatchChar(updateHeritageID(heritage.hID))
+        console.log('heritage', heritage)
+        dispatchChar(updateHTraitID(heritage.hTraitIDs[0]))
+        // dispatchChar(clearTraitIDs())
+    }
+
+
     return (
         <div
             className="charHeritage__container"
@@ -46,23 +47,16 @@ const CharHeritage = () => {
             <StyledMenu
                 menuID={'heritageMenu'}
                 selectStatement={'--Select a Heritage--'}
+                missingTitle={''}
                 array={heritages}
                 arrayIDRef={'hID'}
                 arrayTitleRef={'hTitle'}
                 state={char}
-                dispatchState={dispatchChar}
-                dispatchAction={updateHeritageID}
                 stateIDRef={'heritageID'}
-                closeMenuArrayIDs={
-                    [
-                        "displayHeritage__image"
-                    ]
-                }
+                onSelection={loadHeritage}
             />
 
             {
-
-
                 (
                     heritages
                         .map(heritage => heritage.hID)
@@ -77,8 +71,6 @@ const CharHeritage = () => {
                 />
             }
             <DisplayRational />
-
-
         </div>
     )
 }

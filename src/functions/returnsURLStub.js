@@ -54,9 +54,9 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         trade,              // Trade is user-defined text
         belief,             // Belief is user-defined text
 
-        weaponGroupIDObjects,     // Identified by wgID and wgType
+        weaponGroupObjects,     // Identified by wgID and wgType
 
-        weaponIDObjects,    // Identified by wID and wType
+        weaponObjects,      // Identified by wID and wType
 
         // Wearing select from non-statted descriptions
         // Implement array of wearable items, use oID
@@ -87,7 +87,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         )
     }
 
-    const selectedWeaponGroups = ({ wgTraits, hTraitID, weaponGroupIDObjects, specialTraitsSelected }) => {
+    const selectedWeaponGroups = ({ wgTraits, hTraitID, weaponGroupObjects, specialTraitsSelected }) => {
         // // How many weapon groups currently?
         // const weaponGroupLength = weaponGroupIDs.length;
 
@@ -103,21 +103,37 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
 
         // return wgTotalsMatch
 
-        return (weaponGroupIDObjects.length > 0)
+        return (weaponGroupObjects.length > 0)
     }
 
-    const selectedWeapons = ({ weaponGroupIDObjects, weaponIDObjects }) => {
-        const wgTypes = weaponGroupIDObjects.map(wg => wg.wgType)
-        const wTypes = weaponIDObjects.map(w => w.wType)
+    const selectedWeapons = ({ weaponGroupObjects, weaponObjects }) => {
+        const wgTypes = (
+            weaponGroupObjects.length > 0
+                ?
+                weaponGroupObjects.map(wg => wg.wgType)
+                :
+                [
+                    // {
+                    //     wgType: '',  // Single-letter l,h,r,u,i,s
+                    //     wgID: ''     // Identified by wgID
+                    // }
+                ]
+        )
+        const wTypes = weaponObjects.map(w => w.wType)
         const foundType = []
 
-        wgTypes.forEach(wgType => { foundType.push(wTypes.includes(wgType)) })
+        // If weapon groups have been selected
+        // for each weapon group
+        // has a weapon of that type been selected?
+        wgTypes.length > 0
+            ?
+            wgTypes.forEach(wgType => { foundType.push(wTypes.includes(wgType)) })
+            :
+            foundType.push(true)
 
-        // if (weaponGroupIDs.includes(check.unarmedWeaponGroup)) {
-        //     return ((weaponGroupIDs.length - 1) === weaponIDs.length)
-        // } else {
-        // }
-        // return (weaponGroupIDObjects.length === weaponIDObjects.length)
+
+        // Are there any weapon groups without an associated weapon of that type?
+        // If there are not falses, this stage is complete
         return (!foundType.includes(false))
     }
 
@@ -156,8 +172,8 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
     const trueIfComplete = [
         selectedHeritage,
         selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID }),
-        selectedWeaponGroups({ wgTraits, hTraitID, weaponGroupIDObjects, specialTraitsSelected }),
-        selectedWeapons({ weaponGroupIDObjects, weaponIDObjects }),
+        selectedWeaponGroups({ wgTraits, hTraitID, weaponGroupObjects, specialTraitsSelected }),
+        selectedWeapons({ weaponGroupObjects, weaponObjects }),
         selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }),
         selectedBackstory({ trade, belief, charName }),
         false
