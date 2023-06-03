@@ -74,27 +74,37 @@ export const updateBelief = (belief) => ({
     belief
 })
 
-export const addWeaponGroupIDObject = (weaponGroupIDObject) => ({
-    type: 'ADD_WEAPONGROUPIDOBJECT',
-    weaponGroupIDObject
+export const setDefaultWeaponGroupObjects = (defaultWeaponGroupObjects) => ({
+    type: 'SET_WEAPONGROUPOBJECTS',
+    defaultWeaponGroupObjects
 })
 
-export const removeWeaponGroupIDObject = (weaponGroupIDObject) => ({
-    type: 'REMOVE_WEAPONGROUPIDOBJECT',
-    weaponGroupIDObject
+export const addWeaponGroupObject = (weaponGroupObject) => ({
+    type: 'ADD_WEAPONGROUPOBJECT',
+    weaponGroupObject
 })
 
-export const clearWeaponGroupIDObjects = () => ({
-    type: 'CLEAR_WEAPONGROUPIDOBJECTfS'
+export const removeWeaponGroupObject = (weaponGroupObject) => ({
+    type: 'REMOVE_WEAPONGROUPOBJECT',
+    weaponGroupObject
 })
 
-export const addWeaponIDObject = (weaponIDObject) => ({
-    type: 'ADD_WEAPONIDOBJECT',
-    weaponIDObject
+export const clearWeaponGroupObjects = () => ({
+    type: 'CLEAR_WEAPONGROUPOBJECTS'
 })
 
-export const removeWeaponIDObject = (wgType) => ({
-    type: 'REMOVE_WEAPONIDOBJECT',
+export const setDefaultWeaponObjects = (defaultWeaponObjects) => ({
+    type: 'SET_WEAPONOBJECTS',
+    defaultWeaponObjects
+})
+
+export const addWeaponObject = (weaponObject) => ({
+    type: 'ADD_WEAPONOBJECT',
+    weaponObject
+})
+
+export const removeWeaponObject = (wgType) => ({
+    type: 'REMOVE_WEAPONOBJECT',
     wgType
 })
 

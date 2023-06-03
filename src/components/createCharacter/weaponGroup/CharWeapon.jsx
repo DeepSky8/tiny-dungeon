@@ -61,7 +61,7 @@ const CharWeapon = () => {
     useEffect(() => {
         let tempArray = [];
 
-        char.weaponGroupIDObjects.forEach(wgIDO => {
+        char.weaponGroupObjects.forEach(wgIDO => {
             onValue(ref(db, `weaponGroups/${wgIDO.wgID}`), snapshot => {
                 if (snapshot.exists()) {
                     tempArray.push(snapshot.val())
@@ -181,17 +181,3 @@ const CharWeapon = () => {
 }
 
 export default CharWeapon
-
-
-// {
-//     weaponGroups.length > 0
-//     &&
-//     weaponGroups.map(wg => {
-//         return (
-//             <DisplayWeapon
-//                 key={wg.wgID}
-//             />
-//         )
-//     })
-
-// }

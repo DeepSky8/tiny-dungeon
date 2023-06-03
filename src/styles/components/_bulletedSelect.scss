@@ -1,5 +1,5 @@
 .bulletedSelect__container {
-    margin-top: 5px;
+    margin: 5px 0;
     user-select: none;
 }
 
@@ -17,10 +17,15 @@
     background-color: $menu-yellow;
     @include button--border;
     font-size: $calcFontSizeLarge;
+    font-weight: bold;
+
+    &.notSelected {
+        font-weight: normal;
+    }
 }
 
 .bulletedSelect__container--text {
-    padding: 0 $xs-size;
+    // padding: 0 $xs-size;
     color: $text-brown;
 
     &.notSelected {
