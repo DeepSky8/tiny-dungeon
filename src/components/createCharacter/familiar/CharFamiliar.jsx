@@ -1,14 +1,12 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { useOutletContext } from "react-router";
 import { defaultFamiliar, familiarReducer } from "../../../reducers/familiarReducer";
 import Field from "../../display/Field";
 import DisplayRational from "../DisplayRational";
 import {
-    loadFamiliar,
-    updateFCharID,
+
     updateFDescription,
-    updateFID,
     updateFName
 } from "../../../actions/familiarActions";
 import { updateFamiliarID } from "../../../actions/charActions";
@@ -20,7 +18,6 @@ const CharFamiliar = () => {
     const [familiar, dispatchFamiliar] = useReducer(familiarReducer, localFamiliar)
 
     const handleSaveFamiliar = () => {
-        console.log('familiar', familiar)
         dispatchChar(updateFamiliarID(familiar.fID))
         setLocalFamiliar(familiar)
     }
@@ -41,6 +38,9 @@ const CharFamiliar = () => {
                 theme={'title'}
                 placeholder={'Django?'}
             />
+            <div className="clickOpen__text--reminder">
+                Tap text to edit
+            </div>
             <Field
                 label={'Description: '}
                 id={`description` + familiar.fID}
@@ -55,6 +55,9 @@ const CharFamiliar = () => {
                 theme={''}
                 placeholder={'A feline-shaped shadow, surprisingly frisky'}
             />
+            <div className="clickOpen__text--reminder">
+                Tap text to edit
+            </div>
             <DisplayRational />
         </div>
     )

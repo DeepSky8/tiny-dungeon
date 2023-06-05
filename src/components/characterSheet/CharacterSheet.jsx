@@ -1,6 +1,6 @@
 import React from "react";
 
-const DisplayCharacter = () => {
+const CharacterSheet = () => {
     return (
         <div>
             test
@@ -8,4 +8,4 @@ const DisplayCharacter = () => {
     )
 }
 
-export default DisplayCharacter
+export default CharacterSheet

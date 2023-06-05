@@ -67,11 +67,17 @@ const nextStepReducer = (state, action) => {
 
         case 'NEXT_STEP_CHECK':
 
-            const urlStub = returnsURLStub({ char: action.char, newCharStepOrder: newCharStepOrder })
+            const urlStub = returnsURLStub(
+                {
+                    char: action.char,
+                    newCharStepOrder: newCharStepOrder,
+                    currentStep: state.currentStep,
+                }
+            )
             const currentError = returnsNewCharError({ urlStub: urlStub })
 
             return {
-                pathRoot: urlStub === 'end' ? '/displayCharacter' : '/newCharacter',
+                pathRoot: urlStub === 'end' ? '/characterSheet' : '/newCharacter',
                 buttonText: 'Next',
                 currentStep: urlStub === 'end' ? '' : urlStub,
                 error: state.currentStep === urlStub ? currentError : '',
