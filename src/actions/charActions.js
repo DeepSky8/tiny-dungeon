@@ -134,6 +134,11 @@ export const updateXP = (XP) => ({
     XP
 })
 
+export const setScrollIDs = (scrollIDs) => ({
+    type: 'SET_SCROLLIDS',
+    scrollIDs
+})
+
 export const addScrollID = (scrollID) => ({
     type: 'ADD_SCROLLID',
     scrollID

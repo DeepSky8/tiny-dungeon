@@ -1,7 +1,8 @@
 const defaultScroll = {
     sID: '',
-    sName: '',
-    sText: '',
+    sTitle: '',
+    sDescription: '',
+    sAmount: 1
 }
 
 const scrollReducer = (state, action) => {
@@ -10,20 +11,29 @@ const scrollReducer = (state, action) => {
             return {
                 ...action.scroll
             }
+        case 'CLEAR_SCROLL':
+            return {
+                ...defaultScroll
+            }
         case 'UPDATE_SID':
             return {
                 ...state,
                 sID: action.sID
             }
-        case 'UPDATE_SNAME':
+        case 'UPDATE_STITLE':
             return {
                 ...state,
-                sName: action.sName
+                sTitle: action.sTitle
             }
-        case 'UPDATE_TEXT':
+        case 'UPDATE_SDESCRIPTION':
             return {
                 ...state,
-                sText: action.sText
+                sDescription: action.sDescription
+            }
+        case 'UPDATE_SAMOUNT':
+            return {
+                ...state,
+                sAmount: action.sAmount
             }
         default:
             return {
@@ -32,4 +42,4 @@ const scrollReducer = (state, action) => {
     }
 }
 
-export { defaultScroll, scrollReducer}
+export { defaultScroll, scrollReducer }

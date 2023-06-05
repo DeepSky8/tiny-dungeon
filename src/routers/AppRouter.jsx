@@ -15,10 +15,11 @@ import CharWeaponGroup from "../components/createCharacter/weaponGroup/CharWeapo
 import CharWeapon from "../components/createCharacter/weaponGroup/CharWeapon.jsx";
 import CharBackstory from "../components/createCharacter/backstory/CharBackstory.jsx";
 import CharFamiliar from "../components/createCharacter/familiar/CharFamiliar.jsx";
-import DisplayCharacter from "../components/displayCharacter/DisplayCharacter.jsx";
+import CharacterSheet from "../components/characterSheet/CharacterSheet.jsx";
 import DisplayWeaponGroups from "../components/editItems/DisplayWeaponGroups.jsx";
 import CreateWeapon from "../components/createItems/CreateWeapon.jsx";
 import DisplayWeapons from "../components/editItems/DisplayWeapons.jsx";
+import DisplayScrolls from "../components/editItems/DisplayScrolls.jsx";
 
 const AppRouter = createBrowserRouter([
     {
@@ -64,9 +65,9 @@ const AppRouter = createBrowserRouter([
                 ]
             },
             {
-                path: "/displayCharacter",
+                path: "/characterSheet",
                 errorElement: <NotFoundPage />,
-                element: <DisplayCharacter />,
+                element: <CharacterSheet />,
 
             },
         ]
@@ -97,6 +98,16 @@ const AppRouter = createBrowserRouter([
         element: <DisplayWeaponGroups />
     },
     {
+        path: "/displayWeapons",
+        errorElement: <NotFoundPage />,
+        element: <DisplayWeapons />
+    },
+    {
+        path: "/displayScrolls",
+        errorElement: <NotFoundPage />,
+        element: <DisplayScrolls />
+    },
+    {
         path: "/createScroll",
         errorElement: <NotFoundPage />,
         element: <CreateScroll />
@@ -111,11 +122,7 @@ const AppRouter = createBrowserRouter([
         errorElement: <NotFoundPage />,
         element: <CreateWeapon />
     },
-    {
-        path: "/displayWeapons",
-        errorElement: <NotFoundPage />,
-        element: <DisplayWeapons />
-    },
+
 ])
 
 export default AppRouter 

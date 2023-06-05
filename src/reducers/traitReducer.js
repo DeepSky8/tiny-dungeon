@@ -7,6 +7,7 @@ const defaultTrait = {
     tHTrait: false,
     tSpecial: false,
     tHP: 0,
+    tArmor: 0,
     tShield: false,
     tScroll: false,
     tSpell: false,
@@ -60,6 +61,12 @@ const traitReducer = (state, action) => {
                 ...state,
                 tHP: action.tHP,
                 tSpecial: action.tHP === 0 ? false : true
+            }
+        case 'UPDATE_TARMOR':
+            return {
+                ...state,
+                tArmor: action.tArmor,
+                tSpecial: action.tArmor === 0 ? false : true
             }
         case 'UPDATE_TSHIELD':
             return {
