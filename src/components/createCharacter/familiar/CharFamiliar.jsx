@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { useOutletContext } from "react-router";
 import { defaultFamiliar, familiarReducer } from "../../../reducers/familiarReducer";
@@ -21,6 +21,12 @@ const CharFamiliar = () => {
         dispatchChar(updateFamiliarID(familiar.fID))
         setLocalFamiliar(familiar)
     }
+
+    useEffect(() => {
+        if (familiar.fName && familiar.fDescription) {
+            handleSaveFamiliar()
+        }
+    }, [])
 
     return (
         <div className="charFamiliar__container">
