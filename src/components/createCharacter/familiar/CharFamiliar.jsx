@@ -5,7 +5,6 @@ import { defaultFamiliar, familiarReducer } from "../../../reducers/familiarRedu
 import Field from "../../display/Field";
 import DisplayRational from "../DisplayRational";
 import {
-
     updateFDescription,
     updateFName
 } from "../../../actions/familiarActions";
