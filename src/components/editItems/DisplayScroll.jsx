@@ -1,20 +1,17 @@
 import React, { useReducer } from "react";
 import Field from "../display/Field";
-import { defaultScroll, scrollReducer } from "../../reducers/scrollReducer";
-import { clearScroll, startNewScrollKey, updateSDescription, updateSTitle } from "../../actions/scrollActions";
+import { scrollReducer } from "../../reducers/scrollReducer";
+import { startSaveScroll, updateSDescription, updateSTitle } from "../../actions/scrollActions";
 
-const CreateScroll = () => {
-    const [scroll, dispatchScroll] = useReducer(scrollReducer, defaultScroll)
+const DisplayScroll = ({ scrollData }) => {
+    const [scroll, dispatchScroll] = useReducer(scrollReducer, scrollData)
 
     const handleSave = () => {
-        startNewScrollKey({ scrollData: scroll })
-            .then(
-                dispatchScroll(clearScroll())
-            )
+        startSaveScroll(scroll)
     }
 
     return (
-        <div className="createScroll__container">
+        <div className="displayScroll__container">
             <Field
                 label={'Scroll Name'}
                 id={'sTitle'}
@@ -24,7 +21,7 @@ const CreateScroll = () => {
                     dispatchScroll(updateSTitle(e.target.value))
                 }}
                 blur={() => {
-
+                    handleSave()
                 }}
                 theme={''}
             />
@@ -38,16 +35,14 @@ const CreateScroll = () => {
                     dispatchScroll(updateSDescription(e.target.value))
                 }}
                 blur={() => {
-
+                    handleSave()
                 }}
                 theme={''}
             />
 
-            <button
-                onClick={handleSave}
-            >Save</button>
+            <hr />
         </div>
     )
 }
 
-export default CreateScroll
+export default DisplayScroll
