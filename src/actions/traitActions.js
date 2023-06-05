@@ -26,6 +26,11 @@ export const updateTHP = (tHP) => ({
     tHP
 })
 
+export const updateTArmor = (tArmor) => ({
+    type: 'UPDATE_TARMOR',
+    tArmor
+})
+
 export const updateTHTrait = (tHTrait) => ({
     type: 'UPDATE_THTRAIT',
     tHTrait

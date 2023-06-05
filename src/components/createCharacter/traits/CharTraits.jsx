@@ -4,13 +4,13 @@ import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
 import { useOutletContext } from "react-router";
 import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
-import { updateTraitIDs } from "../../../actions/charActions";
+import { setScrollIDs, updateMaxHP, updateTraitIDs } from "../../../actions/charActions";
 
 const CharTraits = () => {
     const [char, dispatchChar] = useOutletContext();
     const [traits, setTraits] = useState([]);
 
-    const extraTraitID = '-NV0g1IzDJD22PtG_g-y'
+
 
     // Get list of traits
     useEffect(() => {
@@ -33,8 +33,33 @@ const CharTraits = () => {
         })
     }, [])
 
+    const extraTraitID = '-NV0g1IzDJD22PtG_g-y';
+
+    // const additionalHPID = '-NV0CzfGuKHy24OMUfMN';
+    const toughnessTrait = traits.find(trait => trait.tHP > 0)
+    // const armorTraitID = '-NV-zX7BrjyyupnP8Zwc'
+    const armorTrait = traits.find(trait => trait.tArmor > 0)
+    // const scrollReaderID = '-NV0C_daHy4EQZHergVr';
+    const scrollReaderTrait = traits.find(trait => trait.tScroll)
+
+
     const handleSelectCheckbox = (tID) => {
+
+
         dispatchChar(updateTraitIDs(tID))
+        if (tID === toughnessTrait.tID) {
+            dispatchChar(updateMaxHP(toughnessTrait.tHP))
+        }
+
+        if (tID === armorTrait.tID) {
+            dispatchChar(updateMaxHP(armorTrait.tArmor))
+        }
+
+        if(tID === scrollReaderTrait.tID){
+            dispatchChar(setScrollIDs([]))
+        }
+
+
     }
 
     const traitCalculator = (hTraitID, extraTraitID) => {

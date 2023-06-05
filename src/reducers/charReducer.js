@@ -143,7 +143,7 @@ const charReducer = (state, action) => {
             // Keep in mind that both Heritage and Trait impact max HP
             return {
                 ...state,
-                maxHP: action.maxHP
+                maxHP: state.maxHP + action.maxHP
             }
         case 'DECREASE_CURRENTHP':
             return {
@@ -281,6 +281,11 @@ const charReducer = (state, action) => {
             return {
                 ...state,
                 XP: parseInt(newXP)
+            }
+        case 'SET_SCROLLIDS':
+            return {
+                ...state,
+                scrollIDs: action.scrollIDs
             }
         case 'ADD_SCROLLID':
             // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
