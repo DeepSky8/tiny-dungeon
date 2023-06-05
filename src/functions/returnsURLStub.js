@@ -39,7 +39,7 @@ const wgTraits = [
 
 ]
 
-const returnsURLStub = ({ char, newCharStepOrder }) => {
+const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
     const {
         // charID,
         // userID,
@@ -87,21 +87,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         )
     }
 
-    const selectedWeaponGroups = ({ wgTraits, hTraitID, weaponGroupObjects, specialTraitsSelected }) => {
-        // // How many weapon groups currently?
-        // const weaponGroupLength = weaponGroupIDs.length;
-
-        // // Does character have a heritage that adds a weapon group?
-        // const weaponHeritage = wgTraits.includes(hTraitID) ? 1 : 0;
-
-        // // How many traits add a weapon group capability to the character?
-        // const weaponTraits = specialTraitsSelected.filter(traitID => wgTraits.includes(traitID)).length;
-
-        // // All characters should select a weapon group by default,
-        // // in addition to heritage weapon groups and trait weapon groups
-        // const wgTotalsMatch = weaponGroupLength === (weaponHeritage + weaponTraits + 1)
-
-        // return wgTotalsMatch
+    const selectedWeaponGroups = ({ weaponGroupObjects }) => {
 
         return (weaponGroupObjects.length > 0)
     }
@@ -137,16 +123,6 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
         return (!foundType.includes(false))
     }
 
-    // const shouldSelectFamiliar = ({ specialTraitsSelected, familiarID, hasFamiliar }) => {
-    //     // If user selected the 'Familiar' trait
-    //     if (specialTraitsSelected.includes(hasFamiliar)) {
-    //         // return false if the familiar hasn't yet been selected 
-    //         return (shouldHaveFamiliar && familiarID)
-    //     } else {
-    //         return true
-    //     }
-    // }
-
     const selectedFamiliar = ({ specialTraitsSelected, familiarID, hasFamiliar }) => {
         const shouldHaveFamiliar = specialTraitsSelected.includes(hasFamiliar)
         if (shouldHaveFamiliar) {
@@ -154,7 +130,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
             return (familiarID !== '')
         } else {
             // user shouldn't have familiar, return true (move along)
-            return true
+            return 'skip'
         }
     }
 
@@ -172,7 +148,7 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
     const trueIfComplete = [
         selectedHeritage,
         selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID }),
-        selectedWeaponGroups({ wgTraits, hTraitID, weaponGroupObjects, specialTraitsSelected }),
+        selectedWeaponGroups({ weaponGroupObjects }),
         selectedWeapons({ weaponGroupObjects, weaponObjects }),
         selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }),
         selectedBackstory({ trade, belief, charName }),
@@ -180,9 +156,13 @@ const returnsURLStub = ({ char, newCharStepOrder }) => {
     ]
 
     const indexOfFalse = trueIfComplete.indexOf(false)
-    return newCharStepOrder[indexOfFalse]
+    const indexOfCurrent = newCharStepOrder.indexOf(currentStep)
 
-
+    if (indexOfCurrent + 1 <= indexOfFalse && trueIfComplete[indexOfCurrent + 1] === true) {
+        return newCharStepOrder[indexOfCurrent + 1]
+    } else {
+        return newCharStepOrder[indexOfFalse]
+    }
 }
 
 

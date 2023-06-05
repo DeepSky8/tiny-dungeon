@@ -15,7 +15,7 @@ import CharWeaponGroup from "../components/createCharacter/weaponGroup/CharWeapo
 import CharWeapon from "../components/createCharacter/weaponGroup/CharWeapon.jsx";
 import CharBackstory from "../components/createCharacter/backstory/CharBackstory.jsx";
 import CharFamiliar from "../components/createCharacter/familiar/CharFamiliar.jsx";
-import DisplayCharacter from "../components/displayCharacter/DisplayCharacter.jsx";
+import CharacterSheet from "../components/characterSheet/CharacterSheet.jsx";
 import DisplayWeaponGroups from "../components/editItems/DisplayWeaponGroups.jsx";
 import CreateWeapon from "../components/createItems/CreateWeapon.jsx";
 import DisplayWeapons from "../components/editItems/DisplayWeapons.jsx";
@@ -64,9 +64,9 @@ const AppRouter = createBrowserRouter([
                 ]
             },
             {
-                path: "/displayCharacter",
+                path: "/characterSheet",
                 errorElement: <NotFoundPage />,
-                element: <DisplayCharacter />,
+                element: <CharacterSheet />,
 
             },
         ]
