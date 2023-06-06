@@ -22,7 +22,7 @@ const check = {
     // Spell-Touched
     spellsWeapon: '-NV0Cozs0xp32U7L7cx8',
     // Tough - trait
-    additionalHP: '-NV0CzfGuKHy24OMUfMN',
+    additionalHPID: '-NV0CzfGuKHy24OMUfMN',
 
     // Unarmed Weapon Group ID
     unarmedWeaponGroup: '-NV6Yyve_GUxV4OsizI2'

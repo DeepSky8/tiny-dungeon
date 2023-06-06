@@ -1,0 +1,31 @@
+.createScroll__container {
+    background-image: url("../../../src/assets/parchment_small.png");
+    background-size: 100vw 100vh;
+    min-height: 100vh;
+    font-size: $calcFontSizeLarge;
+    font-weight: 600;
+    color: $text-brown;
+    padding: $s-size;
+    justify-content: center;
+
+    .field__container {
+        justify-content: center;
+    }
+
+    .field__container--description {
+        text-align: center;
+    }
+
+    .field--input {
+        background-color: $menu-yellow;
+        max-width: 95%;
+        font-size: $calcFontSizeLarge;
+    }
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .createScroll__container {
+        background-image: url("../../../src/assets/parchment_large.png");
+        font-size: $calcFontSize;
+    }
+}

@@ -7,6 +7,7 @@ const defaultTrait = {
     tHTrait: false,
     tSpecial: false,
     tHP: 0,
+    tArmor: 0,
     tShield: false,
     tScroll: false,
     tSpell: false,
@@ -48,7 +49,8 @@ const traitReducer = (state, action) => {
             return {
                 ...state,
                 tSpecial: !state.tSpecial,
-                tHP: state.tSpecial ? 0 : state.tHP,
+                tHP: state.tSpecial ? 0 : parseInt(state.tHP),
+                tArmor: state.tSpecial ? 0 : parseInt(state.tArmor),
                 tShield: state.tSpecial ? false : state.tShield,
                 tSpell: state.tSpecial ? false : state.tSpell,
                 tImprovised: state.tSpecial ? false : state.tImprovised,
@@ -58,8 +60,14 @@ const traitReducer = (state, action) => {
         case 'UPDATE_THP':
             return {
                 ...state,
-                tHP: action.tHP,
+                tHP: parseInt(action.tHP),
                 tSpecial: action.tHP === 0 ? false : true
+            }
+        case 'UPDATE_TARMOR':
+            return {
+                ...state,
+                tArmor: parseInt(action.tArmor),
+                tSpecial: action.tArmor === 0 ? false : true
             }
         case 'UPDATE_TSHIELD':
             return {

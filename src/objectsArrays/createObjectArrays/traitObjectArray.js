@@ -1,4 +1,6 @@
+import { setMaxArmor } from "../../actions/charActions";
 import {
+    updateTArmor,
     updateTClaws,
     updateTDescription,
     updateTFamiliar,
@@ -95,6 +97,15 @@ const traitObjectArray = [
         id: 'tHP',            // Must match the field name on the default object
         type: 'number',
         action: updateTHP,
+        blur: () => {
+            // Need to add blur save command
+        },
+    },
+    {
+        label: 'Armor Master ',
+        id: 'tArmor',            // Must match the field name on the default object
+        type: 'number',
+        action: updateTArmor,
         blur: () => {
             // Need to add blur save command
         },

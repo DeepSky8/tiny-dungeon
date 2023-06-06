@@ -5,7 +5,7 @@ import { db } from "../../../api/firebase";
 import StyledMenu from "../../display/StyledMenu";
 import DisplayHeritage from "./DisplayHeritage";
 import DisplayRational from "../DisplayRational";
-import { updateHTraitID, updateHeritageID } from "../../../actions/charActions";
+import { setCurrentHP, setHeritageHP, updateHTraitID, updateHeritageID } from "../../../actions/charActions";
 
 const CharHeritage = () => {
     const [char, dispatchChar] = useOutletContext();
@@ -32,9 +32,9 @@ const CharHeritage = () => {
 
     const loadHeritage = (heritage) => {
         dispatchChar(updateHeritageID(heritage.hID))
-        console.log('heritage', heritage)
         dispatchChar(updateHTraitID(heritage.hTraitIDs[0]))
-        // dispatchChar(clearTraitIDs())
+        dispatchChar(setHeritageHP(parseInt(heritage.hHP)))
+        dispatchChar(setCurrentHP(parseInt(heritage.hHP)))
     }
 
 

@@ -8,7 +8,8 @@ const defaultChar = {
     heritageID: '',         // Select from Heritages array, identify by hID
     hTraitID: '',           // Heritage trait determined by Heritage, identified by htID
     traitIDs: [],           // Select and identify by tID
-    maxHP: 0,               // HP determined by Heritage and trait: Toughness
+    hHP: 0,                 // HP determined by Heritage
+    tHP: 0,                 // HP determined by traits: (Toughness)
     currentHP: 0,           // HP current number
     maxArmor: 0,            // HP from armor determined by Trait and worn items
     currentArmor: 0,        // HP from armor current number
@@ -51,17 +52,17 @@ const defaultChar = {
 
     gold: 10,
 
-    familiarID: '',         // Reference by fID
+    familiarID: '',             // Reference by fID
     XP: 0,
-    scrollIDs: [],          // Identified by sID
+    scrolls: [
+        // {
+        //     sID: '',
+        //     sTitle: '',
+        //     sDescription: '',
+        //     sAmount: 1
+        // }
+    ],                          // Identified by sID
 }
-
-const charPlaceholders = {
-    namePlace: 'Character Name',
-    tradePlace: "'s family trade",
-    beliefPlace: "'s personal creed"
-}
-
 
 const charReducer = (state, action) => {
     switch (action.type) {
@@ -88,9 +89,6 @@ const charReducer = (state, action) => {
             return {
                 ...defaultChar,
                 heritageID: action.heritageID,
-                traitIDs: [],
-                weaponGroupObjects: [],
-                weaponObjects: [],
             }
         case 'UPDATE_HTRAITID':
             return {
@@ -98,33 +96,13 @@ const charReducer = (state, action) => {
                 hTraitID: action.hTraitID
             }
         case 'UPDATE_TRAITIDS':
-            // Consider adding logic to check hTrait for standard HP
-            // and calculating additional HP from trait
-
             // PLEASE PASS IN action.traitID <--- PLEASE NOTE SINGULAR
             const newTraitIDs = (
-                (
-                    state
-                        .traitIDs
-                        .includes(action.traitID)
-                )
+                (state.traitIDs.includes(action.traitID))
                     ?
-                    (
-                        state
-                            .traitIDs
-                            .filter(tID => tID !== action.traitID)
-                    )
+                    (state.traitIDs.filter(tID => tID !== action.traitID))
                     :
-                    (
-                        [
-                            action
-                                .traitID
-                        ]
-                            .concat(
-                                state
-                                    .traitIDs
-                            )
-                    )
+                    ([action.traitID].concat(state.traitIDs))
             )
 
             return {
@@ -137,13 +115,23 @@ const charReducer = (state, action) => {
             return {
                 ...state,
                 traitIDs: [],
+                weaponGroupObjects: [],
+                weaponObjects: [],
             }
-
-        case 'UPDATE_MAXHP':
-            // Keep in mind that both Heritage and Trait impact max HP
+        case 'SET_HERITAGEHP':
             return {
                 ...state,
-                maxHP: action.maxHP
+                hHP: action.hHP
+            }
+        case 'SET_TRAITHP':
+            return {
+                ...state,
+                tHP: action.tHP
+            }
+        case 'SET_CURRENTHP':
+            return {
+                ...state,
+                currentHP: action.currentHP
             }
         case 'DECREASE_CURRENTHP':
             return {
@@ -155,10 +143,15 @@ const charReducer = (state, action) => {
                 ...state,
                 currentHP: state.currentHP + 1
             }
-        case 'UPDATE_MAXARMOR':
+        case 'SET_MAXARMOR':
             return {
                 ...state,
                 maxArmor: action.maxArmor
+            }
+        case 'SET_CURRENTARMOR':
+            return {
+                ...state,
+                currentArmor: action.currentArmor
             }
         case 'DECREASE_CURRENTARMOR':
             return {
@@ -190,13 +183,8 @@ const charReducer = (state, action) => {
 
             const newWGOs = (
                 [action.weaponGroupObject].concat(
-                    state
-                        .weaponGroupObjects
-                        .filter(wgO =>
-                            wgO.wgType !== action.weaponGroupObject.wgType
-                        )
-                )
-
+                    state.weaponGroupObjects.filter(wgO =>
+                        wgO.wgType !== action.weaponGroupObject.wgType))
             )
 
             return {
@@ -208,10 +196,8 @@ const charReducer = (state, action) => {
 
             const filteredWGOs = (
                 state
-                    .weaponGroupObjects
-                    .filter(wgO =>
-                        wgO.wgType !== action.weaponGroupObject.wgType
-                    )
+                    .weaponGroupObjects.filter(wgO =>
+                        wgO.wgType !== action.weaponGroupObject.wgType)
             )
 
             return {
@@ -282,32 +268,70 @@ const charReducer = (state, action) => {
                 ...state,
                 XP: parseInt(newXP)
             }
-        case 'ADD_SCROLLID':
-            // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
+        case 'SET_SCROLLS':
             return {
                 ...state,
-                scrollIDs: state.scrollIDs.concat([action.scrollID])
+                scrolls: action.scrolls
             }
-        case 'REMOVE_SCROLLID':
-            // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
-            const scrollIndex = state.scrollIDs.indexOf(action.scrollID)
-
-            const newScrolIDs = (
-                (
-                    scrollIndex > -1
-                )
-                    ?
-                    (
-                        state.scrollIDs.slice(scrollIndex, 1)
-                    )
-                    :
-                    (
-                        state.scrollIDs
-                    )
-            )
+        case 'CLEAR_SCROLLS':
             return {
                 ...state,
-                scrollIDs: newScrolIDs
+                scrolls: []
+            }
+        case 'ADD_SCROLL':
+            // PLEASE PASS IN action.scroll <--- NOTE SINGULAR
+
+            const incrementScroll = (scroll) => {
+                const { sAmount } = scroll;
+                const newAmount = sAmount + 1;
+                return { ...scroll, sAmount: newAmount }
+            }
+
+            // review scrolls by ID, increment number if IDs match
+            const scrollExistsIndex = state.scrolls.findIndex(scroll => scroll.sID === action.scroll.sID)
+            const scrollToAdd = (
+                scrollExistsIndex > -1
+                    ?
+                    incrementScroll(state.scrolls[scrollExistsIndex])
+                    :
+                    action.scroll
+            )
+            const updatedScrollArray = (
+                (state.scrolls.filter(scroll => scroll.sID !== action.scroll.sID))
+                    .concat([scrollToAdd])
+            )
+
+            return {
+                ...state,
+                scrolls: updatedScrollArray
+            }
+        case 'REMOVE_SCROLL':
+            // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
+
+            const decrementedScroll = (scroll) => {
+                const { sAmount } = scroll;
+                const newAmount = sAmount - 1;
+                return { ...scroll, sAmount: newAmount }
+            }
+
+            const currentScroll = state.scrolls.find(scroll => scroll.sID === action.scrollID)
+            const filteredScrolls = (
+                state
+                    .scrolls
+                    .filter(scroll => scroll.sID !== action.scroll.sID)
+            )
+            const decrementedScrollArray = (
+                currentScroll.sAmount > 1
+                    ?
+                    (filteredScrolls)
+                        .concat([decrementedScroll(currentScroll)])
+                    :
+                    (filteredScrolls)
+            )
+
+            return {
+                ...state,
+                scrolls: decrementedScrollArray
             }
         default:
             return {
@@ -316,4 +340,4 @@ const charReducer = (state, action) => {
     }
 }
 
-export { defaultChar, charReducer, charPlaceholders }
+export { defaultChar, charReducer }
