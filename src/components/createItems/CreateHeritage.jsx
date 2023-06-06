@@ -107,7 +107,7 @@ const CreateHeritage = () => {
                 type={'number'}
                 value={heritage.hHP}
                 change={(e) => {
-                    dispatchHeritage(updateHHP(e.target.value))
+                    dispatchHeritage(updateHHP(parseInt(e.target.value)))
                 }}
                 blur={() => {
 

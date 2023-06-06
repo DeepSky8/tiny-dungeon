@@ -37,9 +37,19 @@ export const updateHTraitID = (hTraitID) => ({
     hTraitID
 })
 
-export const updateMaxHP = (maxHP) => ({
-    type: 'UPDATE_MAXHP',
-    maxHP
+export const setHeritageHP = (hHP) => ({
+    type: 'SET_HERITAGEHP',
+    hHP
+})
+
+export const setTraitHP = (tHP) => ({
+    type: 'SET_TRAITHP',
+    tHP
+})
+
+export const setCurrentHP = (currentHP) => ({
+    type: 'SET_CURRENTHP',
+    currentHP
 })
 
 export const decreaseCurrentHP = () => ({
@@ -50,9 +60,14 @@ export const increaseCurrentHP = () => ({
     type: 'INCREASE_CURRENTHP',
 })
 
-export const updateMaxArmor = (maxArmor) => ({
-    type: 'UPDATE_MAXARMOR',
+export const setMaxArmor = (maxArmor) => ({
+    type: 'SET_MAXARMOR',
     maxArmor
+})
+
+export const setCurrentArmor = (currentArmor) => ({
+    type: 'SET_CURRENTARMOR',
+    currentArmor
 })
 
 export const decreaseCurrentArmor = () => ({
@@ -134,18 +149,22 @@ export const updateXP = (XP) => ({
     XP
 })
 
-export const setScrollIDs = (scrollIDs) => ({
-    type: 'SET_SCROLLIDS',
-    scrollIDs
+export const setScrolls = (scrolls) => ({
+    type: 'SET_SCROLLS',
+    scrolls
 })
 
-export const addScrollID = (scrollID) => ({
-    type: 'ADD_SCROLLID',
-    scrollID
+export const clearScrolls = () => ({
+    type: 'CLEAR_SCROLLS'
 })
 
-export const removeScrollID = (scrollID) => ({
-    type: 'REMOVE_SCROLLID',
+export const addScroll = (scroll) => ({
+    type: 'ADD_SCROLL',
+    scroll
+})
+
+export const removeScrollByID = (scrollID) => ({
+    type: 'REMOVE_SCROLL',
     scrollID
 })
 
