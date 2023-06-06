@@ -24,10 +24,6 @@ const DisplayScrolls = () => {
         })
     }, [])
 
-    useEffect(() => {
-        console.log('scrolls', scrolls)
-    }, [scrolls])
-
     return (
         <div className="displayScrolls__container">
             {scrolls.length > 0

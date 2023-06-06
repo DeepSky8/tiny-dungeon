@@ -10,6 +10,13 @@ const CharBackstory = () => {
     const [trade, setTrade] = useState('');
     const [belief, setBelief] = useState('');
 
+    const placeholder = {
+        name: 'Character Name',
+        belief: "'s personal creed",
+        trade: "'s family trade",
+    }
+    // (char.charName ? char.charName : 'Character') + placeholder.trade
+
     const handleSaveBackstory = () => {
         dispatchChar(updateCharName(nameState))
         dispatchChar(updateTrade(trade))
@@ -31,8 +38,23 @@ const CharBackstory = () => {
                     handleSaveBackstory()
                 }}
                 theme={''}
-                placeholder={'Susie?'}
+                placeholder={placeholder.name}
             />
+
+            <Field
+            label={'Belief: '}
+            id={`belief` + char.charID}
+            type={'textarea'}
+            value={belief}
+            change={(e) => {
+                setBelief(e.target.value)
+            }}
+            blur={() => {
+                handleSaveBackstory()
+            }}
+            theme={''}
+            placeholder={(char.charName ? char.charName : 'Character') + placeholder.belief}
+        />
 
             <Field
                 label={'Trade: '}
@@ -46,22 +68,7 @@ const CharBackstory = () => {
                     handleSaveBackstory()
                 }}
                 theme={''}
-                placeholder={'"Trade" explained below'}
-            />
-
-            <Field
-                label={'Belief: '}
-                id={`belief` + char.charID}
-                type={'textarea'}
-                value={belief}
-                change={(e) => {
-                    setBelief(e.target.value)
-                }}
-                blur={() => {
-                    handleSaveBackstory()
-                }}
-                theme={''}
-                placeholder={`There's no such thing as a free lunch`}
+                placeholder={'See below for details'}
             />
 
             <DisplayRational />
