@@ -1,31 +1,32 @@
-.healthDisplay__container {
+.displayHealth__container {
     user-select: none;
     margin-bottom: $xs-size;
-}
-
-.healthDisplay__container {
     display: flexbox;
 }
 
-.healthDisplay__hp--label {
+.displayHealth__container--section {
+    margin: $xs-size 0;
+}
+
+.displayHealth__hp--label {
     display: flex;
     justify-content: space-between;
 }
 
-.healthDisplay__container--plusMinus {
+.displayHealth__container--plusMinus {
     width: 100%;
     display: flex;
     justify-content: space-around;
     padding-bottom: $xs-size;
 }
 
-.healthDisplay__plusMinus--button {
+.displayHealth__plusMinus--button {
     display: flex;
     @include button--border;
     background-color: transparent;
 }
 
-.healthDisplay__symbols {
+.displayHealth__symbols {
     display: flexbox;
     text-align: center;
 }

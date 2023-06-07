@@ -7,7 +7,7 @@ import {
     setMaxArmor
 } from "../../actions/charActions";
 
-const HealthDisplay = ({ char, dispatchChar }) => {
+const DisplayHealth = ({ char, dispatchChar }) => {
     const { currentHP, hHP, tHP, maxArmor, currentArmor } = char
     const maxHP = parseInt(hHP) + parseInt(tHP)
     const lostHP = maxHP - parseInt(currentHP)
@@ -45,53 +45,53 @@ const HealthDisplay = ({ char, dispatchChar }) => {
     const increaseHP = () => { if (currentHP + 1 <= maxHP) { dispatchChar(increaseCurrentHP()) } }
 
     return (
-        <div className="healthDisplay__container">
+        <div className="displayHealth__container">
 
-            <div className="healthDisplay__container--armor" id="healthDisplay__container--armor">
-                <div className="healthDisplay__container--plusMinus">
-                    <label className="healthDisplay__armor--label" htmlFor="healthDisplay__container--armor">Armor</label>
+            <div className="displayHealth__container--section" id="displayHealth__container--armor">
+                <div className="displayHealth__container--plusMinus">
+                    <label className="displayHealth__armor--label" htmlFor="displayHealth__container--armor">Armor</label>
 
                     <button
                         onClick={reduceArmor}
-                        className="healthDisplay__plusMinus--button">
+                        className="displayHealth__plusMinus--button">
                         <span className="material-symbols-outlined empty" >gpp_bad</span>
                     </button>
 
                     <button
                         onClick={increaseArmor}
-                        className="healthDisplay__plusMinus--button">
+                        className="displayHealth__plusMinus--button">
                         <span className="material-symbols-outlined filled" >add_moderator</span>
                     </button>
 
                 </div>
 
-                <div className="healthDisplay__symbols">
+                <div className="displayHealth__symbols">
                     {displayHearts(currentArmor, 'shield_with_heart', 'filled')}
                     {displayHearts(lostArmor, 'shield_with_heart', 'empty faded')}
                 </div>
             </div>
 
-            <div className="healthDisplay__container--hp" id="healthDisplay__container--hp">
-                <div className="healthDisplay__container--plusMinus">
-                    <label className="healthDisplay__hp--label" htmlFor="healthDisplay__container--hp">Health</label>
+            <div className="displayHealth__container--section" id="displayHealth__container--hp">
+                <div className="displayHealth__container--plusMinus">
+                    <label className="displayHealth__hp--label" htmlFor="displayHealth__container--hp">Health</label>
 
                     <button
                         onClick={reduceHP}
-                        className="healthDisplay__plusMinus--button">
+                        className="displayHealth__plusMinus--button">
                         <span
                             className="material-symbols-outlined empty" >heart_minus</span>
                     </button>
 
                     <button
                         onClick={increaseHP}
-                        className="healthDisplay__plusMinus--button">
+                        className="displayHealth__plusMinus--button">
                         <span
                             className="material-symbols-outlined filled" >heart_plus</span>
                     </button>
 
                 </div>
 
-                <div className="healthDisplay__symbols">
+                <div className="displayHealth__symbols">
                     {displayHearts(currentHP, 'favorite', 'filled')}
                     {displayHearts(lostHP, 'favorite', 'empty faded')}
                 </div>
@@ -103,6 +103,6 @@ const HealthDisplay = ({ char, dispatchChar }) => {
     )
 }
 
-export default HealthDisplay
+export default DisplayHealth
 
 // material-symbols-outlined

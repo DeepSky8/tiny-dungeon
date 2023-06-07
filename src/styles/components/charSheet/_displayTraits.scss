@@ -1,0 +1,16 @@
+.displayTraits__container {
+    user-select: none;
+    background-color: transparent;
+    background: transparent;
+}
+
+.displayTraits__section {
+    padding: $xs-size 0;
+}
+
+.displayTraits__text--reminder {
+    font-style: italic;
+    font-size: $calcFontSize;
+    justify-content: right;
+    display: flex;
+}

@@ -38,8 +38,6 @@ const ModuleHeader = ({ titleArray, show, dispatch, theme = '' }) => {
         )
     }
 
-
-    // console.log('titleObjects', titleObjects)
     return (
         <div className="moduleHeader__container">
             {titleObjects.map(object => {
@@ -48,7 +46,6 @@ const ModuleHeader = ({ titleArray, show, dispatch, theme = '' }) => {
                         key={object.displayKey}
                         className={`${theme} moduleHeader__button ` + show[`${object.displayKey}`]}
                         onClick={() => {
-                            console.log('clicked', object)
                             show[object.displayKey] ?
                                 dispatch(object.close())
                                 :

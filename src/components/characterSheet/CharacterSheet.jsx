@@ -7,13 +7,13 @@ import { db } from "../../api/firebase";
 import { loadHeritage } from "../../actions/heritageActions";
 import { defaultTrait, traitReducer } from "../../reducers/traitReducer";
 import { loadTrait } from "../../actions/traitActions";
-import ClickDescription from "../display/ClickDescription";
 import Field from "../display/FieldPencil";
 import { updateBelief } from "../../actions/charActions";
-import HealthDisplay from "./HealthDisplay";
+import DisplayHealth from "./DisplayHealth";
 import ModuleDisplay from "./ModuleDisplay";
 import { defaultDisplay, displayReducer } from "../../reducers/displayReducer";
 import ModuleHeader from "./ModuleHeader";
+import DisplayTraits from "./DisplayTraits";
 
 const CharacterSheet = () => {
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
@@ -23,8 +23,6 @@ const CharacterSheet = () => {
     const [traits, setTraits] = useState([])
 
     const [show, dispatchShow] = useReducer(displayReducer, defaultDisplay)
-
-    // const [showHealth, setShowHealth] = useState(true)
 
     useEffect(() => {
         // Get Heritage
@@ -111,7 +109,7 @@ const CharacterSheet = () => {
                 />
                 <ModuleDisplay
                     jsx={
-                        <HealthDisplay
+                        <DisplayHealth
                             char={char}
                             dispatchChar={dispatchChar}
                         />
@@ -119,7 +117,11 @@ const CharacterSheet = () => {
                     visibleState={show.display1}
                 />
                 <ModuleDisplay
-                    jsx={<span>traits</span>}
+                    jsx={
+                        <DisplayTraits
+                            heritageTrait={hTrait}
+                            traits={traits} />
+                    }
                     visibleState={show.display2}
                 />
                 <ModuleDisplay
