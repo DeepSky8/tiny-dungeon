@@ -158,7 +158,7 @@ const charReducer = (state, action) => {
                 ...state,
                 currentArmor: state.currentArmor - 1
             }
-        case 'INCRASE_CURRENTARMOR':
+        case 'INCREASE_CURRENTARMOR':
             return {
                 ...state,
                 currentArmor: state.currentArmor + 1

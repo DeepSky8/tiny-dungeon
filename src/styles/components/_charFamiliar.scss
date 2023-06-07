@@ -21,10 +21,26 @@
         text-align: center;
         user-select: contain;
         overflow: hidden;
+
         &.title {
             width: 100%;
         }
     }
+    input:focus {
+        outline: none;
+        border-style: solid;
+        border-width: 2px;
+        border-color: $text-brown;
+        box-shadow: 0 0 10px $text-brown;
+    }
+    textarea:focus {
+        outline: none;
+        border-style: solid;
+        border-width: 2px;
+        border-color: $text-brown;
+        box-shadow: 0 0 10px $text-brown;
+    }
+
     ::placeholder {
         color: $text-brown-placeholder;
     }

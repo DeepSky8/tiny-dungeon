@@ -1,7 +1,9 @@
 @import "../styles/base/settings";
 @import "../styles/mixins/styledMenuMixins";
 @import "../styles/base/base";
+@import "../styles/base/materialSymbols";
 @import "../styles/mixins/generalMixins";
+
 @import "../styles/components/footer";
 @import "../styles/components/newCharFooter";
 @import "../styles/components/clickDescription";
@@ -17,6 +19,11 @@
 @import "../styles/components/charWeapon";
 @import "../styles/components/charFamiliar";
 @import "../styles/components/charBackstory";
+
+@import "../styles/components/characterSheet";
+@import "../styles/components/healthDisplay";
+@import "../styles/components/moduleHeader";
+@import "../styles/components/moduleDisplay";
 
 @import "../styles/components/displayWeapon";
 @import "../styles/components/displayHeritage";
