@@ -20,6 +20,10 @@
     border-bottom: 1px solid $text-brown;
 }
 
+.displayWeapon__container--spacer {
+    padding: 0 $xs-size;
+}
+
 .displayWeapon__container--pick {
     .sMenu__container {
         margin-top: 0;

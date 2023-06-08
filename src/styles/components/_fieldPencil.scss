@@ -1,0 +1,27 @@
+.field__container--textarea {
+    position: relative;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.field__container--text {
+    position: relative;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.textarea--pencil {
+    position: absolute;
+    bottom: $s-size;
+    right: $xs-size;
+    pointer-events: none;
+    color: $text-brown-faded;
+}
+
+.text--pencil {
+    position: absolute;
+    bottom: 0;
+    right: $xs-size;
+    pointer-events: none;
+    color: $text-brown-faded;
+}

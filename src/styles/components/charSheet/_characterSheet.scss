@@ -64,13 +64,13 @@
     display: flex;
     justify-content: center;
     position: relative;
-    .pencil {
-        position: absolute;
-        bottom: $s-size;
-        right: 0;
-        pointer-events: none;
-        color: $text-brown-faded;
-    }
+    // .pencil {
+    //     position: absolute;
+    //     bottom: $s-size;
+    //     right: 0;
+    //     pointer-events: none;
+    //     color: $text-brown-faded;
+    // }
 }
 
 // border-bottom: 1px;

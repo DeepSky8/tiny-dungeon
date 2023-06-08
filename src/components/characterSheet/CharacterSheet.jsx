@@ -14,6 +14,7 @@ import ModuleDisplay from "./ModuleDisplay";
 import { defaultDisplay, displayReducer } from "../../reducers/displayReducer";
 import ModuleHeader from "./ModuleHeader";
 import DisplayTraits from "./DisplayTraits";
+import DisplayWeapons from "./DisplayWeapons";
 
 const CharacterSheet = () => {
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
@@ -71,11 +72,11 @@ const CharacterSheet = () => {
     // Belief
 
     // HP, Armor (max and current)
-    // Familiar (if exists)
     // Traits (including HTrait)
     // Weapons (includes ranged spell attacks)
-    // (optional age, personal description)
 
+    // (optional age, personal description)
+    // Familiar (if exists)
     // Trade
     // Notes
 
@@ -125,7 +126,12 @@ const CharacterSheet = () => {
                     visibleState={show.display2}
                 />
                 <ModuleDisplay
-                    jsx={<span>weapons</span>}
+                    jsx={
+                        <DisplayWeapons
+                            char={char}
+                            dispatchChar={dispatchChar}
+                        />
+                    }
                     visibleState={show.display3}
                 />
 

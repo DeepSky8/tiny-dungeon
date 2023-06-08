@@ -18,11 +18,12 @@ const Field = ({ label, id, type, value, change, blur, theme, placeholder = '' }
                         onChange={change}
                         onBlur={blur}
                     />
+
                 }
 
 
                 {type === 'textarea' &&
-                    <span>
+                    <span className="field__container--textarea">
                         <textarea
                             rows='4'
                             // cols='50'
@@ -33,20 +34,23 @@ const Field = ({ label, id, type, value, change, blur, theme, placeholder = '' }
                             onChange={change}
                             onBlur={blur}
                         />
-                        <span className="material-symbols-outlined pencil">edit</span>
+                        <span className="material-symbols-outlined textarea--pencil">edit</span>
                     </span>
                 }
 
                 {type === 'text' &&
-                    <input
-                        id={id}
-                        className={`field--input ${theme}`}
-                        type={type}
-                        placeholder={placeholder}
-                        value={value}
-                        onChange={change}
-                        onBlur={blur}
-                    />
+                    <span className="field__container--text">
+                        <input
+                            id={id}
+                            className={`field--input ${theme}`}
+                            type={type}
+                            placeholder={placeholder}
+                            value={value}
+                            onChange={change}
+                            onBlur={blur}
+                        />
+                        <span className="material-symbols-outlined text--pencil">edit</span>
+                    </span>
                 }
 
                 {type === 'number' &&
