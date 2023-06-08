@@ -7,35 +7,16 @@ import {
 import Field from "../display/FieldPencil";
 import { addWeaponObject } from "../../actions/charActions";
 
-const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
+const DisplayUnarmed = ({ weaponGroup: wG, char, dispatchChar }) => {
     const [wgName,] = useState(wG.wgTitle); // Will always be Unarmed
     const weaponMatch = (char.weaponObjects.find(wO => wO.wType === wG.wgType))
 
-    // const martialArtist = {
-    //     wID: 'martialArtist',
-    //     wCharID: char.charID,
-    //     wType: 'u',             // Corresponds to weaponGroup letter
-    //     wTitle: '',             // User-defined text
-    //     wDescription: '',       // User-defined text, if any
-    //     wDepletion: 99,         // Interact with depletion counters in later update, set initial depletion counters by wType object
-    //     wHTrait: wG.wgHTrait,   // Set by Heritage
-    //     wTrait: wG.wgTrait,     // Set by Trait
-    // }
     const [weapon, dispatchWeapon] = useReducer(weaponsMasteredReducer, (weaponMatch === undefined ? martialArtist : weaponMatch))
     const [show, setShow] = useState(false)
 
     const handleSaveWeapon = () => {
         dispatchChar(addWeaponObject(weapon))
     }
-
-    // useEffect(() => {
-    //     if (wG.wgHTrait && !weaponMatch) {
-    //         const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
-    //         const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
-    //         dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
-    //         handleSaveWeapon(matchesWeaponGroup)
-    //     }
-    // }, [])
 
     const rangeName = (range) => {
         switch (range) {
@@ -74,10 +55,10 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                             <div className="displayWeapon__container--edit">
                                 <div className="displayWeapon__container--spacer">
                                     <Field
-                                        label={'Signature Strike: '}
+                                        label={''}
                                         id={'title'}
                                         type={'text'}
-                                        placeholder="Crane Beak?"
+                                        placeholder="Crane Beak"
                                         value={weapon.wTitle}
                                         change={(e) => {
                                             dispatchWeapon(updateWTitle(e.target.value))
@@ -85,11 +66,11 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                         blur={() => {
                                             handleSaveWeapon()
                                         }}
-                                        theme={''}
+                                        theme={'bold'}
                                     />
 
                                     <Field
-                                        label={'Description: '}
+                                        label={''}
                                         id={'description'}
                                         type={'textarea'}
                                         placeholder="What does it look like?"

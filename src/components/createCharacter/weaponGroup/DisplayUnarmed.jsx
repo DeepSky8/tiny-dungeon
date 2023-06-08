@@ -83,7 +83,7 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                             label={'Signature Strike: '}
                                             id={'title'}
                                             type={'text'}
-                                            placeholder="Crane Beak?"
+                                            placeholder="Crane Beak"
                                             value={newWeapon.wTitle}
                                             change={(e) => {
                                                 dispatchNewWeapon(updateWTitle(e.target.value))

@@ -10,29 +10,9 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
     const [weapon, dispatchWeapon] = useReducer(weaponsMasteredReducer, (weaponMatch === undefined ? defaultWeaponMastered : weaponMatch))
     const [show, setShow] = useState(false)
 
-    // const otherWeapon = {
-    //     wID: `custom${wG.wgType}`,
-    //     wCharID: char.charID,
-    //     wType: wG.wgType,       // Corresponds to weaponGroup letter
-    //     wTitle: '',             // User-defined text
-    //     wDescription: '',       // User-defined text
-    //     wDepletion: 6,          // Interact with depletion counters in later update, set initial depletion counters by wType object
-    //     wHTrait: wG.wgHTrait,   // Set by Heritage
-    //     wTrait: wG.wgTrait,     // Set by Trait
-    // }
-
     const handleSaveWeapon = () => {
         dispatchChar(addWeaponObject(weapon))
     }
-
-    // useEffect(() => {
-    //     if (wG.wgHTrait && !weaponMatch) {
-    //         const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
-    //         const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
-    //         dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
-    //         handleSaveWeapon(matchesWeaponGroup)
-    //     }
-    // }, [])
 
     const rangeName = (range) => {
         switch (range) {
@@ -46,15 +26,6 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
                 break;
         }
     }
-
-    // const selectWeapon = (weapon) => {
-    //     if (weapons.map(weapon => weapon.wID).includes(weapon.wID)) {
-    //         dispatchNewWeapon(loadWeapon(weapon))
-    //     } else if (weapon.wID === otherWeapon.wID) {
-    //         dispatchNewWeapon(loadWeapon(otherWeapon))
-    //     }
-    //     handleSaveWeapon(weapon)
-    // }
 
     return (
         <div className="displayWeapon__container">
@@ -74,17 +45,26 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
             <div className="displayWeapon__container--body">
                 {show &&
                     <div className="displayWeapon__container--pick">
+                        <Field
+                            label={''}
+                            id={'title'}
+                            type={'text'}
+                            placeholder="Weapon Name"
+                            value={weapon.wTitle}
+                            change={(e) => {
+                                dispatchWeapon(updateWTitle(e.target.value))
+                            }}
+                            blur={() => {
+                                handleSaveWeapon()
+                            }}
+                            theme={'bold'}
+                        />
 
-                        <div className="sMenu__container">
-                            <div className="sMenu__button">
-                                {weapon.wTitle}
-                            </div>
-                        </div>
 
                         <div className="displayWeapon__container--spacer">
                             <div className="displayWeapon__container--edit">
                                 <Field
-                                    label={'Description: '}
+                                    label={''}
                                     id={'description'}
                                     type={'textarea'}
                                     placeholder="What does it look like?"
