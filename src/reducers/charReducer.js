@@ -110,6 +110,7 @@ const charReducer = (state, action) => {
                 traitIDs: newTraitIDs,
                 weaponGroupObjects: [],
                 weaponObjects: [],
+                familiarID: '',
             }
         case 'CLEAR_TRAITIDS':
             return {
@@ -117,6 +118,7 @@ const charReducer = (state, action) => {
                 traitIDs: [],
                 weaponGroupObjects: [],
                 weaponObjects: [],
+                familiarID: '',
             }
         case 'SET_HERITAGEHP':
             return {
