@@ -158,9 +158,23 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
     const indexOfFalse = trueIfComplete.indexOf(false)
     const indexOfCurrent = newCharStepOrder.indexOf(currentStep)
 
-    if (indexOfCurrent + 1 <= indexOfFalse && trueIfComplete[indexOfCurrent + 1] === true) {
+    if (
+        // If the next step falls on or before a step that evaluates to false
+        indexOfCurrent + 1 <= indexOfFalse
+        &&
+        // AND if the next step evaluates to true (avoids a step marked 'skip')
+        trueIfComplete[indexOfCurrent + 1] === true
+    ) {
+        // Simply go to the next step
         return newCharStepOrder[indexOfCurrent + 1]
+    } else if (
+        // OR if on Select Weapons, and the character will not select a Familiar
+        indexOfCurrent + 2 === 5
+    ) {
+        // Go to the Backstory step
+        return newCharStepOrder[indexOfCurrent + 2]
     } else {
+        // Otherwise, go to the earliest step marked false
         return newCharStepOrder[indexOfFalse]
     }
 }
