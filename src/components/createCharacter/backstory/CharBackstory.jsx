@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import DisplayRational from "../DisplayRational";
-import Field from "../../display/Field";
+import Field from "../../display/FieldPencil";
 import { useOutletContext } from "react-router";
 import { updateBelief, updateCharName, updateTrade } from "../../../actions/charActions";
 
 const CharBackstory = () => {
     const [char, dispatchChar] = useOutletContext();
-    const [nameState, setName] = useState('');
-    const [trade, setTrade] = useState('');
-    const [belief, setBelief] = useState('');
+    const [nameState, setName] = useState(char.charName);
+    const [trade, setTrade] = useState(char.trade);
+    const [belief, setBelief] = useState(char.belief);
 
     const placeholder = {
         name: 'Character Name',
+        character: 'Character',
         belief: "'s personal creed",
         trade: "'s family trade",
     }
-    // (char.charName ? char.charName : 'Character') + placeholder.trade
 
     const handleSaveBackstory = () => {
         dispatchChar(updateCharName(nameState))
@@ -27,7 +27,7 @@ const CharBackstory = () => {
         <div className="charBackstory__container">
 
             <Field
-                label={'Character Name: '}
+                label={placeholder.name}
                 id={`name` + char.charID}
                 type={'text'}
                 value={nameState}
@@ -42,22 +42,22 @@ const CharBackstory = () => {
             />
 
             <Field
-            label={'Belief: '}
-            id={`belief` + char.charID}
-            type={'textarea'}
-            value={belief}
-            change={(e) => {
-                setBelief(e.target.value)
-            }}
-            blur={() => {
-                handleSaveBackstory()
-            }}
-            theme={''}
-            placeholder={(char.charName ? char.charName : 'Character') + placeholder.belief}
-        />
+                label={'Belief'}
+                id={`belief` + char.charID}
+                type={'textarea'}
+                value={belief}
+                change={(e) => {
+                    setBelief(e.target.value)
+                }}
+                blur={() => {
+                    handleSaveBackstory()
+                }}
+                theme={''}
+                placeholder={(char.charName ? char.charName : placeholder.character) + placeholder.belief}
+            />
 
             <Field
-                label={'Trade: '}
+                label={'Trade'}
                 id={`trade` + char.charID}
                 type={'textarea'}
                 value={trade}
