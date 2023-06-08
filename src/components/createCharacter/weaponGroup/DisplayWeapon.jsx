@@ -5,7 +5,7 @@ import {
     updateWDescription,
     updateWTitle,
 } from "../../../actions/weaponActions";
-import Field from "../../display/Field";
+import Field from "../../display/FieldPencil";
 import { addWeaponObject } from "../../../actions/charActions";
 import StyledMenu from "../../display/StyledMenu";
 
