@@ -4,8 +4,11 @@ import DisplayRational from "../DisplayRational";
 import DisplayWeapon from "./DisplayWeapon";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
-import returnsTitleText from "../../../functions/returnsTitleText";
+import returnsWeaponTitleText from "../../../functions/returnsWeaponTitleText";
 import DisplayUnarmed from "./DisplayUnarmed";
+import returnsUnarmedTitleText from "../../../functions/returnsUnarmedTitleText";
+import DisplayMagicRanged from "./DisplayMagicRanged";
+import alphabetizeWeapons from "../../../functions/alphabetizeWeapons";
 
 
 // // Bow Mastery - Heritage Trait
@@ -96,9 +99,9 @@ const CharWeapon = () => {
         //     onlyOnce: true
         // })
 
-        return (() => {
-            off(ref(db, `weaponGroups`))
-        })
+        // return (() => {
+        //     off(ref(db, `weaponGroups`))
+        // })
 
     }, [])
 
@@ -111,15 +114,15 @@ const CharWeapon = () => {
                     tempArray.push(weapon.val())
                 })
             }
-            setWeapons(tempArray)
+            const sortedWeapons = tempArray.length > 0 ? alphabetizeWeapons({ weapons: tempArray }) : tempArray
+            setWeapons(sortedWeapons)
         }, {
             onlyOnce: true
-        }
-        )
-
-        return (() => {
-            off(ref(db, 'weapons'))
         })
+
+        // return (() => {
+        //     off(ref(db, 'weapons'))
+        // })
     }, [])
 
     // For each (appropriate) weapon group, allow the user
@@ -133,7 +136,14 @@ const CharWeapon = () => {
                 className="charWeapon__text"
                 id="charWeapon__text"
             >
-                Your character is proficient with {returnsTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Unarmed'] })} weapons
+
+                {
+                    weaponGroups.filter(wg => wg.wgType !== 'u' && wg.wgType !== 'm').length > 0
+                    &&
+                    <span>Your character is proficient with {returnsWeaponTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Unarmed', 'Magical Ranged'] })} weapons</span>
+
+                }
+
             </div>
             <div className="clickOpen__text--reminder">
                 Click to open
@@ -148,6 +158,42 @@ const CharWeapon = () => {
                     {
                         weaponGroups.map(wg => {
                             const jsx = (
+                                (wg.wgType !== 'u' && wg.wgType !== 'm')
+                                    ?
+                                    (
+                                        <DisplayWeapon
+                                            key={wg.wgID}
+                                            weaponGroup={wg}
+                                            weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                            char={char}
+                                            dispatchChar={dispatchChar}
+                                        />
+                                    )
+                                    :
+                                    ""
+                            )
+                            return jsx
+                        })
+                    }
+                </span>
+            }
+
+            {
+                weaponGroups.filter(wg => wg.wgType === 'u' || wg.wgType === 'm').length > 0
+                &&
+                <span>Your character is proficient with {returnsUnarmedTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Ranged', 'Powerful Claw', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee'] })} attacks</span>
+            }
+            {
+                weaponGroups.length > 0
+                &&
+                weapons.length > 0
+                &&
+                <span>
+
+                    {
+                        weaponGroups.map(wg => {
+
+                            const jsx = (
                                 wg.wgType === 'u'
                                     ?
                                     (
@@ -160,15 +206,17 @@ const CharWeapon = () => {
                                         />
                                     )
                                     :
-                                    (
-                                        <DisplayWeapon
+                                    wg.wgType === 'm'
+                                        ?
+                                        <DisplayMagicRanged
                                             key={wg.wgID}
                                             weaponGroup={wg}
                                             weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
                                             char={char}
                                             dispatchChar={dispatchChar}
                                         />
-                                    )
+                                        :
+                                        ""
                             )
                             return jsx
                         })

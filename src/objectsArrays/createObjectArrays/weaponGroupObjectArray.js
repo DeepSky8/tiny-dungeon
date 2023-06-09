@@ -12,6 +12,10 @@ const wgTypes = [
         wgTypeID: 'r'
     },
     {
+        wgTypeTitle: 'Magical Ranged',
+        wgTypeID: 'm'
+    },
+    {
         wgTypeTitle: 'Improvised',
         wgTypeID: 'i'
     },

@@ -1,4 +1,4 @@
-const returnsTitleText = ({ array, titlePrefix, removeArray = [''] }) => {
+const returnsWeaponTitleText = ({ array, titlePrefix, removeArray = [''] }) => {
     const titles = array.map(element => element[`${titlePrefix}Title`])
     const filteredTitles = titles.filter(title => !removeArray.includes(title))
 
@@ -23,4 +23,4 @@ const returnsTitleText = ({ array, titlePrefix, removeArray = [''] }) => {
     return result
 }
 
-export default returnsTitleText
+export default returnsWeaponTitleText
