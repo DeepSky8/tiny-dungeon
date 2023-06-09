@@ -10,7 +10,7 @@ import {
     openTwo
 } from "../../actions/displayActions";
 
-const ModuleHeader = ({ titleArray, show, dispatch, theme = '' }) => {
+const ModuleHeader = ({ titleArray, fadeArray = [], show, dispatch, theme = '' }) => {
     const openActionArray = [
         openOne,
         openTwo,
@@ -38,18 +38,26 @@ const ModuleHeader = ({ titleArray, show, dispatch, theme = '' }) => {
         )
     }
 
+    const accessible = (object) => {
+        return !fadeArray.includes(object.title)
+    }
+
+
+
     return (
         <div className="moduleHeader__container">
             {titleObjects.map(object => {
                 return (
                     <span
                         key={object.displayKey}
-                        className={`${theme} moduleHeader__button ` + show[`${object.displayKey}`]}
+                        className={(accessible(object) ? '' : 'fade') + `${theme} moduleHeader__button ` + show[`${object.displayKey}`]}
                         onClick={() => {
-                            show[object.displayKey] ?
-                                dispatch(object.close())
-                                :
-                                dispatch(object.open())
+                            if (accessible(object)) {
+                                show[object.displayKey] ?
+                                    dispatch(object.close())
+                                    :
+                                    dispatch(object.open())
+                            }
                         }}>{object.title}</span>
                 )
             })}
