@@ -15,6 +15,9 @@ import { defaultDisplay, displayReducer } from "../../reducers/displayReducer";
 import ModuleHeader from "./ModuleHeader";
 import DisplayTraits from "./DisplayTraits";
 import DisplayWeapons from "./DisplayWeapons";
+import DisplayDescription from "./DisplayDescription";
+import DisplayFamiliar from "./DisplayFamilar";
+import DisplayScrolls from "./DisplayScrolls";
 
 const CharacterSheet = () => {
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
@@ -22,8 +25,14 @@ const CharacterSheet = () => {
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
     const [hTrait, dispatchHTrait] = useReducer(traitReducer, defaultTrait)
     const [traits, setTraits] = useState([])
+    const [show1, dispatchShow1] = useReducer(displayReducer, defaultDisplay)
+    const [show2, dispatchShow2] = useReducer(displayReducer, defaultDisplay)
+    const [menuOptions, setMenuOptions] = useState([])
 
-    const [show, dispatchShow] = useReducer(displayReducer, defaultDisplay)
+    // Spell Reader - trait
+    const scrollsTraitID = '-NV0C_daHy4EQZHergVr'
+    // Familiar - trait
+    const hasFamiliarID = '-NV0BAgAYVUBA8OA3_LE'
 
     useEffect(() => {
         // Get Heritage
@@ -61,23 +70,21 @@ const CharacterSheet = () => {
 
 
     useEffect(() => {
+        setLocalChar(char)
+
         return () => {
             // When unmounting component, save current char to local
             setLocalChar(char)
         }
+    }, [char])
+
+    useEffect(() => {
+        const tempArray = []
+        if (char.traitIDs.includes(hasFamiliarID)) { tempArray.push('Familiar') }
+        if (char.traitIDs.includes(scrollsTraitID)) { tempArray.push('Scrolls') }
+        setMenuOptions(tempArray)
     }, [])
 
-
-    // Name, Heritage
-    // Belief
-
-    // HP, Armor (max and current)
-    // Traits (including HTrait)
-    // Weapons (includes ranged spell attacks)
-
-    // (optional age, personal description)
-    // Familiar (if exists)
-    // Trade
     // Notes
 
     return (
@@ -105,8 +112,8 @@ const CharacterSheet = () => {
 
                 <ModuleHeader
                     titleArray={['Health', 'Traits', 'Weapons']}
-                    show={show}
-                    dispatch={dispatchShow}
+                    show={show1}
+                    dispatch={dispatchShow1}
                 />
                 <ModuleDisplay
                     jsx={
@@ -115,7 +122,7 @@ const CharacterSheet = () => {
                             dispatchChar={dispatchChar}
                         />
                     }
-                    visibleState={show.display1}
+                    visibleState={show1.display1}
                 />
                 <ModuleDisplay
                     jsx={
@@ -123,7 +130,7 @@ const CharacterSheet = () => {
                             heritageTrait={hTrait}
                             traits={traits} />
                     }
-                    visibleState={show.display2}
+                    visibleState={show1.display2}
                 />
                 <ModuleDisplay
                     jsx={
@@ -132,26 +139,47 @@ const CharacterSheet = () => {
                             dispatchChar={dispatchChar}
                         />
                     }
-                    visibleState={show.display3}
+                    visibleState={show1.display3}
                 />
 
-                {
-                    char.familiarID &&
-                    <div className="charSheet__familiar">
-                        has familiar
-                    </div>}
-                <div className="charSheet__traits">
+                <ModuleHeader
+                    titleArray={['Heritage'].concat(menuOptions)}
+                    show={show2}
+                    dispatch={dispatchShow2}
+                />
 
-                </div>
-                <div className="charSheet__weapons">
 
-                </div>
-                <div className="charSheet__personal">
+                <ModuleDisplay
+                    jsx={
+                        <DisplayDescription
+                            char={char}
+                            dispatchChar={dispatchChar}
+                            heritage={heritage}
+                        />
+                    }
+                    visibleState={show2.display1}
+                />
 
-                </div>
-                <div className="charSheet__trade">
+                <ModuleDisplay
+                    jsx={
+                        <DisplayFamiliar
+                            char={char}
+                            dispatchChar={dispatchChar}
+                        />
+                    }
+                    visibleState={show2.display2}
+                />
 
-                </div>
+                <ModuleDisplay
+                    jsx={
+                        <DisplayScrolls
+                            scrolls={char.scrolls}
+                            dispatchChar={dispatchChar}
+                        />
+                    }
+                    visibleState={show2.display3}
+                />
+
                 <div className="charSheet__notes">
 
                 </div>
@@ -161,24 +189,3 @@ const CharacterSheet = () => {
 }
 
 export default CharacterSheet
-
-
-// <ClickDescription
-// show={ }
-// dispatch={ }
-// displayKey={ }
-// closeAction={ }
-// openAction={ }
-// headerText={ }
-// bodyText={ }
-// />
-
-
-// {showHealth &&
-//     <div className="charSheet__health">
-//         <HealthDisplay
-//             char={char}
-//             dispatchChar={dispatchChar}
-//         />
-//     </div>
-// }

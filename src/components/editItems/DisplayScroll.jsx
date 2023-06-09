@@ -11,7 +11,7 @@ const DisplayScroll = ({ scrollData }) => {
     }
 
     return (
-        <div className="displayScroll__container">
+        <div className="displayScrolls__container--create">
             <Field
                 label={'Scroll Name'}
                 id={'sTitle'}

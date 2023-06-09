@@ -1,18 +1,12 @@
 import React, { useEffect, useReducer } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import { useOutletContext } from "react-router";
-import { defaultFamiliar, familiarReducer } from "../../../reducers/familiarReducer";
-import Field from "../../display/FieldPencil";
-import DisplayRational from "../DisplayRational";
-import {
-    updateFDescription,
-    updateFName
-} from "../../../actions/familiarActions";
-import { updateFamiliarID } from "../../../actions/charActions";
+import Field from "../display/FieldPencil";
+import { updateFamiliarID } from "../../actions/charActions";
+import { defaultFamiliar, familiarReducer } from "../../reducers/familiarReducer";
+import { updateFDescription, updateFName } from "../../actions/familiarActions";
 
 
-const CharFamiliar = () => {
-    const [char, dispatchChar] = useOutletContext();
+const DisplayFamiliar = ({ char, dispatchChar }) => {
     const [localFamiliar, setLocalFamiliar] = useLocalStorageState('familiar', { defaultValue: defaultFamiliar })
     const [familiar, dispatchFamiliar] = useReducer(familiarReducer, localFamiliar)
 
@@ -30,7 +24,7 @@ const CharFamiliar = () => {
     return (
         <div className="charFamiliar__container">
             <Field
-                label={'Familiar Name: '}
+                label={''}
                 id={`name` + familiar.fID}
                 type={'text'}
                 value={familiar.fName}
@@ -41,13 +35,11 @@ const CharFamiliar = () => {
                     handleSaveFamiliar()
                 }}
                 theme={'title'}
-                placeholder={'Django?'}
+                placeholder={'Django'}
             />
-            <div className="clickOpen__text--reminder">
-                Tap text to edit
-            </div>
+
             <Field
-                label={'Description: '}
+                label={''}
                 id={`description` + familiar.fID}
                 type={'textarea'}
                 value={familiar.fDescription}
@@ -60,12 +52,8 @@ const CharFamiliar = () => {
                 theme={''}
                 placeholder={'A feline-shaped shadow, surprisingly frisky'}
             />
-            <div className="clickOpen__text--reminder">
-                Tap text to edit
-            </div>
-            <DisplayRational />
         </div>
     )
 }
 
-export default CharFamiliar
+export default DisplayFamiliar

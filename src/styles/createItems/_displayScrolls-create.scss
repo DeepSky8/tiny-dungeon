@@ -1,4 +1,4 @@
-.displayScrolls__container {
+.displayScrolls__container--create {
     background-image: url("../../../src/assets/parchment_small.png");
     background-size: 100vw 100vh;
     min-height: 100vh;
@@ -24,7 +24,7 @@
 }
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
-    .displayScrolls__container {
+    .displayScrolls__container--create {
         background-image: url("../../../src/assets/parchment_large.png");
         font-size: $calcFontSize;
     }

@@ -1,0 +1,40 @@
+.displayScroll__container {
+    user-select: none;
+}
+
+.displayScroll__heading--container {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    user-select: none;
+    &.faded {
+        color: $text-brown-faded;
+    }
+}
+
+// .displayScroll__heading--clickable {
+// }
+
+.displayScroll__heading--minus {
+    float: left;
+    padding-top: 5px;
+}
+
+.displayScroll__heading--title {
+    margin-left: $xs-size;
+}
+
+.displayScroll__heading--add {
+    float: right;
+    padding-top: 5px;
+}
+
+.displayScroll__container--description {
+    border-left: 1px solid $text-brown;
+    border-right: 1px solid $text-brown;
+    border-bottom: 1px solid $text-brown;
+}
+
+.displayScroll__description {
+    padding: $xs-size;
+}

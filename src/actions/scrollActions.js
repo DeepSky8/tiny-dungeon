@@ -30,6 +30,14 @@ export const updateSAmount = (sAmount) => ({
     sAmount
 })
 
+export const increaseSAmount = () => ({
+    type: 'INCREASE_SAMOUNT'
+})
+
+export const decreaseSAmount = () => ({
+    type: 'DECREASE_SAMOUNT'
+})
+
 
 export const startSaveScroll = async ({
     sID,
