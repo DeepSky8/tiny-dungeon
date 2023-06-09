@@ -103,12 +103,12 @@ const weaponGroupReducer = (state, action) => {
         case 'UPDATE_WGDAMAGE':
             return {
                 ...state,
-                wgDamage: action.wgDamage
+                wgDamage: parseInt(action.wgDamage)
             }
         case 'UPDATE_WGATTACKTURN':
             return {
                 ...state,
-                wgAttackTurn: action.wgAttackTurn
+                wgAttackTurn: parseInt(action.wgAttackTurn)
             }
         case 'UPDATE_WGRANGEIDS':
             const newWGRangeIDs = (
