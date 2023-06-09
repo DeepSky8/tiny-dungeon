@@ -17,6 +17,7 @@ import DisplayTraits from "./DisplayTraits";
 import DisplayWeapons from "./DisplayWeapons";
 import DisplayDescription from "./DisplayDescription";
 import DisplayFamiliar from "./DisplayFamilar";
+import DisplayScrolls from "./DisplayScrolls";
 
 const CharacterSheet = () => {
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
@@ -69,11 +70,13 @@ const CharacterSheet = () => {
 
 
     useEffect(() => {
+        setLocalChar(char)
+
         return () => {
             // When unmounting component, save current char to local
             setLocalChar(char)
         }
-    }, [])
+    }, [char])
 
     useEffect(() => {
         const tempArray = []
@@ -141,7 +144,6 @@ const CharacterSheet = () => {
 
                 <ModuleHeader
                     titleArray={['Heritage'].concat(menuOptions)}
-                    fadeArray={[]}
                     show={show2}
                     dispatch={dispatchShow2}
                 />
@@ -166,6 +168,16 @@ const CharacterSheet = () => {
                         />
                     }
                     visibleState={show2.display2}
+                />
+
+                <ModuleDisplay
+                    jsx={
+                        <DisplayScrolls
+                            scrolls={char.scrolls}
+                            dispatchChar={dispatchChar}
+                        />
+                    }
+                    visibleState={show2.display3}
                 />
 
                 <div className="charSheet__notes">

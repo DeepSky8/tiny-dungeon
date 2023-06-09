@@ -163,9 +163,9 @@ export const addScroll = (scroll) => ({
     scroll
 })
 
-export const removeScrollByID = (scrollID) => ({
-    type: 'REMOVE_SCROLL',
-    scrollID
+export const minusScroll = (scroll) => ({
+    type: 'MINUS_SCROLL',
+    scroll
 })
 
 

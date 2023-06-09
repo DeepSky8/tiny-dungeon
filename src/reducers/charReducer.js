@@ -281,9 +281,10 @@ const charReducer = (state, action) => {
                 scrolls: []
             }
         case 'ADD_SCROLL':
+
             // PLEASE PASS IN action.scroll <--- NOTE SINGULAR
 
-            const incrementScroll = (scroll) => {
+            const incrementedScroll = (scroll) => {
                 const { sAmount } = scroll;
                 const newAmount = sAmount + 1;
                 return { ...scroll, sAmount: newAmount }
@@ -294,7 +295,7 @@ const charReducer = (state, action) => {
             const scrollToAdd = (
                 scrollExistsIndex > -1
                     ?
-                    incrementScroll(state.scrolls[scrollExistsIndex])
+                    incrementedScroll(action.scroll)
                     :
                     action.scroll
             )
@@ -302,34 +303,27 @@ const charReducer = (state, action) => {
                 (state.scrolls.filter(scroll => scroll.sID !== action.scroll.sID))
                     .concat([scrollToAdd])
             )
-
             return {
                 ...state,
                 scrolls: updatedScrollArray
             }
-        case 'REMOVE_SCROLL':
-            // PLEASE PASS IN action.scrollID <--- NOTE SINGULAR
+        case 'MINUS_SCROLL':
+            // PLEASE PASS IN action.scroll <--- NOTE SINGULAR
 
             const decrementedScroll = (scroll) => {
                 const { sAmount } = scroll;
-                const newAmount = sAmount - 1;
+                const newAmount = sAmount - 1 > 0 ? sAmount - 1 : 0;
                 return { ...scroll, sAmount: newAmount }
             }
 
-            const currentScroll = state.scrolls.find(scroll => scroll.sID === action.scrollID)
+            const currentScroll = state.scrolls.find(scroll => scroll.sID === action.scroll.sID)
             const filteredScrolls = (
                 state
                     .scrolls
                     .filter(scroll => scroll.sID !== action.scroll.sID)
             )
-            const decrementedScrollArray = (
-                currentScroll.sAmount > 1
-                    ?
-                    (filteredScrolls)
-                        .concat([decrementedScroll(currentScroll)])
-                    :
-                    (filteredScrolls)
-            )
+
+            const decrementedScrollArray = filteredScrolls.concat([decrementedScroll(currentScroll)])
 
             return {
                 ...state,
