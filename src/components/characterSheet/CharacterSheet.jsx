@@ -80,8 +80,8 @@ const CharacterSheet = () => {
 
     useEffect(() => {
         const tempArray = []
-        if (char.traitIDs.includes(hasFamiliarID)) { tempArray.push('Familiar') }
-        if (char.traitIDs.includes(scrollsTraitID)) { tempArray.push('Scrolls') }
+        if (char.traitIDs.includes(hasFamiliarID)) { tempArray.push('Familiar') } else { tempArray.push('') }
+        if (char.traitIDs.includes(scrollsTraitID)) { tempArray.push('Scrolls') } else { tempArray.push('') }
         setMenuOptions(tempArray)
     }, [])
 

@@ -26,7 +26,7 @@ const DisplayScrolls = ({ scrolls, dispatchChar }) => {
                         />
                     )
                 })}
-
+            <hr className="hr__brown" />
             {usedScrolls.length > 0
                 &&
                 sortScrolls(usedScrolls).map(scroll => {
