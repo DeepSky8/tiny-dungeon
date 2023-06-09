@@ -19,6 +19,8 @@
     position: absolute;
     @include button--border;
     transform: translateX(-50%);
+    max-width: 75%;
+    min-width: max-content;
 }
 
 .sMenu__option {

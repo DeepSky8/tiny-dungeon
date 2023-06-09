@@ -1,5 +1,5 @@
 import React from "react";
-import returnsTitleText from "../../functions/returnsTitleText";
+import returnsWeaponTitleText from "../../functions/returnsWeaponTitleText";
 import DisplayUnarmed from "./DisplayUnarmed";
 import DisplayWeapon from "./DisplayWeapon";
 
@@ -12,7 +12,7 @@ const DisplayWeapons = ({ char, dispatchChar }) => {
                 className="charWeapon__text"
                 id="charWeapon__text"
             >
-                Your character is proficient with {returnsTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Unarmed'] })} weapons
+                Your character is proficient with {returnsWeaponTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Unarmed'] })} weapons
             </div>
             <div className="clickOpen__text--reminder">
                 Click to open

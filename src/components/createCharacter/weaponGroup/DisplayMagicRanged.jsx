@@ -9,19 +9,19 @@ import Field from "../../display/FieldPencil";
 import { addWeaponObject } from "../../../actions/charActions";
 import StyledMenu from "../../display/StyledMenu";
 
-const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
+const DisplayMagicRanged = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     const [wgName,] = useState(wG.wgTitle);
     const weaponMatch = (char.weaponObjects.find(wO => wO.wType === wG.wgType))
     const [newWeapon, dispatchNewWeapon] = useReducer(weaponsMasteredReducer, (weaponMatch === undefined ? defaultWeaponMastered : weaponMatch))
     const [show, setShow] = useState(false)
 
-    const otherWeapon = {
+    const magicAttack = {
         wID: `custom${wG.wgType}`,
         wCharID: char.charID,
         wType: wG.wgType,       // Corresponds to weaponGroup letter
         wTitle: '',             // User-defined text
         wDescription: '',       // User-defined text
-        wDepletion: 6,          // Interact with depletion counters in later update, set initial depletion counters by wType object
+        wDepletion: 99,          // Interact with depletion counters in later update, set initial depletion counters by wType object
         wHTrait: wG.wgHTrait,   // Set by Heritage
         wTrait: wG.wgTrait,     // Set by Trait
     }
@@ -30,18 +30,18 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
         dispatchChar(addWeaponObject(weapon))
     }
 
-    useEffect(() => {
-        // If this weapon group is provided by a heritage trait, 
-        // and at matching weapon hasn't been loaded/added to the character yet
-        // filter out the heritage weapons and find the one that matches this weapon group type
-        // load it and save it to the character
-        if (wG.wgHTrait && !weaponMatch) {
-            const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
-            const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
-            dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
-            handleSaveWeapon(matchesWeaponGroup)
-        }
-    }, [])
+    // useEffect(() => {
+    //     // If this weapon group is provided by a heritage trait, 
+    //     // and at matching weapon hasn't been loaded/added to the character yet
+    //     // filter out the heritage weapons and find the one that matches this weapon group type
+    //     // load it and save it to the character
+    //     if (wG.wgHTrait && !weaponMatch) {
+    //         const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
+    //         const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
+    //         dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
+    //         handleSaveWeapon(matchesWeaponGroup)
+    //     }
+    // }, [])
 
     const rangeName = (range) => {
         switch (range) {
@@ -59,8 +59,8 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     const selectWeapon = (weapon) => {
         if (weapons.map(weapon => weapon.wID).includes(weapon.wID)) {
             dispatchNewWeapon(loadWeapon(weapon))
-        } else if (weapon.wID === otherWeapon.wID) {
-            dispatchNewWeapon(loadWeapon(otherWeapon))
+        } else if (weapon.wID === magicAttack.wID) {
+            dispatchNewWeapon(loadWeapon(magicAttack))
         }
         handleSaveWeapon(weapon)
     }
@@ -89,9 +89,9 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                             &&
                             <StyledMenu
                                 menuID={'weaponMenu'}
-                                selectStatement={'--Select a Weapon--'}
+                                selectStatement={'--Select Magical Attack--'}
                                 missingTitle={'Add your own'}
-                                array={weapons.filter(weapon => !weapon.wHTrait).concat([otherWeapon])}
+                                array={weapons.filter(weapon => !weapon.wHTrait).concat([magicAttack])}
                                 arrayIDRef={'wID'}
                                 arrayTitleRef={'wTitle'}
                                 state={newWeapon}
@@ -119,7 +119,7 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                         label={'Weapon Name: '}
                                         id={'title'}
                                         type={'text'}
-                                        placeholder="Dagger? Poleaxe?"
+                                        placeholder="Stun Spore"
                                         value={newWeapon.wTitle}
                                         change={(e) => {
                                             dispatchNewWeapon(updateWTitle(e.target.value))
@@ -205,4 +205,4 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     )
 }
 
-export default DisplayWeapon
+export default DisplayMagicRanged
