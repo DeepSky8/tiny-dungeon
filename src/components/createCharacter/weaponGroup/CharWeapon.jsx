@@ -57,7 +57,8 @@ const CharWeapon = () => {
     // const selectedWGIDs = char.weaponGroupIDs
     const [weaponGroups, setWeaponGroups] = useState([])
     const [weapons, setWeapons] = useState([])
-
+    const notWeapons = ['Unarmed', 'Magical Ranged']
+    const areWeapons = ['Ranged', 'Powerful Claw', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
 
 
     // Get Weapon Group object per selected Weapon Group ID
@@ -140,7 +141,7 @@ const CharWeapon = () => {
                 {
                     weaponGroups.filter(wg => wg.wgType !== 'u' && wg.wgType !== 'm').length > 0
                     &&
-                    <span>Your character is proficient with {returnsWeaponTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Unarmed', 'Magical Ranged'] })} weapons</span>
+                    <span>Your character is proficient with {returnsWeaponTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: notWeapons })} weapons</span>
 
                 }
 
@@ -181,7 +182,7 @@ const CharWeapon = () => {
             {
                 weaponGroups.filter(wg => wg.wgType === 'u' || wg.wgType === 'm').length > 0
                 &&
-                <span>Your character is proficient with {returnsUnarmedTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: ['Ranged', 'Powerful Claw', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee'] })} attacks</span>
+                <span>Your character is proficient with {returnsUnarmedTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: areWeapons })} attacks</span>
             }
             {
                 weaponGroups.length > 0

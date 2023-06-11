@@ -35,4 +35,16 @@ body {
 
 .hr__brown {
   border-color: $text-brown;
+} 
+
+.italic {
+  font-style: italic;
+}
+
+.small {
+  font-size: $calcFontSize;
+}
+
+.centered {
+  text-align: center;
 }

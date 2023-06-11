@@ -1,5 +1,6 @@
 import React from "react";
 import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
+import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
 
 const DisplayTraits = ({ heritageTrait, traits }) => {
     const sortedTraits = traits.sort((a, b) => {
@@ -10,26 +11,29 @@ const DisplayTraits = ({ heritageTrait, traits }) => {
 
     return (
         <div className="displayTraits__container">
-        
-            <div className="displayTraits__section">
+
+            <div className="displayTraits__section--top">
                 <label
                     className="label__centered"
                     htmlFor="heritageTrait"
                 >Heritage Trait</label>
-                <ClickDescriptionMultiple
+                <ClickDescriptionCentered
                     id='heritageTrait'
                     title={heritageTrait.tTitle}
                     description={heritageTrait.tDescription}
                 />
             </div>
+            <div className="displayTraits__text--reminder">
+                Click to open
+            </div>
 
-            <div className="displayTraits__section">
+            <div className="displayTraits__section--bottom">
 
                 <label className="label__centered"
                 >Selected Traits</label>
                 {sortedTraits.map(trait => {
                     return (
-                        <ClickDescriptionMultiple
+                        <ClickDescriptionCentered
                             key={trait.tID}
                             title={trait.tTitle}
                             description={trait.tDescription}
@@ -38,9 +42,7 @@ const DisplayTraits = ({ heritageTrait, traits }) => {
                 })}
             </div>
 
-            <div className="displayTraits__text--reminder">
-                Click to open
-            </div>
+
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
+import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
 
 const CombatActions = () => {
     const numberOfActions = "Your character may (normally) take two actions on each turn of combat. Aside from weapon restrictions, your character may repeat actions"
@@ -88,7 +89,7 @@ const CombatActions = () => {
 
                         {actions.map(action => {
                             return (
-                                <ClickDescriptionMultiple
+                                <ClickDescriptionCentered
                                     key={action.key}
                                     title={action.title}
                                     description={
