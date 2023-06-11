@@ -30,7 +30,7 @@ const CharFamiliar = () => {
     return (
         <div className="charFamiliar__container">
             <Field
-                label={'Familiar Name: '}
+                label={'Familiar Name'}
                 id={`name` + familiar.fID}
                 type={'text'}
                 value={familiar.fName}
@@ -41,13 +41,13 @@ const CharFamiliar = () => {
                     handleSaveFamiliar()
                 }}
                 theme={'title'}
-                placeholder={'Django?'}
+                placeholder={'Django'}
             />
             <div className="clickOpen__text--reminder">
                 Tap text to edit
             </div>
             <Field
-                label={'Description: '}
+                label={'Description'}
                 id={`description` + familiar.fID}
                 type={'textarea'}
                 value={familiar.fDescription}

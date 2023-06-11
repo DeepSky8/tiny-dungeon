@@ -41,6 +41,15 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
             dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
             handleSaveWeapon(matchesWeaponGroup)
         }
+
+        // If this weapon group is provided by a trait, and the type is 'i' for improvised
+        // find the improvised weapons, and dispatch the first one (should be the only)
+        // as the weapon
+        if (wG.wgTrait && wG.wgType === 'i') {
+            const improvisedWeapon = weapons.filter(weapon => weapon.wType === 'i')[0]
+            dispatchNewWeapon(loadWeapon(improvisedWeapon))
+            handleSaveWeapon(improvisedWeapon)
+        }
     }, [])
 
     const rangeName = (range) => {
@@ -87,6 +96,8 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                         {
                             !wG.wgHTrait
                             &&
+                            wG.wgType !== 'i'
+                            &&
                             <StyledMenu
                                 menuID={'weaponMenu'}
                                 selectStatement={'--Select a Weapon--'}
@@ -103,6 +114,8 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                         {
                             wG.wgHTrait
                             &&
+                            wG.wgType !== 'i'
+                            &&
                             <div className="sMenu__container">
                                 <div className="sMenu__button">
                                     {newWeapon.wTitle}
@@ -116,7 +129,7 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                     !weapons.map(weapon => weapon.wID).includes(newWeapon.wID)
                                     &&
                                     <Field
-                                        label={'Weapon Name: '}
+                                        label={'Weapon Name'}
                                         id={'title'}
                                         type={'text'}
                                         placeholder="Dagger? Poleaxe?"
@@ -132,7 +145,7 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                 }
                                 <div className="displayWeapon__container--spacer">
                                     <Field
-                                        label={'Description: '}
+                                        label={'Description'}
                                         id={'description'}
                                         type={'textarea'}
                                         placeholder="What does it look like?"
@@ -153,7 +166,7 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                     <div className="displayWeapon__container--range">
                                         <div className="displayWeapon__range--regular">
                                             <div className="displayWeapon__range--title">
-                                                Normal Attack Range:
+                                                Normal Attack Range
                                             </div>
 
                                             <ul className="displayWeapon__range--body">
@@ -175,7 +188,7 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                             (
                                                 <div className="displayWeapon__range--disadvantage">
                                                     <div className="displayWeapon__range--title">
-                                                        Disadvantaged Range:
+                                                        Disadvantaged Range
                                                     </div>
 
                                                     <ul className="displayWeapon__range--body">
