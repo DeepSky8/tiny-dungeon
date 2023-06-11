@@ -6,6 +6,14 @@
         font-style: italic;
     }
 
+    .small {
+        font-size: $calcFontSize;
+    }
+
+    .centered {
+        text-align: center;
+    }
+
     .field__container {
         width: 100%;
     }

@@ -163,37 +163,6 @@ export const startNewWeaponGroupKey = async ({ wGroupData }) => {
     startSaveWeaponGroup({ ...wGroupData, wgID })
 }
 
-// export const startSaveHeritage = async ({
-//     hID,
-//     hTitle,
-//     hDescription,
-//     hPhysical,
-//     hHP,
-//     hTraitIDs
-// }) => {
-//     const updates = {}
-
-//     updates[`heritages/${hID}/hID`] = hID
-//     updates[`heritages/${hID}/hTitle`] = hTitle
-//     updates[`heritages/${hID}/hDescription`] = hDescription
-//     updates[`heritages/${hID}/hPhysical`] = hPhysical
-//     updates[`heritages/${hID}/hHP`] = hHP
-//     updates[`heritages/${hID}/hTraitIDs`] = hTraitIDs
-
-//     update(ref(db), updates)
-//         .catch((error) => {
-//             console.log('Did not save heritage', error)
-//         })
-// }
-
-
-
-
-// export const startNewHeritageKey = async ({ heritageData }) => {
-//     const hID = push(child(ref(db), 'heritages')).key
-//     startSaveHeritage({ ...heritageData, hID })
-// }
-
 export const startSaveWeapon = async ({
     wID,
     wType,          // Corresponds to weaponGroup letter

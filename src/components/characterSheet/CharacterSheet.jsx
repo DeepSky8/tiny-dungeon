@@ -18,6 +18,8 @@ import DisplayWeapons from "./DisplayWeapons";
 import DisplayDescription from "./DisplayDescription";
 import DisplayFamiliar from "./DisplayFamilar";
 import DisplayScrolls from "./DisplayScrolls";
+import CombatActions from "./CombatActions";
+import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 
 const CharacterSheet = () => {
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
@@ -109,6 +111,8 @@ const CharacterSheet = () => {
                         placeholder={char.charName + "'s belief"}
                     />
                 </div>
+
+                <CombatActions />
 
                 <ModuleHeader
                     titleArray={['Health', 'Traits', 'Weapons']}
