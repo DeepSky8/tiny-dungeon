@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { useOutletContext } from "react-router";
 import { defaultFamiliar, familiarReducer } from "../../../reducers/familiarReducer";
-import Field from "../../display/Field";
+import Field from "../../display/FieldPencil";
 import DisplayRational from "../DisplayRational";
 import {
     updateFDescription,

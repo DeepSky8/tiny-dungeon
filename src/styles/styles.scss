@@ -1,35 +1,49 @@
 @import "../styles/base/settings";
 @import "../styles/mixins/styledMenuMixins";
 @import "../styles/base/base";
+@import "../styles/base/materialSymbols";
 @import "../styles/mixins/generalMixins";
+@import "../styles/components/notFoundPage";
+
 @import "../styles/components/footer";
-@import "../styles/components/newCharFooter";
 @import "../styles/components/clickDescription";
 @import "../styles/components/clickDescriptionSelect";
+@import "../styles/components/clickDescriptionCount";
+@import "../styles/components/clickDescriptionCentered";
 @import "../styles/components/home";
 @import "../styles/components/header";
 @import "../styles/components/menu";
 @import "../styles/components/styledMenu";
-@import "../styles/components/newCharacter";
-@import "../styles/components/charHeritage";
-@import "../styles/components/charTraits";
-@import "../styles/components/charWeaponGroup";
-@import "../styles/components/charWeapon";
-@import "../styles/components/charFamiliar";
-@import "../styles/components/charBackstory";
-
-@import "../styles/components/displayWeapon";
-@import "../styles/components/displayHeritage";
 @import "../styles/components/bulletedSelect";
-@import "../styles/components/displayRational";
-@import "../styles/components/charField";
-@import "../styles/components/notFoundPage";
+@import "../styles/components/fieldPencil";
+
+@import "../styles/components/createChar/newCharFooter";
+@import "../styles/components/createChar/newCharacter";
+@import "../styles/components/createChar/charHeritage";
+@import "../styles/components/createChar/charTraits";
+@import "../styles/components/createChar/charWeaponGroup";
+@import "../styles/components/createChar/charWeapon";
+@import "../styles/components/createChar/charFamiliar";
+@import "../styles/components/createChar/charBackstory";
+@import "../styles/components/createChar/displayWeapon";
+@import "../styles/components/createChar/displayHeritage";
+@import "../styles/components/createChar/displayRational";
+
+@import "../styles/components/charSheet/characterSheet";
+@import "../styles/components/charSheet/displayHealth";
+@import "../styles/components/charSheet/displayTraits";
+@import "../styles/components/charSheet/displayWeapons";
+@import "../styles/components/charSheet/moduleHeader";
+@import "../styles/components/charSheet/moduleDisplay";
+@import "../styles/components/charSheet/displayScroll";
+@import "../styles/components/charSheet/combatActions";
+
 @import "../styles/createItems/createHeritage";
 @import "../styles/createItems/createTrait";
 @import "../styles/createItems/createWeaponGroup";
 @import "../styles/createItems/createWeapon";
 @import "../styles/createItems/createScroll";
-@import "../styles/createItems/displayTraits";
+@import "../styles/createItems/displayTraits-create";
 @import "../styles/createItems/displayHeritages";
 @import "../styles/createItems/displayWeaponGroup";
-@import "../styles/createItems/displayScroll";
+@import "../styles/createItems/displayScrolls-create";

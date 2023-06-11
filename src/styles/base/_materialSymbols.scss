@@ -1,0 +1,21 @@
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+
+    &.filled {
+        font-size: $largeSymbols;
+        font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+        &.medium {
+            font-size: $calcFontSizeExtraLarge;
+        }
+    }
+    &.empty {
+        font-size: $largeSymbols;
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+        &.faded {
+            color: $text-brown-faded;
+        }
+        &.medium {
+            font-size: $calcFontSizeExtraLarge;
+        }
+    }
+}

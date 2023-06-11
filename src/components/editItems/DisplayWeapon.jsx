@@ -1,9 +1,7 @@
 import React, { useReducer } from "react";
 import Field from "../display/Field";
-import Menu from "../display/Menu";
-import { defaultWeaponMastered, weaponsMasteredReducer } from "../../reducers/weaponReducer";
+import { weaponsMasteredReducer } from "../../reducers/weaponReducer";
 import {
-    startNewWeaponKey,
     startSaveWeapon,
     updateWDescription,
     updateWHTrait,
@@ -11,9 +9,6 @@ import {
     updateWTrait,
     updateWType
 } from "../../actions/weaponActions";
-import { wgTypes } from "../../objectsArrays/createObjectArrays/weaponGroupObjectArray";
-
-
 
 const DisplayWeapon = ({ weaponData }) => {
     const [weapon, dispatchWeapon] = useReducer(weaponsMasteredReducer, weaponData)
@@ -64,8 +59,9 @@ const DisplayWeapon = ({ weaponData }) => {
                     dispatchWeapon(updateWDescription(e.target.value))
                 }}
                 blur={() => {
-                    const formatValue = wGroup.wgDescription.replace(/[\n\r]/gm, ' ');
-                    dispatchWeapon(updateWDescription(formatValue))
+                    // const formatValue = wGroup.wgDescription.replace(/[\n\r]/gm, ' ');
+                    // dispatchWeapon(updateWDescription(formatValue))
+                    handleSave()
                 }}
                 theme={''}
             />
@@ -95,7 +91,6 @@ const DisplayWeapon = ({ weaponData }) => {
                 }}
                 blur={() => {
                     handleSave()
-
                 }}
                 theme={''}
             />

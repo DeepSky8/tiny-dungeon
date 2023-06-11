@@ -1,0 +1,16 @@
+.moduleHeader__container {
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.moduleHeader__button {
+    &.true {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+}
+
+.fade {
+    color: $text-brown-faded;
+}

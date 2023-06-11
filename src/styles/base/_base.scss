@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: $background-blue;
+  background-color: $menu-yellow;
 }
 
 :root {
@@ -26,4 +26,25 @@ body {
   justify-content: right;
   display: flex;
   margin-right: $xs-size;
+}
+
+.label__centered {
+  text-align: center;
+  display: block;
+}
+
+.hr__brown {
+  border-color: $text-brown;
+} 
+
+.italic {
+  font-style: italic;
+}
+
+.small {
+  font-size: $calcFontSize;
+}
+
+.centered {
+  text-align: center;
 }

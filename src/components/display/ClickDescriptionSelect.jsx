@@ -53,23 +53,3 @@ const ClickDescriptionSelect = (
 
 export default ClickDescriptionSelect
 
-// <Field
-// className="clickDescriptionSelect__checkbox"
-// label={title}
-// id={itemID}
-// type='checkbox'
-// value={isSelected}
-// change={() => {
-//     changeHandler(itemID)
-// }}
-// blur={() => { }}
-// theme={''}
-// />
-
-// <div
-// className="clickDescriptionSelect__spacer"
-// />
-
-
-
-

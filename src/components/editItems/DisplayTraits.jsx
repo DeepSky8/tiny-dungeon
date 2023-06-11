@@ -32,7 +32,7 @@ const DisplayTraits = () => {
     }, [])
 
     return (
-        <div className="displayTraits__container">
+        <div className="displayTraits__container--create">
             {traits.length > 0 &&
                 (traits.map(trait => {
                     return (

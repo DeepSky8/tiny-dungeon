@@ -102,7 +102,6 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
             availWGs.push(wg)
         }
     })
-
     return { defaultWGs, availWGs }
 }
 

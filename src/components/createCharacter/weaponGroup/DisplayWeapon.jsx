@@ -5,7 +5,7 @@ import {
     updateWDescription,
     updateWTitle,
 } from "../../../actions/weaponActions";
-import Field from "../../display/Field";
+import Field from "../../display/FieldPencil";
 import { addWeaponObject } from "../../../actions/charActions";
 import StyledMenu from "../../display/StyledMenu";
 
@@ -31,6 +31,10 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     }
 
     useEffect(() => {
+        // If this weapon group is provided by a heritage trait, 
+        // and at matching weapon hasn't been loaded/added to the character yet
+        // filter out the heritage weapons and find the one that matches this weapon group type
+        // load it and save it to the character
         if (wG.wgHTrait && !weaponMatch) {
             const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
             const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
@@ -126,70 +130,71 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                         theme={''}
                                     />
                                 }
+                                <div className="displayWeapon__container--spacer">
+                                    <Field
+                                        label={'Description: '}
+                                        id={'description'}
+                                        type={'textarea'}
+                                        placeholder="What does it look like?"
+                                        value={newWeapon.wDescription}
+                                        change={(e) => {
+                                            dispatchNewWeapon(updateWDescription(e.target.value))
+                                        }}
+                                        blur={() => {
+                                            handleSaveWeapon()
+                                        }}
+                                        theme={''}
+                                    />
 
-                                <Field
-                                    label={'Description: '}
-                                    id={'description'}
-                                    type={'textarea'}
-                                    placeholder="What does it look like?"
-                                    value={newWeapon.wDescription}
-                                    change={(e) => {
-                                        dispatchNewWeapon(updateWDescription(e.target.value))
-                                    }}
-                                    blur={() => {
-                                        handleSaveWeapon()
-                                    }}
-                                    theme={''}
-                                />
-
-                                <div className="clickOpen__text--reminder">
-                                    Tap text to edit
-                                </div>
-
-                                <div className="displayWeapon__container--range">
-                                    <div className="displayWeapon__range--regular">
-                                        <div className="displayWeapon__range--title">
-                                            Normal Attack Range:
-                                        </div>
-
-                                        <ul className="displayWeapon__range--body">
-                                            {wG.wgRangeIDs.map((range) => {
-                                                return (
-                                                    <li
-                                                        key={range + Math.random()}
-                                                    >
-                                                        {rangeName(range)}
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-
+                                    <div className="clickOpen__text--reminder">
+                                        Tap text to edit
                                     </div>
-                                    {
-                                        wG.wgDisRangeIDs
-                                        &&
-                                        (
-                                            <div className="displayWeapon__range--disadvantage">
-                                                <div className="displayWeapon__range--title">
-                                                    Disadvantaged Range:
-                                                </div>
 
-                                                <ul className="displayWeapon__range--body">
-                                                    {wG.wgDisRangeIDs.map((range) => {
-                                                        return (
-                                                            <li
-                                                                key={range + Math.random()}
-                                                            >
-                                                                {rangeName(range)}
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-
+                                    <div className="displayWeapon__container--range">
+                                        <div className="displayWeapon__range--regular">
+                                            <div className="displayWeapon__range--title">
+                                                Normal Attack Range:
                                             </div>
-                                        )
 
-                                    }
+                                            <ul className="displayWeapon__range--body">
+                                                {wG.wgRangeIDs.map((range) => {
+                                                    return (
+                                                        <li
+                                                            key={range + Math.random()}
+                                                        >
+                                                            {rangeName(range)}
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+
+                                        </div>
+                                        {
+                                            wG.wgDisRangeIDs
+                                            &&
+                                            (
+                                                <div className="displayWeapon__range--disadvantage">
+                                                    <div className="displayWeapon__range--title">
+                                                        Disadvantaged Range:
+                                                    </div>
+
+                                                    <ul className="displayWeapon__range--body">
+                                                        {wG.wgDisRangeIDs.map((range) => {
+                                                            return (
+                                                                <li
+                                                                    key={range + Math.random()}
+                                                                >
+                                                                    {rangeName(range)}
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </ul>
+
+                                                </div>
+                                            )
+
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         }

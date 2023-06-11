@@ -15,9 +15,16 @@
 }
 
 .displayWeapon__container--body {
-    border-left: 1px solid $text-brown;
-    border-right: 1px solid $text-brown;
+    // border-left: 1px solid $text-brown;
+    // border-right: 1px solid $text-brown;
     border-bottom: 1px solid $text-brown;
+    .bold {
+        font-weight: bold;
+    }
+}
+
+.displayWeapon__container--spacer {
+    padding: 0 $xs-size;
 }
 
 .displayWeapon__container--pick {
@@ -49,33 +56,6 @@
     user-select: contain;
     justify-content: center;
     text-align: center;
-
-    .field--input {
-        background-color: $menu-yellow-faded;
-        font-size: $calcFontSizeLarge;
-        @include button--border;
-        max-width: 85%;
-        text-align: center;
-        user-select: contain;
-        overflow: hidden;
-    }
-    input:focus {
-        outline: none;
-        border-style: solid;
-        border-width: 2px;
-        border-color: $text-brown;
-        box-shadow: 0 0 10px $text-brown;
-    }
-    textarea:focus {
-        outline: none;
-        border-style: solid;
-        border-width: 2px;
-        border-color: $text-brown;
-        box-shadow: 0 0 10px $text-brown;
-    }
-    ::placeholder {
-        color: $text-brown-placeholder;
-    }
 }
 
 .displayWeapon__container--range {
@@ -93,4 +73,8 @@
 
 .displayWeapon__description {
     padding: $xs-size;
+}
+
+.displayWeapon__container--weaponGroup{
+    padding-bottom: $xs-size;
 }

@@ -1,15 +1,14 @@
-.charBackstory__container {
-    text-align: center;
-    margin-bottom: $m-size;
-
+.field__container--input {
     .field--input {
         background-color: $menu-yellow-faded;
         font-size: $calcFontSizeLarge;
         @include button--border;
         max-width: 98%;
+        min-width: 98%;
         text-align: center;
         user-select: contain;
-        overflow: hidden;
+        overflow: auto;
+        position: relative;
     }
     input:focus {
         outline: none;
@@ -28,4 +27,32 @@
     ::placeholder {
         color: $text-brown-placeholder;
     }
+}
+
+.field__container--textarea {
+    position: relative;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.field__container--text {
+    position: relative;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.textarea--pencil {
+    position: absolute;
+    bottom: $xs-size;
+    right: $xs-size;
+    pointer-events: none;
+    color: $text-brown-faded;
+}
+
+.text--pencil {
+    position: absolute;
+    bottom: 0;
+    right: $xs-size;
+    pointer-events: none;
+    color: $text-brown-faded;
 }

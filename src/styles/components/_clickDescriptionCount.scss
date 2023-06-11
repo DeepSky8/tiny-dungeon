@@ -1,0 +1,37 @@
+.clickDescriptionCount__container {
+    user-select: none;
+}
+
+.clickDescriptionCount__heading--container {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    user-select: none;
+}
+
+// .clickDescriptionCount__heading--clickable {
+// }
+
+.clickDescriptionCount__heading--minus {
+    float: left;
+    padding-top: 5px;
+}
+
+.clickDescriptionCount__heading--title {
+    margin-left: $xs-size;
+}
+
+.clickDescriptionCount__heading--add {
+    float: right;
+    padding-top: 5px;
+}
+
+.clickDescriptionCount__container--description {
+    border-left: 1px solid $text-brown;
+    border-right: 1px solid $text-brown;
+    border-bottom: 1px solid $text-brown;
+}
+
+.clickDescriptionCount__description {
+    padding: $xs-size;
+}

@@ -1,0 +1,32 @@
+.displayHealth__container {
+    user-select: none;
+    margin-bottom: $xs-size;
+    display: flexbox;
+}
+
+.displayHealth__container--section {
+    margin: $xs-size 0;
+}
+
+.displayHealth__hp--label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.displayHealth__container--plusMinus {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: $xs-size;
+}
+
+.displayHealth__plusMinus--button {
+    display: flex;
+    @include button--border;
+    background-color: transparent;
+}
+
+.displayHealth__symbols {
+    display: flexbox;
+    text-align: center;
+}

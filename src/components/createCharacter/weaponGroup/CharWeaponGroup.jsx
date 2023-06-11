@@ -19,7 +19,6 @@ const CharWeaponGroup = () => {
     const [allWeaponGroups, setAllWeaponGroups] = useState([])
     const [defaultWeaponGroups, setDefaultWeaponGroups] = useState([]);
     const [availWeaponGroups, setAvailWeaponGroups] = useState([]);
-    // const [selectedWGObject, setSelectedWGObject] = useState({ wgID: '', wgType: '' })
 
     // Get trait objects
     useEffect(() => {
@@ -32,7 +31,8 @@ const CharWeaponGroup = () => {
                 }
             }, {
                 onlyOnce: true
-            })
+            }
+            )
         })
 
         setSelectedTraits(tempArray)
@@ -53,7 +53,8 @@ const CharWeaponGroup = () => {
             }
         }, {
             onlyOnce: true
-        })
+        }
+        )
 
         // return (() => {
         //     off(ref(db, 'weaponGroups'))

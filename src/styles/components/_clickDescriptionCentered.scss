@@ -1,0 +1,24 @@
+.clickDescriptionCentered__container {
+    user-select: none;
+}
+
+.clickDescriptionCentered__heading--clickable {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    user-select: none;
+}
+
+.clickDescriptionCentered__heading--title {
+    text-align: center;
+}
+
+// .clickDescriptionCentered__container--description {
+//     // border-left: 1px solid $text-brown;
+//     // border-right: 1px solid $text-brown;
+//     border-bottom: 1px solid $text-brown;
+// }
+
+.clickDescriptionCentered__description {
+    padding: $xs-size;
+}
