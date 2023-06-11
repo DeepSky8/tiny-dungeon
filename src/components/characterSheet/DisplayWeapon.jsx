@@ -78,8 +78,8 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
                                     theme={''}
                                 />
 
-                                <div>Attacks per turn: {wG.wgAttackTurn}</div>
-                                <div>Damage per attack: {wG.wgDamage}</div>
+                                <div>{wG.wgDamage} damage</div>
+                                <div> {wG.wgAttackTurn} max attacks/turn</div>
 
                                 <div className="displayWeapon__container--range">
                                     <div className="displayWeapon__range--regular">

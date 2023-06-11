@@ -84,6 +84,9 @@ const DisplayUnarmed = ({ weaponGroup: wG, char, dispatchChar }) => {
                                         theme={''}
                                     />
 
+                                    <div>{wG.wgDamage} damage</div>
+                                    <div> {wG.wgAttackTurn} max attacks/turn</div>
+
                                     <div className="displayWeapon__container--range">
                                         <div className="displayWeapon__range--regular">
                                             <div className="displayWeapon__range--title">

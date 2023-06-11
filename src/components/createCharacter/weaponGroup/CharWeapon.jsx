@@ -8,7 +8,7 @@ import returnsWeaponTitleText from "../../../functions/returnsWeaponTitleText";
 import DisplayUnarmed from "./DisplayUnarmed";
 import returnsUnarmedTitleText from "../../../functions/returnsUnarmedTitleText";
 import DisplayMagicRanged from "./DisplayMagicRanged";
-import alphabetizeWeapons from "../../../functions/alphabetizeWeapons";
+import alphabetizeTitles from "../../../functions/alphabetizeTitles";
 
 
 // // Bow Mastery - Heritage Trait
@@ -114,7 +114,7 @@ const CharWeapon = () => {
                     tempArray.push(weapon.val())
                 })
             }
-            const sortedWeapons = tempArray.length > 0 ? alphabetizeWeapons({ weapons: tempArray }) : tempArray
+            const sortedWeapons = tempArray.length > 0 ? alphabetizeTitles({ objectArray: tempArray, titlePrefix: 'w' }) : tempArray
             setWeapons(sortedWeapons)
         }, {
             onlyOnce: true
