@@ -149,7 +149,7 @@ export const updateXP = (XP) => ({
     XP
 })
 
-export const setScrolls = (scrolls) => ({
+export const dispatchScrolls = (scrolls) => ({
     type: 'SET_SCROLLS',
     scrolls
 })

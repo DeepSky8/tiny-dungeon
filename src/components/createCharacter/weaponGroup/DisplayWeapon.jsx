@@ -27,7 +27,9 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     }
 
     const handleSaveWeapon = (weapon = newWeapon) => {
-        dispatchChar(addWeaponObject(weapon))
+        if (weapon.wTitle.length > 0 && weapon.wDescription.length > 0) {
+            dispatchChar(addWeaponObject(weapon))
+        }
     }
 
     useEffect(() => {

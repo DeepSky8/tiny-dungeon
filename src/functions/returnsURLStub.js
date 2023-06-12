@@ -105,9 +105,7 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
                     // }
                 ]
         )
-        console.log('wgTypes', wgTypes)
         const wTypes = weaponObjects.map(w => w.wType)
-        console.log('wTypes', wTypes)
         const foundType = []
 
         // If weapon groups have been selected
@@ -123,7 +121,6 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
         // Are there any weapon groups without an associated weapon of that type?
         // If there are not falses, this stage is complete
 
-        console.log('fountType', foundType)
         return (!foundType.includes(false))
     }
 
@@ -154,32 +151,26 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
         selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID }),
         selectedWeaponGroups({ weaponGroupObjects }),
         selectedWeapons({ weaponGroupObjects, weaponObjects }),
+        selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }), // Returns 'skip' if it shouldn't be accessed
         selectedBackstory({ trade, belief, charName }),
-        selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }),
         false
     ]
 
-    const indexOfFalse = trueIfComplete.indexOf(false)
     const indexOfCurrent = newCharStepOrder.indexOf(currentStep)
 
-    if (
-        // If the next step falls on or before a step that evaluates to false
-        indexOfCurrent + 1 <= indexOfFalse
-        &&
-        // AND if the next step does not evaluate to 'skip'
-        trueIfComplete[indexOfCurrent + 1] !== 'skip'
-    ) {
-        // Simply go to the next step
-        return newCharStepOrder[indexOfCurrent + 1]
-    } else if (
-        // OR if the next step evaluates to 'skip'
-        trueIfComplete[indexOfCurrent + 1] === 'skip'
-    ) {
-        // Go to the End step
-        return newCharStepOrder[indexOfCurrent + 2]
+
+    if (trueIfComplete[indexOfCurrent] === true) {
+        if (
+            trueIfComplete[(indexOfCurrent + 1)] !== 'skip'
+        ) {
+            return newCharStepOrder[(indexOfCurrent + 1)]
+        } else if (
+            trueIfComplete[(indexOfCurrent + 1)] === 'skip'
+        ) {
+            return newCharStepOrder[(indexOfCurrent + 2)]
+        }
     } else {
-        // Otherwise, go to the earliest step marked false
-        return newCharStepOrder[indexOfFalse]
+        return currentStep
     }
 }
 

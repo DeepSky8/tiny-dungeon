@@ -27,8 +27,9 @@ const DisplayMagicRanged = ({ weaponGroup: wG, weapons, char, dispatchChar }) =>
     }
 
     const handleSaveWeapon = (weapon = newWeapon) => {
-        dispatchChar(addWeaponObject(weapon))
-    }
+        if (weapon.wTitle.length > 0 && weapon.wDescription.length > 0) {
+            dispatchChar(addWeaponObject(weapon))
+        }    }
 
     // useEffect(() => {
     //     // If this weapon group is provided by a heritage trait, 
@@ -116,7 +117,7 @@ const DisplayMagicRanged = ({ weaponGroup: wG, weapons, char, dispatchChar }) =>
                                     !weapons.map(weapon => weapon.wID).includes(newWeapon.wID)
                                     &&
                                     <Field
-                                        label={'Weapon Name: '}
+                                        label={'Attack Name'}
                                         id={'title'}
                                         type={'text'}
                                         placeholder="Stun Spore"
@@ -132,7 +133,7 @@ const DisplayMagicRanged = ({ weaponGroup: wG, weapons, char, dispatchChar }) =>
                                 }
                                 <div className="displayWeapon__container--spacer">
                                     <Field
-                                        label={'Description: '}
+                                        label={'Description'}
                                         id={'description'}
                                         type={'textarea'}
                                         placeholder="What does it look like?"

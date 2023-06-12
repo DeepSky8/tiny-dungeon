@@ -26,7 +26,9 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
     const [show, setShow] = useState(false)
 
     const handleSaveWeapon = (weapon = newWeapon) => {
-        dispatchChar(addWeaponObject(weapon))
+        if (weapon.wTitle.length > 0 && weapon.wDescription.length > 0) {
+            dispatchChar(addWeaponObject(weapon))
+        }
     }
 
     useEffect(() => {
@@ -80,10 +82,10 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                         !weapons.map(weapon => weapon.wID).includes(newWeapon.wID)
                                         &&
                                         <Field
-                                            label={'Signature Strike: '}
+                                            label={'Signature Strike'}
                                             id={'title'}
                                             type={'text'}
-                                            placeholder="Crane Beak"
+                                            placeholder="Swooping Crane"
                                             value={newWeapon.wTitle}
                                             change={(e) => {
                                                 dispatchNewWeapon(updateWTitle(e.target.value))
@@ -96,7 +98,7 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                     }
 
                                     <Field
-                                        label={'Description: '}
+                                        label={'Description'}
                                         id={'description'}
                                         type={'textarea'}
                                         placeholder="What does it look like?"
