@@ -18,7 +18,7 @@ const orSelectA = 'or select a '
 const pleaseCheck = 'Please double-check the number of selected '
 const weaponGroup = 'Weapon Group'
 
-const weaponError = "Make sure you've selected a weapon for each weapon type (click on the weapon type boxes to open)"
+const weaponError = "Make sure you've selected a weapon/attack for each weapon group (click on the weapon group boxes to open)"
 
 
 

@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import Field from "../display/Field";
 import { scrollReducer } from "../../reducers/scrollReducer";
-import { startSaveScroll, updateSDescription, updateSTitle } from "../../actions/scrollActions";
+import { startSaveScroll, updateSAmount, updateSDescription, updateSTitle } from "../../actions/scrollActions";
 
 const DisplayScroll = ({ scrollData }) => {
     const [scroll, dispatchScroll] = useReducer(scrollReducer, scrollData)
@@ -33,6 +33,20 @@ const DisplayScroll = ({ scrollData }) => {
                 value={scroll.sDescription}
                 change={(e) => {
                     dispatchScroll(updateSDescription(e.target.value))
+                }}
+                blur={() => {
+                    handleSave()
+                }}
+                theme={''}
+            />
+
+            <Field
+                label={'Initial Count'}
+                id={'sAmount'}
+                type={'number'}
+                value={scroll.sAmount}
+                change={(e) => {
+                    dispatchScroll(updateSAmount(parseInt(e.target.value)))
                 }}
                 blur={() => {
                     handleSave()

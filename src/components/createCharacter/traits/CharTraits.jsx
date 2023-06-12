@@ -1,10 +1,19 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DisplayRational from "../DisplayRational";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
 import { useOutletContext } from "react-router";
 import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
-import { addScroll, clearScrolls, setCurrentArmor, setCurrentHP, setMaxArmor, setTraitHP, updateTraitIDs } from "../../../actions/charActions";
+import {
+    addScroll,
+    clearScrolls,
+    setCurrentArmor,
+    setCurrentHP,
+    setMaxArmor,
+    dispatchScrolls,
+    setTraitHP,
+    updateTraitIDs
+} from "../../../actions/charActions";
 
 const CharTraits = () => {
     const initialScrolls = 4
@@ -25,13 +34,15 @@ const CharTraits = () => {
                 })
                 setTraits(tempArray)
             }
-        }, {
-            onlyOnce: true
-        })
+        }
+            , {
+                onlyOnce: true
+            }
+        )
 
-        return (() => {
-            off(ref(db, 'traits'))
-        })
+        // return (() => {
+        //     off(ref(db, 'traits'))
+        // })
     }, [])
 
     useEffect(() => {
@@ -43,9 +54,11 @@ const CharTraits = () => {
                 })
                 setScrolls(tempArray)
             }
-        }, {
-            onlyOnce: true
-        })
+        }
+            // , {
+            //     onlyOnce: true
+            // }
+        )
 
         return (() => {
             off(ref(db, 'scrolls'))
@@ -83,11 +96,13 @@ const CharTraits = () => {
             dispatchChar(clearScrolls())
             if (char.traitIDs.includes(scrollReaderTrait.tID)) {
                 // If a character has the scroll reader trait
-                // They start with four scrolls (set by const initialScrolls)
-                // While they have fewer than four scrolls, 
+                // add all scrolls (with zero count) to the char record
+                dispatchChar(dispatchScrolls(scrolls))
+                // Then increment four scrolls (set by const initialScrolls) by one 
+                // (this could potentially result in four of the same scroll)
                 // select a random number from among the number of scrolls, floor it, 
                 // then use it as an index to add the scroll to the char object
-                for (let index = 0; index < initialScrolls; index++) {
+                for (let index = 0; index <= initialScrolls; index++) {
                     const randomIndex = Math.floor(Math.random() * scrolls.length)
                     dispatchChar(addScroll(scrolls[randomIndex]))
                 }
