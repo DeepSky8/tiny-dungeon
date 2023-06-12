@@ -23,7 +23,7 @@
 //     // Barfighter - trait
 //     improvisedWeaponGroup: '-NV03ETlxlqgMs5vFCrO',
 //     // Martial Artist - trait
-//     unarmedWeaponGroup: '-NV0Bbp1XgrfyHr7nha-',obs
+//     unarmedWeaponGroup: '-NV0Bbp1XgrfyHr7nha-',
 
 //     // Shield Bearer
 //     shield: '-NV0C_daHy4EQZHergVr',
@@ -44,7 +44,11 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
     // If the user selected one or more traits that automatically provide 
     // weapon groups, add those weapon groups (once) to the defaultWGIDs array
     allTraits.forEach(trait => {
-        if (trait.tWeaponGroupID && !defaultWGIDs.includes(trait.tWeaponGroupID)) {
+        if (
+            trait.tWeaponGroupID
+            &&
+            !defaultWGIDs.includes(trait.tWeaponGroupID)
+        ) {
             defaultWGIDs.push(trait.tWeaponGroupID)
         }
     });
@@ -54,8 +58,17 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
     // Find the weapon groups associated with the default weapon group IDs
     // and add those weapon groups to the defaultWGs array
     defaultWGIDs.forEach(wgID => {
-        const foundWG = weaponGroups.find(wg => wg.wgID === wgID)
-        defaultWGs.push(foundWG)
+        if (
+            // If the wgID being evaluated does not provide the Unarmed weapon group
+            (wgID !== '-NV6Yyve_GUxV4OsizI2')
+            ||
+            // OR if the wgID being evaluated IS the wgID that provides the Unarmed weapon group
+            // AND if the list of traits don't include the Powerful Claws weapon group
+            (!allTraits.map(trait => trait.tID).includes('-NV0jYp3gMM1_J07zoU2'))) {
+            // put it in the default array
+            const foundWG = weaponGroups.find(wg => wg.wgID === wgID)
+            defaultWGs.push(foundWG)
+        }
     })
 
     // Review all weapon groups, and if they are available to be

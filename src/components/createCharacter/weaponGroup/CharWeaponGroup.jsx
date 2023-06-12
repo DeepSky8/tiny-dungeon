@@ -31,8 +31,7 @@ const CharWeaponGroup = () => {
                 }
             }, {
                 onlyOnce: true
-            }
-            )
+            })
         })
 
         setSelectedTraits(tempArray)
@@ -53,8 +52,7 @@ const CharWeaponGroup = () => {
             }
         }, {
             onlyOnce: true
-        }
-        )
+        })
 
         // return (() => {
         //     off(ref(db, 'weaponGroups'))
@@ -75,11 +73,12 @@ const CharWeaponGroup = () => {
                 }
             )
             setDefaultWeaponGroups(sortedWGs.defaultWGs);
-            sortedWGs
-                .defaultWGs
-                .forEach(wg => {
-                    dispatchChar(addWeaponGroupObject(wg))
-                })
+            dispatchChar(setDefaultWeaponGroupObjects(sortedWGs.defaultWGs))
+            // sortedWGs
+            //     .defaultWGs
+            //     .forEach(wg => {
+            //         dispatchChar(addWeaponGroupObject(wg))
+            //     })
 
             setAvailWeaponGroups(sortedWGs.availWGs);
         }
@@ -123,7 +122,7 @@ const CharWeaponGroup = () => {
                     })}
                 </div>
             }
-
+            <hr className="hr__brown" />
             {
                 availWeaponGroups.length > 0
                 &&

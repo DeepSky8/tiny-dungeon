@@ -100,12 +100,14 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
                 :
                 [
                     // {
-                    //     wgType: '',  // Single-letter l,h,r,u,i,s
+                    //     wgType: '',  // Single-letter l,h,r,u,i,s,m
                     //     wgID: ''     // Identified by wgID
                     // }
                 ]
         )
+        console.log('wgTypes', wgTypes)
         const wTypes = weaponObjects.map(w => w.wType)
+        console.log('wTypes', wTypes)
         const foundType = []
 
         // If weapon groups have been selected
@@ -120,6 +122,8 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
 
         // Are there any weapon groups without an associated weapon of that type?
         // If there are not falses, this stage is complete
+
+        console.log('fountType', foundType)
         return (!foundType.includes(false))
     }
 
@@ -129,7 +133,7 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
             // If user should have familiar and doesn't, return false
             return (familiarID !== '')
         } else {
-            // user shouldn't have familiar, return true (move along)
+            // user shouldn't have familiar, return 'skip' (move along)
             return 'skip'
         }
     }
@@ -150,8 +154,8 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
         selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID }),
         selectedWeaponGroups({ weaponGroupObjects }),
         selectedWeapons({ weaponGroupObjects, weaponObjects }),
-        selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }),
         selectedBackstory({ trade, belief, charName }),
+        selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }),
         false
     ]
 
@@ -162,16 +166,16 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
         // If the next step falls on or before a step that evaluates to false
         indexOfCurrent + 1 <= indexOfFalse
         &&
-        // AND if the next step evaluates to true (avoids a step marked 'skip')
-        trueIfComplete[indexOfCurrent + 1] === true
+        // AND if the next step does not evaluate to 'skip'
+        trueIfComplete[indexOfCurrent + 1] !== 'skip'
     ) {
         // Simply go to the next step
         return newCharStepOrder[indexOfCurrent + 1]
     } else if (
-        // OR if on Select Weapons, and the character will not select a Familiar
-        indexOfCurrent + 2 === 5
+        // OR if the next step evaluates to 'skip'
+        trueIfComplete[indexOfCurrent + 1] === 'skip'
     ) {
-        // Go to the Backstory step
+        // Go to the End step
         return newCharStepOrder[indexOfCurrent + 2]
     } else {
         // Otherwise, go to the earliest step marked false

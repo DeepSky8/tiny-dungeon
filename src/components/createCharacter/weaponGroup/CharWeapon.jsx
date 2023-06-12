@@ -57,8 +57,8 @@ const CharWeapon = () => {
     // const selectedWGIDs = char.weaponGroupIDs
     const [weaponGroups, setWeaponGroups] = useState([])
     const [weapons, setWeapons] = useState([])
-    const notWeapons = ['Unarmed', 'Magical Ranged']
-    const areWeapons = ['Ranged', 'Powerful Claw', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
+    const notWeapons = ['Unarmed', 'Magical Ranged', 'Powerful Claw',]
+    const areWeapons = ['Ranged', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
 
 
     // Get Weapon Group object per selected Weapon Group ID
@@ -72,10 +72,11 @@ const CharWeapon = () => {
                 }
             }, {
                 onlyOnce: true
-            })
+            }
+            )
         });
-
-        setWeaponGroups(tempArray)
+        const sortedWGs = alphabetizeTitles({ objectArray: tempArray, titlePrefix: 'wg' })
+        setWeaponGroups(sortedWGs)
 
         // onValue(ref(db, `weaponGroups`), snapshot => {
         //     const tempArray = [];
@@ -135,22 +136,17 @@ const CharWeapon = () => {
         <div className="charWeapon__container">
             <div
                 className="charWeapon__text"
-                id="charWeapon__text"
             >
-
                 {
                     weaponGroups.filter(wg => wg.wgType !== 'u' && wg.wgType !== 'm').length > 0
                     &&
                     <span>Your character is proficient with {returnsWeaponTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: notWeapons })} weapons</span>
-
                 }
 
             </div>
-            <div className="clickOpen__text--reminder">
-                Click to open
-            </div>
+
             {
-                weaponGroups.length > 0
+                weaponGroups.filter(wg => wg.wgType !== 'u' && wg.wgType !== 'm').length > 0
                 &&
                 weapons.length > 0
                 &&
@@ -176,14 +172,21 @@ const CharWeapon = () => {
                             return jsx
                         })
                     }
+                    <div className="clickOpen__text--reminder">
+                        Click to open
+                    </div>
                 </span>
             }
 
-            {
-                weaponGroups.filter(wg => wg.wgType === 'u' || wg.wgType === 'm').length > 0
-                &&
-                <span>Your character is proficient with {returnsUnarmedTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: areWeapons })} attacks</span>
-            }
+            <div
+                className="charWeapon__text"
+            >
+                {
+                    weaponGroups.filter(wg => wg.wgType === 'u' || wg.wgType === 'm').length > 0
+                    &&
+                    <span>Your character is proficient with {returnsUnarmedTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: areWeapons })} attacks</span>
+                }
+            </div>
             {
                 weaponGroups.length > 0
                 &&
@@ -222,6 +225,9 @@ const CharWeapon = () => {
                             return jsx
                         })
                     }
+                    <div className="clickOpen__text--reminder">
+                        Click to open
+                    </div>
                 </span>
             }
             <DisplayRational />

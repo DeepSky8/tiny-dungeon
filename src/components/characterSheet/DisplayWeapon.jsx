@@ -3,7 +3,6 @@ import { defaultWeaponMastered, weaponsMasteredReducer } from "../../reducers/we
 import { updateWDescription } from "../../actions/weaponActions";
 import Field from "../display/FieldPencil";
 import { addWeaponObject } from "../../actions/charActions";
-import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
 
 const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {

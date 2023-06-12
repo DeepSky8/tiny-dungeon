@@ -106,6 +106,36 @@ const CharTraits = () => {
 
     return (
         <div className="charTraits__container">
+            <div>Select as many interesting traits as you'd like, then come back to the top to review them all</div>
+            {
+                char.traitIDs.length > 0
+                &&
+                <div
+                    className="charTraits__selected"
+                >
+                    <div className="charTraits__text--reminder">
+                        Click to open
+                    </div>
+                    {
+                        traits
+                            .filter(trait => char.traitIDs.includes(trait.tID))
+                            .map(trait => {
+                                return (
+                                    <ClickDescriptionSelect
+                                        key={trait.tID}
+                                        itemID={trait.tID}
+                                        title={trait.tTitle}
+                                        description={trait.tDescription}
+                                        changeHandler={handleSelectCheckbox}
+                                        isSelected={char.traitIDs.includes(trait.tID)}
+                                    />
+                                )
+                            })
+                    }
+
+                </div>
+            }
+            <hr className="hr__brown" />
             <div className="charTraits__container--count">
                 <div>
                     {traitCalculator(char.hTraitID, extraTraitID) - char.traitIDs.length} traits available

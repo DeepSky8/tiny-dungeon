@@ -8,8 +8,8 @@ import returnsUnarmedTitleText from "../../functions/returnsUnarmedTitleText";
 const DisplayWeapons = ({ char, dispatchChar }) => {
     const { weaponGroupObjects: weaponGroups, weaponObjects: weapons } = char
     const sortedWeaponGroups = alphabetizeTitles({ objectArray: weaponGroups, titlePrefix: 'wg' })
-    const notWeapons = ['Unarmed', 'Magical Ranged']
-    const areWeapons = ['Ranged', 'Powerful Claw', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
+    const notWeapons = ['Unarmed', 'Powerful Claw', 'Magical Ranged']
+    const areWeapons = ['Ranged', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
 
     return (
         <div className="displayWeapons__container">
