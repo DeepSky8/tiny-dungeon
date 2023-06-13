@@ -1,6 +1,7 @@
 import React from "react";
-import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
+import TapOpen from "../TapOpen";
+import DisplayRational from "../createCharacter/DisplayRational";
 
 const DisplayTraits = ({ heritageTrait, traits }) => {
     const sortedTraits = traits.sort((a, b) => {
@@ -23,9 +24,7 @@ const DisplayTraits = ({ heritageTrait, traits }) => {
                     description={heritageTrait.tDescription}
                 />
             </div>
-            <div className="displayTraits__text--reminder">
-                Click to open
-            </div>
+            <TapOpen />
 
             <div className="displayTraits__section--bottom">
 
@@ -42,7 +41,9 @@ const DisplayTraits = ({ heritageTrait, traits }) => {
                 })}
             </div>
 
-
+            <DisplayRational
+                stage="traits"
+            />
         </div>
     )
 }

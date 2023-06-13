@@ -4,6 +4,7 @@ import Field from "../display/FieldPencil";
 import { updateFamiliarID } from "../../actions/charActions";
 import { defaultFamiliar, familiarReducer } from "../../reducers/familiarReducer";
 import { updateFDescription, updateFName } from "../../actions/familiarActions";
+import DisplayRational from "../createCharacter/DisplayRational";
 
 
 const DisplayFamiliar = ({ char, dispatchChar }) => {
@@ -51,6 +52,9 @@ const DisplayFamiliar = ({ char, dispatchChar }) => {
                 }}
                 theme={''}
                 placeholder={'A feline-shaped shadow, surprisingly frisky'}
+            />
+            <DisplayRational
+                stage="familiar"
             />
         </div>
     )

@@ -12,6 +12,7 @@ import ClickDescription from "../../display/ClickDescription";
 import BulletedSelect from "../../display/BulletedSelect";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
+import TapOpen from "../../TapOpen";
 
 
 const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTraitID }) => {
@@ -60,6 +61,7 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
             </span>
 
             <span className="displayHeritage__container--text">
+                <TapOpen />
                 <ClickDescription
                     show={show}
                     dispatch={dispatch}
@@ -112,9 +114,7 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
 
                     }
                 </div>
-
             </span>
-
         </div>
     )
 }

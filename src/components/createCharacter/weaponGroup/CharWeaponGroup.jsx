@@ -10,6 +10,7 @@ import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
 import DisplayRational from "../DisplayRational";
+import TapOpen from "../../TapOpen";
 
 
 const CharWeaponGroup = () => {
@@ -103,9 +104,7 @@ const CharWeaponGroup = () => {
                     <div className="charWeaponGroup__text--explanation">
                         Your character can use the following weapon groups due to trait selection:
                     </div>
-                    <div className="clickOpen__text--reminder">
-                        Click to open
-                    </div>
+                    <TapOpen />
                     {defaultWeaponGroups.map(wg => {
                         return (
                             <ClickDescriptionSelect
@@ -130,9 +129,7 @@ const CharWeaponGroup = () => {
                     <div className="charWeaponGroup__text--explanation">
                         The following Weapon Groups are available for your character:
                     </div>
-                    <div className="clickOpen__text--reminder">
-                        Click to open
-                    </div>
+                    <TapOpen />
                     {availWeaponGroups.map(wg => {
                         return (
                             <ClickDescriptionSelect

@@ -4,6 +4,8 @@ import { updateWDescription } from "../../actions/weaponActions";
 import Field from "../display/FieldPencil";
 import { addWeaponObject } from "../../actions/charActions";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
+import DisplayRational from "../createCharacter/DisplayRational";
+import TapOpen from "../TapOpen";
 
 const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
     const [wgName,] = useState(wG.wgTitle);
@@ -130,6 +132,7 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
                         </div>
 
                         <div className="displayWeapon__container--weaponGroup">
+                            <TapOpen />
                             <ClickDescriptionCentered
                                 title={`About`}
                                 description={wG.wgDescription}

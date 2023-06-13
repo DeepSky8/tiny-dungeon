@@ -1,7 +1,21 @@
 .moduleHeader__container {
     user-select: none;
+    // @include button--border;
+}
+
+.moduleHeader__row {
+    user-select: none;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    padding: $xs-size 0;
+
+    &.space-between {
+        justify-content: space-between;
+    }
+
+    &.space-around {
+        justify-content: space-around;
+    }
 }
 
 .moduleHeader__button {

@@ -3,6 +3,10 @@ const defaultDisplay = {
     display2: false,
     display3: false,
     display4: false,
+    display5: false,
+    display6: false,
+    display7: false,
+
 }
 
 const displayReducer = (state, action) => {
@@ -13,6 +17,9 @@ const displayReducer = (state, action) => {
                 display2: false,
                 display3: false,
                 display4: false,
+                display5: false,
+                display6: false,
+                display7: false,
             }
         case 'CLOSE_ONE':
             return {
@@ -25,6 +32,9 @@ const displayReducer = (state, action) => {
                 display2: true,
                 display3: false,
                 display4: false,
+                display5: false,
+                display6: false,
+                display7: false,
             }
         case 'CLOSE_TWO':
             return {
@@ -37,6 +47,9 @@ const displayReducer = (state, action) => {
                 display2: false,
                 display3: true,
                 display4: false,
+                display5: false,
+                display6: false,
+                display7: false,
             }
         case 'CLOSE_THREE':
             return {
@@ -49,11 +62,61 @@ const displayReducer = (state, action) => {
                 display2: false,
                 display3: false,
                 display4: true,
+                display5: false,
+                display6: false,
+                display7: false,
             }
         case 'CLOSE_FOUR':
             return {
                 ...state,
                 display4: false,
+            }
+        case 'OPEN_FIVE':
+            return {
+                display1: false,
+                display2: false,
+                display3: false,
+                display4: false,
+                display5: true,
+                display6: false,
+                display7: false,
+
+            }
+        case 'CLOSE_FIVE':
+            return {
+                ...state,
+                display5: false,
+            }
+        case 'OPEN_SIX':
+            return {
+                display1: false,
+                display2: false,
+                display3: false,
+                display4: false,
+                display5: false,
+                display6: true,
+                display7: false,
+            }
+        case 'CLOSE_SIX':
+            return {
+                ...state,
+                display6: false,
+            }
+        case 'OPEN_SEVEN':
+            return {
+                display1: false,
+                display2: false,
+                display3: false,
+                display4: false,
+                display5: false,
+                display6: false,
+                display7: true,
+
+            }
+        case 'CLOSE_SEVEN':
+            return {
+                ...state,
+                display7: false,
             }
         default:
             return {

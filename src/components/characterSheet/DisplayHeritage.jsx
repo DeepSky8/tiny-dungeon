@@ -11,6 +11,8 @@ import { defaultDisplay, displayReducer } from "../../reducers/displayReducer";
 import ClickDescription from "../display/ClickDescription";
 import Field from "../display/FieldPencil";
 import { updateTrade } from "../../actions/charActions";
+import TapOpen from "../TapOpen";
+import DisplayRational from "../createCharacter/DisplayRational";
 
 
 
@@ -42,6 +44,7 @@ const DisplayHeritage = ({ heritage, dispatchChar, trade }) => {
 
             <span className="displayHeritage__container--text">
 
+                <TapOpen />
 
                 <ClickDescription
                     show={show}
@@ -90,21 +93,12 @@ const DisplayHeritage = ({ heritage, dispatchChar, trade }) => {
                     bodyText={hPhysical}
                 />
 
-
+                <DisplayRational
+                    stage="heritage"
+                />
             </span>
-
         </div>
     )
 }
 
 export default DisplayHeritage
-
-// <ClickDescription
-// show={show}
-// dispatch={dispatch}
-// displayKey={'display1'}
-// closeAction={closeOne}
-// openAction={openOne}
-// headerText={'Trade'}
-// bodyText={trade}
-// />

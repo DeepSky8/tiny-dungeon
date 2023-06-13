@@ -29,3 +29,27 @@ export const openFour = () => ({
 export const closeFour = () => ({
     type: 'CLOSE_FOUR'
 })
+
+export const openFive = () => ({
+    type: 'OPEN_FIVE'
+})
+
+export const closeFive = () => ({
+    type: 'CLOSE_FIVE'
+})
+
+export const openSix = () => ({
+    type: 'OPEN_SIX'
+})
+
+export const closeSix = () => ({
+    type: 'CLOSE_SIX'
+})
+
+export const openSeven = () => ({
+    type: 'OPEN_SEVEN'
+})
+
+export const closeSeven = () => ({
+    type: 'CLOSE_SEVEN'
+})

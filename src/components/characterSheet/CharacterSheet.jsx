@@ -19,7 +19,6 @@ import DisplayDescription from "./DisplayDescription";
 import DisplayFamiliar from "./DisplayFamilar";
 import DisplayScrolls from "./DisplayScrolls";
 import CombatActions from "./CombatActions";
-import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 
 const CharacterSheet = () => {
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
@@ -27,8 +26,7 @@ const CharacterSheet = () => {
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
     const [hTrait, dispatchHTrait] = useReducer(traitReducer, defaultTrait)
     const [traits, setTraits] = useState([])
-    const [show1, dispatchShow1] = useReducer(displayReducer, defaultDisplay)
-    const [show2, dispatchShow2] = useReducer(displayReducer, defaultDisplay)
+    const [show, dispatchShow] = useReducer(displayReducer, defaultDisplay)
     const [menuOptions, setMenuOptions] = useState([])
 
     // Spell Reader - trait
@@ -84,10 +82,9 @@ const CharacterSheet = () => {
         const tempArray = []
         if (char.traitIDs.includes(hasFamiliarID)) { tempArray.push('Familiar') } else { tempArray.push('') }
         if (char.traitIDs.includes(scrollsTraitID)) { tempArray.push('Scrolls') } else { tempArray.push('') }
+        tempArray.push('Combat Actions')
         setMenuOptions(tempArray)
     }, [])
-
-    // Notes
 
     return (
         <div className="charSheet__container">
@@ -112,13 +109,12 @@ const CharacterSheet = () => {
                     />
                 </div>
 
-                <CombatActions />
-
                 <ModuleHeader
-                    titleArray={['Health', 'Traits', 'Weapons']}
-                    show={show1}
-                    dispatch={dispatchShow1}
+                    titleArray={['Health', 'Traits', 'Weapons', 'Heritage'].concat(menuOptions)}
+                    show={show}
+                    dispatch={dispatchShow}
                 />
+
                 <ModuleDisplay
                     jsx={
                         <DisplayHealth
@@ -126,7 +122,7 @@ const CharacterSheet = () => {
                             dispatchChar={dispatchChar}
                         />
                     }
-                    visibleState={show1.display1}
+                    visibleState={show.display1}
                 />
                 <ModuleDisplay
                     jsx={
@@ -134,7 +130,7 @@ const CharacterSheet = () => {
                             heritageTrait={hTrait}
                             traits={traits} />
                     }
-                    visibleState={show1.display2}
+                    visibleState={show.display2}
                 />
                 <ModuleDisplay
                     jsx={
@@ -143,15 +139,8 @@ const CharacterSheet = () => {
                             dispatchChar={dispatchChar}
                         />
                     }
-                    visibleState={show1.display3}
+                    visibleState={show.display3}
                 />
-
-                <ModuleHeader
-                    titleArray={['Heritage'].concat(menuOptions)}
-                    show={show2}
-                    dispatch={dispatchShow2}
-                />
-
 
                 <ModuleDisplay
                     jsx={
@@ -161,7 +150,7 @@ const CharacterSheet = () => {
                             heritage={heritage}
                         />
                     }
-                    visibleState={show2.display1}
+                    visibleState={show.display4}
                 />
 
                 <ModuleDisplay
@@ -171,7 +160,7 @@ const CharacterSheet = () => {
                             dispatchChar={dispatchChar}
                         />
                     }
-                    visibleState={show2.display2}
+                    visibleState={show.display5}
                 />
 
                 <ModuleDisplay
@@ -181,7 +170,14 @@ const CharacterSheet = () => {
                             dispatchChar={dispatchChar}
                         />
                     }
-                    visibleState={show2.display3}
+                    visibleState={show.display6}
+                />
+
+                <ModuleDisplay
+                    jsx={
+                        <CombatActions />
+                    }
+                    visibleState={show.display7}
                 />
 
                 <div className="charSheet__notes">

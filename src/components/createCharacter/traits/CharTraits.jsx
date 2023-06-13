@@ -14,6 +14,7 @@ import {
     setTraitHP,
     updateTraitIDs
 } from "../../../actions/charActions";
+import TapOpen from "../../TapOpen";
 
 const CharTraits = () => {
     const initialScrolls = 4
@@ -128,9 +129,7 @@ const CharTraits = () => {
                 <div
                     className="charTraits__selected"
                 >
-                    <div className="charTraits__text--reminder">
-                        Click to open
-                    </div>
+                    <TapOpen />
                     {
                         traits
                             .filter(trait => char.traitIDs.includes(trait.tID))
@@ -160,10 +159,7 @@ const CharTraits = () => {
                 </div>
             </div>
 
-            <div className="charTraits__text--reminder">
-                Click to open
-            </div>
-
+            <TapOpen />
             {traits.map(trait => {
                 return (
                     <ClickDescriptionSelect

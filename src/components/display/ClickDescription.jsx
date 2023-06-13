@@ -12,7 +12,7 @@ const ClickDescription = (
         bodyText
     }
 ) => {
-    const clickFor = 'Click for '
+    const clickFor = 'Tap for '
 
     return (
         <div className="clickDescription__container">
@@ -24,7 +24,7 @@ const ClickDescription = (
                         :
                         dispatch(openAction())
                 }}
-            >{show[displayKey] ? "" : clickFor}{headerText}
+            >{headerText}
             </div>
 
             <div className="clickDescription__container--description">
@@ -39,3 +39,5 @@ const ClickDescription = (
 }
 
 export default ClickDescription
+
+// {show[displayKey] ? "" : clickFor}{headerText}

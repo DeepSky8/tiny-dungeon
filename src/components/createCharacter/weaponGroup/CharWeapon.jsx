@@ -9,6 +9,7 @@ import DisplayUnarmed from "./DisplayUnarmed";
 import returnsUnarmedTitleText from "../../../functions/returnsUnarmedTitleText";
 import DisplayMagicRanged from "./DisplayMagicRanged";
 import alphabetizeTitles from "../../../functions/alphabetizeTitles";
+import TapOpen from "../../TapOpen";
 
 
 // // Bow Mastery - Heritage Trait
@@ -172,9 +173,7 @@ const CharWeapon = () => {
                             return jsx
                         })
                     }
-                    <div className="clickOpen__text--reminder">
-                        Click to open
-                    </div>
+                    <TapOpen />
                 </span>
             }
 
@@ -225,9 +224,7 @@ const CharWeapon = () => {
                             return jsx
                         })
                     }
-                    <div className="clickOpen__text--reminder">
-                        Click to open
-                    </div>
+                    <TapOpen />
                 </span>
             }
             <DisplayRational />

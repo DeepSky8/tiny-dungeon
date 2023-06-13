@@ -1,5 +1,7 @@
 import React from "react";
 import DisplayScroll from "./DisplayScroll";
+import TapOpen from "../TapOpen";
+import DisplayRational from "../createCharacter/DisplayRational";
 
 const sortScrolls = (scrolls) => {
     return (scrolls.sort((a, b) => {
@@ -26,6 +28,9 @@ const DisplayScrolls = ({ scrolls, dispatchChar }) => {
                         />
                     )
                 })}
+            <DisplayRational
+                stage="scrolls"
+            />
             <hr className="hr__brown" />
             {usedScrolls.length > 0
                 &&

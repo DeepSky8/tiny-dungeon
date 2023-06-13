@@ -1,6 +1,11 @@
 .displayWeapons__container {
-    border-top: 1px solid $text-brown;
-    border-right: 1px solid $text-brown;
-    // border-bottom: 1px solid $text-brown;
-    border-left: 1px solid $text-brown;
+    padding-top: $xs-size;
+    // border-top: 1px solid $text-brown;
+    // border-right: 1px solid $text-brown;
+    // // border-bottom: 1px solid $text-brown;
+    // border-left: 1px solid $text-brown;
+}
+
+.displayWeapons__container--weapons {
+    padding-top: $xs-size;
 }
