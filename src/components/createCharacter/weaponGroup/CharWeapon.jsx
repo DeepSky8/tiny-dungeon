@@ -10,6 +10,7 @@ import returnsUnarmedTitleText from "../../../functions/returnsUnarmedTitleText"
 import DisplayMagicRanged from "./DisplayMagicRanged";
 import alphabetizeTitles from "../../../functions/alphabetizeTitles";
 import TapOpen from "../../TapOpen";
+import returnsTitleText from "../../../functions/returnsTitleText";
 
 
 // // Bow Mastery - Heritage Trait
@@ -58,6 +59,7 @@ const CharWeapon = () => {
     // const selectedWGIDs = char.weaponGroupIDs
     const [weaponGroups, setWeaponGroups] = useState([])
     const [weapons, setWeapons] = useState([])
+
     const notWeapons = ['Unarmed', 'Magical Ranged', 'Powerful Claw',]
     const areWeapons = ['Ranged', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
 
@@ -139,94 +141,68 @@ const CharWeapon = () => {
                 className="charWeapon__text"
             >
                 {
-                    weaponGroups.filter(wg => wg.wgType !== 'u' && wg.wgType !== 'm').length > 0
+                    weaponGroups.length > 0
                     &&
-                    <span>Your character is proficient with {returnsWeaponTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: notWeapons })} weapons</span>
+                    <span>
+                        Your character is proficient with {returnsTitleText({
+                            array1: alphabetizeTitles({ objectArray: weaponGroups, titlePrefix: 'wg' }).filter(title => (title.wgType !== 'u' && title.wgType !== 'm')),
+                            array2: alphabetizeTitles({ objectArray: weaponGroups, titlePrefix: 'wg' }).filter(title => (title.wgType === 'u' || title.wgType === 'm')),
+                            titlePrefix: 'wg',
+                        })}
+                    </span>
                 }
 
             </div>
 
-            {
-                weaponGroups.filter(wg => wg.wgType !== 'u' && wg.wgType !== 'm').length > 0
-                &&
-                weapons.length > 0
-                &&
-                <span>
-
-                    {
-                        weaponGroups.map(wg => {
-                            const jsx = (
-                                (wg.wgType !== 'u' && wg.wgType !== 'm')
-                                    ?
-                                    (
-                                        <DisplayWeapon
-                                            key={wg.wgID}
-                                            weaponGroup={wg}
-                                            weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
-                                            char={char}
-                                            dispatchChar={dispatchChar}
-                                        />
-                                    )
-                                    :
-                                    ""
-                            )
-                            return jsx
-                        })
-                    }
-                    <TapOpen />
-                </span>
-            }
-
-            <div
-                className="charWeapon__text"
-            >
-                {
-                    weaponGroups.filter(wg => wg.wgType === 'u' || wg.wgType === 'm').length > 0
-                    &&
-                    <span>Your character is proficient with {returnsUnarmedTitleText({ array: weaponGroups, titlePrefix: 'wg', removeArray: areWeapons })} attacks</span>
-                }
-            </div>
             {
                 weaponGroups.length > 0
                 &&
                 weapons.length > 0
                 &&
                 <span>
-
-                    {
-                        weaponGroups.map(wg => {
-
-                            const jsx = (
-                                wg.wgType === 'u'
-                                    ?
-                                    (
-                                        <DisplayUnarmed
-                                            key={wg.wgID}
-                                            weaponGroup={wg}
-                                            weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
-                                            char={char}
-                                            dispatchChar={dispatchChar}
-                                        />
-                                    )
-                                    :
-                                    wg.wgType === 'm'
-                                        ?
-                                        <DisplayMagicRanged
-                                            key={wg.wgID}
-                                            weaponGroup={wg}
-                                            weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
-                                            char={char}
-                                            dispatchChar={dispatchChar}
-                                        />
-                                        :
-                                        ""
-                            )
-                            return jsx
-                        })
-                    }
                     <TapOpen />
+                    {
+                        alphabetizeTitles({ objectArray: weaponGroups, titlePrefix: 'wg' })
+                            .map(wg => {
+                                const jsx = (
+                                    wg.wgType === 'u'
+                                        ?
+                                        (
+                                            <DisplayUnarmed
+                                                key={wg.wgID}
+                                                weaponGroup={wg}
+                                                weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                                char={char}
+                                                dispatchChar={dispatchChar}
+                                            />
+                                        )
+                                        :
+                                        wg.wgType === 'm'
+                                            ?
+                                            <DisplayMagicRanged
+                                                key={wg.wgID}
+                                                weaponGroup={wg}
+                                                weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                                char={char}
+                                                dispatchChar={dispatchChar}
+                                            />
+                                            :
+                                            (
+                                                <DisplayWeapon
+                                                    key={wg.wgID}
+                                                    weaponGroup={wg}
+                                                    weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
+                                                    char={char}
+                                                    dispatchChar={dispatchChar}
+                                                />
+                                            )
+                                )
+                                return jsx
+                            })
+                    }
                 </span>
             }
+
             <DisplayRational />
         </div>
     )

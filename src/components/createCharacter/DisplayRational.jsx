@@ -50,6 +50,12 @@ const displayText = {
         title: "--Trade and Belief?--",
         1: "Your character wasn't born an Adventurer. No, really. They were probably exposed to a Family Trade growing up; perhaps Blacksmithing, or Weaving. This can give you Advantage on certain in-game tests",
         2: `All Adventurers have a driving principle called a Belief that should be noted on the Adventurer Sheet. This Belief is a simple statement used as a guiding force for your Adventurer. Their Belief may be, “I’ll always find a diplomatic solution,” “Gold can buy happiness,” or “I let my sword do the talking.” This Belief is not etched in stone, and can be changed or added to with the approval of your Game Master`
+    },
+
+    combat: {
+        title: "--Combat Actions--",
+        1: "Your character may (normally) take two actions on each turn of combat. Aside from weapon restrictions, your character may repeat actions",
+        2: "",
     }
 }
 const DisplayRational = ({ stage = useLocation().pathname.split('/')[2] }) => {

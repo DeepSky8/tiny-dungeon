@@ -2,6 +2,7 @@ import React from "react";
 import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
 import TapOpen from "../TapOpen";
+import DisplayRational from "../createCharacter/DisplayRational";
 
 const CombatActions = () => {
     const numberOfActions = "Your character may (normally) take two actions on each turn of combat. Aside from weapon restrictions, your character may repeat actions"
@@ -57,6 +58,7 @@ const CombatActions = () => {
 
     return (
         <div className="combatActions__container">
+            <div className="centered bold">Combat Actions</div>
             <TapOpen />
             {actions.map(action => {
                 return (
@@ -82,6 +84,9 @@ const CombatActions = () => {
 
                 )
             })}
+            <DisplayRational
+                stage="combat"
+            />
         </div>
     )
 }

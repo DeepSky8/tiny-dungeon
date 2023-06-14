@@ -51,12 +51,6 @@ const ModuleHeader = ({ titleArray, fadeArray = [], maxPerRow = 3, show, dispatc
         )
     }
 
-    // const numberOfRows = (titleObjects.length % maxPerRow === 0)
-    //     ?
-    //     (titleObjects.length / maxPerRow)
-    //     :
-    //     (Math.floor(titleObjects.length / maxPerRow) + 1);
-
     if (titleObjects.length > maxPerRow) {
         for (let index = 0; index < titleObjects.length; index += maxPerRow) {
             const row = titleObjects.slice(index, index + maxPerRow)
@@ -99,9 +93,7 @@ const ModuleHeader = ({ titleArray, fadeArray = [], maxPerRow = 3, show, dispatc
                             }
                         </div>
                     )
-                }
-
-                )
+                })
             }
             <hr className="hr__brown" />
         </div>
@@ -109,20 +101,3 @@ const ModuleHeader = ({ titleArray, fadeArray = [], maxPerRow = 3, show, dispatc
 }
 
 export default ModuleHeader
-
-
-// objectRow.map(object => {
-//     return (
-//         <span
-//             key={object.displayKey}
-//             className={(accessible(object) ? '' : 'fade') + `${theme} moduleHeader__button ` + show[`${object.displayKey}`]}
-//             onClick={() => {
-//                 if (accessible(object)) {
-//                     show[object.displayKey] ?
-//                         dispatch(object.close())
-//                         :
-//                         dispatch(object.open())
-//                 }
-//             }}>{object.title}</span>
-//     )
-// })

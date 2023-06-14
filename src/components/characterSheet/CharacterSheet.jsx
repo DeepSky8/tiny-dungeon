@@ -10,15 +10,14 @@ import { loadTrait } from "../../actions/traitActions";
 import Field from "../display/FieldPencil";
 import { updateBelief } from "../../actions/charActions";
 import DisplayHealth from "./DisplayHealth";
-import ModuleDisplay from "./ModuleDisplay";
-import { defaultDisplay, displayReducer } from "../../reducers/displayReducer";
-import ModuleHeader from "./ModuleHeader";
 import DisplayTraits from "./DisplayTraits";
 import DisplayWeapons from "./DisplayWeapons";
 import DisplayDescription from "./DisplayDescription";
 import DisplayFamiliar from "./DisplayFamilar";
 import DisplayScrolls from "./DisplayScrolls";
 import CombatActions from "./CombatActions";
+import addDisplayActions from "../../functions/addDisplayActions";
+import Display from "./Display";
 
 const CharacterSheet = () => {
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
@@ -26,13 +25,69 @@ const CharacterSheet = () => {
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
     const [hTrait, dispatchHTrait] = useReducer(traitReducer, defaultTrait)
     const [traits, setTraits] = useState([])
-    const [show, dispatchShow] = useReducer(displayReducer, defaultDisplay)
-    const [menuOptions, setMenuOptions] = useState([])
+    const [menuObjects, setMenuObjects] = useState([])
 
     // Spell Reader - trait
     const scrollsTraitID = '-NV0C_daHy4EQZHergVr'
     // Familiar - trait
     const hasFamiliarID = '-NV0BAgAYVUBA8OA3_LE'
+
+    const protoMenuObjects = [
+        {
+            title: 'Heritage',
+            display: <DisplayDescription
+                char={char}
+                dispatchChar={dispatchChar}
+                heritage={heritage}
+            />,
+            traitID: '',
+        },
+        {
+            title: 'Health',
+            display: <DisplayHealth
+                char={char}
+                dispatchChar={dispatchChar}
+            />,
+            traitID: '',
+        },
+        {
+            title: 'Traits',
+            display: <DisplayTraits
+                heritageTrait={hTrait}
+                traits={traits} />,
+            traitID: '',
+        },
+        {
+            title: 'Familiar',
+            display: <DisplayFamiliar
+                char={char}
+                dispatchChar={dispatchChar}
+            />,
+            traitID: hasFamiliarID,
+        },
+        {
+            title: 'Scrolls',
+            display: <DisplayScrolls
+                scrolls={char.scrolls}
+                dispatchChar={dispatchChar}
+            />,
+            traitID: scrollsTraitID,
+        },
+        {
+            title: 'Combat',
+            display: <CombatActions />,
+            traitID: '',
+        },
+        {
+            title: 'Weapons',
+            display: <DisplayWeapons
+                char={char}
+                dispatchChar={dispatchChar}
+            />,
+            traitID: '',
+        },
+
+    ]
 
     useEffect(() => {
         // Get Heritage
@@ -80,10 +135,17 @@ const CharacterSheet = () => {
 
     useEffect(() => {
         const tempArray = []
-        if (char.traitIDs.includes(hasFamiliarID)) { tempArray.push('Familiar') } else { tempArray.push('') }
-        if (char.traitIDs.includes(scrollsTraitID)) { tempArray.push('Scrolls') } else { tempArray.push('') }
-        tempArray.push('Combat Actions')
-        setMenuOptions(tempArray)
+
+        protoMenuObjects.forEach(object => {
+            if (
+                (object.traitID === '')
+                ||
+                (char.traitIDs.includes(object.traitID))
+            ) {
+                tempArray.push(object)
+            }
+        })
+        setMenuObjects(tempArray)
     }, [])
 
     return (
@@ -109,80 +171,9 @@ const CharacterSheet = () => {
                     />
                 </div>
 
-                <ModuleHeader
-                    titleArray={['Health', 'Traits', 'Weapons', 'Heritage'].concat(menuOptions)}
-                    show={show}
-                    dispatch={dispatchShow}
+                <Display
+                    menuObjects={addDisplayActions(menuObjects)}
                 />
-
-                <ModuleDisplay
-                    jsx={
-                        <DisplayHealth
-                            char={char}
-                            dispatchChar={dispatchChar}
-                        />
-                    }
-                    visibleState={show.display1}
-                />
-                <ModuleDisplay
-                    jsx={
-                        <DisplayTraits
-                            heritageTrait={hTrait}
-                            traits={traits} />
-                    }
-                    visibleState={show.display2}
-                />
-                <ModuleDisplay
-                    jsx={
-                        <DisplayWeapons
-                            char={char}
-                            dispatchChar={dispatchChar}
-                        />
-                    }
-                    visibleState={show.display3}
-                />
-
-                <ModuleDisplay
-                    jsx={
-                        <DisplayDescription
-                            char={char}
-                            dispatchChar={dispatchChar}
-                            heritage={heritage}
-                        />
-                    }
-                    visibleState={show.display4}
-                />
-
-                <ModuleDisplay
-                    jsx={
-                        <DisplayFamiliar
-                            char={char}
-                            dispatchChar={dispatchChar}
-                        />
-                    }
-                    visibleState={show.display5}
-                />
-
-                <ModuleDisplay
-                    jsx={
-                        <DisplayScrolls
-                            scrolls={char.scrolls}
-                            dispatchChar={dispatchChar}
-                        />
-                    }
-                    visibleState={show.display6}
-                />
-
-                <ModuleDisplay
-                    jsx={
-                        <CombatActions />
-                    }
-                    visibleState={show.display7}
-                />
-
-                <div className="charSheet__notes">
-
-                </div>
             </div>
         </div>
     )
