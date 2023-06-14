@@ -5,7 +5,9 @@
     left: 0;
     width: 100%;
     background-color: $menu-yellow;
-    background-image: url("../../../src/assets/parchment_footer.png");
+    // background-image: url("../../../src/assets/parchment_footer.png");
+    // background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_footer.png?alt=media&token=68176bdf-c406-49b5-9b2d-742359106ddf");
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_header.png?alt=media&token=e1c3eec6-3538-47f6-81aa-ba6b09d0a0ae");
     background-size: 100%;
 
     .float-left {

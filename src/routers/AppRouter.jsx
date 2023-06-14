@@ -24,6 +24,7 @@ import Welcome from "../components/home/Welcome.jsx";
 import Attribution from "../components/home/Attribution.jsx";
 
 const AppRouter = createBrowserRouter([
+
     {
         path: "/",
         errorElement: <NotFoundPage />,
@@ -75,7 +76,7 @@ const AppRouter = createBrowserRouter([
                 path: "/characterSheet",
                 errorElement: <NotFoundPage />,
                 element: <CharacterSheet />,
-
+    
             },
             {
                 path: "/attribution",
@@ -84,6 +85,19 @@ const AppRouter = createBrowserRouter([
             },
         ]
     },
+
+    {
+        path: "/characterSheet",
+        errorElement: <NotFoundPage />,
+        element: <CharacterSheet />,
+
+    },
+    {
+        path: "/attribution",
+        errorElement: <NotFoundPage />,
+        element: <Attribution />
+    },
+
     {
         path: "/createTrait",
         errorElement: <NotFoundPage />,
@@ -137,4 +151,66 @@ const AppRouter = createBrowserRouter([
 
 ])
 
-export default AppRouter 
+export default AppRouter
+
+
+// {
+//     path: "/",
+//     errorElement: <NotFoundPage />,
+//     element: <Home />,
+//     children: [
+//         {
+//             index: true,
+//             errorElement: <NotFoundPage />,
+//             element: <Welcome />,
+//         },
+//         {
+//             path: "/newCharacter",
+//             errorElement: <NotFoundPage />,
+//             element: <NewCharacter />,
+//             children: [
+//                 {
+//                     path: "/newCharacter/heritage",
+//                     errorElement: <NotFoundPage />,
+//                     element: <CharHeritage />,
+//                 },
+//                 {
+//                     path: "/newCharacter/traits",
+//                     errorElement: <NotFoundPage />,
+//                     element: <CharTraits />,
+//                 },
+//                 {
+//                     path: "/newCharacter/weaponGroup",
+//                     errorElement: <NotFoundPage />,
+//                     element: <CharWeaponGroup />,
+//                 },
+//                 {
+//                     path: "/newCharacter/weapon",
+//                     errorElement: <NotFoundPage />,
+//                     element: <CharWeapon />,
+//                 },
+//                 {
+//                     path: "/newCharacter/familiar",
+//                     errorElement: <NotFoundPage />,
+//                     element: <CharFamiliar />,
+//                 },
+//                 {
+//                     path: "/newCharacter/backstory",
+//                     errorElement: <NotFoundPage />,
+//                     element: <CharBackstory />,
+//                 },
+//             ]
+//         },
+//         {
+//             path: "/characterSheet",
+//             errorElement: <NotFoundPage />,
+//             element: <CharacterSheet />,
+
+//         },
+//         {
+//             path: "/attribution",
+//             errorElement: <NotFoundPage />,
+//             element: <Attribution />
+//         },
+//     ]
+// },

@@ -1,0 +1,44 @@
+.welcome__container {
+    user-select: none;
+    padding: $s-size;
+    // display: flexbox;
+}
+
+.welcome__container--logo {
+    padding-bottom: 16vh;
+}
+
+.welcome__logo--image {
+    max-width: 90vw;
+    max-height: 25vh;
+}
+
+.welcome__container--button {
+    padding-bottom: $s-size;
+}
+
+.welcome__creation--button {
+    max-width: 90vw;
+    max-height: 25vh;
+    box-shadow: 0 5px 27px 2px $text-brown;
+}
+
+.welcome__container--attribution {
+    display: flex;
+    justify-content: center;
+}
+
+.welcome__attribution--link {
+    color: $text-brown;
+    position: absolute;
+    bottom: -0vh;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .home__container {
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_large.png?alt=media&token=0ee8d6b5-6fa0-46e1-8545-123dc602017c");
+        font-size: $calcFontSize;
+    }
+}
