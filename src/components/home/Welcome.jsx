@@ -9,15 +9,22 @@ const Welcome = () => {
 
     useEffect(() => {
         if (
-            localChar === 'undefined'
-                // (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
+            (localChar !== undefined)
+            &&
+            (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
         ) {
             setCharCreated(true)
+        } else {
+            setCharCreated(false)
         }
     }, [localChar])
 
     const charSheetClick = () => {
-        if (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0) {
+        if (
+            (localChar !== undefined)
+            &&
+            (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
+        ) {
             navigate('/characterSheet')
         }
         // else {
@@ -58,3 +65,5 @@ const Welcome = () => {
 }
 
 export default Welcome
+
+// localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0

@@ -96,9 +96,9 @@ const CharacterSheet = () => {
                 dispatchHeritage(loadHeritage(snapshot.val()))
             }
         }
-        // , {
-        //     onlyOnce: true
-        // }
+            // , {
+            //     onlyOnce: true
+            // }
         )
 
         // Get Heritage Trait
@@ -107,9 +107,9 @@ const CharacterSheet = () => {
                 dispatchHTrait(loadTrait(snapshot.val()))
             }
         }
-        // , {
-        //     onlyOnce: true
-        // }
+            // , {
+            //     onlyOnce: true
+            // }
         )
 
         // Get Traits
@@ -120,9 +120,9 @@ const CharacterSheet = () => {
                     tempTraitArray.push(snapshot.val())
                 }
             }
-            // , {
-            //     onlyOnce: true
-            // }
+                // , {
+                //     onlyOnce: true
+                // }
             )
         });
         setTraits(tempTraitArray);

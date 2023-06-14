@@ -1,4 +1,6 @@
 const returnsTitleText = ({ array1, type1 = ' weapons', array2, type2 = ' attacks', titlePrefix, removeArray = [''] }) => {
+    const no = 'no '
+
     const titles1 = array1.map(element => element[`${titlePrefix}Title`])
     const filteredTitles1 = titles1.filter(title => !removeArray.includes(title))
 
@@ -20,7 +22,7 @@ const returnsTitleText = ({ array1, type1 = ' weapons', array2, type2 = ' attack
                 ]
                     .join(" and ")
                 :
-                'no '
+                no
     )
 
     const joinedTitles2 = (
@@ -38,15 +40,15 @@ const returnsTitleText = ({ array1, type1 = ' weapons', array2, type2 = ' attack
                 ]
                     .join(" and ")
                 :
-                'no '
+                no
     )
-
     return (
-        joinedTitles2.length < 1
+        joinedTitles2 === no
             ?
             joinedTitles1 + type1
             :
             [(joinedTitles1 + type1), (joinedTitles2 + type2)].join(", and ")
+
     )
 }
 
