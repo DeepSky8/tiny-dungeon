@@ -17,6 +17,7 @@ const DisplayScrolls = ({ scrolls, dispatchChar }) => {
 
     return (
         <div className="displayScrolls__container">
+            <TapOpen />
             {ownedScrolls.length > 0
                 &&
                 sortScrolls(ownedScrolls).map(scroll => {

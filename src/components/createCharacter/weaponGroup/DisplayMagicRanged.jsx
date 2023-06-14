@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 import { defaultWeaponMastered, weaponsMasteredReducer } from "../../../reducers/weaponReducer";
 import {
     loadWeapon,
@@ -29,20 +29,8 @@ const DisplayMagicRanged = ({ weaponGroup: wG, weapons, char, dispatchChar }) =>
     const handleSaveWeapon = (weapon = newWeapon) => {
         if (weapon.wTitle.length > 0 && weapon.wDescription.length > 0) {
             dispatchChar(addWeaponObject(weapon))
-        }    }
-
-    // useEffect(() => {
-    //     // If this weapon group is provided by a heritage trait, 
-    //     // and at matching weapon hasn't been loaded/added to the character yet
-    //     // filter out the heritage weapons and find the one that matches this weapon group type
-    //     // load it and save it to the character
-    //     if (wG.wgHTrait && !weaponMatch) {
-    //         const heritageWeapons = weapons.filter(weapon => weapon.wHTrait)
-    //         const matchesWeaponGroup = heritageWeapons.find(weapon => weapon.wType === wG.wgType)
-    //         dispatchNewWeapon(loadWeapon(matchesWeaponGroup))
-    //         handleSaveWeapon(matchesWeaponGroup)
-    //     }
-    // }, [])
+        }
+    }
 
     const rangeName = (range) => {
         switch (range) {
@@ -190,15 +178,14 @@ const DisplayMagicRanged = ({ weaponGroup: wG, weapons, char, dispatchChar }) =>
                                                             )
                                                         })}
                                                     </ul>
-
                                                 </div>
                                             )
-
                                         }
                                     </div>
                                 </div>
                             </div>
                         }
+                        <hr className="hr__brown" />
                     </div>
                 }
             </div>

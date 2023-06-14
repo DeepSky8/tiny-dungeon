@@ -43,9 +43,6 @@ const displayText = {
         3: "If the character fails the Test, the scroll is not destroyed, but the character obviously does not successfully cast the spell"
     },
 
-    // All melee weapons can strike enemies at close range. You can use Ranged weapons at close range, but you have Disadvantage on the attack Test. You can use Magic at Close range.
-    //  Heavy Melee weapons can strike near enemies if you are willing to suffer Disadvantage on your attack (representing the ability of a larger weapon to reach.) You can use Ranged weapons and Magic at Near range.
-    //  Magic and Ranged weapons are the only weapons that can strike enemies in the Far range.
     backstory: {
         title: "--Trade and Belief?--",
         1: "Your character wasn't born an Adventurer. No, really. They were probably exposed to a Family Trade growing up; perhaps Blacksmithing, or Weaving. This can give you Advantage on certain in-game tests",

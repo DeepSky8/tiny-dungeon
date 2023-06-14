@@ -53,72 +53,9 @@ const Menu = (
                             </option>
                         )
                     }))}
-
             </select>
         </div>
     )
 }
 
 export default Menu
-
-// <span className="field__container--input">
-// <input
-//     id={id}
-//     className={`field--input ${theme}`}
-//     type={type}
-//     value={value}
-//     onChange={change}
-//     onBlur={blur}
-// />
-
-
-// <span className="field__container--input">
-
-// {type === 'checkbox' &&
-//     <input
-//         id={id}
-//         className={`field--input ${theme}`}
-//         type={type}
-//         checked={value}
-//         onChange={change}
-//         onBlur={blur}
-//     />
-// }
-
-
-// {type === 'textarea' &&
-//     <textarea
-//         rows='6'
-//         cols='50'
-//         id={id}
-//         className={`field--input ${theme}`}
-//         value={value}
-//         onChange={change}
-//         onBlur={blur}
-//     />
-// }
-
-// {type === 'text' &&
-//     <input
-//         id={id}
-//         className={`field--input ${theme}`}
-//         type={type}
-//         value={value}
-//         onChange={change}
-//         onBlur={blur}
-//     />
-// }
-
-// {type === 'number' &&
-//     <input
-//         id={id}
-//         className={`field--input ${theme}`}
-//         type={type}
-//         value={value}
-//         onChange={change}
-//         onBlur={blur}
-//     />
-// }
-
-
-// </span>

@@ -159,25 +159,3 @@ const DisplayHeritage = ({ heritageData, hTraitData }) => {
 }
 
 export default DisplayHeritage
-
-// <Field
-// label={''}
-// id={ }
-// type={ }
-// value={ }
-// change={ }
-// blur={ }
-// theme={''}
-// />
-
-// <Field
-// label={'Heritage Name'}
-// id={'hName'}
-// type={'text'}
-// value={heritage.hName}
-// change={(e) => {
-//     dispatchHeritage(updateHName(e.target.value))
-// }}
-// blur={''}
-// theme={''}
-// />

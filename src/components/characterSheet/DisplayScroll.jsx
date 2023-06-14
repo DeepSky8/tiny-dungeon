@@ -1,6 +1,5 @@
 import React, { useReducer, useState } from "react";
 import { scrollReducer } from "../../reducers/scrollReducer";
-// import ClickDescriptionCount from "../display/ClickDescriptionCount";
 import { addScroll, minusScroll } from "../../actions/charActions";
 import { decreaseSAmount, increaseSAmount } from "../../actions/scrollActions";
 
@@ -62,11 +61,3 @@ const DisplayScroll = ({ scrollData, dispatchChar }) => {
 }
 
 export default DisplayScroll
-
-// <ClickDescriptionCount
-// title={scroll.sTitle}
-// description={scroll.sDescription}
-// amount={scroll.sAmount}
-// increase={increaseScroll}
-// decrease={decreaseScroll}
-// />

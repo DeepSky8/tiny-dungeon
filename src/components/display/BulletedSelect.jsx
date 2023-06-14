@@ -84,5 +84,3 @@ const BulletedSelect = (
 }
 
 export default BulletedSelect
-
-// selectText + object[`${IDTitle}`]

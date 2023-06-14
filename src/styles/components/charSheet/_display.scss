@@ -1,12 +1,10 @@
-.moduleHeader__container {
+.display__container {
     user-select: none;
-    // @include button--border;
 }
 
-.moduleHeader__row {
+.display__row {
     user-select: none;
     display: flex;
-    // justify-content: space-between;
     padding: $xs-size 0;
 
     &.space-between {
@@ -18,7 +16,7 @@
     }
 }
 
-.moduleHeader__button {
+.display__button {
     &.true {
         font-weight: bold;
         text-decoration: underline;

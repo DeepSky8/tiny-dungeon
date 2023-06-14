@@ -1,4 +1,3 @@
-import { setMaxArmor } from "../../actions/charActions";
 import {
     updateTArmor,
     updateTClaws,

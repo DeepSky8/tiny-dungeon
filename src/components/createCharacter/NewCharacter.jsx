@@ -12,14 +12,6 @@ const NewCharacter = () => {
     const [char, dispatchChar] = useReducer(charReducer, localChar)
     const [nextStep, dispatchNext] = useReducer(nextStepReducer, defaultNextStep)
 
-    useEffect(() => {
-        console.log('char', char)
-    }, [char])
-
-    // useEffect(() => {
-    //     console.log('nextStep', nextStep)
-    // }, [nextStep])
-
     const handleClickNext = () => {
         setLocalChar(char)
         dispatchNext(takeNextStep(char))

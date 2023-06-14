@@ -213,6 +213,7 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                 </div>
                             </div>
                         }
+                        <hr className="hr__brown" />
                     </div>
                 }
             </div>

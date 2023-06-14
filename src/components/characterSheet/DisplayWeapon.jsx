@@ -4,7 +4,6 @@ import { updateWDescription } from "../../actions/weaponActions";
 import Field from "../display/FieldPencil";
 import { addWeaponObject } from "../../actions/charActions";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
-import DisplayRational from "../createCharacter/DisplayRational";
 import TapOpen from "../TapOpen";
 
 const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
@@ -147,22 +146,3 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
 }
 
 export default DisplayWeapon
-
-// {
-//     !weapons.map(weapon => weapon.wID).includes(weapon.wID)
-//     &&
-//     <Field
-//         label={'Weapon Name: '}
-//         id={'title'}
-//         type={'text'}
-//         placeholder="Dagger? Poleaxe?"
-//         value={weapon.wTitle}
-//         change={(e) => {
-//             dispatchWeapon(updateWTitle(e.target.value))
-//         }}
-//         blur={() => {
-//             handleSaveWeapon()
-//         }}
-//         theme={''}
-//     />
-// }

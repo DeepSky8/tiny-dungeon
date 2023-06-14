@@ -29,46 +29,18 @@ const check = {
 
 }
 
-const wgTraits = [
-    check.bowMasteryID,
-    check.karhuClawID,
-    check.improvisedWeapon,
-    check.unarmedWeapon,
-    check.shieldWeapon,
-    check.spellsWeapon
-
-]
-
 const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
     const {
-        // charID,
-        // userID,
+
         charName,
         heritageID,         // Select from Heritages array, identify by hID
         hTraitID,           // Heritage trait determined by Heritage, identified by htID
         traitIDs,           // Select and identify by tID
-        // maxHP,              // HP determined by Heritage and trait: Toughness
-        // currentHP,          // HP current number
-        // maxArmor,           // HP from armor determined by Trait and worn items
-        // currentArmor,       // HP from armor current number
         trade,              // Trade is user-defined text
         belief,             // Belief is user-defined text
-
         weaponGroupObjects,     // Identified by wgID and wgType
-
         weaponObjects,      // Identified by wID and wType
-
-        // Wearing select from non-statted descriptions
-        // Implement array of wearable items, use oID
-        // Add specialized armor/wearable items in later update
-        // outfitIDs,
-        // gearIDs,
-
-        // gold,
-
         familiarID,         // Reference by fID
-        // XP,
-        // scrollIDs,          // Identified by sID
     } = char
 
     // arrays used in evaluations

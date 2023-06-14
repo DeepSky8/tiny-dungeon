@@ -59,8 +59,6 @@ const DisplayWeapon = ({ weaponData }) => {
                     dispatchWeapon(updateWDescription(e.target.value))
                 }}
                 blur={() => {
-                    // const formatValue = wGroup.wgDescription.replace(/[\n\r]/gm, ' ');
-                    // dispatchWeapon(updateWDescription(formatValue))
                     handleSave()
                 }}
                 theme={''}

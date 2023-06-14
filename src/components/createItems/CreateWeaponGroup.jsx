@@ -24,10 +24,6 @@ import { wgRange, wgTypes } from "../../objectsArrays/createObjectArrays/weaponG
 const CreateWeaponGroup = () => {
     const [wGroup, dispatchWGroup] = useReducer(weaponGroupReducer, defaultWeaponGroup)
 
-    // useEffect(() => {
-    //     console.log('wGroup', wGroup)
-    // }, [wGroup])
-
     const handleRemoveWGroupRangeID = (id) => {
         dispatchWGroup(removeWGRangeID(id))
     }

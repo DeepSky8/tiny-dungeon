@@ -4,9 +4,7 @@ import DisplayRational from "../DisplayRational";
 import DisplayWeapon from "./DisplayWeapon";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
-import returnsWeaponTitleText from "../../../functions/returnsWeaponTitleText";
 import DisplayUnarmed from "./DisplayUnarmed";
-import returnsUnarmedTitleText from "../../../functions/returnsUnarmedTitleText";
 import DisplayMagicRanged from "./DisplayMagicRanged";
 import alphabetizeTitles from "../../../functions/alphabetizeTitles";
 import TapOpen from "../../TapOpen";
@@ -56,12 +54,11 @@ import returnsTitleText from "../../../functions/returnsTitleText";
 
 const CharWeapon = () => {
     const [char, dispatchChar] = useOutletContext()
-    // const selectedWGIDs = char.weaponGroupIDs
     const [weaponGroups, setWeaponGroups] = useState([])
     const [weapons, setWeapons] = useState([])
 
-    const notWeapons = ['Unarmed', 'Magical Ranged', 'Powerful Claw',]
-    const areWeapons = ['Ranged', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
+    // const notWeapons = ['Unarmed', 'Magical Ranged', 'Powerful Claw',]
+    // const areWeapons = ['Ranged', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
 
 
     // Get Weapon Group object per selected Weapon Group ID
@@ -202,7 +199,6 @@ const CharWeapon = () => {
                     }
                 </span>
             }
-
             <DisplayRational />
         </div>
     )

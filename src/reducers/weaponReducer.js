@@ -30,6 +30,11 @@
 //      Effect as described by player
 //      * attacks per turn
 //      Close range standard test
+//  Magical Ranged   m
+//      1 damage
+//      1 attack per turn
+//      Close range disadvantage
+//      Near, far range standard test
 
 const defaultWeaponGroup = {
     wgID: Math.random(),

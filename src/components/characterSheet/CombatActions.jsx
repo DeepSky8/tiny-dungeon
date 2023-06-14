@@ -1,11 +1,9 @@
 import React from "react";
-import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
 import TapOpen from "../TapOpen";
 import DisplayRational from "../createCharacter/DisplayRational";
 
 const CombatActions = () => {
-    const numberOfActions = "Your character may (normally) take two actions on each turn of combat. Aside from weapon restrictions, your character may repeat actions"
     const actions = [
         {
             key: 0,
@@ -92,73 +90,3 @@ const CombatActions = () => {
 }
 
 export default CombatActions
-
-
-// <TapOpen />
-// {actions.map(action => {
-//     return (
-//         <ClickDescriptionCentered
-//             key={action.key}
-//             title={action.title}
-//             description={
-//                 <span className="combatActions__description--field">
-//                     {action.description.map(line => {
-//                         return (
-//                             <div
-//                                 key={line}
-//                                 className="combatActions__description--newLine"
-//                             >
-//                                 {line}
-//                             </div>
-//                         )
-//                     })}
-//                     <div className="italic small centered combatActions__description--newLine" >{action.italic}</div>
-//                 </span>
-//             }
-//         />
-
-//     )
-// })}
-
-
-
-
-
-
-// <TapOpen />
-// <ClickDescriptionMultiple
-//     title={'Combat Actions'}
-//     description={
-//         <span className="combatActions__container--description">
-//             <span className="combatActions__header">
-//                 {numberOfActions}
-//             </span>
-//             <TapOpen />
-//             {actions.map(action => {
-//                 return (
-//                     <ClickDescriptionCentered
-//                         key={action.key}
-//                         title={action.title}
-//                         description={
-//                             <span className="combatActions__description--field">
-//                                 {action.description.map(line => {
-//                                     return (
-//                                         <div
-//                                             key={line}
-//                                             className="combatActions__description--newLine"
-//                                         >
-//                                             {line}
-//                                         </div>
-//                                     )
-//                                 })}
-//                                 <div className="italic small centered combatActions__description--newLine" >{action.italic}</div>
-//                             </span>
-//                         }
-//                     />
-
-//                 )
-//             })}
-//         </span>
-//     }
-// />
-// <hr className="hr__brown" />

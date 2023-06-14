@@ -17,45 +17,11 @@ const StyledMenu = ({
         setMenuOpen(!menuOpen)
     }
 
-    // const closeMenu = () => {
-    //     setMenuOpen(false)
-    // }
-
-    // useEffect(() => {
-    //     closeMenuArrayIDs.forEach(element => {
-    //         if (document.getElementById(element)) {
-    //             return (
-    //                 document
-    //                     .getElementById(element)
-    //                     .addEventListener('click', closeMenu)
-    //             )
-    //         }
-
-    //     });
-
-    //     return (() => {
-    //         closeMenuArrayIDs.forEach(element => {
-    //             if (document.getElementById(element)) {
-    //                 return (
-    //                     document
-    //                         .getElementById(element)
-    //                         .removeEventListener('click', closeMenu)
-    //                 )
-    //             }
-
-    //         });
-    //     })
-    // }, [])
-
-
     const getTitle = () => {
         const object = array.find(element => element[`${arrayIDRef}`] === state[`${stateIDRef}`])
-        // const objectIndex = array.map(object => object[`${arrayIDRef}`]).indexOf(state[`${stateIDRef}`])
         const title = (object === undefined ? selectStatement : object[arrayTitleRef])
         return (title === '' ? missingTitle : title)
     }
-
-
 
     return (
         <div className="sMenu__container">

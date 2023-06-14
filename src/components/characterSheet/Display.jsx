@@ -7,7 +7,7 @@ const Display = ({ menuObjects, fadeArray = [], maxPerRow = 3, theme = '' }) => 
     const [show, dispatchShow] = useReducer(displayReducer, defaultDisplay)
     const splitMenuObjects = []
 
-    
+
     if (menuObjects.length > maxPerRow) {
         for (let index = 0; index < menuObjects.length; index += maxPerRow) {
             const row = menuObjects.slice(index, index + maxPerRow)
@@ -22,21 +22,21 @@ const Display = ({ menuObjects, fadeArray = [], maxPerRow = 3, theme = '' }) => 
     }
 
     return (
-        <div className="moduleHeader__container">
+        <div className="display__container">
             {
                 splitMenuObjects.map(objectRow => {
                     const spacing = objectRow.length === maxPerRow ? 'space-between' : 'space-around'
                     return (
                         <div
                             key={Math.random()}
-                            className={`moduleHeader__row ${spacing}`}
+                            className={`display__row ${spacing}`}
                         >
                             {
                                 objectRow.map(object => {
                                     return (
                                         <span
                                             key={object.displayKey}
-                                            className={(accessible(object) ? '' : 'fade') + `${theme} moduleHeader__button ` + show[`${object.displayKey}`]}
+                                            className={(accessible(object) ? '' : 'fade') + `${theme} display__button ` + show[`${object.displayKey}`]}
                                             onClick={() => {
                                                 if (accessible(object)) {
                                                     show[object.displayKey] ?

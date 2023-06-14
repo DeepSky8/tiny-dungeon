@@ -71,13 +71,3 @@ const Field = ({ label, id, type, value, change, blur, theme, placeholder = '' }
 }
 
 export default Field
-
-// <span className="field__container--input">
-// <input
-//     id={id}
-//     className={`field--input ${theme}`}
-//     type={type}
-//     value={value}
-//     onChange={change}
-//     onBlur={blur}
-// />

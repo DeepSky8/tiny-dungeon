@@ -25,10 +25,3 @@ const fieldPopulator = ({ state, dispatchState, objectArray }) => {
 }
 
 export default fieldPopulator
-
-// : () => {
-//     if (id === 'tDescription') {
-//         const formatValue = state.tDescription.replace(/[\n\r]/gm, ' ');
-//         dispatchState(action(formatValue))
-//     }
-// },

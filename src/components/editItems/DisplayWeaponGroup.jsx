@@ -55,18 +55,6 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
 
                 }}
                 theme={''}
-            // label={'Weapon Group Type'}
-            // id={'wgType'}
-            // change={(e) => {
-            //     dispatchWGroup(updateWGType(e.target.value))
-            // }}
-            // blur={() => {
-
-            // }}
-            // theme={''}
-            // array={wgTypes}
-            // keyID={'wgTypeID'}
-            // displayID={'wgTypeTitle'}
             />
 
 

@@ -75,12 +75,6 @@ const CharWeaponGroup = () => {
             )
             setDefaultWeaponGroups(sortedWGs.defaultWGs);
             dispatchChar(setDefaultWeaponGroupObjects(sortedWGs.defaultWGs))
-            // sortedWGs
-            //     .defaultWGs
-            //     .forEach(wg => {
-            //         dispatchChar(addWeaponGroupObject(wg))
-            //     })
-
             setAvailWeaponGroups(sortedWGs.availWGs);
         }
 

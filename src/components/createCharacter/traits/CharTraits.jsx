@@ -18,6 +18,9 @@ import TapOpen from "../../TapOpen";
 
 const CharTraits = () => {
     const initialScrolls = 4
+    const initialTraits = 3
+    const extraTraitID = '-NV0g1IzDJD22PtG_g-y';
+
 
     const [char, dispatchChar] = useOutletContext();
     const [traits, setTraits] = useState([]);
@@ -35,11 +38,9 @@ const CharTraits = () => {
                 })
                 setTraits(tempArray)
             }
-        }
-            , {
-                onlyOnce: true
-            }
-        )
+        }, {
+            onlyOnce: true
+        })
 
         // return (() => {
         //     off(ref(db, 'traits'))
@@ -55,22 +56,18 @@ const CharTraits = () => {
                 })
                 setScrolls(tempArray)
             }
-        }
-            // , {
-            //     onlyOnce: true
-            // }
-        )
-
-        return (() => {
-            off(ref(db, 'scrolls'))
+        }, {
+            onlyOnce: true
         })
+
+        // return (() => {
+        //     off(ref(db, 'scrolls'))
+        // })
     }, [])
 
-    const extraTraitID = '-NV0g1IzDJD22PtG_g-y';
 
     useEffect(() => {
         if (traits.length > 0) {
-            // const additionalHPID = '-NV0CzfGuKHy24OMUfMN';
             const toughnessTrait = traits.find(trait => trait.tHP > 0)
             if (char.traitIDs.includes(toughnessTrait.tID)) {
                 dispatchChar(setTraitHP(parseInt(toughnessTrait.tHP)))
@@ -80,8 +77,6 @@ const CharTraits = () => {
                 dispatchChar(setCurrentHP(parseInt(char.hHP)))
             }
 
-
-            // const armorTraitID = '-NV-zX7BrjyyupnP8Zwc'
             const armorTrait = traits.find(trait => trait.tArmor > 0)
             if (char.traitIDs.includes(armorTrait.tID)) {
                 dispatchChar(setMaxArmor(parseInt(armorTrait.tArmor)))
@@ -91,8 +86,6 @@ const CharTraits = () => {
                 dispatchChar(setCurrentArmor(0))
             }
 
-
-            // const scrollReaderID = '-NV0C_daHy4EQZHergVr';
             const scrollReaderTrait = traits.find(trait => trait.tScroll)
             dispatchChar(clearScrolls())
             if (char.traitIDs.includes(scrollReaderTrait.tID)) {
@@ -117,7 +110,7 @@ const CharTraits = () => {
     }
 
     const traitCalculator = (hTraitID, extraTraitID) => {
-        return (hTraitID === extraTraitID ? 4 : 3)
+        return (hTraitID === extraTraitID ? (initialTraits + 1) : initialTraits)
     }
 
     return (
