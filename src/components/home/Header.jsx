@@ -14,7 +14,11 @@ const Header = () => {
                     src="src\assets\castle-brown-small.png"
                     alt="brown castle tower with door"
                 />
-                <div className="title">Tiny Dungeon</div>
+                <img
+                    className="header__logo--image"
+                    src="src\assets\TinyDungeonLogo.png"
+                    alt="Tiny Dungeon logo"
+                />
                 <img
                     className="header__castle--image"
                     src="src\assets\castle-brown-small.png"
@@ -29,3 +33,4 @@ const Header = () => {
 export default Header
 
 //                 <div className="material-symbols-outlined filled float-left">home</div>
+//                 <div className="title">Tiny Dungeon</div>

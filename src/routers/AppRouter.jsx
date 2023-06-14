@@ -21,6 +21,7 @@ import CreateWeapon from "../components/createItems/CreateWeapon.jsx";
 import DisplayWeapons from "../components/editItems/DisplayWeapons.jsx";
 import DisplayScrolls from "../components/editItems/DisplayScrolls.jsx";
 import Welcome from "../components/home/Welcome.jsx";
+import Attribution from "../components/home/Attribution.jsx";
 
 const AppRouter = createBrowserRouter([
     {
@@ -75,6 +76,11 @@ const AppRouter = createBrowserRouter([
                 errorElement: <NotFoundPage />,
                 element: <CharacterSheet />,
 
+            },
+            {
+                path: "/attribution",
+                errorElement: <NotFoundPage />,
+                element: <Attribution />
             },
         ]
     },
