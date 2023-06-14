@@ -21,6 +21,10 @@
     max-width: 90vw;
     max-height: 25vh;
     box-shadow: 0 5px 27px 2px $text-brown;
+
+    &.faded {
+        opacity: 0.8;
+    }
 }
 
 .welcome__container--attribution {

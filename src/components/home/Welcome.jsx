@@ -1,7 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
 
 const Welcome = () => {
+    let navigate = useNavigate();
+    const [localChar, setLocalChar] = useLocalStorageState('localChar')
+    const [charCreated, setCharCreated] = useState(false)
+
+    useEffect(() => {
+        if (
+            localChar === 'undefined'
+                // (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
+        ) {
+            setCharCreated(true)
+        }
+    }, [localChar])
+
+    const charSheetClick = () => {
+        if (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0) {
+            navigate('/characterSheet')
+        }
+        // else {
+        //     navigate('/newCharacter/heritage')
+        // }
+    }
 
 
     return (
@@ -17,10 +39,12 @@ const Welcome = () => {
                 </Link>
             </div>
             <div className="welcome__container--button">
-
-                <Link to={'/characterSheet'}>
-                    <img className="welcome__creation--button" alt='Character Creation button' src="src\assets\characterSheet-button-transparent-brown.png" />
-                </Link>
+                <div
+                    onClick={charSheetClick}
+                    className=""
+                >
+                    <img className={`welcome__creation--button ` + (charCreated ? "" : 'faded')} alt='Character Creation button' src="src\assets\characterSheet-button-transparent-brown.png" />
+                </div>
             </div>
 
             <div className="welcome__container--attribution">

@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { charReducer } from "../../reducers/charReducer";
 import useLocalStorageState from "use-local-storage-state";
 import { defaultHeritage, heritageReducer } from "../../reducers/heritageReducer";
-import { onValue, ref } from "firebase/database";
+import { off, onValue, ref } from "firebase/database";
 import { db } from "../../api/firebase";
 import { loadHeritage } from "../../actions/heritageActions";
 import { defaultTrait, traitReducer } from "../../reducers/traitReducer";
@@ -95,18 +95,22 @@ const CharacterSheet = () => {
             if (snapshot.exists()) {
                 dispatchHeritage(loadHeritage(snapshot.val()))
             }
-        }, {
-            onlyOnce: true
-        })
+        }
+        // , {
+        //     onlyOnce: true
+        // }
+        )
 
         // Get Heritage Trait
         onValue(ref(db, `traits/${char.hTraitID}`), snapshot => {
             if (snapshot.exists()) {
                 dispatchHTrait(loadTrait(snapshot.val()))
             }
-        }, {
-            onlyOnce: true
-        })
+        }
+        // , {
+        //     onlyOnce: true
+        // }
+        )
 
         // Get Traits
         const tempTraitArray = []
@@ -115,11 +119,21 @@ const CharacterSheet = () => {
                 if (snapshot.exists()) {
                     tempTraitArray.push(snapshot.val())
                 }
-            }, {
-                onlyOnce: true
-            })
+            }
+            // , {
+            //     onlyOnce: true
+            // }
+            )
         });
         setTraits(tempTraitArray);
+
+        return (() => {
+            off(ref(db, `heritages/${char.heritageID}`))
+            off(ref(db, `traits/${char.hTraitID}`))
+            char.traitIDs.forEach(traitID => {
+                off(ref(db, `traits/${traitID}`))
+            });
+        })
 
     }, [])
 
