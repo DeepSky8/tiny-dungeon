@@ -7,15 +7,29 @@
     background-color: $menu-yellow;
     background-image: url("../../../src/assets/parchment_footer.png");
     background-size: 100%;
-}
+    // display: flex;
 
-h3 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
+    .float-left {
+        float: left;
+    }
+    .title {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
 }
 
 .header__link {
+    padding-top: $xs-size;
+
     text-decoration: none;
     color: $text-brown;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__castle--image {
+    max-height: $l-size;
+    margin-bottom: 2px;
 }

@@ -6,10 +6,20 @@ const Header = () => {
     return (
         <div className="header__container">
             <Link
-            className="header__link"
+                className="header__link"
                 to={"/"}
             >
-                <h3>Tiny Dungeon</h3>
+                <img
+                    className="header__castle--image"
+                    src="src\assets\castle-brown-small.png"
+                    alt="brown castle tower with door"
+                />
+                <div className="title">Tiny Dungeon</div>
+                <img
+                    className="header__castle--image"
+                    src="src\assets\castle-brown-small.png"
+                    alt="brown castle tower with door"
+                />
             </Link>
 
         </div>
@@ -17,3 +27,5 @@ const Header = () => {
 }
 
 export default Header
+
+//                 <div className="material-symbols-outlined filled float-left">home</div>
