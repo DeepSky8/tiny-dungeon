@@ -117,9 +117,12 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
             traitID: '',
         },
         {
-            title: 'Combat',
-            display: <CombatActions />,
-            traitID: '',
+            title: 'Familiar',
+            display: <DisplayFamiliar
+                char={char}
+                dispatchChar={dispatchChar} q
+            />,
+            traitID: hasFamiliarID,
         },
         {
             title: 'Weapons',
@@ -138,13 +141,11 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
             traitID: scrollsTraitID,
         },
         {
-            title: 'Familiar',
-            display: <DisplayFamiliar
-                char={char}
-                dispatchChar={dispatchChar} q
-            />,
-            traitID: hasFamiliarID,
+            title: 'Actions',
+            display: <CombatActions />,
+            traitID: '',
         },
+
     ]
 
     const tempArray = []
