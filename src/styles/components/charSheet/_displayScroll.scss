@@ -7,6 +7,7 @@
     background-color: $menu-yellow;
     color: $text-brown;
     user-select: none;
+    @include button--shadow--list;
     &.faded {
         color: $text-brown-faded;
     }
@@ -26,11 +27,9 @@
     padding-top: 5px;
 }
 
-.displayScroll__container--description {
-    border-left: 1px solid $text-brown;
-    border-right: 1px solid $text-brown;
-    border-bottom: 1px solid $text-brown;
-}
+// .displayScroll__container--description {
+
+// }
 
 .displayScroll__description {
     padding: $xs-size;

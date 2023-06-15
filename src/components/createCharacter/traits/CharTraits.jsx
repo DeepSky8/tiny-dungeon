@@ -115,7 +115,10 @@ const CharTraits = () => {
 
     return (
         <div className="charTraits__container">
-            <div>Select as many interesting traits as you'd like, then come back to the top to review them all</div>
+            <div className="charTraits__title bold centered">
+                Traits</div>
+            <div className="">
+                Select the traits as you'd like to review, then come back to the top to view them all</div>
             {
                 char.traitIDs.length > 0
                 &&

@@ -29,8 +29,11 @@ const CharFamiliar = () => {
 
     return (
         <div className="charFamiliar__container">
+            <div className="charFamiliar__title centered bold">
+                Familiar
+            </div>
             <Field
-                label={'Familiar Name'}
+                label={'Name'}
                 id={`name` + familiar.fID}
                 type={'text'}
                 value={familiar.fName}
@@ -43,9 +46,6 @@ const CharFamiliar = () => {
                 theme={'title'}
                 placeholder={'Django'}
             />
-            <div className="clickOpen__text--reminder">
-                Tap text to edit
-            </div>
             <Field
                 label={'Description'}
                 id={`description` + familiar.fID}
@@ -60,9 +60,6 @@ const CharFamiliar = () => {
                 theme={''}
                 placeholder={'A feline-shaped shadow, surprisingly frisky'}
             />
-            <div className="clickOpen__text--reminder">
-                Tap text to edit
-            </div>
             <DisplayRational />
         </div>
     )

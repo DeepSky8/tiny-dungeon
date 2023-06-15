@@ -3,6 +3,15 @@
     margin-bottom: $s-size;
 }
 
+.charWeaponGroup__title{
+    font-size: $calcFontSizeExtraLarge;
+    margin-top: $xs-size;
+}
+
 .charWeaponGroup__container--defaultWGs {
     margin-bottom: $s-size;
+}
+
+.charWeaponGroup__container--availWGs {
+    margin-top: $s-size;
 }

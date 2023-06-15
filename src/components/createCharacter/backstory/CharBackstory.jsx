@@ -26,6 +26,10 @@ const CharBackstory = () => {
     return (
         <div className="charBackstory__container">
 
+            <div className="charBackstory__title centered bold">
+                Backstory
+            </div>
+
             <Field
                 label={placeholder.name}
                 id={`name` + char.charID}

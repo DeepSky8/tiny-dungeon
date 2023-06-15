@@ -18,7 +18,7 @@ const displayText = {
 
     weaponGroup: {
         title: "--Weapon Group?--",
-        1: "There are three main weapon categories: Light Melee (one-handed), Heavy Melee (two-handed), and Ranged (reach out and touch someone)",
+        1: "There are three main weapon categories / proficiencies: Light Melee (one-handed), Heavy Melee (two-handed), and Ranged",
         2: "From this group, you select one specific type of weapon that you have Mastered. For example, you can select Light Melee Weapons as your Proficient group, and from that, you can select daggers as your Mastered weapon",
     },
 
@@ -78,19 +78,15 @@ const DisplayRational = ({ stage = useLocation().pathname.split('/')[2] }) => {
                     </div>
 
                     {displayText[stage][2] &&
-                        <span>
-                            <div className="displayRational__text">
-                                {displayText[stage][2]}
-                            </div>
-                        </span>
+                        <div className="displayRational__text">
+                            {displayText[stage][2]}
+                        </div>
                     }
 
                     {displayText[stage][3] &&
-                        <span>
-                            <div className="displayRational__text">
-                                {displayText[stage][3]}
-                            </div>
-                        </span>
+                        <div className="displayRational__text">
+                            {displayText[stage][3]}
+                        </div>
                     }
                 </div>
             }

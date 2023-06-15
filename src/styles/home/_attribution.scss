@@ -1,0 +1,22 @@
+.attribution__container {
+    user-select: none;
+    a {
+        color: $text-brown;
+    }
+}
+
+.attribution__published {
+    padding-top: $s-size;
+}
+
+.attribution__description {
+    padding: $s-size $s-size 0;
+}
+
+.attribution__trademarks {
+    padding: $s-size 0;
+}
+
+.attribution__copyright {
+    padding: $s-size;
+}

@@ -27,9 +27,9 @@ const ClickDescription = (
 
             <div className="clickDescription__container--description">
                 {show[displayKey] &&
-                    <span className="clickDescription__description">
+                    <div className="clickDescription__description">
                         {bodyText}
-                    </span>
+                    </div>
                 }
             </div>
         </div>

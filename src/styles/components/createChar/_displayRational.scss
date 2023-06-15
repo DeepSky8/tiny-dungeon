@@ -4,6 +4,7 @@
 }
 
 .displayRational__header--clickable {
+    @include button--shadow;
     @include button--border;
     background-color: $menu-yellow;
     color: $text-brown;
@@ -13,9 +14,9 @@
 }
 
 .displayRational__container--text {
-    padding: 0 $s-size;
+    padding: 0 $xs-size;
 }
 
 .displayRational__text {
-    padding: $s-size 0;
+    padding-top: $xs-size;
 }

@@ -161,10 +161,6 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
                                         theme={''}
                                     />
 
-                                    <div className="clickOpen__text--reminder">
-                                        Tap text to edit
-                                    </div>
-
                                     <div className="displayWeapon__container--range">
                                         <div className="displayWeapon__range--regular">
                                             <div className="displayWeapon__range--title">
