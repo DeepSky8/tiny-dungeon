@@ -9,16 +9,18 @@ $background-blue: #151517;
 // Text dark brown
 $text-brown: #221802;
 $text-brown-faded: transparentize($text-brown, 0.5);
+$text-brown-shadow: transparentize($text-brown, 0.8);
 $text-brown-placeholder: transparentize($text-brown, 0.25);
 
-
 // Menu Background
-$menu-yellow: #bb9f44;
+// $menu-yellow: #bb9f44;
+$menu-yellow: lighten(#bb9f44, 15%);
+
 $menu-yellow-hover: darken($menu-yellow, 10%);
 $menu-yellow-faded: transparentize($menu-yellow, 0.5);
+$menu-yellow-background: lighten(#bb9f44, 15%);
+
 // (214, 183, 79)
-
-
 
 // Breakpoints
 
@@ -40,6 +42,5 @@ $calcFontSizeMed: calc(12px + 3vmin);
 $calcFontSizeLarge: calc(12px + 4vmin);
 $calcFontSizeExtraLarge: calc(12px + 6vmin);
 $largeSymbols: calc(12px + 8vmin);
-
 
 $max-content-width: 60rem;

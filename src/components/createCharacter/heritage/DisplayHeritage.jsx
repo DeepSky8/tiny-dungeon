@@ -27,8 +27,6 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
     } = heritages.filter(selected => selected.hID === heritageID)[0]
     const [traits, setTraits] = useState([])
     const [show, dispatch] = useReducer(displayReducer, defaultDisplay)
-    const clickFor = 'Click for '
-
 
     useEffect(() => {
         onValue(ref(db, 'traits'), snapshot => {
@@ -60,45 +58,17 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                 />
             </span>
 
-            <span className="displayHeritage__container--text">
-                <TapOpen />
+            <div className="displayHeritage__container--text">
                 <ClickDescription
                     show={show}
                     dispatch={dispatch}
                     displayKey={'display1'}
                     closeAction={closeOne}
                     openAction={openOne}
-                    headerText={'Description'}
-                    bodyText={hDescription}
-                />
-
-                <ClickDescription
-                    show={show}
-                    dispatch={dispatch}
-                    displayKey={'display2'}
-                    closeAction={closeTwo}
-                    openAction={openTwo}
-                    headerText={'Physical Attributes'}
-                    bodyText={hPhysical}
-                />
-
-                <div
-                    className="clickDescription__heading"
-                    onClick={() => {
-                        show.display3 ?
-                            dispatch(closeThree())
-                            :
-                            dispatch(openThree())
-                    }}
-                >{show.display3 ? "" : clickFor}Stats</div>
-
-                <div className="clickDescription__container--description">
-                    {show.display3 &&
-                        <div>
-                            <span className="clickDescription--stats">
-                                <div>Hit points: {hHP}</div>
-                                <div>Heritage Trait:</div>
-                            </span>
+                    headerText={'Stats'}
+                    bodyText={
+                        <div className="clickDescription--stats">
+                            <div>Hit points: {hHP}</div>
                             <BulletedSelect
                                 objectArray={traits}
                                 IDArray={hTraitIDs}
@@ -111,14 +81,33 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                                 selectedHTraitID={hTraitID}
                             />
                         </div>
-
                     }
-                </div>
-            </span>
+                />
+
+                <ClickDescription
+                    show={show}
+                    dispatch={dispatch}
+                    displayKey={'display2'}
+                    closeAction={closeTwo}
+                    openAction={openTwo}
+                    headerText={'History'}
+                    bodyText={hDescription}
+                />
+
+                <ClickDescription
+                    show={show}
+                    dispatch={dispatch}
+                    displayKey={'display3'}
+                    closeAction={closeThree}
+                    openAction={openThree}
+                    headerText={'Physical Attributes'}
+                    bodyText={hPhysical}
+                />
+
+
+            </div>
         </div>
     )
 }
 
 export default DisplayHeritage
-
-

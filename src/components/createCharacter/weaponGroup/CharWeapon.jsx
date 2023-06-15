@@ -134,19 +134,41 @@ const CharWeapon = () => {
 
     return (
         <div className="charWeapon__container">
-            <div
-                className="charWeapon__text"
-            >
+            <div className="charWeapon__title centered bold">
+                <span>
+                    {weaponGroups.filter(title => (title.wgType !== 'u' && title.wgType !== 'm')).length > 0 ? 'Weapons' : ""}
+                </span>
+                <span>
+                    {
+                        (
+                            ((weaponGroups.filter(title => (title.wgType !== 'u' && title.wgType !== 'm'))).length > 0)
+                            &&
+                            ((weaponGroups.filter(title => (title.wgType === 'u' || title.wgType === 'm'))).length > 0)
+                        )
+                            ?
+                            '/'
+                            :
+                            ''
+                    }
+                </span>
+                <span>
+                    {weaponGroups.filter(title => (title.wgType === 'u' || title.wgType === 'm')).length > 0 ? 'Attacks' : ''}
+                </span>
+
+            </div>
+            <div className="charWeapon__text">
                 {
                     weaponGroups.length > 0
                     &&
-                    <span>
+                    <div>
                         Your character is proficient with {returnsTitleText({
-                            array1: alphabetizeTitles({ objectArray: weaponGroups, titlePrefix: 'wg' }).filter(title => (title.wgType !== 'u' && title.wgType !== 'm')),
-                            array2: alphabetizeTitles({ objectArray: weaponGroups, titlePrefix: 'wg' }).filter(title => (title.wgType === 'u' || title.wgType === 'm')),
+                            array1: alphabetizeTitles({ objectArray: weaponGroups.filter(title => (title.wgType !== 'u' && title.wgType !== 'm')), titlePrefix: 'wg' }),
+                            // .filter(title => (title.wgType !== 'u' && title.wgType !== 'm')),
+                            array2: alphabetizeTitles({ objectArray: weaponGroups.filter(title => (title.wgType === 'u' || title.wgType === 'm')), titlePrefix: 'wg' }),
+                            // .filter(title => (title.wgType === 'u' || title.wgType === 'm')),
                             titlePrefix: 'wg',
                         })}
-                    </span>
+                    </div>
                 }
 
             </div>

@@ -193,7 +193,7 @@ const charReducer = (state, action) => {
                 ...state,
                 weaponGroupObjects: newWGOs,
             }
-        case 'REMOVE_WEAPONGROUPIDOBJECT':
+        case 'REMOVE_WEAPONGROUPOBJECT':
             // PLEASE PASS IN action.weaponGroupObject <--- NOTE SINGULAR
 
             const filteredWGOs = (

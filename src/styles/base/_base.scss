@@ -1,7 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: $menu-yellow;
+  background-color: $menu-yellow-background;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 :root {

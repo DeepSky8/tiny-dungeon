@@ -6,11 +6,19 @@
 
 .welcome__container--logo {
     padding-bottom: 16vh;
+    width: 100%;
 }
 
 .welcome__logo--image {
     max-width: 90vw;
     max-height: 25vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.welcome__container--buttons {
+    padding-bottom: $xl-size;
 }
 
 .welcome__container--button {
@@ -21,23 +29,38 @@
     max-width: 90vw;
     max-height: 25vh;
     box-shadow: 0 5px 27px 2px $text-brown;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: $text-brown-shadow;
+
 
     &.faded {
-        opacity: 0.8;
+        opacity: 0.6;
     }
 }
 
 .welcome__container--attribution {
-    display: flex;
-    justify-content: center;
+    display: block;
+    // position: absolute;
+    // bottom: -0vh;
+    // margin-bottom: 10px;
+    // justify-content: center;
+    // margin-left: auto;
+    // margin-right: auto;
+    text-align: center;
 }
 
 .welcome__attribution--link {
     color: $text-brown;
-    position: absolute;
+    // position: fixed;
     bottom: -0vh;
     margin-bottom: 10px;
-    text-decoration: none;
+    text-decoration: underline;
+    // margin-left: auto;
+    // margin-right: auto;
+    // display: inline-block;
+    transform: translateX(-50%);
 }
 
 @media only screen and (min-device-width: $desktop-breakpoint) {

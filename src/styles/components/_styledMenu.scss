@@ -12,6 +12,7 @@
     display: block;
     font-weight: bold;
     padding: 2px;
+    @include button--shadow;
 }
 
 .sMenu__tray {
@@ -21,6 +22,7 @@
     transform: translateX(-50%);
     max-width: 75%;
     min-width: max-content;
+    @include button--shadow--list;
 }
 
 .sMenu__option {

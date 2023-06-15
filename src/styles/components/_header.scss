@@ -4,11 +4,13 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: $menu-yellow;
-    // background-image: url("../../../src/assets/parchment_footer.png");
+    background-color: $menu-yellow-background;
+    // background-image: url("../../../src/assets/parchment_large-header.png");
     // background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_footer.png?alt=media&token=68176bdf-c406-49b5-9b2d-742359106ddf");
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_header.png?alt=media&token=e1c3eec6-3538-47f6-81aa-ba6b09d0a0ae");
+    // background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_header.png?alt=media&token=e1c3eec6-3538-47f6-81aa-ba6b09d0a0ae");
     background-size: 100%;
+    // background-image: url('https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_small.png?alt=media&token=47a561c9-751f-4a10-8f7b-72a8611e1b8d');
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_large-header.png?alt=media&token=5d2bddfb-dd3d-484d-b579-47366641a643");
 
     .float-left {
         float: left;

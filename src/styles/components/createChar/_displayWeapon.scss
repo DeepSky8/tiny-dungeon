@@ -1,9 +1,9 @@
-
 .displayWeapon__heading--clickable {
     @include button--border;
     background-color: $menu-yellow;
     color: $text-brown;
     user-select: none;
+    @include button--shadow--list;
 }
 
 .displayWeapon__heading--title {
@@ -50,6 +50,7 @@
     user-select: contain;
     justify-content: center;
     text-align: center;
+    padding-top: $xs-size;
 }
 
 .displayWeapon__container--range {
@@ -69,6 +70,6 @@
     padding: $xs-size;
 }
 
-.displayWeapon__container--weaponGroup{
+.displayWeapon__container--weaponGroup {
     padding-bottom: $xs-size;
 }

@@ -43,11 +43,15 @@ const returnsTitleText = ({ array1, type1 = ' weapons', array2, type2 = ' attack
                 no
     )
     return (
-        joinedTitles2 === no
+        (joinedTitles1 === no && joinedTitles2 !== no)
             ?
-            joinedTitles1 + type1
+            joinedTitles2 + type2
             :
-            [(joinedTitles1 + type1), (joinedTitles2 + type2)].join(", and ")
+            joinedTitles2 === no
+                ?
+                joinedTitles1 + type1
+                :
+                [(joinedTitles1 + type1), (joinedTitles2 + type2)].join(", and ")
 
     )
 }

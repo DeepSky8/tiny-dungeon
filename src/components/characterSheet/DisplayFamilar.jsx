@@ -35,7 +35,7 @@ const DisplayFamiliar = ({ char, dispatchChar }) => {
                 blur={() => {
                     handleSaveFamiliar()
                 }}
-                theme={'title'}
+                theme={'title bold'}
                 placeholder={'Django'}
             />
 

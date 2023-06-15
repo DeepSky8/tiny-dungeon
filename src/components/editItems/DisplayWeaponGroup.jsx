@@ -4,6 +4,7 @@ import { weaponGroupReducer } from "../../reducers/weaponReducer";
 import {
     removeWGDisRangeID,
     removeWGRangeID,
+    startSaveWeaponGroup,
     updateWGAttackTurn,
     updateWGDamage,
     updateWGDescription,
@@ -41,6 +42,22 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
         dispatchWG(removeWGDisRangeID(id))
     }
 
+    const saveWeaponGroup = () => {
+        // startSaveWeaponGroup({
+        //     wgID: wg.wgID,
+        //     wgType: wg.wgType,
+        //     wgTitle: wg.wgTitle,
+        //     wgDescription: wg.wgDescription,
+        //     wgDamage: wg.wgDamage,
+        //     wgAttackTurn: wg.wgAttackTurn,
+        //     wgRangeIDs: wg.wgRangeIDs,     // c,n,f
+        //     wgDisRangeIDs: wg.wgDisRangeIDs,  // c,n,f
+        //     wgHTrait: wg.wgHTrait,       // Set by Heritage
+        //     wgTrait: wg.wgTrait,        // Set by Trait
+        // })
+        startSaveWeaponGroup({ ...wg })
+    }
+
     return (
         <div className="displayWeaponGroup__container">
             <Field
@@ -52,7 +69,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGType(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
             />
@@ -67,7 +84,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGTitle(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
             />
@@ -81,8 +98,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGDescription(e.target.value))
                 }}
                 blur={() => {
-                    const formatValue = wg.wgDescription.replace(/[\n\r]/gm, ' ');
-                    dispatchWG(updateWGDescription(formatValue))
+                    saveWeaponGroup()
                 }}
                 theme={''}
             />
@@ -96,7 +112,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGDamage(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
             />
@@ -110,7 +126,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGAttackTurn(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
             />
@@ -122,7 +138,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGRangeIDs(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
                 array={wgRange}
@@ -146,7 +162,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGDisRangeIDs(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
                 array={wgRange}
@@ -172,7 +188,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGHTrait(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
             />
@@ -186,7 +202,7 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
                     dispatchWG(updateWGTrait(e.target.value))
                 }}
                 blur={() => {
-
+                    saveWeaponGroup()
                 }}
                 theme={''}
             />

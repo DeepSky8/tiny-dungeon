@@ -39,14 +39,12 @@
 }
 
 .charSheet__spacer {
-    padding: $s-size;
+    padding: $xs-size;
 }
 
 .charSheet__nameHeritage {
     display: flexbox;
-    text-align: center;
-    font-weight: bold;
-    font-size: $calcFontSizeLarge;
+    font-size: $calcFontSizeExtraLarge;
 }
 
 .charSheet__belief {

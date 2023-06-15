@@ -10,12 +10,18 @@
     padding: 2px;
     text-align: center;
     user-select: none;
+    @include button--shadow--list;
 }
 
-.clickDescription__container--description {
-    padding: 0 $s-size;
+// .clickDescription__container--description {
+//     // margin: $xs-size;
+// }
+
+.clickDescription__description {
+    margin: $xs-size 0;
 }
 
 .clickDescription--stats {
     text-align: center;
+    margin: $xs-size 0;
 }

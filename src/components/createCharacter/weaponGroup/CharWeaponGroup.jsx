@@ -3,7 +3,8 @@ import { useOutletContext } from "react-router";
 import {
     setDefaultWeaponGroupObjects,
     addWeaponGroupObject,
-    clearWeaponGroupObjects
+    clearWeaponGroupObjects,
+    removeWeaponGroupObject
 } from "../../../actions/charActions";
 import sortWGs from "../../../functions/sortWGs";
 import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
@@ -84,19 +85,27 @@ const CharWeaponGroup = () => {
         // Reset the default weapon group objects
         dispatchChar(setDefaultWeaponGroupObjects(defaultWeaponGroups))
 
-        // Add the newly-selected weapon group object
-        dispatchChar(addWeaponGroupObject(wg))
+        if (char.weaponGroupObjects.filter(wgO => wgO.wgType === wg.wgType).length > 0) {
+            // If weapon group was previously selected
+            // remove it
+            dispatchChar(removeWeaponGroupObject(wg))
+        } else {
+            // Otherwise, add the newly-selected weapon group object to char
+            dispatchChar(addWeaponGroupObject(wg))
+        }
     }
 
     return (
         <div className="charWeaponGroup__container">
-
+            <div
+                className="charWeaponGroup__title bold centered"
+            >Weapon Groups</div>
             {
                 defaultWeaponGroups.length > 0
                 &&
                 <div className="charWeaponGroup__container--defaultWGs">
                     <div className="charWeaponGroup__text--explanation">
-                        Your character can use the following weapon groups due to trait selection:
+                        Your character can use the following weapon groups due to trait selection
                     </div>
                     <TapOpen />
                     {defaultWeaponGroups.map(wg => {
@@ -113,15 +122,15 @@ const CharWeaponGroup = () => {
                             />
                         )
                     })}
+                    <hr className="hr__brown" />
                 </div>
             }
-            <hr className="hr__brown" />
             {
                 availWeaponGroups.length > 0
                 &&
                 <div className="charWeaponGroup__container--availWGs">
                     <div className="charWeaponGroup__text--explanation">
-                        The following Weapon Groups are available for your character:
+                        The following Weapon Groups are available for your character
                     </div>
                     <TapOpen />
                     {availWeaponGroups.map(wg => {

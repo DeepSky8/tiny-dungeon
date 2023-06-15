@@ -17,127 +17,90 @@ import DisplayFamiliar from "./DisplayFamilar";
 import DisplayScrolls from "./DisplayScrolls";
 import CombatActions from "./CombatActions";
 import addDisplayActions from "../../functions/addDisplayActions";
-import Display from "./Display";
+import Display from "./DisplayMenu";
+import { useNavigate } from "react-router";
 
 const CharacterSheet = () => {
+    let navigate = useNavigate()
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
     const [char, dispatchChar] = useReducer(charReducer, localChar)
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
-    const [hTrait, dispatchHTrait] = useReducer(traitReducer, defaultTrait)
-    const [traits, setTraits] = useState([])
-    const [menuObjects, setMenuObjects] = useState([])
-
-    // Spell Reader - trait
-    const scrollsTraitID = '-NV0C_daHy4EQZHergVr'
-    // Familiar - trait
-    const hasFamiliarID = '-NV0BAgAYVUBA8OA3_LE'
-
-    const protoMenuObjects = [
-        {
-            title: 'Heritage',
-            display: <DisplayDescription
-                char={char}
-                dispatchChar={dispatchChar}
-                heritage={heritage}
-            />,
-            traitID: '',
-        },
-        {
-            title: 'Health',
-            display: <DisplayHealth
-                char={char}
-                dispatchChar={dispatchChar}
-            />,
-            traitID: '',
-        },
-        {
-            title: 'Traits',
-            display: <DisplayTraits
-                heritageTrait={hTrait}
-                traits={traits} />,
-            traitID: '',
-        },
-        {
-            title: 'Familiar',
-            display: <DisplayFamiliar
-                char={char}
-                dispatchChar={dispatchChar}
-            />,
-            traitID: hasFamiliarID,
-        },
-        {
-            title: 'Scrolls',
-            display: <DisplayScrolls
-                scrolls={char.scrolls}
-                dispatchChar={dispatchChar}
-            />,
-            traitID: scrollsTraitID,
-        },
-        {
-            title: 'Combat',
-            display: <CombatActions />,
-            traitID: '',
-        },
-        {
-            title: 'Weapons',
-            display: <DisplayWeapons
-                char={char}
-                dispatchChar={dispatchChar}
-            />,
-            traitID: '',
-        },
-
-    ]
+    // const [hTrait, dispatchHTrait] = useReducer(traitReducer, defaultTrait)
+    // const [traits, setTraits] = useState([])
+    // const [menuObjects, setMenuObjects] = useState([])
 
     useEffect(() => {
-        // Get Heritage
+        if (localChar === undefined) {
+            navigate('/')
+        }
+    }, [])
+
+    // // Spell Reader - trait
+    // const scrollsTraitID = '-NV0C_daHy4EQZHergVr'
+    // // Familiar - trait
+    // const hasFamiliarID = '-NV0BAgAYVUBA8OA3_LE'
+
+    // Get Heritage
+    useEffect(() => {
         onValue(ref(db, `heritages/${char.heritageID}`), snapshot => {
             if (snapshot.exists()) {
                 dispatchHeritage(loadHeritage(snapshot.val()))
             }
         }
-            // , {
-            //     onlyOnce: true
-            // }
+            , {
+                onlyOnce: true
+            }
         )
 
-        // Get Heritage Trait
-        onValue(ref(db, `traits/${char.hTraitID}`), snapshot => {
-            if (snapshot.exists()) {
-                dispatchHTrait(loadTrait(snapshot.val()))
-            }
-        }
-            // , {
-            //     onlyOnce: true
-            // }
-        )
-
-        // Get Traits
-        const tempTraitArray = []
-        char.traitIDs.forEach(traitID => {
-            onValue(ref(db, `traits/${traitID}`), snapshot => {
-                if (snapshot.exists()) {
-                    tempTraitArray.push(snapshot.val())
-                }
-            }
-                // , {
-                //     onlyOnce: true
-                // }
-            )
-        });
-        setTraits(tempTraitArray);
-
-        return (() => {
-            off(ref(db, `heritages/${char.heritageID}`))
-            off(ref(db, `traits/${char.hTraitID}`))
-            char.traitIDs.forEach(traitID => {
-                off(ref(db, `traits/${traitID}`))
-            });
-        })
+        // return (() => {
+        //     off(ref(db, `heritages/${char.heritageID}`))
+        // })
 
     }, [])
 
+    // // Get Heritage Trait
+    // useEffect(() => {
+    //     onValue(ref(db, `traits/${char.hTraitID}`), snapshot => {
+    //         if (snapshot.exists()) {
+    //             dispatchHTrait(loadTrait(snapshot.val()))
+    //         }
+    //     }
+    //         , {
+    //             onlyOnce: true
+    //         }
+    //     )
 
+    //     // return (() => {
+    //     //     off(ref(db, `traits/${char.hTraitID}`))
+    //     // })
+
+    // }, [])
+
+    // // Get Traits
+    // useEffect(() => {
+    //     const tempTraitArray = []
+    //     char.traitIDs.forEach(traitID => {
+    //         onValue(ref(db, `traits/${traitID}`), snapshot => {
+    //             if (snapshot.exists()) {
+    //                 tempTraitArray.push(snapshot.val())
+    //             }
+    //         }
+    //             , {
+    //                 onlyOnce: true
+    //             }
+    //         )
+    //     });
+    //     setTraits(tempTraitArray);
+
+    //     // return (() => {
+    //     //     char.traitIDs.forEach(traitID => {
+    //     //         off(ref(db, `traits/${traitID}`))
+    //     //     });
+    //     // })
+
+    // }, [])
+
+    // Save locally
     useEffect(() => {
         setLocalChar(char)
 
@@ -147,25 +110,88 @@ const CharacterSheet = () => {
         }
     }, [char])
 
-    useEffect(() => {
-        const tempArray = []
+    // // Evaluate traits, design menu
+    // useEffect(() => {
+    //     const protoMenuObjects = [
+    //         {
+    //             title: 'Heritage',
+    //             display: <DisplayDescription
+    //                 char={char}
+    //                 dispatchChar={dispatchChar}
+    //                 heritage={heritage}
+    //             />,
+    //             traitID: '',
+    //         },
+    //         {
+    //             title: 'Health',
+    //             display: <DisplayHealth
+    //                 char={char}
+    //                 dispatchChar={dispatchChar}
+    //             />,
+    //             traitID: '',
+    //         },
+    //         {
+    //             title: 'Traits',
+    //             display: <DisplayTraits
+    //                 heritageTrait={hTrait}
+    //                 traits={traits} />,
+    //             traitID: '',
+    //         },
+    //         {
+    //             title: 'Combat',
+    //             display: <CombatActions />,
+    //             traitID: '',
+    //         },
+    //         {
+    //             title: 'Weapons',
+    //             display: <DisplayWeapons
+    //                 char={char}
+    //                 dispatchChar={dispatchChar}
+    //             />,
+    //             traitID: '',
+    //         },
+    //         {
+    //             title: 'Scrolls',
+    //             display: <DisplayScrolls
+    //                 scrolls={char.scrolls}
+    //                 dispatchChar={dispatchChar}
+    //             />,
+    //             traitID: scrollsTraitID,
+    //         },
+    //         {
+    //             title: 'Familiar',
+    //             display: <DisplayFamiliar
+    //                 char={char}
+    //                 dispatchChar={dispatchChar} q
+    //             />,
+    //             traitID: hasFamiliarID,
+    //         },
+    //     ]
 
-        protoMenuObjects.forEach(object => {
-            if (
-                (object.traitID === '')
-                ||
-                (char.traitIDs.includes(object.traitID))
-            ) {
-                tempArray.push(object)
-            }
-        })
-        setMenuObjects(tempArray)
-    }, [])
+    //     const tempArray = []
+
+    //     protoMenuObjects.forEach(object => {
+    //         if (
+    //             (object.traitID === '')
+    //             ||
+    //             (char.traitIDs.includes(object.traitID))
+    //         ) {
+    //             tempArray.push(object)
+    //         }
+    //     })
+
+
+    //     // setMenuObjects(tempArray)
+
+
+    //     setMenuObjects(addDisplayActions(tempArray))
+    // }, [char.heritage])
+
 
     return (
         <div className="charSheet__container">
             <div className="charSheet__spacer">
-                <div className="charSheet__nameHeritage">
+                <div className="charSheet__nameHeritage bold centered">
                     {`${char.charName}, ${heritage.hTitle}`}
                 </div>
                 <div className="charSheet__belief">
@@ -186,7 +212,8 @@ const CharacterSheet = () => {
                 </div>
 
                 <Display
-                    menuObjects={addDisplayActions(menuObjects)}
+                    char={char}
+                    dispatchChar={dispatchChar}
                 />
             </div>
         </div>
@@ -194,3 +221,5 @@ const CharacterSheet = () => {
 }
 
 export default CharacterSheet
+
+// {`${char.charName}, ${heritage.hTitle}`}

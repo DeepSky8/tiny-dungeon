@@ -3,3 +3,24 @@
     border-width: 1px;
     border-color: $text-brown;
 }
+
+@mixin button--outline {
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: $text-brown;
+}
+
+@mixin button--shadow {
+    // box-shadow: 0 5px 27px 2px $text-brown;
+    // box-shadow: 0 0 10px $text-brown;
+    box-shadow: 0 8px 20px 2px $text-brown;
+}
+
+@mixin button--shadow--list {
+    box-shadow: 0 10px 20px 2px $text-brown;
+}
+
+@mixin footer--shadow{
+    box-shadow: 0 -4px 7px 2px $text-brown;
+
+}
