@@ -4,7 +4,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 const Welcome = () => {
     let navigate = useNavigate();
-    const [localChar, setLocalChar] = useLocalStorageState('localChar')
+    const [localChar,] = useLocalStorageState('localChar')
     const [charCreated, setCharCreated] = useState(false)
 
     useEffect(() => {
@@ -27,9 +27,6 @@ const Welcome = () => {
         ) {
             navigate('/characterSheet')
         }
-        // else {
-        //     navigate('/newCharacter/heritage')
-        // }
     }
 
 
@@ -75,5 +72,3 @@ const Welcome = () => {
 }
 
 export default Welcome
-
-// localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0

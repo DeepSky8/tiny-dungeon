@@ -105,7 +105,7 @@ const CharWeaponGroup = () => {
                 &&
                 <div className="charWeaponGroup__container--defaultWGs">
                     <div className="charWeaponGroup__text--explanation">
-                        Your character can use the following weapon groups due to trait selection
+                        Your adventurer can use the following weapon groups due to trait selection
                     </div>
                     <TapOpen />
                     {defaultWeaponGroups.map(wg => {
@@ -130,7 +130,7 @@ const CharWeaponGroup = () => {
                 &&
                 <div className="charWeaponGroup__container--availWGs">
                     <div className="charWeaponGroup__text--explanation">
-                        The following Weapon Groups are available for your character
+                        The following Weapon Groups are available for your adventurer
                     </div>
                     <TapOpen />
                     {availWeaponGroups.map(wg => {

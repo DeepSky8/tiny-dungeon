@@ -78,33 +78,6 @@ const CharWeapon = () => {
         const sortedWGs = alphabetizeTitles({ objectArray: tempArray, titlePrefix: 'wg' })
         setWeaponGroups(sortedWGs)
 
-        // onValue(ref(db, `weaponGroups`), snapshot => {
-        //     const tempArray = [];
-        //     if (snapshot.exists()) {
-        //         snapshot.forEach(snap => {
-        //             if (
-        //                 (
-        //                     char.weaponGroupIDs.includes(snap.val().wgID)
-        //                 )
-        //                 // &&
-        //                 // (
-        //                 //     snap.val().wgID !== '-NV6Yyve_GUxV4OsizI2' // Unarmed weapon group does not create a weapon
-        //                 // )
-        //             ) {
-        //                 tempArray.push(snap.val())
-        //             }
-        //         })
-        //     }
-        //     // const tempFiltered = tempArray.filter(wg => char.weaponGroupIDs.includes(wg.wgID))
-        //     setWeaponGroups(tempArray)
-        // }, {
-        //     onlyOnce: true
-        // })
-
-        // return (() => {
-        //     off(ref(db, `weaponGroups`))
-        // })
-
     }, [])
 
     // Get all Weapons

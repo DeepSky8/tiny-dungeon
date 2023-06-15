@@ -12,8 +12,6 @@ import ClickDescription from "../../display/ClickDescription";
 import BulletedSelect from "../../display/BulletedSelect";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
-import TapOpen from "../../TapOpen";
-
 
 const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTraitID }) => {
     const {

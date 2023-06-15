@@ -18,7 +18,7 @@ import {
 import Menu from "../display/Menu";
 import BulletedRemove from "../display/BulletedRemove";
 
-import { wgRange, wgTypes } from "../../objectsArrays/createObjectArrays/weaponGroupObjectArray";
+import { wgRange } from "../../objectsArrays/createObjectArrays/weaponGroupObjectArray";
 
 const DisplayWeaponGroup = ({ weaponGroup }) => {
     const [wg, dispatchWG] = useReducer(weaponGroupReducer, weaponGroup)
@@ -43,18 +43,6 @@ const DisplayWeaponGroup = ({ weaponGroup }) => {
     }
 
     const saveWeaponGroup = () => {
-        // startSaveWeaponGroup({
-        //     wgID: wg.wgID,
-        //     wgType: wg.wgType,
-        //     wgTitle: wg.wgTitle,
-        //     wgDescription: wg.wgDescription,
-        //     wgDamage: wg.wgDamage,
-        //     wgAttackTurn: wg.wgAttackTurn,
-        //     wgRangeIDs: wg.wgRangeIDs,     // c,n,f
-        //     wgDisRangeIDs: wg.wgDisRangeIDs,  // c,n,f
-        //     wgHTrait: wg.wgHTrait,       // Set by Heritage
-        //     wgTrait: wg.wgTrait,        // Set by Trait
-        // })
         startSaveWeaponGroup({ ...wg })
     }
 
