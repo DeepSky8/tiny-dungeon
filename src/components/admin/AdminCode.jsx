@@ -28,8 +28,6 @@ const AdminCode = () => {
     // }, [])
 
     const checkCode = () => {
-        console.log('adminCodes', codes.admin)
-        console.log('enteredCode', enteredCode)
         if (codes.admin.includes(parseInt(enteredCode))) {
             setLocalAdmin(parseInt(enteredCode))
             navigate('/admin')
