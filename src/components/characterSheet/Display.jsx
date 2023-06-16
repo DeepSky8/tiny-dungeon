@@ -16,6 +16,7 @@ import { onValue, ref } from "firebase/database";
 import { db } from "../../api/firebase";
 import { loadHeritage } from "../../actions/heritageActions";
 import { loadTrait } from "../../actions/traitActions";
+import DisplayNotes from "./DisplayNotes";
 
 // Spell Reader - trait
 const scrollsTraitID = '-NV0C_daHy4EQZHergVr'
@@ -145,7 +146,11 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
             display: <CombatActions />,
             traitID: '',
         },
-
+        {
+            title: 'Notes',
+            display: <DisplayNotes />,
+            traitID: '',
+        },
     ]
 
     const tempArray = []
