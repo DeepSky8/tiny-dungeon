@@ -1,5 +1,4 @@
 .createWeapon__container {
-    background-image: url("../../../src/assets/parchment_small.png");
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -14,7 +13,6 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .createWeapon__container {
-        background-image: url("../../../src/assets/parchment_large.png");
         font-size: $calcFontSize;
     }
 }

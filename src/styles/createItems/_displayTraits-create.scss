@@ -1,5 +1,4 @@
 .displayTraits__container--create {
-    background-image: url("../../../src/assets/parchment_small.png");
     background-size: 100vw 100vh;
     min-height: 100vh;
     font-size: $calcFontSizeLarge;
@@ -9,7 +8,6 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .displayTraits__container--create {
-        background-image: url("../../../src/assets/parchment_large.png");
         font-size: $calcFontSize;
     }
 }

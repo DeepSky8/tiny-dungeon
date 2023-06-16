@@ -60,7 +60,7 @@ const Welcome = () => {
                         <img
                             className="welcome__button"
                             alt='Character Creation button'
-                            src="src\assets\creation-centered-transparent-brown.png" />
+                            src="https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/creation-centered-transparent-brown.png?alt=media&token=153d7de6-f9c6-46c4-bf3b-9abae9923fa5" />
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@ const Welcome = () => {
                         <img
                             className={`welcome__button ` + (charCreated ? "" : 'faded')}
                             alt='Character Sheet button'
-                            src="src\assets\characterSheet-button-transparent-brown.png" />
+                            src="https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/characterSheet-button-transparent-brown.png?alt=media&token=c218b7fe-d13e-4aac-bd14-85258e889be9" />
                     </div>
                 </div>
             </div>
