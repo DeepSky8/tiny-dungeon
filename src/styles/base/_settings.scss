@@ -14,12 +14,12 @@ $text-brown-placeholder: transparentize($text-brown, 0.25);
 
 // Menu Background
 // $menu-yellow: #bb9f44;
-$menu-yellow: lighten(#bb9f44, 15%);
-
+$menu-yellow: #cfbc7c;
+// $menu-yellow: lighten(#bb9f44, 15%);
 $menu-yellow-hover: darken($menu-yellow, 10%);
 $menu-yellow-faded: transparentize($menu-yellow, 0.5);
-$menu-yellow-background: lighten(#bb9f44, 15%);
-
+// $menu-yellow-background: lighten(#bb9f44, 15%);
+$menu-yellow-background: #cfbc7c;
 // (214, 183, 79)
 
 // Breakpoints
