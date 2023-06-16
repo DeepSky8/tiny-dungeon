@@ -26,6 +26,7 @@ import AuthCode from "../components/authenticate/AuthCode.jsx";
 import AuthWrapper from "../components/authenticate/AuthWrapper.jsx";
 import AuthWrapperCreate from "../components/authenticate/AuthWrapperCreate.jsx";
 import AdminPage from "../components/admin/AdminPage.jsx";
+import AdminCode from "../components/admin/AdminCode.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -98,73 +99,78 @@ const AppRouter = createBrowserRouter([
                     },
                 ]
             },
-        ]
-    },
-    {
-        path: '/admin',
-        element: <AdminPage />,
-        errorElement: <NotFoundPage />,
-        children: [
+            {
+                path: '/adminAccess',
+                errorElement: <NotFoundPage />,
+                element: <AdminCode />,
+            },
+            {
+                element: <AuthWrapperCreate />,
+                errorElement: <NotFoundPage />,
+                children: [
+                    {
+                        path: '/admin',
+                        element: <AdminPage />,
+                        errorElement: <NotFoundPage />,
+                        children: [
+                            {
+                                path: "createTrait",
+                                errorElement: <NotFoundPage />,
+                                element: <CreateTrait />
+                            },
+                            {
+                                path: "createHeritage",
+                                errorElement: <NotFoundPage />,
+                                element: <CreateHeritage />
+                            },
+                            {
+                                path: "displayTraits",
+                                errorElement: <NotFoundPage />,
+                                element: <DisplayTraits />
+                            },
+                            {
+                                path: "displayHeritages",
+                                errorElement: <NotFoundPage />,
+                                element: <DisplayHeritages />
+                            },
+                            {
+                                path: "displayWeaponGroups",
+                                errorElement: <NotFoundPage />,
+                                element: <DisplayWeaponGroups />
+                            },
+                            {
+                                path: "displayWeapons",
+                                errorElement: <NotFoundPage />,
+                                element: <DisplayWeapons />
+                            },
+                            {
+                                path: "displayScrolls",
+                                errorElement: <NotFoundPage />,
+                                element: <DisplayScrolls />
+                            },
+                            {
+                                path: "createScroll",
+                                errorElement: <NotFoundPage />,
+                                element: <CreateScroll />
+                            },
+                            {
+                                path: "createWeaponGroup",
+                                errorElement: <NotFoundPage />,
+                                element: <CreateWeaponGroup />
+                            },
+                            {
+                                path: "createWeapon",
+                                errorElement: <NotFoundPage />,
+                                element: <CreateWeapon />
+                            },
+                        ]
+                    },
 
+                ]
+            },
         ]
     },
 
-    {
-        element: <AuthWrapperCreate />,
-        errorElement: <NotFoundPage />,
-        children: [
-            {
-                path: "createTrait",
-                errorElement: <NotFoundPage />,
-                element: <CreateTrait />
-            },
-            {
-                path: "createHeritage",
-                errorElement: <NotFoundPage />,
-                element: <CreateHeritage />
-            },
-            {
-                path: "displayTraits",
-                errorElement: <NotFoundPage />,
-                element: <DisplayTraits />
-            },
-            {
-                path: "displayHeritages",
-                errorElement: <NotFoundPage />,
-                element: <DisplayHeritages />
-            },
-            {
-                path: "displayWeaponGroups",
-                errorElement: <NotFoundPage />,
-                element: <DisplayWeaponGroups />
-            },
-            {
-                path: "displayWeapons",
-                errorElement: <NotFoundPage />,
-                element: <DisplayWeapons />
-            },
-            {
-                path: "displayScrolls",
-                errorElement: <NotFoundPage />,
-                element: <DisplayScrolls />
-            },
-            {
-                path: "createScroll",
-                errorElement: <NotFoundPage />,
-                element: <CreateScroll />
-            },
-            {
-                path: "createWeaponGroup",
-                errorElement: <NotFoundPage />,
-                element: <CreateWeaponGroup />
-            },
-            {
-                path: "createWeapon",
-                errorElement: <NotFoundPage />,
-                element: <CreateWeapon />
-            },
-        ]
-    },
 
 
 ])

@@ -1,42 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
+import React, { useState } from "react";
 import Field from "../display/Field";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import useLocalStorageState from "use-local-storage-state";
-import strung from "../../functions/strung";
 
 const AdminCode = () => {
+    const [codes] = useOutletContext();
     let navigate = useNavigate()
-    const { passthrough } = useParams()
-    const nextLink = passthrough ? strung(passthrough.split('('), '/') : "/"
-    const [localCode, setLocalCode] = useLocalStorageState('localCode')
-    const [authCodes, setAuthCodes] = useState([])
-    const [enteredCode, setEnteredCode] = useState(localCode ? localCode : '')
+    const [localAdmin, setLocalAdmin] = useLocalStorageState('localAdmin')
+    // const [authCodes, setAuthCodes] = useState([])
+    const [enteredCode, setEnteredCode] = useState(localAdmin ? localAdmin : '')
     const [message, setMessage] = useState('')
 
     const errorMessage = 'Double-check that code, please'
-    const successMessage = 'Success! Now authenticating'
 
-    useEffect(() => {
-        onValue(ref(db, 'authCodes'), snapshot => {
-            const tempArray = []
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => tempArray.push(snap.val()))
-            }
-            setAuthCodes(tempArray)
-        })
+    // useEffect(() => {
+    //     onValue(ref(db, 'adminCodes'), snapshot => {
+    //         const tempArray = []
+    //         if (snapshot.exists()) {
+    //             snapshot.forEach(snap => tempArray.push(snap.val()))
+    //         }
+    //         setAuthCodes(tempArray)
+    //     })
 
-        return (() => {
-            off(ref(db, 'authCodes'))
-        })
-    }, [])
+    //     return (() => {
+    //         off(ref(db, 'adminCodes'))
+    //     })
+    // }, [])
 
     const checkCode = () => {
-        if (authCodes.includes(parseInt(enteredCode))) {
-            setLocalCode(parseInt(enteredCode))
-            setMessage(successMessage)
-            setTimeout(() => { navigate(nextLink) }, 2000)
+        console.log('adminCodes', codes.admin)
+        console.log('enteredCode', enteredCode)
+        if (codes.admin.includes(parseInt(enteredCode))) {
+            setLocalAdmin(parseInt(enteredCode))
+            navigate('/admin')
         } else {
             setMessage(errorMessage)
         }
@@ -45,11 +41,11 @@ const AdminCode = () => {
     return (
         <div className="authCode__container authCode__spacer--xsmall centered">
             <div className="bold centered extraLarge">
-                Join Game
+                Admin
             </div>
             <div className="authCode__container--text">
                 <div className="authCode__text">
-                    Please enter a game code
+                    Please enter a code
                 </div>
 
             </div>

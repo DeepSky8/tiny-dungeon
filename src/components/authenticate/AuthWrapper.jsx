@@ -3,10 +3,10 @@ import { Navigate, Outlet, useOutletContext } from "react-router";
 import useLocalStorageState from "use-local-storage-state";
 
 const AuthWrapper = () => {
-    const [authCodes] = useOutletContext();
+    const [codes] = useOutletContext();
     const [localCode,] = useLocalStorageState('localCode')
 
-    if (localCode !== undefined && authCodes.includes(parseInt(localCode))) {
+    if (localCode !== undefined && codes.auth.includes(parseInt(localCode))) {
         return (
             <div>
                 <Outlet />
