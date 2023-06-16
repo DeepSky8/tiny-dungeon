@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": "/",
+    "start_url": "https://tiny-dungeon.surge.sh/",
     "theme_color": "#cfbc7c",
     "background_color": "#cfbc7c",
     "display": "standalone",
