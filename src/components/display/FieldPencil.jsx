@@ -6,6 +6,7 @@ const Field = ({ label, aria = label, id, type, value, change, blur, theme, plac
         <div className="field__container">
             <span className={`field__container--description ${theme}`}>
                 <label
+                    className={theme}
                     aria-label={aria}
                     htmlFor={id}
                 >{label}</label>
