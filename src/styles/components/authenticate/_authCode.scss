@@ -1,0 +1,41 @@
+.authCode__container {
+    user-select: none;
+}
+
+.authCode__spacer--xsmall {
+    margin: $xs-size;
+}
+
+.authCode__spacer--medium {
+    margin: $m-size;
+}
+
+.authCode__container--text {
+    margin-top: $m-size;
+}
+
+.authCode__container--field {
+    margin-top: $m-size;
+    position: relative;
+    display: block;
+    // text-align: center;
+}
+
+.authCode__button--submit {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    font-size: $calcFontSize;
+    font-weight: bold;
+    padding: $xs-size;
+    width: 50%;
+    margin: $xs-size;
+    text-align: center;
+    user-select: none;
+    justify-content: space-around;
+    @include button--shadow;
+
+    &:focus {
+        outline-color: $text-brown;
+    }
+}

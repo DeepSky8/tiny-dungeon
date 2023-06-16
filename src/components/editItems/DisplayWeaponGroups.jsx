@@ -24,10 +24,6 @@ const DisplayWeaponGroups = () => {
         })
     }, [])
 
-    useEffect(() => {
-        console.log('weaponGroups', weaponGroups)
-    }, [weaponGroups])
-
     return (
         <div>
             {weaponGroups.length > 0

@@ -52,7 +52,7 @@ const DisplayHeritage = ({ heritage, dispatchChar, trade }) => {
                     displayKey={'display1'}
                     closeAction={closeOne}
                     openAction={openOne}
-                    headerText={'Trade'}
+                    headerText={'Family Trade'}
                     bodyText={
                         <div className="displayHeritage__spacer--trade">
                             <Field

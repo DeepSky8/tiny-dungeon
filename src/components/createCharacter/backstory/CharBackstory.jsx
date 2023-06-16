@@ -61,7 +61,7 @@ const CharBackstory = () => {
             />
 
             <Field
-                label={'Trade'}
+                label={'Family Trade'}
                 id={`trade` + char.charID}
                 type={'textarea'}
                 value={trade}

@@ -11,10 +11,7 @@ const DisplayWeapons = () => {
             const tempArray = [];
             if (snapshot.exists()) {
                 snapshot.forEach(weapon => {
-                    console.log('weapon', weapon.val())
-
                     tempArray.push(weapon.val())
-
                 })
             }
             setWeapons(tempArray)

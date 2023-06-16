@@ -1,7 +1,6 @@
 .welcome__container {
     user-select: none;
     padding: $s-size;
-    // display: flexbox;
 }
 
 .welcome__container--logo {
@@ -25,7 +24,7 @@
     padding-bottom: $s-size;
 }
 
-.welcome__creation--button {
+.welcome__button {
     max-width: 90vw;
     max-height: 25vh;
     box-shadow: 0 5px 27px 2px $text-brown;
@@ -42,24 +41,14 @@
 
 .welcome__container--attribution {
     display: block;
-    // position: absolute;
-    // bottom: -0vh;
-    // margin-bottom: 10px;
-    // justify-content: center;
-    // margin-left: auto;
-    // margin-right: auto;
     text-align: center;
 }
 
 .welcome__attribution--link {
     color: $text-brown;
-    // position: fixed;
     bottom: -0vh;
     margin-bottom: 10px;
     text-decoration: underline;
-    // margin-left: auto;
-    // margin-right: auto;
-    // display: inline-block;
     transform: translateX(-50%);
 }
 

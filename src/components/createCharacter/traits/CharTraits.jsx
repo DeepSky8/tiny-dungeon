@@ -118,7 +118,7 @@ const CharTraits = () => {
             <div className="charTraits__title bold centered">
                 Traits</div>
             <div className="">
-                Select the traits as you'd like to review, then come back to the top to view them all</div>
+                Select all the traits you'd like to review; they'll cluster here at the top for easy comparison</div>
             {
                 char.traitIDs.length > 0
                 &&
