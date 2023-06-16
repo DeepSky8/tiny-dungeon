@@ -27,6 +27,17 @@
     ::placeholder {
         color: $text-brown-placeholder;
     }
+
+    .field--input--number {
+        background-color: $menu-yellow-faded;
+        font-size: $calcFontSizeLarge;
+        @include button--border;
+        text-align: center;
+        user-select: contain;
+        overflow: auto;
+        position: relative;
+        max-width: 40%;
+    }
 }
 
 .field__container--textarea {

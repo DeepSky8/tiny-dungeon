@@ -5,6 +5,7 @@ import useLocalStorageState from "use-local-storage-state";
 const Welcome = () => {
     let navigate = useNavigate();
     const [localChar,] = useLocalStorageState('localChar')
+    const [localCode,] = useLocalStorageState('localCode')
     const [charCreated, setCharCreated] = useState(false)
 
     useEffect(() => {
@@ -19,13 +20,27 @@ const Welcome = () => {
         }
     }, [localChar])
 
+    const newCharClick = () => {
+        if (localCode) {
+            navigate('/newCharacter/heritage')
+        } else {
+            navigate('/join/(newCharacter(heritage')
+        }
+    }
+
     const charSheetClick = () => {
-        if (
-            (localChar !== undefined)
-            &&
-            (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
-        ) {
-            navigate('/characterSheet')
+        if (localCode) {
+            if (
+                (localChar !== undefined)
+                &&
+                (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
+            ) {
+                navigate('/characterSheet')
+            } else {
+                navigate('/newCharacter/heritage')
+            }
+        } else if (localChar) {
+            navigate('/join/(characterSheet')
         }
     }
 
@@ -33,7 +48,7 @@ const Welcome = () => {
     return (
         <div className="welcome__container">
 
-            <div className="welcome__container--logo"            >
+            <div className="welcome__container--logo">
                 <img
                     className="welcome__logo--image"
                     alt='Tiny Dungeon logo'
@@ -41,20 +56,20 @@ const Welcome = () => {
             </div>
             <div className="welcome__container--buttons">
                 <div className="welcome__container--button">
-                    <Link to={'/newCharacter/heritage'}>
+                    <div onClick={newCharClick}>
                         <img
-                            className="welcome__creation--button"
+                            className="welcome__button"
                             alt='Character Creation button'
                             src="src\assets\creation-centered-transparent-brown.png" />
-                    </Link>
+                    </div>
                 </div>
 
                 <div className="welcome__container--button">
-                    <div
-                        onClick={charSheetClick}
-                        className=""
-                    >
-                        <img className={`welcome__creation--button ` + (charCreated ? "" : 'faded')} alt='Character Creation button' src="src\assets\characterSheet-button-transparent-brown.png" />
+                    <div onClick={charSheetClick}>
+                        <img
+                            className={`welcome__button ` + (charCreated ? "" : 'faded')}
+                            alt='Character Sheet button'
+                            src="src\assets\characterSheet-button-transparent-brown.png" />
                     </div>
                 </div>
             </div>

@@ -1,11 +1,14 @@
 import React from "react";
 
 
-const Field = ({ label, id, type, value, change, blur, theme, placeholder = '' }) => {
+const Field = ({ label, aria = label, id, type, value, change, blur, theme, placeholder = '' }) => {
     return (
         <div className="field__container">
             <span className={`field__container--description ${theme}`}>
-                <label htmlFor={id}>{label}</label>
+                <label
+                    aria-label={aria}
+                    htmlFor={id}
+                >{label}</label>
             </span>
             <span className="field__container--input">
 

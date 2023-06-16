@@ -22,6 +22,10 @@ import DisplayWeapons from "../components/editItems/DisplayWeapons.jsx";
 import DisplayScrolls from "../components/editItems/DisplayScrolls.jsx";
 import Welcome from "../components/home/Welcome.jsx";
 import Attribution from "../components/home/Attribution.jsx";
+import AuthCode from "../components/authenticate/AuthCode.jsx";
+import AuthWrapper from "../components/authenticate/AuthWrapper.jsx";
+import AuthWrapperCreate from "../components/authenticate/AuthWrapperCreate.jsx";
+import AdminPage from "../components/admin/AdminPage.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -34,183 +38,135 @@ const AppRouter = createBrowserRouter([
                 index: true,
                 errorElement: <NotFoundPage />,
                 element: <Welcome />,
-            },
-            {
-                path: "/newCharacter",
-                errorElement: <NotFoundPage />,
-                element: <NewCharacter />,
-                children: [
-                    {
-                        path: "/newCharacter/heritage",
-                        errorElement: <NotFoundPage />,
-                        element: <CharHeritage />,
-                    },
-                    {
-                        path: "/newCharacter/traits",
-                        errorElement: <NotFoundPage />,
-                        element: <CharTraits />,
-                    },
-                    {
-                        path: "/newCharacter/weaponGroup",
-                        errorElement: <NotFoundPage />,
-                        element: <CharWeaponGroup />,
-                    },
-                    {
-                        path: "/newCharacter/weapon",
-                        errorElement: <NotFoundPage />,
-                        element: <CharWeapon />,
-                    },
-                    {
-                        path: "/newCharacter/familiar",
-                        errorElement: <NotFoundPage />,
-                        element: <CharFamiliar />,
-                    },
-                    {
-                        path: "/newCharacter/backstory",
-                        errorElement: <NotFoundPage />,
-                        element: <CharBackstory />,
-                    },
-                ]
-            },
-            {
-                path: "/characterSheet",
-                errorElement: <NotFoundPage />,
-                element: <CharacterSheet />,
-    
+
             },
             {
                 path: "/attribution",
                 errorElement: <NotFoundPage />,
                 element: <Attribution />
             },
+            {
+                path: "/join/:passthrough?",
+                errorElement: <NotFoundPage />,
+                element: <AuthCode />
+            },
+            {
+                element: <AuthWrapper />,
+                children: [
+                    {
+                        path: "/newCharacter",
+                        errorElement: <NotFoundPage />,
+                        element: <NewCharacter />,
+                        children: [
+                            {
+                                path: "heritage",
+                                errorElement: <NotFoundPage />,
+                                element: <CharHeritage />,
+                            },
+                            {
+                                path: "traits",
+                                errorElement: <NotFoundPage />,
+                                element: <CharTraits />,
+                            },
+                            {
+                                path: "weaponGroup",
+                                errorElement: <NotFoundPage />,
+                                element: <CharWeaponGroup />,
+                            },
+                            {
+                                path: "weapon",
+                                errorElement: <NotFoundPage />,
+                                element: <CharWeapon />,
+                            },
+                            {
+                                path: "familiar",
+                                errorElement: <NotFoundPage />,
+                                element: <CharFamiliar />,
+                            },
+                            {
+                                path: "backstory",
+                                errorElement: <NotFoundPage />,
+                                element: <CharBackstory />,
+                            },
+                        ]
+                    },
+                    {
+                        path: "/characterSheet",
+                        errorElement: <NotFoundPage />,
+                        element: <CharacterSheet />,
+
+                    },
+                ]
+            },
+        ]
+    },
+    {
+        path: '/admin',
+        element: <AdminPage />,
+        errorElement: <NotFoundPage />,
+        children: [
+
         ]
     },
 
     {
-        path: "/characterSheet",
+        element: <AuthWrapperCreate />,
         errorElement: <NotFoundPage />,
-        element: <CharacterSheet />,
+        children: [
+            {
+                path: "createTrait",
+                errorElement: <NotFoundPage />,
+                element: <CreateTrait />
+            },
+            {
+                path: "createHeritage",
+                errorElement: <NotFoundPage />,
+                element: <CreateHeritage />
+            },
+            {
+                path: "displayTraits",
+                errorElement: <NotFoundPage />,
+                element: <DisplayTraits />
+            },
+            {
+                path: "displayHeritages",
+                errorElement: <NotFoundPage />,
+                element: <DisplayHeritages />
+            },
+            {
+                path: "displayWeaponGroups",
+                errorElement: <NotFoundPage />,
+                element: <DisplayWeaponGroups />
+            },
+            {
+                path: "displayWeapons",
+                errorElement: <NotFoundPage />,
+                element: <DisplayWeapons />
+            },
+            {
+                path: "displayScrolls",
+                errorElement: <NotFoundPage />,
+                element: <DisplayScrolls />
+            },
+            {
+                path: "createScroll",
+                errorElement: <NotFoundPage />,
+                element: <CreateScroll />
+            },
+            {
+                path: "createWeaponGroup",
+                errorElement: <NotFoundPage />,
+                element: <CreateWeaponGroup />
+            },
+            {
+                path: "createWeapon",
+                errorElement: <NotFoundPage />,
+                element: <CreateWeapon />
+            },
+        ]
+    },
 
-    },
-    {
-        path: "/attribution",
-        errorElement: <NotFoundPage />,
-        element: <Attribution />
-    },
-
-    {
-        path: "/createTrait",
-        errorElement: <NotFoundPage />,
-        element: <CreateTrait />
-    },
-    {
-        path: "/createHeritage",
-        errorElement: <NotFoundPage />,
-        element: <CreateHeritage />
-    },
-    {
-        path: "/displayTraits",
-        errorElement: <NotFoundPage />,
-        element: <DisplayTraits />
-    },
-    {
-        path: "/displayHeritages",
-        errorElement: <NotFoundPage />,
-        element: <DisplayHeritages />
-    },
-    {
-        path: "/displayWeaponGroups",
-        errorElement: <NotFoundPage />,
-        element: <DisplayWeaponGroups />
-    },
-    {
-        path: "/displayWeapons",
-        errorElement: <NotFoundPage />,
-        element: <DisplayWeapons />
-    },
-    {
-        path: "/displayScrolls",
-        errorElement: <NotFoundPage />,
-        element: <DisplayScrolls />
-    },
-    {
-        path: "/createScroll",
-        errorElement: <NotFoundPage />,
-        element: <CreateScroll />
-    },
-    {
-        path: "/createWeaponGroup",
-        errorElement: <NotFoundPage />,
-        element: <CreateWeaponGroup />
-    },
-    {
-        path: "/createWeapon",
-        errorElement: <NotFoundPage />,
-        element: <CreateWeapon />
-    },
 
 ])
 
 export default AppRouter
-
-
-// {
-//     path: "/",
-//     errorElement: <NotFoundPage />,
-//     element: <Home />,
-//     children: [
-//         {
-//             index: true,
-//             errorElement: <NotFoundPage />,
-//             element: <Welcome />,
-//         },
-//         {
-//             path: "/newCharacter",
-//             errorElement: <NotFoundPage />,
-//             element: <NewCharacter />,
-//             children: [
-//                 {
-//                     path: "/newCharacter/heritage",
-//                     errorElement: <NotFoundPage />,
-//                     element: <CharHeritage />,
-//                 },
-//                 {
-//                     path: "/newCharacter/traits",
-//                     errorElement: <NotFoundPage />,
-//                     element: <CharTraits />,
-//                 },
-//                 {
-//                     path: "/newCharacter/weaponGroup",
-//                     errorElement: <NotFoundPage />,
-//                     element: <CharWeaponGroup />,
-//                 },
-//                 {
-//                     path: "/newCharacter/weapon",
-//                     errorElement: <NotFoundPage />,
-//                     element: <CharWeapon />,
-//                 },
-//                 {
-//                     path: "/newCharacter/familiar",
-//                     errorElement: <NotFoundPage />,
-//                     element: <CharFamiliar />,
-//                 },
-//                 {
-//                     path: "/newCharacter/backstory",
-//                     errorElement: <NotFoundPage />,
-//                     element: <CharBackstory />,
-//                 },
-//             ]
-//         },
-//         {
-//             path: "/characterSheet",
-//             errorElement: <NotFoundPage />,
-//             element: <CharacterSheet />,
-
-//         },
-//         {
-//             path: "/attribution",
-//             errorElement: <NotFoundPage />,
-//             element: <Attribution />
-//         },
-//     ]
-// },
