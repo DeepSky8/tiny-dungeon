@@ -12,12 +12,13 @@ const DisplayTraits = ({ heritageTrait, traits }) => {
 
     return (
         <div className="displayTraits__container">
+        <div className="charSheet__display--title centered bold">Traits</div>
 
             <div className="displayTraits__section--top">
                 <label
                     className="label__centered"
                     htmlFor="heritageTrait"
-                >Heritage Trait</label>
+                >Heritage</label>
                 <ClickDescriptionCentered
                     id='heritageTrait'
                     title={heritageTrait.tTitle}

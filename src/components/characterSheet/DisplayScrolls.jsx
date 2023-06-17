@@ -17,6 +17,8 @@ const DisplayScrolls = ({ scrolls, dispatchChar }) => {
 
     return (
         <div className="displayScrolls__container">
+        <div className="charSheet__display--title centered bold">Scrolls</div>
+
             <TapOpen />
             {ownedScrolls.length > 0
                 &&

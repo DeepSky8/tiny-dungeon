@@ -1,13 +1,17 @@
 import {
+    closeEight,
     closeFive,
     closeFour,
+    closeNine,
     closeOne,
     closeSeven,
     closeSix,
     closeThree,
     closeTwo,
+    openEight,
     openFive,
     openFour,
+    openNine,
     openOne,
     openSeven,
     openSix,
@@ -25,7 +29,9 @@ const addDisplayActions = (menuObjects) => {
         openFour,
         openFive,
         openSix,
-        openSeven
+        openSeven,
+        openEight,
+        openNine
     ]
 
     const closeActionArray = [
@@ -35,7 +41,9 @@ const addDisplayActions = (menuObjects) => {
         closeFour,
         closeFive,
         closeSix,
-        closeSeven
+        closeSeven,
+        closeEight,
+        closeNine
     ]
 
     const actionableMenuObjects = []

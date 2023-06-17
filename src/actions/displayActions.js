@@ -53,3 +53,19 @@ export const openSeven = () => ({
 export const closeSeven = () => ({
     type: 'CLOSE_SEVEN'
 })
+
+export const openEight = () => ({
+    type: 'OPEN_EIGHT'
+})
+
+export const closeEight = () => ({
+    type: 'CLOSE_EIGHT'
+})
+
+export const openNine = () => ({
+    type: 'OPEN_NINE'
+})
+
+export const closeNine = () => ({
+    type: 'CLOSE_NINE'
+})

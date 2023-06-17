@@ -56,7 +56,7 @@ const CombatActions = () => {
 
     return (
         <div className="combatActions__container">
-            <div className="centered bold">Combat Actions</div>
+            <div className="charSheet__display--title centered bold">Combat Actions</div>
             <TapOpen />
             {actions.map(action => {
                 return (

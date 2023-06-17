@@ -6,3 +6,19 @@
 .newC__spacer {
     padding: 0 $xs-size $m-size $xs-size;
 }
+
+.newC__title {
+    font-size: $calcFontSizeExtraLarge;
+    margin-top: $xs-size;
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .newC__spacer {
+        padding: 0 $s-size $m-size $s-size;
+    }
+
+    .newC__title {
+        font-size: $calcFontSizeLarge;
+        margin-top: $s-size;
+    }
+}

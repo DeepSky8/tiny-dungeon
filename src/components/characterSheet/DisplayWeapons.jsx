@@ -14,9 +14,8 @@ const DisplayWeapons = ({ char, dispatchChar }) => {
 
     return (
         <div className="displayWeapons__container">
-            <div
-                className="displayWeapons__text"
-            >
+        <div className="charSheet__display--title centered bold">Weapons</div>
+            <div className="displayWeapons__text">
                 {
                     sortedWeaponGroups.length > 0
                     &&

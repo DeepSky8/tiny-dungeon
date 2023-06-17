@@ -66,7 +66,7 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                     headerText={'Stats'}
                     bodyText={
                         <div className="clickDescription--stats">
-                            <div>Hit points: {hHP}</div>
+                            <div>Health: {hHP}</div>
                             <BulletedSelect
                                 objectArray={traits}
                                 IDArray={hTraitIDs}

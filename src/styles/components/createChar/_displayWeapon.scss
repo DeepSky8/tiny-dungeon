@@ -11,46 +11,18 @@
     overflow: hidden;
 }
 
-.displayWeapon__container--body {
-    .bold {
-        font-weight: bold;
-    }
-}
+// .displayWeapon__container--body {
+
+// }
 
 .displayWeapon__container--spacer {
-    padding: 0 $xs-size;
-}
-
-.displayWeapon__container--pick {
-    .sMenu__container {
-        margin-top: 0;
-        padding: $xs-size;
-        position: relative;
-    }
-
-    .sMenu__button {
-        @include button--border;
-        background-color: $menu-yellow;
-        color: $text-brown;
-        display: block;
-        font-weight: normal;
-        padding: 2px;
-    }
-
-    .sMenu__tray {
-        background-color: $menu-yellow;
-        position: absolute;
-        @include button--border;
-        transform: translateX(-50%);
-        z-index: 75;
-    }
+    padding: $xs-size;
 }
 
 .displayWeapon__container--edit {
     user-select: contain;
     justify-content: center;
     text-align: center;
-    padding-top: $xs-size;
 }
 
 .displayWeapon__container--range {
@@ -71,5 +43,5 @@
 }
 
 .displayWeapon__container--weaponGroup {
-    padding-bottom: $xs-size;
+    padding-bottom: $s-size;
 }

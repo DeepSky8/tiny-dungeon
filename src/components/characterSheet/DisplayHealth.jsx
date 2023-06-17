@@ -46,6 +46,7 @@ const DisplayHealth = ({ char, dispatchChar }) => {
 
     return (
         <div className="displayHealth__container">
+        <div className="charSheet__display--title centered bold">Health</div>
 
             <div className="displayHealth__container--section" id="displayHealth__container--armor">
                 <div className="displayHealth__container--plusMinus">

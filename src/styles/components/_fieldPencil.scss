@@ -1,4 +1,16 @@
+// .fieldContainer{
+
+// }
+
+.field__container {
+    width: 100%;
+    justify-content: space-around;
+    display: block;
+}
+
 .field__container--input {
+    display: block;
+    max-width: 99%;
     .field--input {
         background-color: $menu-yellow-faded;
         font-size: $calcFontSizeLarge;
@@ -50,11 +62,12 @@
     position: relative;
     min-width: 100%;
     max-width: 100%;
+    // font-size: $calcFontSize;
 }
 
 .textarea--pencil {
     position: absolute;
-    bottom: $xs-size;
+    bottom: $xs-size + 0.1rem;
     right: $xs-size;
     pointer-events: none;
     color: $text-brown-faded;
@@ -62,8 +75,130 @@
 
 .text--pencil {
     position: absolute;
-    bottom: 0;
+    bottom: 0.1rem;
     right: $xs-size;
     pointer-events: none;
     color: $text-brown-faded;
+}
+
+.charSheet__container {
+    // user-select: none;
+    // position: relative;
+
+    .field__container {
+        width: 100%;
+    }
+
+    .field--input {
+        text-align: center;
+        background-color: transparent;
+        border: none;
+        // font-size: $calcFontSizeLarge;
+        // min-width: 100%;
+        // max-width: 100%;
+        min-height: max-content;
+        user-select: contain;
+        overflow: auto;
+        z-index: 20;
+    }
+
+    // input:focus {
+    //     outline: none;
+    //     border-style: solid;
+    //     border-width: 2px;
+    //     border-color: $text-brown;
+    //     box-shadow: 0 0 10px $text-brown;
+    // }
+    // textarea:focus {
+    //     outline: none;
+    //     border-style: solid;
+    //     border-width: 2px;
+    //     border-color: $text-brown;
+    //     box-shadow: 0 0 10px $text-brown;
+    // }
+    // ::placeholder {
+    //     color: $text-brown-placeholder;
+    // }
+}
+
+.charFamiliar__container {
+    .field--input {
+        background-color: $menu-yellow-faded;
+        font-size: $calcFontSizeLarge;
+        @include button--border;
+        // max-width: 98%;
+        text-align: center;
+        user-select: contain;
+        overflow: hidden;
+
+        &.title {
+            width: 100%;
+        }
+    }
+}
+
+.createScroll__container {
+    .field__container {
+        justify-content: center;
+    }
+
+    .field__container--description {
+        text-align: center;
+    }
+
+    .field--input {
+        background-color: $menu-yellow;
+        max-width: 95%;
+        // font-size: $calcFontSizeLarge;
+    }
+}
+
+.displayScrolls__container--create {
+    .field__container {
+        justify-content: center;
+    }
+
+    .field__container--description {
+        text-align: center;
+    }
+
+    .field--input {
+        background-color: $menu-yellow;
+        max-width: 95%;
+        // font-size: $calcFontSizeLarge;
+    }
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .field__container--input {
+        // max-width: 100%;
+
+        .field--input {
+            font-size: $calcFontSizeMed;
+        }
+    }
+
+    // .field__container--textarea {
+    //     // font-size: $calcFontSize;
+    // }
+
+    // .field__container--text {
+    //     // font-size: $calcFontSize;
+    // }
+
+    // .charSheet__container {
+    //     .field--input {
+    //         // font-size: $calcFontSize;
+    //     }
+    // }
+
+    .textarea--pencil {
+        bottom: $xs-size + 0.1rem;
+        right: $xs-size;
+    }
+
+    .text--pencil {
+        bottom: 0.1rem;
+        right: $xs-size;
+    }
 }

@@ -31,10 +31,7 @@ const ClickDescriptionSelect = (
                         setShow(!show)
                     }}
                 >
-
-                    <div
-                        className="clickDescriptionSelect__heading--title"
-                    >
+                    <div className="clickDescriptionSelect__heading--title">
                         {title}
                     </div>
                 </div>

@@ -97,14 +97,14 @@ const CharWeaponGroup = () => {
 
     return (
         <div className="charWeaponGroup__container">
-            <div
-                className="charWeaponGroup__title bold centered"
-            >Weapon Groups</div>
+            <div className="newC__title bold centered">
+                Weapon Groups
+            </div>
             {
                 defaultWeaponGroups.length > 0
                 &&
                 <div className="charWeaponGroup__container--defaultWGs">
-                    <div className="charWeaponGroup__text--explanation">
+                    <div className="charWeaponGroup__text--explanation centered">
                         Your adventurer can use the following weapon groups due to trait selection
                     </div>
                     <TapOpen />
@@ -129,7 +129,7 @@ const CharWeaponGroup = () => {
                 availWeaponGroups.length > 0
                 &&
                 <div className="charWeaponGroup__container--availWGs">
-                    <div className="charWeaponGroup__text--explanation">
+                    <div className="charWeaponGroup__text--explanation centered">
                         The following Weapon Groups are available for your adventurer
                     </div>
                     <TapOpen />

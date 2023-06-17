@@ -4,14 +4,14 @@ import React from "react";
 const Field = ({ label, aria = label, id, type, value, change, blur, theme, placeholder = '' }) => {
     return (
         <div className="field__container">
-            <span className={`field__container--description ${theme}`}>
+            <div className={`field__container--description ${theme}`}>
                 <label
                     className={theme}
                     aria-label={aria}
                     htmlFor={id}
                 >{label}</label>
-            </span>
-            <span className="field__container--input">
+            </div>
+            <div className="field__container--input">
 
                 {type === 'checkbox' &&
                     <input
@@ -27,7 +27,7 @@ const Field = ({ label, aria = label, id, type, value, change, blur, theme, plac
 
 
                 {type === 'textarea' &&
-                    <span className="field__container--textarea">
+                    <div className="field__container--textarea">
                         <textarea
                             rows='4'
                             // cols='50'
@@ -38,12 +38,12 @@ const Field = ({ label, aria = label, id, type, value, change, blur, theme, plac
                             onChange={change}
                             onBlur={blur}
                         />
-                        <span className="material-symbols-outlined textarea--pencil">edit</span>
-                    </span>
+                        <div className="material-symbols-outlined textarea--pencil">edit</div>
+                    </div>
                 }
 
                 {type === 'text' &&
-                    <span className="field__container--text">
+                    <div className="field__container--text">
                         <input
                             id={id}
                             className={`field--input ${theme}`}
@@ -53,8 +53,8 @@ const Field = ({ label, aria = label, id, type, value, change, blur, theme, plac
                             onChange={change}
                             onBlur={blur}
                         />
-                        <span className="material-symbols-outlined text--pencil">edit</span>
-                    </span>
+                        <div className="material-symbols-outlined text--pencil">edit</div>
+                    </div>
                 }
 
                 {type === 'number' &&
@@ -68,7 +68,7 @@ const Field = ({ label, aria = label, id, type, value, change, blur, theme, plac
                     />
                 }
 
-            </span>
+            </div>
         </div>
 
     )

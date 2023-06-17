@@ -62,6 +62,7 @@ const Attribution = () => {
                 )
             })}
             <div className="attribution__description">
+                <TapOpen />
                 <ClickDescriptionCentered
                     title='Web app design'
                     description={
@@ -70,11 +71,10 @@ const Attribution = () => {
                         </div>
                     }
                 />
-                <TapOpen />
             </div>
 
             <div className="attribution__description">
-
+                <TapOpen />
                 <ClickDescriptionCentered
                     title="Tiny Dungeon design"
                     description={
@@ -83,21 +83,22 @@ const Attribution = () => {
                         </div>
                     }
                 />
-                <TapOpen />
             </div>
 
-            {attributes.map(attribute => {
-                return (
-                    <div
-                        key={attribute.by}
-                        className="centered"
-                    >
-                        <div className="bold">{attribute.by}</div>
-                        <div>{attribute.person}</div>
+            <div className="attribution__description">
+                {attributes.map(attribute => {
+                    return (
+                        <div
+                            key={attribute.by}
+                            className="centered"
+                        >
+                            <div className="bold">{attribute.by}</div>
+                            <div>{attribute.person}</div>
 
-                    </div>
-                )
-            })}
+                        </div>
+                    )
+                })}
+            </div>
             <div className="attribution__trademarks centered">Tiny Dungeon 2e and TinyD6 are trademarks of <a href="https://www.gallantknightgames.com/">Gallant Knight Games</a></div>
             <div className="attribution__copyright">©2022 by Gallant Knight Games. All rights reserved. Reproduction without the written permission of the publisher is expressly forbidden, except for the purposes of reviews, and for the blank character sheets, which may be reproduced for personal use only.</div>
         </div>

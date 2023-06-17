@@ -29,37 +29,40 @@ const CharFamiliar = () => {
 
     return (
         <div className="charFamiliar__container">
-            <div className="charFamiliar__title centered bold">
+            <div className="newC__title centered bold">
                 Familiar
             </div>
-            <Field
-                label={'Name'}
-                id={`name` + familiar.fID}
-                type={'text'}
-                value={familiar.fName}
-                change={(e) => {
-                    dispatchFamiliar(updateFName(e.target.value))
-                }}
-                blur={() => {
-                    handleSaveFamiliar()
-                }}
-                theme={'title'}
-                placeholder={'Django'}
-            />
-            <Field
-                label={'Description'}
-                id={`description` + familiar.fID}
-                type={'textarea'}
-                value={familiar.fDescription}
-                change={(e) => {
-                    dispatchFamiliar(updateFDescription(e.target.value))
-                }}
-                blur={() => {
-                    handleSaveFamiliar()
-                }}
-                theme={''}
-                placeholder={'A feline-shaped shadow, surprisingly frisky'}
-            />
+            <div className="fieldContainer">
+                <Field
+                    label={'Name'}
+                    id={`name` + familiar.fID}
+                    type={'text'}
+                    value={familiar.fName}
+                    change={(e) => {
+                        dispatchFamiliar(updateFName(e.target.value))
+                    }}
+                    blur={() => {
+                        handleSaveFamiliar()
+                    }}
+                    theme={'title'}
+                    placeholder={'Django'}
+                />
+                <Field
+                    label={'Description'}
+                    id={`description` + familiar.fID}
+                    type={'textarea'}
+                    value={familiar.fDescription}
+                    change={(e) => {
+                        dispatchFamiliar(updateFDescription(e.target.value))
+                    }}
+                    blur={() => {
+                        handleSaveFamiliar()
+                    }}
+                    theme={''}
+                    placeholder={'A feline-shaped shadow, surprisingly frisky'}
+                />
+            </div>
+
             <DisplayRational />
         </div>
     )

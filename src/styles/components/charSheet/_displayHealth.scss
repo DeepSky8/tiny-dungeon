@@ -24,6 +24,7 @@
     display: flex;
     @include button--border;
     background-color: transparent;
+    color: $text-brown;
 }
 
 .displayHealth__symbols {

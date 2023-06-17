@@ -115,8 +115,9 @@ const CharTraits = () => {
 
     return (
         <div className="charTraits__container">
-            <div className="charTraits__title bold centered">
-                Traits</div>
+            <div className="newC__title bold centered">
+                Traits
+            </div>
             <div className="">
                 Select all the traits you'd like to review; they'll cluster here at the top for easy comparison</div>
             {

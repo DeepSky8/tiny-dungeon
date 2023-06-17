@@ -107,7 +107,7 @@ const CharWeapon = () => {
 
     return (
         <div className="charWeapon__container">
-            <div className="charWeapon__title centered bold">
+            <div className="newC__title centered bold">
                 <span>
                     {weaponGroups.filter(title => (title.wgType !== 'u' && title.wgType !== 'm')).length > 0 ? 'Weapons' : ""}
                 </span>

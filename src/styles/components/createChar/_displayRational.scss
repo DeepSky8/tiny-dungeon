@@ -14,9 +14,15 @@
 }
 
 .displayRational__container--text {
-    padding: 0 $xs-size;
+    padding: $xs-size;
 }
 
 .displayRational__text {
     padding-top: $xs-size;
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .displayRational__container {
+        font-size: $calcFontSizeMed;
+    }
 }

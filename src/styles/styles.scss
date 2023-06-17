@@ -5,21 +5,23 @@
 @import "../styles/mixins/generalMixins";
 @import "../styles/components/notFoundPage";
 
+@import "../styles/home/home";
+@import "../styles/home/welcome";
+@import "../styles/home/attribution";
+
 @import "../styles/components/footer";
 @import "../styles/components/tapOpen";
 @import "../styles/components/clickDescription";
 @import "../styles/components/clickDescriptionSelect";
 @import "../styles/components/clickDescriptionCount";
 @import "../styles/components/clickDescriptionCentered";
-@import "../styles/components/home";
 @import "../styles/components/header";
 @import "../styles/components/menu";
 @import "../styles/components/styledMenu";
 @import "../styles/components/bulletedSelect";
 @import "../styles/components/fieldPencil";
 
-@import "../styles/home/welcome";
-@import "../styles/home/attribution";
+
 
 @import "../styles/components/authenticate/authCode";
 

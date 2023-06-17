@@ -1,41 +1,6 @@
 .charSheet__container {
     user-select: none;
     position: relative;
-
-    .field__container {
-        width: 100%;
-    }
-
-    .field--input {
-        text-align: center;
-        background-color: transparent;
-        border: none;
-        font-size: $calcFontSizeLarge;
-        min-width: 100%;
-        max-width: 100%;
-        min-height: max-content;
-        user-select: contain;
-        overflow: auto;
-        z-index: 20;
-    }
-
-    input:focus {
-        outline: none;
-        border-style: solid;
-        border-width: 2px;
-        border-color: $text-brown;
-        box-shadow: 0 0 10px $text-brown;
-    }
-    textarea:focus {
-        outline: none;
-        border-style: solid;
-        border-width: 2px;
-        border-color: $text-brown;
-        box-shadow: 0 0 10px $text-brown;
-    }
-    ::placeholder {
-        color: $text-brown-placeholder;
-    }
 }
 
 .charSheet__spacer {
@@ -51,4 +16,26 @@
     display: flex;
     justify-content: center;
     position: relative;
+}
+
+
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    // .charSheet__container {
+    //     .field--input {
+    //         font-size: $calcFontSize;
+    //     }
+    // }
+    .charSheet__spacer {
+        padding: $s-size;
+    }
+
+    .charSheet__nameHeritage {
+        display: flexbox;
+        font-size: $calcFontSizeLarge;
+    }
+
+    .charSheet__display--title{
+        font-size: $calcFontSizeLarge;
+    }
 }

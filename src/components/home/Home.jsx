@@ -45,8 +45,10 @@ const Home = () => {
 
     return (
         <div className="home__container">
-            <Header />
-            <Outlet context={[codes]} />
+            <div className="home__contents">
+                <Header />
+                <Outlet context={[codes]} />
+            </div>
         </div>
     )
 }

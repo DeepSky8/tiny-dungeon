@@ -46,9 +46,10 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
             <div className="displayWeapon__container--body">
                 {show &&
                     <div className="displayWeapon__container--spacer">
-                        <div className="displayWeapon__container--title">
+                        <div className="displayWeapon__container--text">
                             <Field
                                 label={''}
+                                aria={'Weapon Title'}
                                 id={'title'}
                                 type={'text'}
                                 placeholder="Weapon Name"
@@ -66,6 +67,7 @@ const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
                             <div className="displayWeapon__container--description">
                                 <Field
                                     label={''}
+                                    aria={'Weapon Description'}
                                     id={'description'}
                                     type={'textarea'}
                                     placeholder="What does it look like?"

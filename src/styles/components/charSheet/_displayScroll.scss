@@ -4,27 +4,34 @@
 
 .displayScroll__heading--container {
     @include button--border;
+    @include button--shadow--list;
     background-color: $menu-yellow;
     color: $text-brown;
     user-select: none;
-    @include button--shadow--list;
+    min-height: $calcFontSizeExtraLarge;
+    display: flex;
+    justify-content: space-between;
     &.faded {
         color: $text-brown-faded;
     }
 }
 
+
+
 .displayScroll__heading--minus {
     float: left;
-    padding-top: 5px;
 }
 
-.displayScroll__heading--title {
-    margin-left: $xs-size;
+.displayScroll__heading--clickable {
+    width: 75%;
 }
+
+// .displayScroll__heading--title {
+
+// }
 
 .displayScroll__heading--add {
     float: right;
-    padding-top: 5px;
 }
 
 // .displayScroll__container--description {
@@ -34,3 +41,6 @@
 .displayScroll__description {
     padding: $xs-size;
 }
+
+// @media only screen and (min-device-width: $desktop-breakpoint) {
+// }

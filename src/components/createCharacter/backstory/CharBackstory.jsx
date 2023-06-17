@@ -26,54 +26,55 @@ const CharBackstory = () => {
     return (
         <div className="charBackstory__container">
 
-            <div className="charBackstory__title centered bold">
+            <div className="newC__title centered bold">
                 Backstory
             </div>
+            <div className="fieldContainer">
+                <Field
+                    label={placeholder.name}
+                    id={`name` + char.charID}
+                    type={'text'}
+                    value={nameState}
+                    change={(e) => {
+                        setName(e.target.value)
+                    }}
+                    blur={() => {
+                        handleSaveBackstory()
+                    }}
+                    theme={''}
+                    placeholder={placeholder.name}
+                />
 
-            <Field
-                label={placeholder.name}
-                id={`name` + char.charID}
-                type={'text'}
-                value={nameState}
-                change={(e) => {
-                    setName(e.target.value)
-                }}
-                blur={() => {
-                    handleSaveBackstory()
-                }}
-                theme={''}
-                placeholder={placeholder.name}
-            />
+                <Field
+                    label={'Belief'}
+                    id={`belief` + char.charID}
+                    type={'textarea'}
+                    value={belief}
+                    change={(e) => {
+                        setBelief(e.target.value)
+                    }}
+                    blur={() => {
+                        handleSaveBackstory()
+                    }}
+                    theme={''}
+                    placeholder={(char.charName ? char.charName : placeholder.character) + placeholder.belief}
+                />
 
-            <Field
-                label={'Belief'}
-                id={`belief` + char.charID}
-                type={'textarea'}
-                value={belief}
-                change={(e) => {
-                    setBelief(e.target.value)
-                }}
-                blur={() => {
-                    handleSaveBackstory()
-                }}
-                theme={''}
-                placeholder={(char.charName ? char.charName : placeholder.character) + placeholder.belief}
-            />
-
-            <Field
-                label={'Family Trade'}
-                id={`trade` + char.charID}
-                type={'textarea'}
-                value={trade}
-                change={(e) => {
-                    setTrade(e.target.value)
-                }}
-                blur={() => {
-                    handleSaveBackstory()
-                }}
-                theme={''}
-                placeholder={'See below for details'}
-            />
+                <Field
+                    label={'Family Trade'}
+                    id={`trade` + char.charID}
+                    type={'textarea'}
+                    value={trade}
+                    change={(e) => {
+                        setTrade(e.target.value)
+                    }}
+                    blur={() => {
+                        handleSaveBackstory()
+                    }}
+                    theme={''}
+                    placeholder={'See below for details'}
+                />
+            </div>
 
             <DisplayRational />
         </div>

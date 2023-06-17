@@ -8,8 +8,10 @@ const DisplayNotes = () => {
     const [notes, setNotes] = useState(localNotes)
     return (
         <div className="displayNotes__container">
+            <div className="charSheet__display--title centered bold">Notes</div>
             <Field
-                label={'Notes'}
+                label={''}
+                aria={'Notes'}
                 id={`notes`}
                 type={'textarea'}
                 value={notes}
@@ -20,7 +22,7 @@ const DisplayNotes = () => {
                     setLocalNotes(notes)
                 }}
                 theme={'label__centered'}
-                placeholder={'A useful (and resizable!) place to store reminders about extra items or knowledge discovered by your Adventurer'}
+                placeholder={'A useful place to store reminders about extra items or knowledge discovered by your Adventurer'}
             />
 
         </div>

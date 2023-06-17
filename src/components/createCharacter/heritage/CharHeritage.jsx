@@ -42,9 +42,8 @@ const CharHeritage = () => {
     return (
         <div
             className="charHeritage__container"
-            id="charHeritage__container"
         >
-            <title>Select a Heritage</title>
+            <div className="newC__title bold centered">Heritage</div>
             <StyledMenu
                 menuID={'heritageMenu'}
                 selectStatement={'--Select a Heritage--'}
