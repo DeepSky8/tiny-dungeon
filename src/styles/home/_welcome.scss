@@ -1,6 +1,6 @@
 .welcome__container {
     user-select: none;
-    padding: $s-size;
+    padding: $xs-size;
 }
 
 .welcome__container--logo {
@@ -54,5 +54,16 @@
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .welcome__container--logo {
         padding-bottom: 5vh;
+        width: 100%;
+    }
+
+    .welcome__container--buttons {
+        padding-bottom: $m-size;
+    }
+
+    .welcome__container {
+        user-select: none;
+        padding: $s-size;
+        padding-bottom: 0;
     }
 }

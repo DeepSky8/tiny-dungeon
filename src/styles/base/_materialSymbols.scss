@@ -19,3 +19,27 @@
         }
     }
 }
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+
+        &.filled {
+            font-size: $calcFontSizeLarge;
+            font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+            &.medium {
+                font-size: $calcFontSizeLarge;
+            }
+        }
+        &.empty {
+            font-size: $calcFontSizeLarge;
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+            &.faded {
+                color: $text-brown-faded;
+            }
+            &.medium {
+                font-size: $calcFontSizeLarge;
+            }
+        }
+    }
+}

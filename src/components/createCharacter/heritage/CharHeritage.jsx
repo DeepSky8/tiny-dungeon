@@ -55,8 +55,6 @@ const CharHeritage = () => {
                 stateIDRef={'heritageID'}
                 onSelection={loadHeritage}
             />
-            <TapOpen />
-
             {
                 (
                     heritages

@@ -76,13 +76,22 @@ const Welcome = () => {
                     </div>
                 </div>
             </div>
-
             <Footer
                 authStatus={authStatus}
                 setAuthStatus={setAuthStatus}
             />
+
         </div>
     )
 }
 
 export default Welcome
+
+// <div className="welcome__container--attribution">
+// <Link
+//     className="welcome__attribution--link"
+//     to={'/attribution'}
+// >
+//     Attribution
+// </Link>
+// </div>

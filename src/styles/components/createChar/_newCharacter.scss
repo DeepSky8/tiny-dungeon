@@ -14,11 +14,12 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .newC__spacer {
-        padding: 0 $s-size $m-size $s-size;
+        width: 35rem;
+        margin: auto;
     }
 
     .newC__title {
         font-size: $calcFontSizeLarge;
-        margin-top: $s-size;
+        margin-top: 0;
     }
 }
