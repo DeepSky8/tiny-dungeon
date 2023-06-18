@@ -27,7 +27,9 @@
     //     }
     // }
     .charSheet__spacer {
-        padding: $s-size;
+        // padding: $s-size;
+        width: 35rem;
+        margin: auto;
     }
 
     .charSheet__nameHeritage {
@@ -35,7 +37,7 @@
         font-size: $calcFontSizeMed;
     }
 
-    .charSheet__display--title{
-        // font-size: $calcFontSizeLarge;
-    }
+    // .charSheet__display--title{
+    //     font-size: $calcFontSizeLarge;
+    // }
 }
