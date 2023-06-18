@@ -7,6 +7,7 @@ import { db } from "../../api/firebase";
 const Home = () => {
     const [auth, setAuthCodes] = useState([])
     const [admin, setAdminCodes] = useState([])
+    const [registerLock, setRegisterLock] = useState(false)
 
     useEffect(() => {
         onValue(ref(db, 'authCodes'), snapshot => {
@@ -38,9 +39,28 @@ const Home = () => {
         })
     }, [])
 
+    // useEffect(() => {
+    //     onValue(ref(db, 'registerLock'), snapshot => {
+    //         if (snapshot.exists()) {
+    //             setRegisterLock(snapshot.val())
+    //         } else {
+    //             setRegisterLock(true)
+    //         }
+    //     })
+
+    //     return (() => {
+    //         off(ref(db, 'registerLock'))
+    //     })
+    // }, [])
+
+    // useEffect(() => {
+    //     console.log('registerLock', registerLock)
+    // }, [registerLock])
+
     const codes = {
         auth,
-        admin
+        admin,
+        registerLock
     }
 
     return (

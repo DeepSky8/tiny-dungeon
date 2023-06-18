@@ -1,3 +1,9 @@
+.attribution__linkTo {
+    padding-top: 5px;
+    color: $text-brown;
+    text-decoration: none;
+}
+
 .attribution__container {
     user-select: none;
     a {
@@ -19,4 +25,10 @@
 
 .attribution__copyright {
     padding: $s-size;
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .attribution__linkTo {
+        padding-top: $s-size;
+    }
 }
