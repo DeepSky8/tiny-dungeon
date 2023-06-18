@@ -47,7 +47,9 @@ const Home = () => {
         <div className="home__container">
             <div className="home__contents">
                 <Header />
-                <Outlet context={[codes]} />
+                <div className="home__spacer--desktop">
+                    <Outlet context={[codes]} />
+                </div>
             </div>
         </div>
     )

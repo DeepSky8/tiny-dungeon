@@ -33,7 +33,6 @@
     display: block;
     background-color: $text-brown-shadow;
 
-
     &.faded {
         opacity: 0.6;
     }
@@ -53,8 +52,18 @@
 }
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
-    // .home__container {
-    //     background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_large.png?alt=media&token=0ee8d6b5-6fa0-46e1-8545-123dc602017c");
-    //     font-size: $calcFontSize;
-    // }
+    .welcome__container--logo {
+        padding-bottom: 5vh;
+        width: 100%;
+    }
+
+    .welcome__container--buttons {
+        padding-bottom: $m-size;
+    }
+
+    .welcome__container {
+        user-select: none;
+        padding: $s-size;
+        padding-bottom: 0;
+    }
 }

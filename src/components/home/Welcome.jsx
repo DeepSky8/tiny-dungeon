@@ -74,16 +74,18 @@ const Welcome = () => {
                 </div>
             </div>
 
-            <div className="welcome__container--attribution">
-                <Link
-                    className="welcome__attribution--link"
-                    to={'/attribution'}
-                >
-                    Attribution
-                </Link>
-            </div>
+
         </div>
     )
 }
 
 export default Welcome
+
+// <div className="welcome__container--attribution">
+// <Link
+//     className="welcome__attribution--link"
+//     to={'/attribution'}
+// >
+//     Attribution
+// </Link>
+// </div>
