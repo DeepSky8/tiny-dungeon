@@ -27,15 +27,17 @@
     //     }
     // }
     .charSheet__spacer {
-        padding: $s-size;
+        // padding: $s-size;
+        width: 35rem;
+        margin: auto;
     }
 
     .charSheet__nameHeritage {
         display: flexbox;
-        font-size: $calcFontSizeLarge;
+        font-size: $calcFontSizeMed;
     }
 
-    .charSheet__display--title{
-        font-size: $calcFontSizeLarge;
-    }
+    // .charSheet__display--title{
+    //     font-size: $calcFontSizeLarge;
+    // }
 }

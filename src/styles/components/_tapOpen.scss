@@ -4,3 +4,9 @@
     justify-content: right;
     display: flex;
 }
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .tapOpen__text--reminder {
+        font-size: $calcFontSizeSmall;
+    }
+}

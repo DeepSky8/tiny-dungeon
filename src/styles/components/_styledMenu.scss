@@ -71,10 +71,13 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     // .sMenu__container {
-    //     font-size: $calcFontSize;
+    //     width: 50%;
+    //     margin: auto;
+    //     margin-top: $s-size;
     // }
     .sMenu__button {
-        font-size: $calcFontSizeMed;
+        // font-size: $calcFontSizeMed;
+        // width: 50%;
+        // margin: auto;
     }
-
 }

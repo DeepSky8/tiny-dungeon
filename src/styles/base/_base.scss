@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: $menu-yellow-background;
+  // background-color: $background-brown;
   overflow-wrap: break-word;
   hyphens: auto;
 }
@@ -88,6 +89,12 @@ body {
   &.active {
     font-weight: bold;
     color: $text-brown;
+  }
+}
 
+@media only screen and (min-device-width: $desktop-breakpoint) {
+  body {
+    // background-color: #151517;
+    background-color: $background-brown;
   }
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TapOpen from "../TapOpen";
 
 const StyledMenu = ({
     menuID,
@@ -31,6 +32,7 @@ const StyledMenu = ({
                 className={`sMenu__button`}>
                 {getTitle()}
             </span>
+            <TapOpen />
             {
                 menuOpen &&
                 <span className="sMenu__tray">
