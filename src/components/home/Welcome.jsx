@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
+import Footer from "./Footer";
 
 const Welcome = () => {
     let navigate = useNavigate();
     const [localChar,] = useLocalStorageState('localChar')
     const [localCode,] = useLocalStorageState('localCode')
     const [charCreated, setCharCreated] = useState(false)
+    const [authStatus, setAuthStatus] = useState('lock')
+
 
     useEffect(() => {
         if (
@@ -74,14 +77,10 @@ const Welcome = () => {
                 </div>
             </div>
 
-            <div className="welcome__container--attribution">
-                <Link
-                    className="welcome__attribution--link"
-                    to={'/attribution'}
-                >
-                    Attribution
-                </Link>
-            </div>
+            <Footer
+                authStatus={authStatus}
+                setAuthStatus={setAuthStatus}
+            />
         </div>
     )
 }
