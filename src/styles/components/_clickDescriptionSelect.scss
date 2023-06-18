@@ -34,7 +34,16 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .clickDescriptionSelect__container {
-        font-size: $calcFontSizeMed;
+        font-size: $calcFontSize;
+    }
+
+    .clickDescriptionSelect__heading--container {
+        min-height: $calcFontSizeLarge;
+    }
+    
+    .clickDescriptionSelect__checkbox {
+        width: $calcFontSize;
+        height: $calcFontSize;
     }
 
     .clickDescriptionSelect__heading--title {

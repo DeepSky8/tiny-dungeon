@@ -45,11 +45,9 @@ const Home = () => {
 
     return (
         <div className="home__container">
-            <div className="home__contents">
-                <Header />
-                <div className="home__spacer--desktop">
-                    <Outlet context={[codes]} />
-                </div>
+            <Header />
+            <div className="home__spacer--desktop">
+                <Outlet context={[codes]} />
             </div>
         </div>
     )

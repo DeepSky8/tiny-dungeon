@@ -101,6 +101,9 @@ const Attribution = () => {
             </div>
             <div className="attribution__trademarks centered">Tiny Dungeon 2e and TinyD6 are trademarks of <a href="https://www.gallantknightgames.com/">Gallant Knight Games</a></div>
             <div className="attribution__copyright">©2022 by Gallant Knight Games. All rights reserved. Reproduction without the written permission of the publisher is expressly forbidden, except for the purposes of reviews, and for the blank character sheets, which may be reproduced for personal use only.</div>
+            <div className="centered">
+                Background Image by rawpixel.com
+            </div>
         </div>
     )
 }

@@ -11,14 +11,34 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .home__container {
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_large.png?alt=media&token=0ee8d6b5-6fa0-46e1-8545-123dc602017c");
-        font-size: $calcFontSizeMed;
+        background-image: none;
+        font-size: $calcFontSize;
     }
+
     .home__spacer--desktop {
-        position: absolute;
-        top: $l-size + $xs-size;
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: 60%;
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/tinydungeon-85b41.appspot.com/o/parchment_large.png?alt=media&token=0ee8d6b5-6fa0-46e1-8545-123dc602017c");
+        background-attachment: fixed;
+        background-position: center top;
+        background-size: 100%;
+        background-repeat: repeat-y;
+        min-height: 100vh;
+        // font-size: $calcFontSizeMed;
+        max-width: 50rem;
+        margin: 0 auto;
     }
+    // .home__spacer--desktop {
+    //     position: absolute;
+    //     top: $l-size + $xs-size;
+    //     left: 50%;
+    //     transform: translateX(-50%);
+    //     max-width: 60%;
+    // }
 }
+
+// .home__spacer--desktop {
+//     position: absolute;
+//     top: $l-size + $xs-size;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     max-width: 60%;
+// }
