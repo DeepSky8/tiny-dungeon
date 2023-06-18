@@ -27,6 +27,9 @@ import AuthWrapper from "../components/authenticate/AuthWrapper.jsx";
 import AuthWrapperCreate from "../components/authenticate/AuthWrapperCreate.jsx";
 import AdminPage from "../components/admin/AdminPage.jsx";
 import AdminCode from "../components/admin/AdminCode.jsx";
+import AuthPage from "../components/authenticate/AuthPage.jsx";
+import RegisterPage from "../components/authenticate/RegisterPage.jsx";
+import ResetPage from "../components/authenticate/ResetPage.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -45,6 +48,21 @@ const AppRouter = createBrowserRouter([
                 path: "/attribution",
                 errorElement: <NotFoundPage />,
                 element: <Attribution />
+            },
+            {
+                path: "/authenticate/:back?",
+                errorElement: <NotFoundPage />,
+                element: <AuthPage />
+            },
+            {
+                path: "/register/:back?",
+                errorElement: <NotFoundPage />,
+                element: <RegisterPage />
+            },
+            {
+                path: "/reset/:back?",
+                errorElement: <NotFoundPage />,
+                element: <ResetPage />
             },
             {
                 path: "/join/:passthrough?",

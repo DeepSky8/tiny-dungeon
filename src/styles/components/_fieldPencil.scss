@@ -9,8 +9,9 @@
 }
 
 .field__container--input {
-    display: block;
+    display: flex;
     max-width: 99%;
+    justify-content: center;
     .field--input {
         background-color: $menu-yellow-faded;
         font-size: $calcFontSizeLarge;
@@ -54,21 +55,21 @@
 
 .field__container--textarea {
     position: relative;
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 98%;
+    max-width: 98%;
 }
 
 .field__container--text {
     position: relative;
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 98%;
+    max-width: 98%;
     // font-size: $calcFontSize;
 }
 
 .textarea--pencil {
     position: absolute;
-    bottom: $xs-size + 0.1rem;
-    right: $xs-size;
+    bottom: $xs-size + 0.2rem;
+    right: 0.1rem;
     pointer-events: none;
     color: $text-brown-faded;
 }
@@ -171,7 +172,9 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .field__container--input {
-        // max-width: 100%;
+        display: flex;
+        max-width: 99%;
+        justify-content: center;
 
         .field--input {
             font-size: $calcFontSizeMed;
@@ -198,7 +201,11 @@
     }
 
     .text--pencil {
-        bottom: 0.1rem;
+        bottom: 0.3rem;
         right: $xs-size;
+    }
+
+    .authPage__container--login {
+        max-width: 60%;
     }
 }
