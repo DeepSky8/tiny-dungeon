@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
+import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 
 const AdminPage = () => {
 
@@ -46,10 +47,10 @@ const AdminPage = () => {
             title: 'Display Scrolls',
             location: 'displayScrolls'
         },
-        // {
-        //     title: '',
-        //     location: ''
-        // },
+        {
+            title: 'Game Overview',
+            location: 'gameMom'
+        },
         // {
         //     title: '',
         //     location: ''
@@ -58,20 +59,26 @@ const AdminPage = () => {
 
     return (
         <div>
-            {links.map(link => {
-                return (
-                    <div
-                        className="centered"
-                        key={Math.random()}
-                    >
-                        <NavLink
-                            to={link.location}
-                            className={'navLink'}
-                        >{link.title}
-                        </NavLink>
-                    </div>
-                )
-            })}
+            <ClickDescriptionMultiple
+                title={'Links'}
+                description={
+                    links.map(link => {
+                        return (
+                            <div
+                                className="centered"
+                                key={Math.random()}
+                            >
+                                <NavLink
+                                    to={link.location}
+                                    className={'navLink'}
+                                >{link.title}
+                                </NavLink>
+                            </div>
+                        )
+                    })
+                }
+            />
+
             <hr className="hr__brown" />
             <Outlet />
         </div>

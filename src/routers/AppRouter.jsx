@@ -31,7 +31,7 @@ import AuthPage from "../components/authenticate/AuthPage.jsx";
 import RegisterPage from "../components/authenticate/RegisterPage.jsx";
 import ResetPage from "../components/authenticate/ResetPage.jsx";
 import Settings from "../components/admin/Settings.jsx";
-import Footer from "../components/home/Footer.jsx";
+import CharactersOverview from "../components/gameMom/CharactersOverview.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -143,6 +143,11 @@ const AppRouter = createBrowserRouter([
                         element: <AdminPage />,
                         errorElement: <NotFoundPage />,
                         children: [
+                            {
+                                path: 'gameMom',
+                                element: <CharactersOverview />,
+                                errorElement: <NotFoundPage />,
+                            },
                             {
                                 path: "createTrait",
                                 errorElement: <NotFoundPage />,
