@@ -1,6 +1,7 @@
-export const addCounterItem = (item) => ({
+export const addCounterItem = ({key, title}) => ({
     type: 'ADD_ITEM',
-    item
+    key,
+    title
 })
 
 export const clearCounters = () => ({

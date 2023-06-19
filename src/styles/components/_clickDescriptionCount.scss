@@ -1,5 +1,6 @@
 .clickDescriptionCount__container {
     user-select: none;
+    text-align: left;
 }
 
 .clickDescriptionCount__heading--container {
@@ -12,23 +13,24 @@
     @include button--shadow--list;
 }
 
-.clickDescriptionCount__heading--minus {
-    float: left;
-    padding-top: 5px;
-}
+// .clickDescriptionCount__heading--minus {
+//     float: left;
+//     padding-top: 5px;
+// }
 
 .clickDescriptionCount__heading--title {
     margin-left: 15%;
+    
 }
 
 .clickDescriptionCount__heading--clickable {
     width: 100%;
 }
 
-.clickDescriptionCount__heading--add {
-    float: right;
-    padding-top: 5px;
-}
+// .clickDescriptionCount__heading--add {
+//     float: right;
+//     padding-top: 5px;
+// }
 
 // .clickDescriptionCount__container--description {
 //     border-left: 1px solid $text-brown;

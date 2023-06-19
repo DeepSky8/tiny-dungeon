@@ -5,9 +5,9 @@ import { off, onValue, ref } from "firebase/database";
 import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import CharacterSummary from "./CharacterSummary";
 import TraitsOverview from "./TraitsOverview";
-import alphabetizeNames from "../../functions/alphabetizeNames";
 import WeaponsOverview from "./WeaponsOverview";
 import ScrollsOverview from "./ScrollsOverview";
+import alphabetizeKeys from "../../functions/alphabetizeKeys";
 
 
 const CharactersOverview = () => {
@@ -18,6 +18,7 @@ const CharactersOverview = () => {
     const [heritages, setHeritages] = useState([])
     const [traits, setTraits] = useState([])
     const [weapons, setWeapons] = useState([])
+    const [weaponGroups, setWeaponGroups] = useState([])
     const [scrolls, setScrolls] = useState([])
 
 
@@ -82,6 +83,20 @@ const CharactersOverview = () => {
     }, [])
 
     useEffect(() => {
+        onValue(ref(db, 'weaponGroups'), snapshot => {
+            const tempArray = []
+            if (snapshot.exists()) {
+                snapshot.forEach(snap => { tempArray.push(snap.val()) })
+            }
+            setWeaponGroups(tempArray)
+        })
+
+        return (() => {
+            off(ref(db, 'weaponGroups'))
+        })
+    }, [])
+
+    useEffect(() => {
         onValue(ref(db, 'weapons'), snapshot => {
             const tempArray = []
             if (snapshot.exists()) {
@@ -115,10 +130,9 @@ const CharactersOverview = () => {
         onValue(ref(db, `gameSessions/${localCode}`), snapshot => {
             const tempArray = []
             if (snapshot.exists()) {
-                snapshot.forEach(snap => tempArray.push(snap.val()))
+                snapshot.forEach(snap => { tempArray.push(snap.val()) })
             }
-            const sortedCharacters = alphabetizeNames({ objectArray: tempArray, namePrefix: 'char' })
-            setCharacters(sortedCharacters)
+            setCharacters(tempArray)
         })
         // }
 
@@ -132,7 +146,7 @@ const CharactersOverview = () => {
             <ClickDescriptionMultiple
                 title={'Characters'}
                 description={
-                    characters.map(character => {
+                    alphabetizeKeys({ objectArray: characters, key: 'charName' }).map(character => {
                         return (
                             <ClickDescriptionMultiple
                                 key={character.charID}
@@ -155,6 +169,7 @@ const CharactersOverview = () => {
                     <WeaponsOverview
                         characters={characters}
                         weapons={weapons}
+                        weaponGroups={weaponGroups}
                     />
                 }
             />

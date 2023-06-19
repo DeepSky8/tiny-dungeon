@@ -3,6 +3,7 @@ const defaultCounter = {
         // {
         // key: 
         // amount: 
+        // title:
         // }
     ]
 }
@@ -14,26 +15,27 @@ const counterReducer = (state, action) => {
                 ...defaultCounter
             }
         case 'ADD_ITEM':
-            const itemExists = state.pairs.find(pair => pair.key === action.item)
+            const itemExists = state.pairs.find(pair => pair.key === action.key)
             const itemToAdd = (
                 itemExists
                     ?
                     {
-                        key: action.item,
-                        amount: itemExists.amount + 1
+                        key: action.key,
+                        amount: itemExists.amount + 1,
+                        title: itemExists.title
                     }
                     :
                     {
-                        key: action.item,
-                        amount: 1
+                        key: action.key,
+                        amount: 1,
+                        title: action.title
                     }
             )
 
             const updatedPairs = (
-                state.pairs.filter(pair => pair.key !== action.item)
+                state.pairs.filter(pair => pair.key !== action.key)
                     .concat([itemToAdd])
             )
-
             return {
                 pairs: updatedPairs
             }

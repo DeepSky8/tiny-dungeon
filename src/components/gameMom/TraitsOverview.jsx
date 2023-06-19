@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import { counterReducer, defaultCounter } from "../../reducers/counterReducer";
 import { addCounterItem, clearCounters } from "../../actions/counterActions";
 import ClickDescriptionCount from "../display/ClickDescriptionCount";
+import alphabetizeKeys from "../../functions/alphabetizeKeys";
 
 
 const TraitsOverview = ({ characters, traits }) => {
@@ -11,11 +12,11 @@ const TraitsOverview = ({ characters, traits }) => {
         dispatchCountedTraits(clearCounters())
 
         characters.forEach(character => {
-            dispatchCountedTraits(addCounterItem(character.hTraitID))
+            dispatchCountedTraits(addCounterItem({ key: character.hTraitID, title: traits.find(trait => trait.tID === character.hTraitID).tTitle }))
 
 
             character.traitIDs.forEach(traitID => {
-                dispatchCountedTraits(addCounterItem(traitID))
+                dispatchCountedTraits(addCounterItem({ key: traitID, title: traits.find(trait => trait.tID === traitID).tTitle }))
             })
 
         });
@@ -25,7 +26,7 @@ const TraitsOverview = ({ characters, traits }) => {
 
     return (
         <div className="traitsOverview__container">
-            {countedTraits.pairs.map(countedTrait => {
+            {alphabetizeKeys({ objectArray: countedTraits.pairs, key: 'title' }).map(countedTrait => {
                 const thisTrait = traits.find(trait => trait.tID === countedTrait.key)
                 return (
                     <ClickDescriptionCount
