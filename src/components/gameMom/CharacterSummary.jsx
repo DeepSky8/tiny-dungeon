@@ -1,53 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { auth, db } from "../../api/firebase";
-import { off, onValue, ref } from "firebase/database";
+import React from "react";
 import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import ClickDescriptionCount from "../display/ClickDescriptionCount";
 
 
-const CharacterSummary = ({ charData }) => {
-    const [heritage, setHeritage] = useState([])
-    const [traits, setTraits] = useState([])
-    // const heritage = heritageData.find(heritage => heritage.hID === charData.heritageID)
-    // const hTrait = traitData.filter(trait => charData.hTraitID.includes(trait.tID))
-    // const traits = traitData.filter(trait => charData.traitIDs.includes(trait.tID))
+const CharacterSummary = ({ charData, heritageData, traitData }) => {
 
-
-
-    useEffect(() => {
-        onValue(ref(db, 'heritages'), snapshot => {
-            const tempArray = []
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => tempArray.push(snap.val()))
-            }
-            const thisHeritage = tempArray.find(heritage => heritage.hID === charData.heritageID)
-            if (thisHeritage) { setHeritage(thisHeritage) }
-        })
-
-        return (() => {
-            off(ref(db, 'heritages'))
-        })
-    }, [])
-
-    useEffect(() => {
-        onValue(ref(db, 'traits'), snapshot => {
-            const tempArray = []
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => {
-                    tempArray.push(snap.val())
-                })
-                const hTrait = tempArray.filter(trait => charData.hTraitID.includes(trait.tID))
-                const regTraits = tempArray.filter(trait => charData.traitIDs.includes(trait.tID))
-                console.log('hTrait', hTrait)
-                console.log('regTraits', regTraits)
-                setTraits(hTrait.concat(regTraits))
-            }
-        })
-
-        return (() => {
-            off(ref(db, 'traits'))
-        })
-    }, [])
+    const heritage = heritageData.find(heritage => heritage.hID === charData.heritageID)
+    const hTrait = traitData.find(trait => charData.hTraitID === trait.tID)
+    const traits = traitData.filter(trait => charData.traitIDs.includes(trait.tID))
 
 
     return (
@@ -69,6 +29,10 @@ const CharacterSummary = ({ charData }) => {
                 </div>
 
                 <div>
+                    <ClickDescriptionMultiple
+                        title={hTrait.tTitle}
+                        description={hTrait.tDescription}
+                    />
                     {traits.map(trait => {
                         return (
                             <ClickDescriptionMultiple
@@ -123,11 +87,3 @@ const CharacterSummary = ({ charData }) => {
 }
 
 export default CharacterSummary
-
-// Belief
-// Heritage
-// Health/Armor
-// Traits
-// Weapons
-// has familiar
-// Scrolls

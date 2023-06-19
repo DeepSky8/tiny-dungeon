@@ -7,6 +7,8 @@
     background-color: $menu-yellow;
     color: $text-brown;
     user-select: none;
+    display: flex;
+    justify-content: space-between;
 }
 
 .clickDescriptionCount__heading--minus {
@@ -14,8 +16,8 @@
     padding-top: 5px;
 }
 
-.clickDescriptionCount__heading--title {
-    margin-left: $xs-size;
+.clickDescriptionCount__heading--clickable {
+    width: 65%;
 }
 
 .clickDescriptionCount__heading--add {
