@@ -28,19 +28,21 @@ const ScrollsOverview = ({ characters, scrolls }) => {
 
     return (
         <div className="traitsOverview__container">
-            {alphabetizeKeys({ objectArray: countedScrolls.pairs, key: 'title' }).map(countedScroll => {
-                const thisScroll = scrolls.find(scroll => scroll.sID === countedScroll.key)
-                return (
-                    <ClickDescriptionCount
-                        key={countedScroll.key}
-                        title={thisScroll.sTitle}
-                        description={thisScroll.sDescription}
-                        amount={countedScroll.amount}
-                        increase={() => { }}
-                        decrease={() => { }}
-                    />
-                )
-            })}
+            <div>
+                {alphabetizeKeys({ objectArray: countedScrolls.pairs, key: 'title' }).map(countedScroll => {
+                    const thisScroll = scrolls.find(scroll => scroll.sID === countedScroll.key)
+                    return (
+                        <ClickDescriptionCount
+                            key={countedScroll.key}
+                            title={thisScroll.sTitle}
+                            description={thisScroll.sDescription}
+                            amount={countedScroll.amount}
+                            increase={() => { }}
+                            decrease={() => { }}
+                        />
+                    )
+                })}
+            </div>
         </div>
     )
 }

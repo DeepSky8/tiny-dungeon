@@ -8,6 +8,7 @@ import TraitsOverview from "./TraitsOverview";
 import WeaponsOverview from "./WeaponsOverview";
 import ScrollsOverview from "./ScrollsOverview";
 import alphabetizeKeys from "../../functions/alphabetizeKeys";
+import ClickDescriptionSelect from "../display/ClickDescriptionSelect";
 
 
 const CharactersOverview = () => {
@@ -23,6 +24,7 @@ const CharactersOverview = () => {
 
 
     const [characters, setCharacters] = useState([])
+    const [selectedCharacters, setSelectedCharacters] = useState([])
     // const [show, dispatch] = useReducer(displayReducer, defaultDisplay)
 
 
@@ -141,6 +143,18 @@ const CharactersOverview = () => {
         })
     }, [auth, localCode])
 
+    const unSelectChar = (charID) => {
+        if (selectedCharacters.find(character => character.charID === charID)) {
+            const updatedSelChar = selectedCharacters.filter(character => character.charID !== charID)
+            setSelectedCharacters(updatedSelChar)
+        } else {
+            const charToAdd = characters.find(character => character.charID === charID)
+            if (charToAdd) {
+                setSelectedCharacters(selectedCharacters.concat([charToAdd]))
+            }
+        }
+    }
+
     return (
         <div className="charactersOverview__container">
             <ClickDescriptionMultiple
@@ -148,8 +162,9 @@ const CharactersOverview = () => {
                 description={
                     alphabetizeKeys({ objectArray: characters, key: 'charName' }).map(character => {
                         return (
-                            <ClickDescriptionMultiple
+                            <ClickDescriptionSelect
                                 key={character.charID}
+                                itemID={character.charID}
                                 title={character.charName}
                                 description={
                                     <CharacterSummary
@@ -158,39 +173,47 @@ const CharactersOverview = () => {
                                         traitData={traits}
                                     />
                                 }
+                                changeHandler={unSelectChar}
+                                isSelected={selectedCharacters.map(character => character.charID).includes(character.charID)}
                             />
                         )
                     })
                 }
             />
-            <ClickDescriptionMultiple
-                title={'Weapons'}
-                description={
-                    <WeaponsOverview
-                        characters={characters}
-                        weapons={weapons}
-                        weaponGroups={weaponGroups}
+            {selectedCharacters.length > 0
+                &&
+                <div>
+                    <ClickDescriptionMultiple
+                        title={'Weapons'}
+                        description={
+                            <WeaponsOverview
+                                characters={selectedCharacters}
+                                weapons={weapons}
+                                weaponGroups={weaponGroups}
+                            />
+                        }
                     />
-                }
-            />
-            <ClickDescriptionMultiple
-                title={'Active Traits'}
-                description={
-                    <TraitsOverview
-                        characters={characters}
-                        traits={traits}
+                    <ClickDescriptionMultiple
+                        title={'Active Traits'}
+                        description={
+                            <TraitsOverview
+                                characters={selectedCharacters}
+                                traits={traits}
+                            />
+                        }
                     />
-                }
-            />
-            <ClickDescriptionMultiple
-                title={'Available Scrolls'}
-                description={
-                    <ScrollsOverview
-                        characters={characters}
-                        scrolls={scrolls}
+                    <ClickDescriptionMultiple
+                        title={'Available Scrolls'}
+                        description={
+                            <ScrollsOverview
+                                characters={selectedCharacters}
+                                scrolls={scrolls}
+                            />
+                        }
                     />
-                }
-            />
+                </div>
+            }
+
 
         </div>
     )
