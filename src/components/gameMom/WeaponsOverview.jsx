@@ -12,7 +12,6 @@ const WeaponsOverview = ({ characters, weapons }) => {
 
         characters.forEach(character => {
             character.weaponObjects.forEach(weapon => {
-                console.log('weaponID', weapon.wID)
                 dispatchCountedWeapons(addCounterItem(weapon.wID))
             })
         });

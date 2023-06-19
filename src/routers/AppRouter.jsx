@@ -72,11 +72,6 @@ const AppRouter = createBrowserRouter([
                 element: <ResetPage />
             },
             {
-                path: "/join/:passthrough?",
-                errorElement: <NotFoundPage />,
-                element: <AuthCode />
-            },
-            {
                 path: "/settings/:back?",
                 errorElement: <NotFoundPage />,
                 element: <Settings />

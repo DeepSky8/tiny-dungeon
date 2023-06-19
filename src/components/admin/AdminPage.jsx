@@ -8,6 +8,10 @@ const AdminPage = () => {
 
     const links = [
         {
+            title: 'Game Overview',
+            location: 'gameMom'
+        },
+        {
             title: 'Create Heritage',
             location: 'createHeritage'
         },
@@ -47,10 +51,6 @@ const AdminPage = () => {
             title: 'Display Scrolls',
             location: 'displayScrolls'
         },
-        {
-            title: 'Game Overview',
-            location: 'gameMom'
-        },
         // {
         //     title: '',
         //     location: ''
@@ -58,7 +58,7 @@ const AdminPage = () => {
     ]
 
     return (
-        <div>
+        <div className="adminPage__container">
             <ClickDescriptionMultiple
                 title={'Links'}
                 description={

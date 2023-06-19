@@ -8,8 +8,8 @@ import strung from "../../functions/strung";
 
 const AuthCode = () => {
     let navigate = useNavigate()
-    const { passthrough } = useParams()
-    const nextLink = passthrough ? strung(passthrough.split('('), '/') : "/"
+    const { back } = useParams()
+    const nextLink = back ? strung(back.split('('), '/') : "/"
     const [localCode, setLocalCode] = useLocalStorageState('localCode')
     const [authCodes, setAuthCodes] = useState([])
     const [enteredCode, setEnteredCode] = useState(localCode ? localCode : '')

@@ -28,7 +28,7 @@ const Welcome = () => {
         if (localCode) {
             navigate('/newCharacter/heritage')
         } else {
-            navigate('/join/(newCharacter(heritage')
+            navigate('/settings/(newCharacter(heritage')
         }
     }
 
@@ -44,7 +44,7 @@ const Welcome = () => {
                 navigate('/newCharacter/heritage')
             }
         } else if (localChar) {
-            navigate('/join/(characterSheet')
+            navigate('/settings/(characterSheet')
         }
     }
 

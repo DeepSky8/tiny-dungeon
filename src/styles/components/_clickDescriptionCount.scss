@@ -7,8 +7,9 @@
     background-color: $menu-yellow;
     color: $text-brown;
     user-select: none;
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
+    @include button--shadow--list;
 }
 
 .clickDescriptionCount__heading--minus {
@@ -16,8 +17,12 @@
     padding-top: 5px;
 }
 
+.clickDescriptionCount__heading--title {
+    margin-left: 15%;
+}
+
 .clickDescriptionCount__heading--clickable {
-    width: 65%;
+    width: 100%;
 }
 
 .clickDescriptionCount__heading--add {
@@ -25,11 +30,11 @@
     padding-top: 5px;
 }
 
-.clickDescriptionCount__container--description {
-    border-left: 1px solid $text-brown;
-    border-right: 1px solid $text-brown;
-    border-bottom: 1px solid $text-brown;
-}
+// .clickDescriptionCount__container--description {
+//     border-left: 1px solid $text-brown;
+//     border-right: 1px solid $text-brown;
+//     border-bottom: 1px solid $text-brown;
+// }
 
 .clickDescriptionCount__description {
     padding: $xs-size;

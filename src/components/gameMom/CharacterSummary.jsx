@@ -61,7 +61,7 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                 {
                     traits.map(trait => trait.tScroll).includes(true)
                     &&
-                    <div>
+                    <div className="charSum__scrolls">
                         {charData.scrolls.map(scroll => {
                             return (
                                 <ClickDescriptionCount

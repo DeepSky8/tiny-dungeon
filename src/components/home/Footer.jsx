@@ -10,12 +10,13 @@ const Footer = ({ }) => {
     const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
 
     const authActions = () => {
-        if (auth.currentUser) {
-            logout()
-            setAuthStatus('lock')
-        } else {
-            navigate(`/authenticate/${here}`)
-        }
+        navigate('/settings')
+        // if (auth.currentUser) {
+        //     logout()
+        //     setAuthStatus('lock')
+        // } else {
+        //     navigate(`/authenticate/${here}`)
+        // }
     }
 
     const navActions = () => {

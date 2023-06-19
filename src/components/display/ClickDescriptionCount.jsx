@@ -15,12 +15,7 @@ const ClickDescriptionCount = (
     return (
         <div className="clickDescriptionCount__container">
             <div className="clickDescriptionCount__heading--container">
-                <div
-                    className={`clickDescriptionCount__heading--minus material-symbols-outlined empty medium`}
-                    onClick={decrease}
-                >
-                    bookmark_remove
-                </div>
+
                 <div
                     className="clickDescriptionCount__heading--clickable"
                     onClick={() => {
@@ -31,12 +26,7 @@ const ClickDescriptionCount = (
                         {`${amount} ${title}`}
                     </div>
                 </div>
-                <div
-                    className={`clickDescriptionCount__heading--add material-symbols-outlined filled medium`}
-                    onClick={increase}
-                >
-                    bookmark_add
-                </div>
+
             </div>
 
             <div className="clickDescriptionCount__container--description">
@@ -54,3 +44,19 @@ export default ClickDescriptionCount
 
 
 
+
+
+// <div
+// className={`clickDescriptionCount__heading--minus material-symbols-outlined empty medium`}
+// onClick={decrease}
+// >
+// bookmark_remove
+// </div>
+
+
+// <div
+// className={`clickDescriptionCount__heading--add material-symbols-outlined filled medium`}
+// onClick={increase}
+// >
+// bookmark_add
+// </div>

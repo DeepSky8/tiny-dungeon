@@ -7,6 +7,7 @@ import CharacterSummary from "./CharacterSummary";
 import TraitsOverview from "./TraitsOverview";
 import alphabetizeNames from "../../functions/alphabetizeNames";
 import WeaponsOverview from "./WeaponsOverview";
+import ScrollsOverview from "./ScrollsOverview";
 
 
 const CharactersOverview = () => {
@@ -17,6 +18,8 @@ const CharactersOverview = () => {
     const [heritages, setHeritages] = useState([])
     const [traits, setTraits] = useState([])
     const [weapons, setWeapons] = useState([])
+    const [scrolls, setScrolls] = useState([])
+
 
     const [characters, setCharacters] = useState([])
     // const [show, dispatch] = useReducer(displayReducer, defaultDisplay)
@@ -92,6 +95,20 @@ const CharactersOverview = () => {
         })
     }, [])
 
+    useEffect(() => {
+        onValue(ref(db, 'scrolls'), snapshot => {
+            const tempArray = []
+            if (snapshot.exists()) {
+                snapshot.forEach(snap => { tempArray.push(snap.val()) })
+            }
+            setScrolls(tempArray)
+        })
+
+        return (() => {
+            off(ref(db, 'scrolls'))
+        })
+    }, [])
+
 
     useEffect(() => {
         // if (auth.currentUser && adminCodes.includes(localAdmin)) {
@@ -133,6 +150,15 @@ const CharactersOverview = () => {
                 }
             />
             <ClickDescriptionMultiple
+                title={'Weapons'}
+                description={
+                    <WeaponsOverview
+                        characters={characters}
+                        weapons={weapons}
+                    />
+                }
+            />
+            <ClickDescriptionMultiple
                 title={'Active Traits'}
                 description={
                     <TraitsOverview
@@ -142,11 +168,11 @@ const CharactersOverview = () => {
                 }
             />
             <ClickDescriptionMultiple
-                title={'Weapons'}
+                title={'Available Scrolls'}
                 description={
-                    <WeaponsOverview
+                    <ScrollsOverview
                         characters={characters}
-                        weapons={weapons}
+                        scrolls={scrolls}
                     />
                 }
             />
