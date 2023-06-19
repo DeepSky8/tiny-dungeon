@@ -2,7 +2,7 @@ import defaultGear from "../objectsArrays/defaultGear";
 
 
 const defaultChar = {
-    charID: Math.random(),
+    charID: 0,
     userID: '',
     charName: '',
     heritageID: '',         // Select from Heritages array, identify by hID
@@ -62,6 +62,9 @@ const defaultChar = {
         //     sAmount: 1
         // }
     ],                          // Identified by sID
+    charCreated: Date.now(),
+    charUpdated: 0,
+    charNotes: '',
 }
 
 const charReducer = (state, action) => {
@@ -328,6 +331,11 @@ const charReducer = (state, action) => {
             return {
                 ...state,
                 scrolls: decrementedScrollArray
+            }
+        case 'UPDATE_NOTES':
+            return {
+                ...state,
+                charNotes: action.charNotes
             }
         default:
             return {

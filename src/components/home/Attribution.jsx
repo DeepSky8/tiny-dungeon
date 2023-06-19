@@ -1,6 +1,7 @@
 import React from "react";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
 import TapOpen from "../TapOpen";
+import Footer from "./Footer";
 
 const Attribution = () => {
 

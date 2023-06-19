@@ -1,3 +1,6 @@
+import { child, push, ref, update } from "firebase/database"
+import { db } from "../api/firebase"
+
 export const loadChar = (char) => ({
     type: 'LOAD_CHAR',
     char
@@ -168,8 +171,10 @@ export const minusScroll = (scroll) => ({
     scroll
 })
 
-
-
+export const updateNotes = (charNotes) => ({
+    type: "UPDATE_NOTES",
+    charNotes
+})
 
 
 
@@ -178,3 +183,21 @@ export const minusScroll = (scroll) => ({
 //     type: 'UPDATE_',
 
 // })
+
+
+export const startUpdateCharInfo = async ({ gameCode, charID, charData }) => {
+    const updates = {};
+
+    updates[`gameSessions/${gameCode}/${charID}`] = { ...charData, charID, charUpdated: Date.now() }
+
+    update(ref(db), updates)
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
+
+export const startNewCharKey = async () => {
+    const charID = push(child(ref(db), 'characters')).key
+    return charID
+}

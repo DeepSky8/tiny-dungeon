@@ -29,10 +29,10 @@ const DisplayHealth = ({ char, dispatchChar }) => {
     }
 
     const reduceArmor = () => {
-        if (currentArmor - 1 > -1) { dispatchChar(decreaseCurrentArmor()) }
-        if (currentArmor % 3 === 0) {
+        if (currentArmor - 1 >= 0) { dispatchChar(decreaseCurrentArmor()) }
+        if (currentArmor % 3 === 0 && char.maxArmor >= 3) {
             dispatchChar(setMaxArmor(char.maxArmor - 3))
-        } else if (currentArmor - 1 <= -1) { dispatchChar(setMaxArmor(0)) }
+        } else if (currentArmor - 1 <= 0) { dispatchChar(setMaxArmor(0)) }
     }
 
     const increaseArmor = () => {
@@ -46,7 +46,7 @@ const DisplayHealth = ({ char, dispatchChar }) => {
 
     return (
         <div className="displayHealth__container">
-        <div className="charSheet__display--title centered bold">Health</div>
+            <div className="charSheet__display--title centered bold">Health</div>
 
             <div className="displayHealth__container--section" id="displayHealth__container--armor">
                 <div className="displayHealth__container--plusMinus">

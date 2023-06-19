@@ -30,7 +30,7 @@
 .authPage__login--textBox {
     height: fit-content;
     max-width: 65%;
-    font-size: $calcFontSizeLarge;
+    // font-size: $calcFontSizeLarge;
     background-color: $menu-yellow;
     input:focus {
         outline: none;
@@ -77,8 +77,9 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .authPage__container {
-        margin-top: $m-size;
-        font-size: $calcFontSizeLarge;
+        max-width: 100%;
+        margin: auto;
+        // font-size: $calcFontSize;
     }
 
     .authPage__container--input {
@@ -87,12 +88,12 @@
         padding: 0 $xl-size;
     }
 
-    .authPage__login--label {
-        font-size: $calcFontSize;
-    }
+    // .authPage__login--label {
+    //     // font-size: $calcFontSize;
+    // }
 
     .authPage__login--textBox {
-        font-size: $calcFontSize;
+        // font-size: $calcFontSize;
         width: 55%;
     }
 

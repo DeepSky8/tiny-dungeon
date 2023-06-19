@@ -1,32 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth, logout } from "../../api/firebase";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 
-const Footer = ({ authStatus, setAuthStatus }) => {
-    let navigate = useNavigate()
+const Footer = ({ }) => {
+    let navigate = useNavigate();
+    let location = useLocation();
+    const here = location.pathname.split('/')[1]
+    const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
 
     const authActions = () => {
         if (auth.currentUser) {
             logout()
             setAuthStatus('lock')
         } else {
-            navigate(`/authenticate`)
+            navigate(`/authenticate/${here}`)
         }
     }
 
-    const overviewActions = () => {
-        if (auth.currentUser) {
-            navigate('/gameMom')
-        } else {
-            navigate('/authenticate/gameMom')
-        }
+    const navActions = () => {
+        navigate(here == 'settings' ? '/' : '/settings')
     }
 
 
     return (
         <div className="footer__container">
-
+            <Outlet />
             <button
                 className={`material-symbols-outlined filled footer__button`}
                 onClick={authActions} >
@@ -41,9 +40,9 @@ const Footer = ({ authStatus, setAuthStatus }) => {
             </Link>
             <button
                 className="material-symbols-outlined filled footer__button"
-                onClick={overviewActions}
+                onClick={navActions}
             >
-                demography
+                {here == 'settings' ? 'home' : 'settings'}
             </button>
         </div>
     )

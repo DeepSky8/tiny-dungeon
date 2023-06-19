@@ -9,10 +9,13 @@ import Field from "../display/FieldPencil";
 import { updateBelief } from "../../actions/charActions";
 import Display from "./Display";
 import { useNavigate } from "react-router";
+import { startUpdateCharInfo } from "../../actions/charActions";
 
 const CharacterSheet = () => {
     let navigate = useNavigate()
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
+    const [gameCode,] = useLocalStorageState('localCode')
+    const [charID,] = useLocalStorageState('localCID')
     const [char, dispatchChar] = useReducer(charReducer, localChar)
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
 
@@ -40,14 +43,13 @@ const CharacterSheet = () => {
 
     }, [])
 
-
-    // Save locally
     useEffect(() => {
         setLocalChar(char)
-
+        startUpdateCharInfo({ gameCode, charID, charData: char })
         return () => {
             // When unmounting component, save current char to local
             setLocalChar(char)
+            startUpdateCharInfo({ gameCode, charID, charData: char })
         }
     }, [char])
 

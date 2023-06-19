@@ -30,6 +30,8 @@ import AdminCode from "../components/admin/AdminCode.jsx";
 import AuthPage from "../components/authenticate/AuthPage.jsx";
 import RegisterPage from "../components/authenticate/RegisterPage.jsx";
 import ResetPage from "../components/authenticate/ResetPage.jsx";
+import Settings from "../components/admin/Settings.jsx";
+import Footer from "../components/home/Footer.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -43,6 +45,11 @@ const AppRouter = createBrowserRouter([
                 errorElement: <NotFoundPage />,
                 element: <Welcome />,
 
+            },
+            {
+                path: '/settings',
+                errorElement: <NotFoundPage />,
+                element: <Settings />,
             },
             {
                 path: "/attribution",
@@ -68,6 +75,11 @@ const AppRouter = createBrowserRouter([
                 path: "/join/:passthrough?",
                 errorElement: <NotFoundPage />,
                 element: <AuthCode />
+            },
+            {
+                path: "/settings/:back?",
+                errorElement: <NotFoundPage />,
+                element: <Settings />
             },
             {
                 element: <AuthWrapper />,

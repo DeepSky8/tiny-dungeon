@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import Footer from "./Footer";
+import { auth } from "../../api/firebase";
 
 const Welcome = () => {
     let navigate = useNavigate();
     const [localChar,] = useLocalStorageState('localChar')
     const [localCode,] = useLocalStorageState('localCode')
     const [charCreated, setCharCreated] = useState(false)
-    const [authStatus, setAuthStatus] = useState('lock')
+    // const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
 
 
     useEffect(() => {
@@ -76,22 +77,11 @@ const Welcome = () => {
                     </div>
                 </div>
             </div>
-            <Footer
-                authStatus={authStatus}
-                setAuthStatus={setAuthStatus}
-            />
 
+            <Footer />
         </div>
     )
 }
 
 export default Welcome
 
-// <div className="welcome__container--attribution">
-// <Link
-//     className="welcome__attribution--link"
-//     to={'/attribution'}
-// >
-//     Attribution
-// </Link>
-// </div>
