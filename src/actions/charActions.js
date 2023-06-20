@@ -196,6 +196,17 @@ export const startUpdateCharInfo = async ({ gameCode, charID, charData }) => {
         })
 }
 
+export const startClearCharData = async ({ gameCode, charID }) => {
+    const updates = {};
+
+    updates[`gameSessions/${gameCode}/${charID}`] = null
+
+    update(ref(db), updates)
+        .catch((error) => {
+            console.log('Did not clear character', error)
+        })
+}
+
 
 export const startNewCharKey = async () => {
     const charID = push(child(ref(db), 'characters')).key

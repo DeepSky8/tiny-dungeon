@@ -67,7 +67,7 @@ const Home = () => {
         onValue(ref(db, 'authCodes'), snapshot => {
             const tempArray = []
             if (snapshot.exists()) {
-                snapshot.forEach(snap => tempArray.push(snap.val()))
+                snapshot.forEach(snap => { tempArray.push(snap.val()) })
             }
             setAuthCodes(tempArray)
         })
@@ -82,7 +82,7 @@ const Home = () => {
         onValue(ref(db, 'adminCodes'), snapshot => {
             const tempArray = []
             if (snapshot.exists()) {
-                snapshot.forEach(snap => tempArray.push(snap.val()))
+                snapshot.forEach(snap => { tempArray.push(snap.val()) })
             }
             setAdminCodes(tempArray)
         })
