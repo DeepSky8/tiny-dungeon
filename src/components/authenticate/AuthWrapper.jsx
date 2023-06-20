@@ -14,7 +14,7 @@ const AuthWrapper = () => {
         )
     } else {
         return (
-            <Navigate to={'/join'} />
+            <Navigate to={'/settings'} />
         )
     }
 }

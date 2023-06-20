@@ -1,0 +1,105 @@
+.authPage__container {
+    display: flexbox;
+    margin: 0 $s-size;
+}
+
+.authPage__container--title {
+    text-align: center;
+    // @include body__text--color;
+    h3 {
+        margin: 0;
+    }
+}
+
+.authPage__container--login {
+    // justify-content: center;
+    margin: auto;
+    display: flexbox;
+    // @include body__text--color;
+}
+
+.authPage__container--input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.authPage__login--label {
+    max-width: 50%;
+}
+
+.authPage__login--textBox {
+    height: fit-content;
+    max-width: 65%;
+    // font-size: $calcFontSizeLarge;
+    background-color: $menu-yellow;
+    input:focus {
+        outline: none;
+        border-style: solid;
+        border-width: 2px;
+        border-color: $text-brown;
+        box-shadow: 0 0 10px $text-brown;
+    }
+    ::placeholder {
+        color: $text-brown-placeholder;
+    }
+
+    // @include background--color(field__input__background);
+    // @include body__text--color;
+}
+
+.authPage__container--buttons {
+    display: flexbox;
+    justify-content: center;
+    padding-bottom: $s-size;
+}
+
+.authPage__container--button {
+    display: flex;
+    justify-content: center;
+    margin: $s-size 0;
+}
+
+.authPage__login--button {
+    font-size: $calcFontSizeMed;
+    width: 75%;
+    height: $calcFontSizeExtraLarge;
+    background-color: $menu-yellow;
+    color: $text-brown;
+
+    // @include background--color(button__background);
+    // @include body__text--color;
+    // &:hover {
+    //     @include background--color(hover__background);
+    // }
+    @include button--border;
+    @include button--shadow;
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .authPage__container {
+        max-width: 100%;
+        margin: auto;
+        // font-size: $calcFontSize;
+    }
+
+    .authPage__container--input {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 $xl-size;
+    }
+
+    // .authPage__login--label {
+    //     // font-size: $calcFontSize;
+    // }
+
+    .authPage__login--textBox {
+        // font-size: $calcFontSize;
+        width: 55%;
+    }
+
+    .authPage__login--button {
+        font-size: $calcFontSize;
+        height: $calcFontSizeLarge;
+        width: 55%;
+    }
+}

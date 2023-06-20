@@ -39,3 +39,10 @@
         outline-color: $text-brown;
     }
 }
+
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .authCode__spacer--xsmall {
+        margin: 0;
+    }
+}

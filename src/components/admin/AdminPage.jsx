@@ -1,11 +1,16 @@
 import React from "react";
 import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
+import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 
 const AdminPage = () => {
 
 
     const links = [
+        {
+            title: 'Game Overview',
+            location: 'gameMom'
+        },
         {
             title: 'Create Heritage',
             location: 'createHeritage'
@@ -50,28 +55,30 @@ const AdminPage = () => {
         //     title: '',
         //     location: ''
         // },
-        // {
-        //     title: '',
-        //     location: ''
-        // },
     ]
 
     return (
-        <div>
-            {links.map(link => {
-                return (
-                    <div
-                        className="centered"
-                        key={Math.random()}
-                    >
-                        <NavLink
-                            to={link.location}
-                            className={'navLink'}
-                        >{link.title}
-                        </NavLink>
-                    </div>
-                )
-            })}
+        <div className="adminPage__container">
+            <ClickDescriptionMultiple
+                title={'Links'}
+                description={
+                    links.map(link => {
+                        return (
+                            <div
+                                className="centered"
+                                key={Math.random()}
+                            >
+                                <NavLink
+                                    to={link.location}
+                                    className={'navLink'}
+                                >{link.title}
+                                </NavLink>
+                            </div>
+                        )
+                    })
+                }
+            />
+
             <hr className="hr__brown" />
             <Outlet />
         </div>

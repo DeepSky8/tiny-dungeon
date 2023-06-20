@@ -17,7 +17,7 @@
 }
 
 .welcome__container--buttons {
-    padding-bottom: $xl-size;
+    padding-bottom: $s-size;
 }
 
 .welcome__container--button {
@@ -25,7 +25,7 @@
 }
 
 .welcome__button {
-    max-width: 90vw;
+    max-width: 100%;
     max-height: 25vh;
     box-shadow: 0 5px 27px 2px $text-brown;
     margin-left: auto;
@@ -52,18 +52,16 @@
 }
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
+    .welcome__container {
+        padding-top: $s-size;
+    }
+
     .welcome__container--logo {
         padding-bottom: 5vh;
         width: 100%;
     }
 
     .welcome__container--buttons {
-        padding-bottom: $m-size;
-    }
-
-    .welcome__container {
-        user-select: none;
-        padding: $s-size;
         padding-bottom: 0;
     }
 }

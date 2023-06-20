@@ -27,6 +27,11 @@ import AuthWrapper from "../components/authenticate/AuthWrapper.jsx";
 import AuthWrapperCreate from "../components/authenticate/AuthWrapperCreate.jsx";
 import AdminPage from "../components/admin/AdminPage.jsx";
 import AdminCode from "../components/admin/AdminCode.jsx";
+import AuthPage from "../components/authenticate/AuthPage.jsx";
+import RegisterPage from "../components/authenticate/RegisterPage.jsx";
+import ResetPage from "../components/authenticate/ResetPage.jsx";
+import Settings from "../components/admin/Settings.jsx";
+import CharactersOverview from "../components/gameMom/CharactersOverview.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -42,14 +47,34 @@ const AppRouter = createBrowserRouter([
 
             },
             {
+                path: '/settings',
+                errorElement: <NotFoundPage />,
+                element: <Settings />,
+            },
+            {
                 path: "/attribution",
                 errorElement: <NotFoundPage />,
                 element: <Attribution />
             },
             {
-                path: "/join/:passthrough?",
+                path: "/authenticate/:back?",
                 errorElement: <NotFoundPage />,
-                element: <AuthCode />
+                element: <AuthPage />
+            },
+            {
+                path: "/register/:back?",
+                errorElement: <NotFoundPage />,
+                element: <RegisterPage />
+            },
+            {
+                path: "/reset/:back?",
+                errorElement: <NotFoundPage />,
+                element: <ResetPage />
+            },
+            {
+                path: "/settings/:back?",
+                errorElement: <NotFoundPage />,
+                element: <Settings />
             },
             {
                 element: <AuthWrapper />,
@@ -113,6 +138,11 @@ const AppRouter = createBrowserRouter([
                         element: <AdminPage />,
                         errorElement: <NotFoundPage />,
                         children: [
+                            {
+                                path: 'gameMom',
+                                element: <CharactersOverview />,
+                                errorElement: <NotFoundPage />,
+                            },
                             {
                                 path: "createTrait",
                                 errorElement: <NotFoundPage />,

@@ -17,7 +17,7 @@ const AdminCode = () => {
     //     onValue(ref(db, 'adminCodes'), snapshot => {
     //         const tempArray = []
     //         if (snapshot.exists()) {
-    //             snapshot.forEach(snap => tempArray.push(snap.val()))
+    //             snapshot.forEach(snap => {tempArray.push(snap.val())})
     //         }
     //         setAuthCodes(tempArray)
     //     })

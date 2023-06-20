@@ -1,9 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
-    getAuth
+    GoogleAuthProvider,
+    getAuth,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
 } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
+import { startCreateUser, startUpdateUserAccessDate } from "../actions/authActions";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,5 +27,93 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+const googleProvider = new GoogleAuthProvider();
 
-export {auth, db}
+const signInWithGoogle = async () => {
+    try {
+        await signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                startCreateUser(
+                    {
+                        uid: result.user.uid,
+                        authProvider: 'Google',
+                        email: result.user.email,
+                    }
+                )
+                // split('@')[0].toUpperCase()
+                return result.user.uid
+            })
+            .then((uid) => {
+                startUpdateUserAccessDate({ uid })
+            })
+            .catch((error) => {
+                alert(error)
+            })
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
+const logInWithEmailAndPassword = async (email, password) => {
+    try {
+        await signInWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                if (result) {
+                    startUpdateUserAccessDate({ uid: result.user.uid })
+                }
+            })
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
+const registerWithEmailAndPassword = async (email, password) => {
+    try {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+
+                startCreateUser({
+                    uid: result.user.uid,
+                    authProvider: 'local',
+                    email: email,
+                    // .split('@')[0].toUpperCase()
+                })
+
+            })
+            .catch((err) => {
+                console.error(err);
+                alert(err.message);
+            })
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
+const sendPasswordReset = async (email) => {
+    await sendPasswordResetEmail(auth, email)
+        .then(() => {
+            alert("Password reset link sent!");
+        })
+        .catch((error) => {
+            alert(error.message)
+        })
+};
+
+const logout = () => {
+    signOut(auth);
+};
+
+
+export {
+    auth,
+    db,
+    logInWithEmailAndPassword,
+    logout,
+    registerWithEmailAndPassword,
+    sendPasswordReset,
+    signInWithGoogle,
+
+}
