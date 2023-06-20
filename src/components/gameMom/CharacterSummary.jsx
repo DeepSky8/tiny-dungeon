@@ -15,6 +15,8 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
 
             <div className="charSum__body">
                 <div className="italic centered">{charData.belief}</div>
+
+
                 <div className="charSum__line">
                     <div>{heritage.hTitle}</div>
                     {
@@ -23,9 +25,16 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                         <div>Has Familiar</div>
                     }
                 </div>
-                <div className="charSum__line">
+                <div className="characterSummary__line">
                     <div>{`Armor: ${charData.currentArmor}`}</div>
                     <div>{`Health: ${charData.currentHP}`}</div>
+                </div>
+
+                <div className="characterSummary__line">
+                    <div className="characterSummary__margin--right">
+                        Trade:
+                    </div>
+                    <div>{charData.trade}</div>
                 </div>
 
                 <div>
@@ -56,12 +65,13 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                         )
                     })}
                 </div>
-                <hr className="hr__brown" />
 
                 {
                     traits.map(trait => trait.tScroll).includes(true)
                     &&
-                    <div className="charSum__scrolls">
+                    <div className="characterSummary__scrolls">
+                        <hr className="hr__brown" />
+
                         {charData.scrolls.map(scroll => {
                             return (
                                 <ClickDescriptionCount

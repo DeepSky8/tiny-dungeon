@@ -9,6 +9,7 @@ import WeaponsOverview from "./WeaponsOverview";
 import ScrollsOverview from "./ScrollsOverview";
 import alphabetizeKeys from "../../functions/alphabetizeKeys";
 import ClickDescriptionSelect from "../display/ClickDescriptionSelect";
+import TradeOverview from "./TradeOverview";
 
 
 const CharactersOverview = () => {
@@ -194,7 +195,7 @@ const CharactersOverview = () => {
                         }
                     />
                     <ClickDescriptionMultiple
-                        title={'Active Traits'}
+                        title={'Traits'}
                         description={
                             <TraitsOverview
                                 characters={selectedCharacters}
@@ -203,11 +204,19 @@ const CharactersOverview = () => {
                         }
                     />
                     <ClickDescriptionMultiple
-                        title={'Available Scrolls'}
+                        title={'Scrolls'}
                         description={
                             <ScrollsOverview
                                 characters={selectedCharacters}
                                 scrolls={scrolls}
+                            />
+                        }
+                    />
+                    <ClickDescriptionMultiple
+                        title={'Trades'}
+                        description={
+                            <TradeOverview
+                                characters={selectedCharacters}
                             />
                         }
                     />

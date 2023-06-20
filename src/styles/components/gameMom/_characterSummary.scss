@@ -1,8 +1,15 @@
-.charSum__line {
+.characterSummary__line {
     display: flex;
     justify-content: space-between;
 }
 
-// .charSum__scrolls {
+.characterSummary__margin--right {
+    margin-right: 5%;
+}
+
+.characterSummary__margin--left {
+    margin-left: 5%;
+}
+// .characterSummary__scrolls {
 //     @include button--shadow--list;
 // }
