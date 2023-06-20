@@ -15,7 +15,7 @@ import { wgTypes } from "../../objectsArrays/createObjectArrays/weaponGroupObjec
 
 
 
-const CreateWeapon = () => {
+const BuildWeapon = () => {
     const [weapon, dispatchWeapon] = useReducer(weaponsMasteredReducer, defaultWeaponMastered)
 
     const handleSave = () => {
@@ -113,4 +113,4 @@ const CreateWeapon = () => {
     )
 }
 
-export default CreateWeapon
+export default BuildWeapon

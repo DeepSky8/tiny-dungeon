@@ -3,13 +3,13 @@ import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import ClickDescriptionCount from "../display/ClickDescriptionCount";
 
 
-const CharacterSummary = ({ charData, heritageData, traitData }) => {
+const CharacterOverview = ({ charData, heritageData, traitData }) => {
 
     const heritage = heritageData.find(heritage => heritage.hID === charData.heritageID)
     const hTrait = traitData.find(trait => charData.hTraitID === trait.tID)
     const traits = traitData.filter(trait => charData.traitIDs.includes(trait.tID))
 
-
+    console.log('charData', charData)
     return (
         <div className="characterSummary__container">
 
@@ -25,6 +25,7 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                         <div>Has Familiar</div>
                     }
                 </div>
+
                 <div className="characterSummary__line">
                     <div>{`Armor: ${charData.currentArmor}`}</div>
                     <div>{`Health: ${charData.currentHP}`}</div>
@@ -35,6 +36,13 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                         Trade:
                     </div>
                     <div>{charData.trade}</div>
+                </div>
+
+                <div className="characterSummary__line">
+                    <div className="characterSummary__margin--right">
+                        Notes:
+                    </div>
+                    <div>{charData.charNotes}</div>
                 </div>
 
                 <div>
@@ -84,16 +92,15 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                                 />
                             )
                         })}
+                        <hr className="hr__brown" />
                     </div>
                 }
 
 
             </div>
 
-            <hr className="hr__brown" />
-
         </div>
     )
 }
 
-export default CharacterSummary
+export default CharacterOverview

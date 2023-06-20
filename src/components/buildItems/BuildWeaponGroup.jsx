@@ -21,7 +21,7 @@ import {
 import { wgRange, wgTypes } from "../../objectsArrays/createObjectArrays/weaponGroupObjectArray";
 
 
-const CreateWeaponGroup = () => {
+const BuildWeaponGroup = () => {
     const [wGroup, dispatchWGroup] = useReducer(weaponGroupReducer, defaultWeaponGroup)
 
     const handleRemoveWGroupRangeID = (id) => {
@@ -205,4 +205,4 @@ const CreateWeaponGroup = () => {
     )
 }
 
-export default CreateWeaponGroup
+export default BuildWeaponGroup

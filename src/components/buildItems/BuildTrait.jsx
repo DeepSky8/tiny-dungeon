@@ -5,7 +5,7 @@ import traitObjectArray from "../../objectsArrays/createObjectArrays/traitObject
 import Field from "../display/Field";
 import { loadTrait, startNewTraitKey } from "../../actions/traitActions";
 
-const CreateTrait = () => {
+const BuildTrait = () => {
     const [trait, dispatchTrait] = useReducer(traitReducer, defaultTrait)
     const fieldArray = fieldPopulator({ state: trait, dispatchState: dispatchTrait, objectArray: traitObjectArray })
 
@@ -35,4 +35,4 @@ const CreateTrait = () => {
     )
 }
 
-export default CreateTrait
+export default BuildTrait

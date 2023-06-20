@@ -3,7 +3,7 @@ import Field from "../display/Field";
 import { defaultScroll, scrollReducer } from "../../reducers/scrollReducer";
 import { clearScroll, startNewScrollKey, updateSDescription, updateSTitle } from "../../actions/scrollActions";
 
-const CreateScroll = () => {
+const BuildScroll = () => {
     const [scroll, dispatchScroll] = useReducer(scrollReducer, defaultScroll)
 
     const handleSave = () => {
@@ -50,4 +50,4 @@ const CreateScroll = () => {
     )
 }
 
-export default CreateScroll
+export default BuildScroll

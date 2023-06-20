@@ -16,7 +16,7 @@ import Field from "../display/Field";
 import Menu from "../display/Menu";
 import BulletedRemove from "../display/BulletedRemove";
 
-const CreateHeritage = () => {
+const BuildHeritage = () => {
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
     const [hTraits, setHTraits] = useState([])
 
@@ -153,4 +153,4 @@ const CreateHeritage = () => {
     )
 }
 
-export default CreateHeritage
+export default BuildHeritage

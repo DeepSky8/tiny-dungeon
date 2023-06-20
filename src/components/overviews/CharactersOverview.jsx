@@ -3,12 +3,12 @@ import useLocalStorageState from "use-local-storage-state";
 import { auth, db } from "../../api/firebase";
 import { off, onValue, ref } from "firebase/database";
 import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
-import CharacterSummary from "./CharacterSummary";
+import ClickDescriptionSelect from "../display/ClickDescriptionSelect";
+import alphabetizeKeys from "../../functions/alphabetizeKeys";
+import CharacterOverview from "./CharacterOverview";
 import TraitsOverview from "./TraitsOverview";
 import WeaponsOverview from "./WeaponsOverview";
 import ScrollsOverview from "./ScrollsOverview";
-import alphabetizeKeys from "../../functions/alphabetizeKeys";
-import ClickDescriptionSelect from "../display/ClickDescriptionSelect";
 import TradeOverview from "./TradeOverview";
 
 
@@ -168,7 +168,7 @@ const CharactersOverview = () => {
                                 itemID={character.charID}
                                 title={character.charName}
                                 description={
-                                    <CharacterSummary
+                                    <CharacterOverview
                                         charData={character}
                                         heritageData={heritages}
                                         traitData={traits}

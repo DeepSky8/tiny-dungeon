@@ -26,7 +26,7 @@
 @import "../styles/components/authenticate/authCode";
 @import "../styles/components/authenticate/authPage";
 
-@import "../styles/components/gameMom/characterSummary";
+@import "../styles/components/overviews/characterSummary";
 
 @import "../styles/components/createChar/newCharFooter";
 @import "../styles/components/createChar/newCharacter";
@@ -50,12 +50,12 @@
 @import "../styles/components/charSheet/displayScroll";
 @import "../styles/components/charSheet/combatActions";
 
-@import "../styles/createItems/createHeritage";
-@import "../styles/createItems/createTrait";
-@import "../styles/createItems/createWeaponGroup";
-@import "../styles/createItems/createWeapon";
-@import "../styles/createItems/createScroll";
-@import "../styles/createItems/displayTraits-create";
-@import "../styles/createItems/displayHeritages";
-@import "../styles/createItems/displayWeaponGroup";
-@import "../styles/createItems/displayScrolls-create";
+@import "../styles/buildItems/createHeritage";
+@import "../styles/buildItems/createTrait";
+@import "../styles/buildItems/createWeaponGroup";
+@import "../styles/buildItems/createWeapon";
+@import "../styles/buildItems/createScroll";
+@import "../styles/buildItems/displayTraits-create";
+@import "../styles/buildItems/displayHeritages";
+@import "../styles/buildItems/displayWeaponGroup";
+@import "../styles/buildItems/displayScrolls-create";

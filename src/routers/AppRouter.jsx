@@ -2,12 +2,12 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import NotFoundPage from "../components/NotFoundPage.jsx";
 import Home from "../components/home/Home.jsx";
-import CreateTrait from "../components/createItems/CreateTrait.jsx";
-import CreateScroll from "../components/createItems/CreateScroll.jsx";
-import CreateWeaponGroup from "../components/createItems/CreateWeaponGroup.jsx";
+import BuildTrait from "../components/buildItems/BuildTrait.jsx";
+import BuildScroll from "../components/buildItems/BuildScroll.jsx";
+import BuildWeaponGroup from "../components/buildItems/BuildWeaponGroup.jsx";
 import NewCharacter from "../components/createCharacter/NewCharacter.jsx";
 import DisplayTraits from "../components/editItems/DisplayTraits.jsx";
-import CreateHeritage from "../components/createItems/CreateHeritage.jsx";
+import BuildHeritage from "../components/buildItems/BuildHeritage.jsx";
 import DisplayHeritages from "../components/editItems/DisplayHeritages.jsx";
 import CharHeritage from "../components/createCharacter/heritage/CharHeritage.jsx";
 import CharTraits from "../components/createCharacter/traits/CharTraits.jsx";
@@ -17,7 +17,7 @@ import CharBackstory from "../components/createCharacter/backstory/CharBackstory
 import CharFamiliar from "../components/createCharacter/familiar/CharFamiliar.jsx";
 import CharacterSheet from "../components/characterSheet/CharacterSheet.jsx";
 import DisplayWeaponGroups from "../components/editItems/DisplayWeaponGroups.jsx";
-import CreateWeapon from "../components/createItems/CreateWeapon.jsx";
+import BuildWeapon from "../components/buildItems/BuildWeapon.jsx";
 import DisplayWeapons from "../components/editItems/DisplayWeapons.jsx";
 import DisplayScrolls from "../components/editItems/DisplayScrolls.jsx";
 import Welcome from "../components/home/Welcome.jsx";
@@ -31,7 +31,7 @@ import AuthPage from "../components/authenticate/AuthPage.jsx";
 import RegisterPage from "../components/authenticate/RegisterPage.jsx";
 import ResetPage from "../components/authenticate/ResetPage.jsx";
 import Settings from "../components/admin/Settings.jsx";
-import CharactersOverview from "../components/gameMom/CharactersOverview.jsx";
+import CharactersOverview from "../components/overviews/CharactersOverview.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -146,12 +146,12 @@ const AppRouter = createBrowserRouter([
                             {
                                 path: "createTrait",
                                 errorElement: <NotFoundPage />,
-                                element: <CreateTrait />
+                                element: <BuildTrait />
                             },
                             {
                                 path: "createHeritage",
                                 errorElement: <NotFoundPage />,
-                                element: <CreateHeritage />
+                                element: <BuildHeritage />
                             },
                             {
                                 path: "displayTraits",
@@ -181,17 +181,17 @@ const AppRouter = createBrowserRouter([
                             {
                                 path: "createScroll",
                                 errorElement: <NotFoundPage />,
-                                element: <CreateScroll />
+                                element: <BuildScroll />
                             },
                             {
                                 path: "createWeaponGroup",
                                 errorElement: <NotFoundPage />,
-                                element: <CreateWeaponGroup />
+                                element: <BuildWeaponGroup />
                             },
                             {
                                 path: "createWeapon",
                                 errorElement: <NotFoundPage />,
-                                element: <CreateWeapon />
+                                element: <BuildWeapon />
                             },
                         ]
                     },
