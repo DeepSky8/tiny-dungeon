@@ -16,9 +16,9 @@ const NewCharacter = () => {
     const [char, dispatchChar] = useReducer(charReducer, defaultChar)
     const [nextStep, dispatchNext] = useReducer(nextStepReducer, defaultNextStep)
 
-    // useEffect(() => {
-    //     console.log('char', char)
-    // }, [char])
+    useEffect(() => {
+        console.log('char', char)
+    }, [char])
 
     useEffect(() => {
         if (auth.currentUser) {
@@ -64,9 +64,12 @@ const NewCharacter = () => {
                 onValue(ref(db, `characters/` + localCharID), snapshot => {
                     if (snapshot.exists()) {
                         dispatchChar(loadChar(snapshot.val()))
+                    } else {
+                        dispatchChar(updateCharID(localCharID))
                     }
                 })
             } else if (localCharID === undefined || localCharID === '') {
+                console.log('fired no char id',)
                 startNewCharKey().then((newKey) => {
                     setLocalCharID(newKey)
                     dispatchChar(updateCharID(newKey))
@@ -83,7 +86,7 @@ const NewCharacter = () => {
 
             if (auth.currentUser) {
                 off(ref(db, `users/${auth.currentUser.uid}`)) // Connection hard-closed on Footer
-                off(ref(db, `users/${auth.currentUser.uid}/currentCharID`)) 
+                off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
             }
         })
     }, [auth.currentUser])

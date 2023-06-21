@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { charReducer, defaultChar } from "../../reducers/charReducer";
 import useLocalStorageState from "use-local-storage-state";
 import { defaultHeritage, heritageReducer } from "../../reducers/heritageReducer";
@@ -8,55 +8,16 @@ import { loadHeritage } from "../../actions/heritageActions";
 import Field from "../display/FieldPencil";
 import { loadChar, startUpdateCharID, updateBelief, updateCharID } from "../../actions/charActions";
 import Display from "./Display";
-import { useNavigate } from "react-router";
 import { startUpdateCharInfo } from "../../actions/charActions";
 
 const CharacterSheet = () => {
-    let navigate = useNavigate()
-    // const [localChar, setLocalChar] = useLocalStorageState('localChar')
-    const [localCharID, setLocalCharID, { removeItem: removeLocalCharID }] = useLocalStorageState('localCharID')
-
-    // const [gameCode,] = useLocalStorageState('localCode')
-    // const [charID, setCharID] = useState('')
+    const [localCharID, , { removeItem: removeLocalCharID }] = useLocalStorageState('localCharID')
     const [char, dispatchChar] = useReducer(charReducer, defaultChar)
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
 
     useEffect(() => {
         console.log('char', char)
     }, [char])
-
-    // useEffect(() => {
-    //     if (localChar === undefined) {
-    //         navigate('/')
-    //     }
-    // }, [])
-
-    // useEffect(() => {
-    //     if (auth.currentUser) {
-
-    //         onValue(ref(db, `users/${auth.currentUser.uid}/currentCharID`), snapshot => {
-    //             if (snapshot.exists()) {
-    //                 // setCharID(snapshot.val())
-
-    //                 onValue(ref(db, `characters/` + snapshot.val()), snapshot => {
-    //                     if (snapshot.exists()) {
-    //                         dispatchChar(loadChar(snapshot.val()))
-    //                     }
-    //                 })
-    //             } else if (localCharID){
-
-    //             }
-    //         })
-
-    //     } else if (localChar) { }
-
-    //     return (() => {
-    //         if (auth.currentUser) {
-    //             off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
-    //             off(ref(db, `characters/${char.charID}`))
-    //         }
-    //     })
-    // }, [auth.currentUser])
 
     useEffect(() => {
         if (auth.currentUser) {
@@ -83,12 +44,7 @@ const CharacterSheet = () => {
                             onlyOnce: true
                         })
                     }
-                    // else {
-                    //     startNewCharKey().then((newKey) => {
-                    //         startUpdateCharID({ uid: auth.currentUser.uid, currentCharID: newKey })
-                    //         dispatchChar(updateCharID(newKey))
-                    //     })
-                    // }
+
                 })
 
             } else (
@@ -111,12 +67,6 @@ const CharacterSheet = () => {
                     onlyOnce: true
                 })
             }
-            //  else if (localCharID === undefined || localCharID === '') {
-            //     startNewCharKey().then((newKey) => {
-            //         setLocalCharID(newKey)
-            //         dispatchChar(updateCharID(newKey))
-            //     })
-            // }
         }
 
 
@@ -134,11 +84,6 @@ const CharacterSheet = () => {
     }, [auth.currentUser])
 
 
-
-
-
-
-
     // Get Heritage
     useEffect(() => {
         if (char.heritageID) {
@@ -146,11 +91,9 @@ const CharacterSheet = () => {
                 if (snapshot.exists()) {
                     dispatchHeritage(loadHeritage(snapshot.val()))
                 }
-            }
-                , {
-                    onlyOnce: true
-                }
-            )
+            }, {
+                onlyOnce: true
+            })
         }
 
         // return (() => {
