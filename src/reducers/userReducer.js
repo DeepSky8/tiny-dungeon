@@ -1,11 +1,14 @@
 const defaultUserState = {
+    uid: '',
     authProvider: '',
     email: '',
-    uid: '',
     admin: false,
     gm: false,
     lastAccess: 0,
     dateCreated: 0,
+    gameSession: 0,
+    currentCharID: '',
+    charIDs: [],
 }
 
 const userReducer = (state, action) => {

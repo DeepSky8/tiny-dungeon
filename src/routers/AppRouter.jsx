@@ -24,7 +24,7 @@ import Welcome from "../components/home/Welcome.jsx";
 import Attribution from "../components/home/Attribution.jsx";
 import AuthCode from "../components/authenticate/AuthCode.jsx";
 import AuthWrapper from "../components/authenticate/AuthWrapper.jsx";
-import AuthWrapperCreate from "../components/authenticate/AuthWrapperCreate.jsx";
+import AdminWrapper from "../components/authenticate/AdminWrapper.jsx";
 import AdminPage from "../components/admin/AdminPage.jsx";
 import AdminCode from "../components/admin/AdminCode.jsx";
 import AuthPage from "../components/authenticate/AuthPage.jsx";
@@ -45,11 +45,6 @@ const AppRouter = createBrowserRouter([
                 errorElement: <NotFoundPage />,
                 element: <Welcome />,
 
-            },
-            {
-                path: '/settings',
-                errorElement: <NotFoundPage />,
-                element: <Settings />,
             },
             {
                 path: "/attribution",
@@ -130,7 +125,7 @@ const AppRouter = createBrowserRouter([
                 element: <AdminCode />,
             },
             {
-                element: <AuthWrapperCreate />,
+                element: <AdminWrapper />,
                 errorElement: <NotFoundPage />,
                 children: [
                     {

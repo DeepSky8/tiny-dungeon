@@ -1,16 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import Footer from "./Footer";
-import { auth } from "../../api/firebase";
+import { off, onValue, ref } from "firebase/database";
+import { auth, db } from "../../api/firebase";
+import { defaultUserState, userReducer } from "../../reducers/userReducer";
+import { loadUser } from "../../actions/userActions";
 
 const Welcome = () => {
     let navigate = useNavigate();
-    const [localChar,] = useLocalStorageState('localChar')
-    const [localCode,] = useLocalStorageState('localCode')
+    const [localChar, , { removeItem: removeLocalChar }] = useLocalStorageState('localChar')
+    const [localCode, , { removeItem: removeLocalCode }] = useLocalStorageState('localCode')
     const [charCreated, setCharCreated] = useState(false)
-    // const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
+    // const [user, dispatchUser] = useReducer(userReducer, defaultUserState)
 
+    // useEffect(() => {
+    //     console.log('user', user)
+    //     console.log('auth', auth.currentUser)
+    // }, [user])
+
+    useEffect(() => {
+        if (auth.currentUser) {
+
+            onValue(ref(db, `users/${auth.currentUser.uid}/currentCharID`), snapshot => {
+                if (snapshot.exists()) {
+                    setCharCreated(true)
+                } else {
+                    setCharCreated(false)
+                }
+            })
+        }
+
+        return (() => {
+            if (auth.currentUser) {
+                off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
+            }
+        })
+    }, [auth.currentUser])
 
     useEffect(() => {
         if (
@@ -25,26 +51,12 @@ const Welcome = () => {
     }, [localChar])
 
     const newCharClick = () => {
-        if (localCode) {
-            navigate('/newCharacter/heritage')
-        } else {
-            navigate('/settings/(newCharacter(heritage')
-        }
+        navigate('/newCharacter/heritage')
     }
 
     const charSheetClick = () => {
-        if (localCode) {
-            if (
-                (localChar !== undefined)
-                &&
-                (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
-            ) {
-                navigate('/characterSheet')
-            } else {
-                navigate('/newCharacter/heritage')
-            }
-        } else if (localChar) {
-            navigate('/settings/(characterSheet')
+        if (charCreated) {
+            navigate('/characterSheet')
         }
     }
 

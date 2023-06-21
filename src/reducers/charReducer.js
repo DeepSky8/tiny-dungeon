@@ -71,6 +71,7 @@ const charReducer = (state, action) => {
     switch (action.type) {
         case 'LOAD_CHAR':
             return {
+                ...defaultChar,
                 ...action.char
             }
         case 'UPDATE_CHARID':

@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from "react";
 import { defaultWeaponMastered, weaponsMasteredReducer } from "../../reducers/weaponReducer";
-import { updateWDescription } from "../../actions/weaponActions";
+import { updateWDescription, updateWTitle } from "../../actions/weaponActions";
 import Field from "../display/FieldPencil";
 import { addWeaponObject } from "../../actions/charActions";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";

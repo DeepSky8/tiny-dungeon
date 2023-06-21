@@ -11,7 +11,7 @@ const Settings = () => {
     const [, , { removeItem: removeLocalChar }] = useLocalStorageState('localChar')
     const [, , { removeItem: removeLocalFamiliar }] = useLocalStorageState('familiar')
     const [localCode,] = useLocalStorageState('localCode')
-    const [localCID,] = useLocalStorageState('localCID')
+    // const [localCID,] = useLocalStorageState('localCID')
 
 
 
@@ -20,7 +20,7 @@ const Settings = () => {
         removeLocalFamiliar()
         // setLocalChar('')
         // setLocalFamiliar('')
-        startClearCharData({ gameCode: localCode, charID: localCID })
+        // startClearCharData({ gameCode: localCode, charID: localCID })
         navigate('/')
     }
 

@@ -1,43 +1,45 @@
 import React, {
     useEffect,
-    // useReducer, 
+    useReducer,
     useState
 } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import Header from "./Header";
 import { Outlet } from "react-router";
 import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
-// import { defaultUserState, userReducer } from "../../reducers/userReducer";
+import { auth, db } from "../../api/firebase";
 import { startNewCharKey } from "../../actions/charActions";
+import { defaultUserState, userReducer } from "../../reducers/userReducer";
+import { loadUser } from "../../actions/userActions";
 
 const Home = () => {
-    const [localCID, setLocalCID] = useLocalStorageState('localCID', { defaultValue: '' })
-    const [auth, setAuthCodes] = useState([])
+    // const [localCID, setLocalCID, { removeItem: clearLocalCID }] = useLocalStorageState('localCID', { defaultValue: '' })
+    const [authCodes, setAuthCodes] = useState([])
     const [admin, setAdminCodes] = useState([])
     // const [charIDs, setCharIDs] = useState([])
-    const [registerLock, setRegisterLock] = useState(false)
-    // const [currentUser, dispatchCurrentUser] = useReducer(userReducer, defaultUserState)
+    // const [registerLock, setRegisterLock] = useState(false)
+    // const [user, dispatchUser] = useReducer(userReducer, defaultUserState)
+
+    // useEffect(() => {
+    //     console.log('user', user)
+    // }, [user])
 
     // useEffect(() => {
     //     if (auth.currentUser) {
 
-    //         onValue(ref(db, `${auth.currentUser.uid}/charIDs`), snapshot => {
-    //             const tempArray = []
+    //         onValue(ref(db, `users/${auth.currentUser.uid}`), snapshot => {
     //             if (snapshot.exists()) {
-    //                 snapshot.forEach(snap => tempArray.push(snap.val()))
+    //                 dispatchUser(loadUser(snapshot.val()))
     //             }
-    //             setCharIDs(tempArray)
     //         })
-    //     } else if (localCID) {
+    //     }
 
-    //     }
-    //     if (auth.currentUser) {
-    //         return (() => {
-    //             off(ref(db, `${auth.currentUser.uid}/charIDs`))
-    //         })
-    //     }
-    // }, [])
+    //     return (() => {
+    //         off(ref(db, `users/${auth.currentUser.uid}`))
+    //     })
+    // }, [auth.currentUser])
+
+
 
     // useEffect(() => {
     //     onValue(ref(db, 'authCodes'), snapshot => {
@@ -54,13 +56,13 @@ const Home = () => {
     //     })
     // }, [])
 
-    useEffect(() => {
-        if (localCID === '') {
-            startNewCharKey().then((newKey) => {
-                setLocalCID(newKey)
-            })
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (localCID === '') {
+    //         startNewCharKey().then((newKey) => {
+    //             setLocalCID(newKey)
+    //         })
+    //     }
+    // }, [])
 
 
     useEffect(() => {
@@ -114,10 +116,10 @@ const Home = () => {
     // }, [registerLock])
 
     const context = {
-        auth,
+        authCodes,
         admin,
-        registerLock,
-        localCID
+        // registerLock,
+        // localCID
     }
 
     return (

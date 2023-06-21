@@ -1,12 +1,17 @@
 import React from "react";
 import { Navigate, Outlet, useOutletContext } from "react-router";
 import useLocalStorageState from "use-local-storage-state";
+import { auth } from "../../api/firebase";
 
-const AuthWrapperCreate = () => {
-    const [codes] = useOutletContext();
+const AdminWrapper = () => {
+    const [context] = useOutletContext();
     const [localAdmin,] = useLocalStorageState('localAdmin')
 
-    if (localAdmin !== undefined && codes.admin.includes(localAdmin)) {
+    if (
+        (localCode !== undefined && context.authCodes.includes(parseInt(localAdmin)))
+        // ||
+        // (auth.currentUser)
+    ) {
         return (
             <div>
                 <Outlet />
@@ -19,4 +24,4 @@ const AuthWrapperCreate = () => {
     }
 }
 
-export default AuthWrapperCreate
+export default AdminWrapper

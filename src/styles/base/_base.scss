@@ -67,6 +67,10 @@ body {
   margin-top: $m-size;
 }
 
+.footerSpacer {
+  padding-bottom: $calcFontSizeExtraLarge;
+}
+
 .brown {
   color: $text-brown;
 

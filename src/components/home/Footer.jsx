@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { auth, logout } from "../../api/firebase";
+import React, { useEffect, useState } from "react";
+import { auth, db, logout } from "../../api/firebase";
+import { off, onValue, ref } from "firebase/database";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 
@@ -9,18 +10,29 @@ const Footer = ({ }) => {
     const here = location.pathname.split('/')[1]
     const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
 
+    useEffect(() => {
+        if (auth.currentUser) {
+            setAuthStatus('lock_open')
+        } else {
+            setAuthStatus('lock')
+        }
+    }, [auth])
+
     const authActions = () => {
-        navigate('/settings')
-        // if (auth.currentUser) {
-        //     logout()
-        //     setAuthStatus('lock')
-        // } else {
-        //     navigate(`/authenticate/${here}`)
-        // }
+        if (auth.currentUser) {
+            logout()
+            off(ref(db, `users/${auth.currentUser.uid}`))
+            // Connections established on NewCharacter
+            off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
+
+            setAuthStatus('lock')
+        } else {
+            navigate(`/authenticate/${here}`)
+        }
     }
 
     const navActions = () => {
-        navigate(here == 'settings' ? '/' : '/settings')
+        navigate(here !== '' ? '/' : '/settings')
     }
 
 
@@ -43,7 +55,7 @@ const Footer = ({ }) => {
                 className="material-symbols-outlined filled footer__button"
                 onClick={navActions}
             >
-                {here == 'settings' ? 'home' : 'settings'}
+                {here == '' ? 'settings' : 'home'}
             </button>
         </div>
     )

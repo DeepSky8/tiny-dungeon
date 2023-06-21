@@ -185,10 +185,22 @@ export const updateNotes = (charNotes) => ({
 // })
 
 
-export const startUpdateCharInfo = async ({ gameCode, charID, charData }) => {
+export const startUpdateCharID = async ({ uid, currentCharID }) => {
     const updates = {};
 
-    updates[`gameSessions/${gameCode}/${charID}`] = { ...charData, charID, charUpdated: Date.now() }
+    updates[`users/${uid}/currentCharID`] = currentCharID
+
+    update(ref(db), updates)
+        .catch((error) => {
+            alert('Did not update character ID', error)
+        })
+}
+
+
+export const startUpdateCharInfo = async ({ char }) => {
+    const updates = {};
+
+    updates[`characters/${char.charID}`] = { ...char, charUpdated: Date.now() }
 
     update(ref(db), updates)
         .catch((error) => {
@@ -212,3 +224,15 @@ export const startNewCharKey = async () => {
     const charID = push(child(ref(db), 'characters')).key
     return charID
 }
+
+
+// export const startUpdateBelief = async ({ charData }) => {
+//     const updates = {};
+
+//     updates[`gameSessions/${charData.charID}/belief`] = null
+
+//     update(ref(db), updates)
+//         .catch((error) => {
+//             console.log('Did not clear character', error)
+//         })
+// }
