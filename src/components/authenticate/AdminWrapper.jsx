@@ -7,8 +7,9 @@ const AdminWrapper = () => {
     const [context] = useOutletContext();
     const [localAdmin,] = useLocalStorageState('localAdmin')
 
+
     if (
-        (localCode !== undefined && context.authCodes.includes(parseInt(localAdmin)))
+        (context.localCode !== undefined && context.authCodes.includes(parseInt(localAdmin)))
         // ||
         // (auth.currentUser)
     ) {

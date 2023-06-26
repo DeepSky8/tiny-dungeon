@@ -1,0 +1,54 @@
+import React, { useState } from "react";
+
+
+const DisplayNameHealth = (
+    {
+        itemID,
+        title,
+        armor,
+        health,
+        description,
+        changeHandler,
+        isSelected,
+    }
+) => {
+    const [show, setShow] = useState(false)
+
+    return (
+        <div className="clickDescriptionSelect__container">
+            <div className="clickDescriptionSelect__heading--container">
+                <input
+                    className="clickDescriptionSelect__checkbox"
+                    type="checkbox"
+                    id={itemID}
+                    name={title}
+                    checked={isSelected}
+                    onChange={() => {
+                        changeHandler(itemID)
+                    }}
+                />
+                <div
+                    className="clickDescriptionSelect__heading--clickable"
+                    onClick={() => {
+                        setShow(!show)
+                    }}
+                >
+                    <div className="clickDescript ionSelect__heading--title">
+                        {`${title}, `} {armor > 0 ? `${armor}a` : ""} {`${health}hp`}
+                    </div>
+                </div>
+            </div>
+
+            <div className="clickDescriptionSelect__container--description">
+                {show &&
+                    <div className="clickDescriptionSelect__description">
+                        {description}
+                    </div>
+                }
+            </div>
+        </div>
+    )
+}
+
+export default DisplayNameHealth
+
