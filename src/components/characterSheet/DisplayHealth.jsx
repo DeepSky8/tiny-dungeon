@@ -30,7 +30,7 @@ const DisplayHealth = ({ char, dispatchChar }) => {
 
     const reduceArmor = () => {
         if (currentArmor - 1 >= 0) { dispatchChar(decreaseCurrentArmor()) }
-        if (currentArmor % 3 === 0 && char.maxArmor >= 3) {
+        if (currentArmor % 3 === 0 && lostArmor == 3) {
             dispatchChar(setMaxArmor(char.maxArmor - 3))
         } else if (currentArmor - 1 <= 0) { dispatchChar(setMaxArmor(0)) }
     }
