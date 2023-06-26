@@ -7,7 +7,9 @@ const TradeOverview = ({ characters }) => {
         <div>
             {trades.map(trade => {
                 return (
-                    <li>{trade}</li>
+                    <li
+                        key={Math.random()}
+                    >{trade}</li>
                 )
             })}
         </div>

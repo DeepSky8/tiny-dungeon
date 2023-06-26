@@ -8,15 +8,12 @@ import TraitsOverview from "./TraitsOverview";
 import WeaponsOverview from "./WeaponsOverview";
 import ScrollsOverview from "./ScrollsOverview";
 import alphabetizeKeys from "../../functions/alphabetizeKeys";
-import ClickDescriptionSelect from "../display/ClickDescriptionSelect";
 import TradeOverview from "./TradeOverview";
+import DisplayNameHealth from "../characterSheet/DisplayNameHealth";
 
 
 const CharactersOverview = () => {
     const [localCode] = useLocalStorageState('localCode')
-    const [localAdmin] = useLocalStorageState('localAdmin')
-    const [authCodes, setAuthCodes] = useState([])
-    const [adminCodes, setAdminCodes] = useState([])
     const [heritages, setHeritages] = useState([])
     const [traits, setTraits] = useState([])
     const [weapons, setWeapons] = useState([])
@@ -26,36 +23,6 @@ const CharactersOverview = () => {
 
     const [characters, setCharacters] = useState([])
     const [selectedCharacters, setSelectedCharacters] = useState([])
-    // const [show, dispatch] = useReducer(displayReducer, defaultDisplay)
-
-
-    useEffect(() => {
-        onValue(ref(db, 'authCodes'), snapshot => {
-            const tempArray = []
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => { tempArray.push(snap.val()) })
-            }
-            setAuthCodes(tempArray)
-        })
-
-        return (() => {
-            off(ref(db, 'authCodes'))
-        })
-    }, [])
-
-    useEffect(() => {
-        onValue(ref(db, 'adminCodes'), snapshot => {
-            const tempArray = []
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => { tempArray.push(snap.val()) })
-            }
-            setAdminCodes(tempArray)
-        })
-
-        return (() => {
-            off(ref(db, 'adminCodes'))
-        })
-    }, [])
 
     useEffect(() => {
         onValue(ref(db, 'heritages'), snapshot => {
@@ -129,7 +96,6 @@ const CharactersOverview = () => {
 
 
     useEffect(() => {
-        // if (auth.currentUser && adminCodes.includes(localAdmin)) {
         onValue(ref(db, `gameSessions/${localCode}`), snapshot => {
             const tempArray = []
             if (snapshot.exists()) {
@@ -137,7 +103,6 @@ const CharactersOverview = () => {
             }
             setCharacters(tempArray)
         })
-        // }
 
         return (() => {
             off(ref(db, `gameSessions/${localCode}`))
@@ -163,10 +128,12 @@ const CharactersOverview = () => {
                 description={
                     alphabetizeKeys({ objectArray: characters, key: 'charName' }).map(character => {
                         return (
-                            <ClickDescriptionSelect
+                            <DisplayNameHealth
                                 key={character.charID}
                                 itemID={character.charID}
                                 title={character.charName}
+                                armor={character.currentArmor}
+                                health={character.currentHP}
                                 description={
                                     <CharacterSummary
                                         charData={character}
