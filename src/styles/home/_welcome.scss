@@ -53,7 +53,7 @@
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     .welcome__container {
-        padding-top: $s-size;
+        padding: $s-size;
     }
 
     .welcome__container--logo {
