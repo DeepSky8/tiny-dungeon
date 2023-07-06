@@ -37,6 +37,8 @@ const Field = ({ label, aria = label, id, type, value, change, blur, theme, plac
                             value={value}
                             onChange={change}
                             onBlur={blur}
+                            maxLength={300}
+                            autoCorrect="on"
                         />
                         <div className="material-symbols-outlined textarea--pencil">edit</div>
                     </div>

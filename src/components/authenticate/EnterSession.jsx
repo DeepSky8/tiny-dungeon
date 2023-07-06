@@ -1,42 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
+import { auth } from "../../api/firebase";
 import Field from "../display/Field";
-import { useNavigate, useParams } from "react-router";
-import useLocalStorageState from "use-local-storage-state";
+import { useNavigate, useOutletContext, useParams } from "react-router";
 import strung from "../../functions/strung";
+import { startCreateUser, startUpdateSessionCode } from "../../actions/userActions";
 
-const AuthCode = () => {
+const EnterSession = () => {
+    const [context] = useOutletContext();
     let navigate = useNavigate()
     const { back } = useParams()
     const nextLink = back ? strung(back.split('('), '/') : "/"
-    const [localCode, setLocalCode] = useLocalStorageState('localCode')
-    const [authCodes, setAuthCodes] = useState([])
-    const [enteredCode, setEnteredCode] = useState(localCode ? localCode : '')
+    const [enteredCode, setEnteredCode] = useState('')
     const [message, setMessage] = useState('')
 
     const errorMessage = 'Double-check that code, please'
     const successMessage = 'Success! Now authenticating'
 
-    useEffect(() => {
-        onValue(ref(db, 'authCodes'), snapshot => {
-            const tempArray = []
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => { tempArray.push(snap.val()) })
-            }
-            setAuthCodes(tempArray)
-        })
+    // useEffect(() => {
+    //     console.log('context EnterSession', context)
+    // }, [context])
 
-        return (() => {
-            off(ref(db, 'authCodes'))
-        })
-    }, [])
+    useEffect(() => {
+        if (context.user.gameSession !== 0) {
+            setEnteredCode(context.user.gameSession);
+        }
+    }, [context.user.gameSession])
+
+    const goNext = (location) => {
+        setTimeout(() => { navigate(location) }, 2000)
+
+    }
 
     const checkCode = () => {
-        if (authCodes.includes(parseInt(enteredCode))) {
-            setLocalCode(parseInt(enteredCode))
+        // console.log('nextLink', nextLink)
+        // console.log('currentCharID', context.user.currentCharID)
+        // console.log('user id', context.user.uid)
+        // console.log('auth uid', auth.currentUser.uid)
+        if (context.sessions.includes(parseInt(enteredCode))) {
+            if (context.user.uid === "") {
+                startCreateUser({ uid: auth.currentUser.uid, authProvider: 'anonymous' })
+            }
+            startUpdateSessionCode({ uid: auth.currentUser.uid, session: parseInt(enteredCode) })
             setMessage(successMessage)
-            setTimeout(() => { navigate(nextLink) }, 2000)
+
+            if (nextLink === "/characterSheet" && context.user.currentCharID === "") {
+                goNext('/newCharacter/heritage')
+            } else {
+                goNext(nextLink)
+            }
+
         } else {
             setMessage(errorMessage)
         }
@@ -88,4 +100,4 @@ const AuthCode = () => {
     )
 }
 
-export default AuthCode
+export default EnterSession

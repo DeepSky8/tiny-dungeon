@@ -1,29 +1,20 @@
 import React from "react";
-import { Navigate, Outlet, useOutletContext } from "react-router";
-import useLocalStorageState from "use-local-storage-state";
-import { auth } from "../../api/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { Navigate, Outlet, useLocation, useOutletContext } from "react-router";
+import strung from "../../functions/strung";
 
 
 const AuthWrapper = () => {
-    const [codes] = useOutletContext();
-    const [localCode,] = useLocalStorageState('localCode')
-    const [user, loading, error] = useAuthState(auth)
+    const [context] = useOutletContext();
+    let location = useLocation();
+    const nextLocation = strung(location.pathname.split('/'), '(')
 
-    if (
-        (auth.currentUser)
-        ||
-        (localCode !== undefined && codes.authCodes.includes(parseInt(localCode)))
-    ) {
-        return (
-            <Outlet />
-        )
+    if (context.sessions.includes(parseInt(context.user.gameSession))) {
+        return (<Outlet context={[context.user]} />)
     } else {
-        return (
-            <Navigate to={'/settings'} />
-        )
+        return (<Navigate to={`/settings/${nextLocation}`} />)
     }
+
+
 }
 
 export default AuthWrapper
-

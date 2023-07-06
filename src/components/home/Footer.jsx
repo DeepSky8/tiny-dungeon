@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { auth, db, logout } from "../../api/firebase";
-import { off, onValue, ref } from "firebase/database";
+import { off, ref } from "firebase/database";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 
-const Footer = ({ }) => {
+const Footer = ({  }) => {
     let navigate = useNavigate();
     let location = useLocation();
     const here = location.pathname.split('/')[1]
-    const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
+    const [authStatus, setAuthStatus] = useState('lock')
 
     useEffect(() => {
-        if (auth.currentUser) {
+        if (auth.currentUser && !auth.currentUser.isAnonymous) {
             setAuthStatus('lock_open')
         } else {
             setAuthStatus('lock')
@@ -19,15 +19,18 @@ const Footer = ({ }) => {
     }, [auth])
 
     const authActions = () => {
-        if (auth.currentUser) {
-            logout()
-            off(ref(db, `users/${auth.currentUser.uid}`))
+        if (!auth.currentUser.isAnonymous) {
             // Connections established on NewCharacter
+            off(ref(db, `users/${auth.currentUser.uid}`))
             off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
 
             setAuthStatus('lock')
+            logout()
+            window.location.reload()
         } else {
+            // navigate(`/authenticate`)
             navigate(`/authenticate/${here}`)
+
         }
     }
 

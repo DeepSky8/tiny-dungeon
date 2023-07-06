@@ -3,6 +3,11 @@
     position: relative;
 }
 
+.charSheet__noCharacter {
+    text-align: center;
+    font-size: $calcFontSizeExtraLarge;
+}
+
 .charSheet__spacer {
     padding: $xs-size;
 }
@@ -17,8 +22,6 @@
     justify-content: center;
     position: relative;
 }
-
-
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
     // .charSheet__container {

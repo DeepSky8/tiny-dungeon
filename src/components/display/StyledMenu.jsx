@@ -32,7 +32,6 @@ const StyledMenu = ({
                 className={`sMenu__button`}>
                 {getTitle()}
             </span>
-            <TapOpen />
             {
                 menuOpen &&
                 <span className="sMenu__tray">
@@ -51,6 +50,7 @@ const StyledMenu = ({
                     )}
                 </span>
             }
+            <TapOpen />
         </div>
     )
 }

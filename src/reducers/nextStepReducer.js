@@ -45,12 +45,15 @@ import returnsURLStubBack from "../functions/returnsURLStubBack"
 
 const defaultNextStep = {
     pathRoot: '/newCharacter',
+    stepCharID: '0',
     buttonText: 'Next',
     currentStep: 'heritage',
     error: '',
+    initialTraits: 3,
 }
 
 // Used to return URLStub for navigation
+// If updating here, update Welcome evaluator as well
 const newCharStepOrder = [
     'heritage',
     'traits',
@@ -72,15 +75,18 @@ const nextStepReducer = (state, action) => {
                     char: action.char,
                     newCharStepOrder: newCharStepOrder,
                     currentStep: state.currentStep,
+                    initialTraits: state.initialTraits
                 }
             )
             const currentError = returnsNewCharError({ urlStub: urlStub })
 
             return {
+                stepCharID: action.char.charID,
                 pathRoot: urlStub === 'end' ? '/characterSheet' : '/newCharacter',
                 buttonText: 'Next',
                 currentStep: urlStub === 'end' ? '' : urlStub,
                 error: state.currentStep === urlStub ? currentError : '',
+                initialTraits: state.initialTraits
             }
 
         case 'PREV_STEP':
@@ -95,10 +101,20 @@ const nextStepReducer = (state, action) => {
 
             return {
                 ...state,
+                stepCharID: action.char.charID,
                 pathRoot: '/newCharacter',
                 currentStep: urlStubBack,
             }
-
+        case 'SET_STEP_CHARID':
+            return {
+                ...state,
+                stepCharID: action.stepCharID
+            }
+        case 'SET_STEP_INITIALTRAITS':
+            return {
+                ...state,
+                initialTraits: action.initialTraits
+            }
         case 'CLEAR_ERROR':
             return {
                 ...state,
@@ -113,4 +129,4 @@ const nextStepReducer = (state, action) => {
     }
 }
 
-export { defaultNextStep, nextStepReducer }
+export { defaultNextStep, nextStepReducer, newCharStepOrder }

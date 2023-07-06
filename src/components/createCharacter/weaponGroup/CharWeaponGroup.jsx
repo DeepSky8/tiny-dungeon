@@ -1,29 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router";
+import React, { useEffect, useReducer, useState } from "react";
+import { useParams } from "react-router";
 import {
-    setDefaultWeaponGroupObjects,
-    addWeaponGroupObject,
-    clearWeaponGroupObjects,
-    removeWeaponGroupObject
+    loadChar,
+    startSetDefaultWeaponGroupObjects,
+    startSetWeaponGroupObjects
 } from "../../../actions/charActions";
 import sortWGs from "../../../functions/sortWGs";
 import ClickDescriptionSelect from "../../display/ClickDescriptionSelect";
 import { off, onValue, ref } from "firebase/database";
-import { db } from "../../../api/firebase";
+import { auth, db } from "../../../api/firebase";
 import DisplayRational from "../DisplayRational";
 import TapOpen from "../../TapOpen";
+import { charReducer, defaultChar } from "../../../reducers/charReducer";
 
 
 const CharWeaponGroup = () => {
-    const [char, dispatchChar] = useOutletContext();
-    const charTraitIDs = [char.hTraitID].concat(char.traitIDs)
+    const { charID } = useParams()
+    const [char, dispatchChar] = useReducer(charReducer, defaultChar)
     const [selectedTraits, setSelectedTraits] = useState([])
     const [allWeaponGroups, setAllWeaponGroups] = useState([])
     const [defaultWeaponGroups, setDefaultWeaponGroups] = useState([]);
     const [availWeaponGroups, setAvailWeaponGroups] = useState([]);
 
-    // Get trait objects
     useEffect(() => {
+        console.log('char', char)
+    }, [char])
+
+    useEffect(() => {
+        if (charID && charID !== 0) {
+            onValue(ref(db, `characters/${charID}`), snapshot => {
+
+                if (
+                    snapshot.exists()
+                    &&
+                    snapshot.val().userID === auth.currentUser.uid
+                ) {
+                    dispatchChar(loadChar(snapshot.val()))
+                }
+
+            })
+        }
+
+        return (() => {
+
+            if (charID && charID !== 0) {
+                off(ref(db, `characters/${charID}`))
+            }
+        })
+    }, [charID])
+
+    useEffect(() => {
+        const charTraitIDs = [char.hTraitID].concat(char.traitIDs)
+
         const tempArray = [];
 
         charTraitIDs.forEach(traitID => {
@@ -40,9 +68,8 @@ const CharWeaponGroup = () => {
         // return (() => {
         //     off(ref(db, 'weaponGroups'))
         // })
-    }, [])
+    }, [char.traitIDs])
 
-    // Get Weapon Group objects
     useEffect(() => {
         onValue(ref(db, 'weaponGroups'), snapshot => {
             const tempArray = [];
@@ -61,38 +88,37 @@ const CharWeaponGroup = () => {
         // })
     }, [])
 
-    // Clear weapon group IDs on char
-    // then use sortedWGs to evaluate weapon groups gained via trait
+    // Use sortedWGs to evaluate weapon groups gained via trait
     // Add those weapon groups to char,
     // then provide the remaining weapon groups to the user to select one
     useEffect(() => {
-        dispatchChar(clearWeaponGroupObjects())
+
         if (selectedTraits.length > 0 && allWeaponGroups.length > 0) {
             const sortedWGs = sortWGs(
                 {
-                    allTraits: selectedTraits,
+                    selectedTraits: selectedTraits,
                     weaponGroups: allWeaponGroups
                 }
             )
             setDefaultWeaponGroups(sortedWGs.defaultWGs);
-            dispatchChar(setDefaultWeaponGroupObjects(sortedWGs.defaultWGs))
+            startSetDefaultWeaponGroupObjects({ uid: auth.currentUser.uid, charID: charID, defaultWGs: sortedWGs.defaultWGs })
+            console.log('set default weapons',)
             setAvailWeaponGroups(sortedWGs.availWGs);
         }
 
     }, [selectedTraits, allWeaponGroups])
 
     const handleWGSelection = (wg) => {
-        // Reset the default weapon group objects
-        dispatchChar(setDefaultWeaponGroupObjects(defaultWeaponGroups))
 
         if (char.weaponGroupObjects.filter(wgO => wgO.wgType === wg.wgType).length > 0) {
-            // If weapon group was previously selected
-            // remove it
-            dispatchChar(removeWeaponGroupObject(wg))
+            const filteredWGOs = (char.weaponGroupObjects.filter(wgO => wgO.wgType !== wg.wgType))
+            startSetWeaponGroupObjects({ uid: auth.currentUser.uid, charID: charID, weaponGroups: filteredWGOs })
+
         } else {
-            // Otherwise, add the newly-selected weapon group object to char
-            dispatchChar(addWeaponGroupObject(wg))
+            const newWGOs = defaultWeaponGroups.concat(wg)
+            startSetWeaponGroupObjects({ uid: auth.currentUser.uid, charID: charID, weaponGroups: newWGOs })
         }
+
     }
 
     return (

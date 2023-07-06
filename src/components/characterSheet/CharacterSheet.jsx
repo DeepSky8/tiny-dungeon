@@ -1,88 +1,47 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { charReducer, defaultChar } from "../../reducers/charReducer";
-import useLocalStorageState from "use-local-storage-state";
+// import useLocalStorageState from "use-local-storage-state";
 import { defaultHeritage, heritageReducer } from "../../reducers/heritageReducer";
 import { off, onValue, ref } from "firebase/database";
 import { auth, db } from "../../api/firebase";
 import { loadHeritage } from "../../actions/heritageActions";
 import Field from "../display/FieldPencil";
-import { loadChar, startUpdateCharID, updateBelief, updateCharID } from "../../actions/charActions";
+import { loadChar, startUpdateBelief, startUpdateCharID, updateBelief, updateCharID } from "../../actions/charActions";
 import Display from "./Display";
-import { startUpdateCharInfo } from "../../actions/charActions";
+import { useOutletContext, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const CharacterSheet = () => {
-    const [localCharID, , { removeItem: removeLocalCharID }] = useLocalStorageState('localCharID')
-    const [char, dispatchChar] = useReducer(charReducer, defaultChar)
+    const { charID } = useParams()
+    const [user] = useOutletContext();
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
+    const [char, dispatchChar] = useReducer(charReducer, defaultChar)
+    const [belief, setBelief] = useState('')
+
+    // useEffect(() => {
+    //     console.log('char', char)
+    // }, [char])
+
+    // useEffect(() => {
+    //     console.log('user', user)
+    // }, [user])
 
     useEffect(() => {
-        console.log('char', char)
-    }, [char])
-
-    useEffect(() => {
-        if (auth.currentUser) {
-
-            if (localCharID) {
-                startUpdateCharID({ uid: auth.currentUser.uid, currentCharID: localCharID });
-                removeLocalCharID()
-            }
-
-
-            if (char.charID === 0) {
-                onValue(ref(db, `users/${auth.currentUser.uid}/currentCharID`), snapshot => {
-                    if (snapshot.exists()) {
-                        const tempID = snapshot.val()
-
-                        onValue(ref(db, `characters/` + snapshot.val()), snapshot => {
-                            if (snapshot.exists()) {
-                                dispatchChar(loadChar(snapshot.val()))
-                            } else {
-                                dispatchChar(updateCharID(tempID))
-                            }
-
-                        }, {
-                            onlyOnce: true
-                        })
-                    }
-
-                })
-
-            } else (
-                onValue(ref(db, `characters/` + char.charID), snapshot => {
-                    if (snapshot.exists()) {
-                        dispatchChar(loadChar(snapshot.val()))
-                    }
-                }, {
-                    onlyOnce: true
-                })
-            )
-
-        } else {
-            if (localCharID) {
-                onValue(ref(db, `characters/` + localCharID), snapshot => {
-                    if (snapshot.exists()) {
-                        dispatchChar(loadChar(snapshot.val()))
-                    }
-                }, {
-                    onlyOnce: true
-                })
-            }
+        if (charID) {
+            onValue(ref(db, `characters/${charID}`), snapshot => {
+                if (snapshot.exists()) {
+                    dispatchChar(loadChar(snapshot.val()))
+                    setBelief(snapshot.val().belief)
+                }
+            })
         }
 
-
         return (() => {
-
-            if (localCharID) {
-                off(ref(db, `characters/` + localCharID))
-            }
-
-            if (auth.currentUser) {
-                off(ref(db, `users/${auth.currentUser.uid}`)) // Connection hard-closed on Footer
-                off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
+            if (charID) {
+                off(ref(db, `characters/${charID}`))
             }
         })
-    }, [auth.currentUser])
-
+    }, [charID])
 
     // Get Heritage
     useEffect(() => {
@@ -102,12 +61,26 @@ const CharacterSheet = () => {
 
     }, [char])
 
-    useEffect(() => {
-        startUpdateCharInfo({ char })
-    }, [char])
+    // useEffect(() => {
+    //     startUpdateCharInfo({ char })
+    // }, [char])
 
     return (
         <div className="charSheet__container">
+            {
+                (char.charID === 0 || charID === '')
+                &&
+                <div className="charSheet__noCharacter">
+                    <Link
+                        className="brown noUnderline"
+                        to={'/newCharacter/heritage'}>
+                        <div>Please</div>
+                        <div>click here</div>
+                        <div>to create</div>
+                        <div>a character</div>
+                    </Link>
+                </div>
+            }
             {
                 char.charName &&
                 heritage.hTitle &&
@@ -120,12 +93,14 @@ const CharacterSheet = () => {
                             label={''}
                             id={'charBelief'}
                             type={'textarea'}
-                            value={char.belief}
+                            value={belief}
                             change={(e) => {
-                                dispatchChar(updateBelief(e.target.value))
+                                // dispatchChar(updateBelief(e.target.value))
+                                setBelief(e.target.value)
                             }}
                             blur={() => {
-                                startUpdateCharInfo({ char })
+                                startUpdateBelief({ uid: auth.currentUser.uid, charID: char.charID, belief })
+                                // startUpdateCharInfo({ char })
                             }}
                             theme={'italic'}
                             placeholder={char.charName + "'s belief"}

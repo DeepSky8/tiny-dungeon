@@ -52,7 +52,12 @@ const defaultChar = {
 
     gold: 10,
 
-    familiarID: '',             // Reference by fID
+    familiar: {
+        // fID: '',
+        // fName: '',
+        // fCharID: '',
+        // fDescription: ''
+    },
     XP: 0,
     scrolls: [
         // {
@@ -72,6 +77,7 @@ const charReducer = (state, action) => {
         case 'LOAD_CHAR':
             return {
                 ...defaultChar,
+                ...state,
                 ...action.char
             }
         case 'UPDATE_CHARID':
@@ -92,6 +98,7 @@ const charReducer = (state, action) => {
         case 'UPDATE_HERITAGEID':
             return {
                 ...defaultChar,
+                ...state,
                 heritageID: action.heritageID,
             }
         case 'UPDATE_HTRAITID':
@@ -263,10 +270,10 @@ const charReducer = (state, action) => {
                 ...state,
                 // Gear cannot currently be updated
             }
-        case 'UPDATE_FAMILIARID':
+        case 'UPDATE_FAMILIAR':
             return {
                 ...state,
-                familiarID: action.familiarID
+                familiar: action.familiar
             }
         case 'UPDATE_XP':
             const newXP = parseInt(state.XP) + parseInt(action.XP)

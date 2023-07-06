@@ -1,7 +1,6 @@
 import React from "react";
-import { updateHTraitID } from "../../actions/charActions";
 
-const BulletedSelect = (
+const HeritageTraitSelect = (
     {
         objectArray,    // Select from these list items
         IDArray,        // Match on these IDs
@@ -19,7 +18,7 @@ const BulletedSelect = (
 
     return (
 
-        <div className="bulletedSelect__container">
+        <div className="heritageTraitSelect__container">
             {
                 filteredArray.map(
                     object => {
@@ -30,8 +29,8 @@ const BulletedSelect = (
                                 key={object[`${IDKey}`]}
                             >
                                 {!canSelect &&
-                                    <div className="bulletedSelect__container--text">
-                                        <div className="bulletedSelect__header">
+                                    <div className="heritageTraitSelect__container--text">
+                                        <div className="heritageTraitSelect__header">
                                             {object[`${IDTitle}`]}
                                         </div>
                                         <div>
@@ -42,22 +41,20 @@ const BulletedSelect = (
 
                                 {canSelect &&
 
-                                    <div className="bulletedSelect__container--display">
-                                        <div className={`bulletedSelect__container--text ${notSelected}`}>
-                                            <div className="bulletedSelect__header">
+                                    <div className="heritageTraitSelect__container--display">
+                                        <div className={`heritageTraitSelect__container--text ${notSelected}`}>
+                                            <div className="heritageTraitSelect__header">
                                                 {object[`${IDTitle}`]}
                                             </div>
                                             <div>
                                                 {object[`${IDDescription}`]}
                                             </div>
                                         </div>
-                                        <div className="bulletedSelect__container--button">
+                                        <div className="heritageTraitSelect__container--button">
                                             <button
-                                                className={`bulletedSelect__button ${notSelected}`}
+                                                className={`heritageTraitSelect__button ${notSelected}`}
                                                 onClick={() => {
-                                                    dispatchCharHeritageID(
-                                                        updateHTraitID(
-                                                            object[`${IDKey}`]))
+                                                    dispatchCharHeritageID(object[`${IDKey}`])
                                                 }}
                                             >
                                                 {
@@ -83,4 +80,4 @@ const BulletedSelect = (
     )
 }
 
-export default BulletedSelect
+export default HeritageTraitSelect

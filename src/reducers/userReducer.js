@@ -4,8 +4,8 @@ const defaultUserState = {
     email: '',
     admin: false,
     gm: false,
-    lastAccess: 0,
-    dateCreated: 0,
+    lastAccess: Date.now(),
+    dateCreated: Date.now(),
     gameSession: 0,
     currentCharID: '',
     charIDs: [],
@@ -18,11 +18,11 @@ const userReducer = (state, action) => {
                 ...defaultUserState,
                 ...action.userData
             }
-        case 'UPDATE_ADMIN':
+        case 'UPDATE_UID':
             return {
                 ...defaultUserState,
                 ...state,
-                admin: action.admin
+                uid: action.uid
             }
         case 'CLEAR_USER':
             return {

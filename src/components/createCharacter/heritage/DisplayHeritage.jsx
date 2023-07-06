@@ -9,7 +9,7 @@ import {
     openTwo
 } from "../../../actions/displayActions";
 import ClickDescription from "../../display/ClickDescription";
-import BulletedSelect from "../../display/BulletedSelect";
+import HeritageTraitSelect from "./HeritageTraitSelect";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
 
@@ -67,7 +67,7 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                     bodyText={
                         <div className="clickDescription--stats">
                             <div>Health: {hHP}</div>
-                            <BulletedSelect
+                            <HeritageTraitSelect
                                 objectArray={traits}
                                 IDArray={hTraitIDs}
                                 IDKey={'tID'}

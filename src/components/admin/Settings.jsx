@@ -1,32 +1,23 @@
 import React from "react";
 import Footer from "../home/Footer";
-import AuthCode from "../authenticate/AuthCode";
-import { Link, useNavigate } from "react-router-dom";
-import useLocalStorageState from "use-local-storage-state";
+import EnterSession from "../authenticate/EnterSession";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { startClearCharData } from "../../actions/charActions";
 
 
 const Settings = () => {
+    const [context] = useOutletContext();
     let navigate = useNavigate()
-    const [, , { removeItem: removeLocalChar }] = useLocalStorageState('localChar')
-    const [, , { removeItem: removeLocalFamiliar }] = useLocalStorageState('familiar')
-    const [localCode,] = useLocalStorageState('localCode')
-    // const [localCID,] = useLocalStorageState('localCID')
-
 
 
     const clearCharData = () => {
-        removeLocalChar()
-        removeLocalFamiliar()
-        // setLocalChar('')
-        // setLocalFamiliar('')
-        // startClearCharData({ gameCode: localCode, charID: localCID })
+        startClearCharData({ charID: context.user.currentCharID })
         navigate('/')
     }
 
     return (
         <div>
-            <AuthCode />
+            <EnterSession />
 
             <hr className="hr__brown" />
             <div className="centered brown">

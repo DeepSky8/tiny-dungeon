@@ -22,7 +22,7 @@ import DisplayWeapons from "../components/editItems/DisplayWeapons.jsx";
 import DisplayScrolls from "../components/editItems/DisplayScrolls.jsx";
 import Welcome from "../components/home/Welcome.jsx";
 import Attribution from "../components/home/Attribution.jsx";
-import AuthCode from "../components/authenticate/AuthCode.jsx";
+import EnterSession from "../components/authenticate/EnterSession.jsx";
 import AuthWrapper from "../components/authenticate/AuthWrapper.jsx";
 import AdminWrapper from "../components/authenticate/AdminWrapper.jsx";
 import AdminPage from "../components/admin/AdminPage.jsx";
@@ -80,39 +80,39 @@ const AppRouter = createBrowserRouter([
                         element: <NewCharacter />,
                         children: [
                             {
-                                path: "heritage",
+                                path: "heritage/:charID?",
                                 errorElement: <NotFoundPage />,
                                 element: <CharHeritage />,
                             },
                             {
-                                path: "traits",
+                                path: "traits/:charID?",
                                 errorElement: <NotFoundPage />,
                                 element: <CharTraits />,
                             },
                             {
-                                path: "weaponGroup",
+                                path: "weaponGroup/:charID?",
                                 errorElement: <NotFoundPage />,
                                 element: <CharWeaponGroup />,
                             },
                             {
-                                path: "weapon",
+                                path: "weapon/:charID?",
                                 errorElement: <NotFoundPage />,
                                 element: <CharWeapon />,
                             },
                             {
-                                path: "familiar",
+                                path: "familiar/:charID?",
                                 errorElement: <NotFoundPage />,
                                 element: <CharFamiliar />,
                             },
                             {
-                                path: "backstory",
+                                path: "backstory/:charID?",
                                 errorElement: <NotFoundPage />,
                                 element: <CharBackstory />,
                             },
                         ]
                     },
                     {
-                        path: "/characterSheet",
+                        path: "/characterSheet/:charID?",
                         errorElement: <NotFoundPage />,
                         element: <CharacterSheet />,
 

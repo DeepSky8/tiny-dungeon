@@ -1,16 +1,61 @@
 import { off, onValue, ref } from "firebase/database";
-import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router";
-import { db } from "../../../api/firebase";
+import React, { useEffect, useReducer, useState } from "react";
+import { useOutletContext, useParams } from "react-router";
+import { auth, db } from "../../../api/firebase";
 import StyledMenu from "../../display/StyledMenu";
 import DisplayHeritage from "./DisplayHeritage";
 import DisplayRational from "../DisplayRational";
-import { setCurrentHP, setHeritageHP, updateHTraitID, updateHeritageID } from "../../../actions/charActions";
-import TapOpen from "../../TapOpen";
+import {
+    loadChar,
+    setCurrentHP,
+    setHeritageHP,
+    startUpdateHeritageData,
+    startUpdateHeritageTraitID,
+    updateHTraitID,
+    updateHeritageID
+} from "../../../actions/charActions";
+import { charReducer, defaultChar } from "../../../reducers/charReducer";
 
 const CharHeritage = () => {
-    const [char, dispatchChar] = useOutletContext();
+    const { charID } = useParams();
+
+    // const [charData] = useOutletContext();
+    const [char, dispatchChar] = useReducer(charReducer, defaultChar)
     const [heritages, setHeritages] = useState([]);
+
+    useEffect(() => {
+        // console.log('charData', charData)
+        console.log('char', char)
+    }, [char])
+
+    useEffect(() => {
+        if (charID && charID !== 0) {
+            onValue(ref(db, `characters/${charID}`), snapshot => {
+
+                if (
+                    snapshot.exists()
+                    &&
+                    snapshot.val().userID === auth.currentUser.uid
+                ) {
+                    dispatchChar(loadChar(snapshot.val()))
+                }
+
+            })
+        }
+        //  else {
+        //     startNewCharKey().then((newKey) => {
+        //         startUpdateCharID({ uid: auth.currentUser.uid, currentCharID: newKey })
+        //         updateIDs({ uid: auth.currentUser.uid, charID: newKey })
+        //     })
+        // }
+
+        return (() => {
+
+            if (charID && charID !== 0) {
+                off(ref(db, `characters/${charID}`))
+            }
+        })
+    }, [charID])
 
     // Get a list of heritages from firebase
     useEffect(() => {
@@ -31,11 +76,17 @@ const CharHeritage = () => {
         })
     }, [])
 
-    const loadHeritage = (heritage) => {
-        dispatchChar(updateHeritageID(heritage.hID))
-        dispatchChar(updateHTraitID(heritage.hTraitIDs[0]))
-        dispatchChar(setHeritageHP(parseInt(heritage.hHP)))
-        dispatchChar(setCurrentHP(parseInt(heritage.hHP)))
+    const selectHeritage = (heritage) => {
+        // dispatchChar(updateHeritageID(heritage.hID))
+        // dispatchChar(updateHTraitID(heritage.hTraitIDs[0]))
+        // dispatchChar(setHeritageHP(parseInt(heritage.hHP)))
+        // dispatchChar(setCurrentHP(parseInt(heritage.hHP)))
+        startUpdateHeritageData({ uid: char.userID, charID: char.charID, heritage })
+    }
+
+    const selectHeritageTrait = (hTraitID) => {
+        // dispatchChar(updateHTraitID(hTraitID))
+        startUpdateHeritageTraitID({ uid: char.userID, charID: char.charID, hTraitID })
     }
 
 
@@ -53,7 +104,7 @@ const CharHeritage = () => {
                 arrayTitleRef={'hTitle'}
                 state={char}
                 stateIDRef={'heritageID'}
-                onSelection={loadHeritage}
+                onSelection={selectHeritage}
             />
             {
                 (
@@ -65,7 +116,7 @@ const CharHeritage = () => {
                 <DisplayHeritage
                     heritages={heritages}
                     heritageID={char.heritageID}
-                    dispatchCharHeritageID={dispatchChar}
+                    dispatchCharHeritageID={selectHeritageTrait}
                     hTraitID={char.hTraitID}
                 />
             }

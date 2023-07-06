@@ -6,9 +6,9 @@ export const loadUser = (userData) => ({
     userData
 })
 
-export const updateAdmin = (admin) => ({
-    type: 'UPDATE_ADMIN',
-    admin
+export const updateUID = (uid) => ({
+    type: 'UPDATE_UID',
+    uid
 })
 
 export const clearUser = () => ({
@@ -52,16 +52,16 @@ export const startUpdateUserAccessDate = async ({ uid }) => {
         })
 }
 
-export const startCreateNewUser = ({ uid, userData }) => {
-    const updates = {};
+// export const startCreateNewUser = ({ uid, userData }) => {
+//     const updates = {};
 
-    updates[`users/${uid}`] = null
+//     updates[`users/${uid}`] = null
 
-    update(ref(db), updates)
-        .catch((error) => {
-            alert('Did not remove user', error)
-        })
-}
+//     update(ref(db), updates)
+//         .catch((error) => {
+//             alert('Did not remove user', error)
+//         })
+// }
 
 export const startRemoveUser = ({ uid }) => {
     const updates = {};
@@ -87,14 +87,30 @@ export const startUpdateUserRoles = ({ uid, admin, gm }) => {
         })
 }
 
+export const startUpdateSessionCode = ({ uid, session }) => {
+    const updates = {};
 
-// export const startUpdateCharID = async ({ uid, currentCharID }) => {
-//     const updates = {};
+    updates[`users/${uid}/uid`] = uid
+    updates[`users/${uid}/gameSession`] = session
 
-//     updates[`users/${uid}/currentCharID`] = currentCharID
 
-//     update(ref(db), updates)
-//         .catch((error) => {
-//             alert('Did not update character ID', error)
-//         })
-// }
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid })
+        })
+        .catch((error) => {
+            alert('Did not update session code', error)
+        })
+}
+
+
+export const startUpdateCurrentCharID = async ({ uid, currentCharID }) => {
+    const updates = {};
+
+    updates[`users/${uid}/currentCharID`] = currentCharID
+
+    update(ref(db), updates)
+        .catch((error) => {
+            alert('Did not update character ID', error)
+        })
+}

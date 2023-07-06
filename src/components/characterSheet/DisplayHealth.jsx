@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
 import {
     decreaseCurrentArmor,
     decreaseCurrentHP,
     increaseCurrentArmor,
     increaseCurrentHP,
-    setMaxArmor
+    setMaxArmor,
+    startUpdateCharInfo
 } from "../../actions/charActions";
+import { charReducer } from "../../reducers/charReducer";
 
-const DisplayHealth = ({ char, dispatchChar }) => {
+const DisplayHealth = ({ charData }) => {
+    const [char, dispatchChar] = useReducer(charReducer, charData)
     const { currentHP, hHP, tHP, maxArmor, currentArmor } = char
     const maxHP = parseInt(hHP) + parseInt(tHP)
     const lostHP = maxHP - parseInt(currentHP)
     const lostArmor = parseInt(maxArmor) - parseInt(currentArmor)
+
+    useEffect(() => {
+        startUpdateCharInfo({ char })
+    }, [char])
 
 
     const displayHearts = (number, iconName, cssFlag) => {

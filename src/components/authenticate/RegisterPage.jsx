@@ -7,10 +7,13 @@ import {
 } from "react-router";
 import Field from "../display/FieldPencil";
 import { auth, registerWithEmailAndPassword } from "../../api/firebase";
+import { EmailAuthProvider, linkWithCredential } from "firebase/auth";
 
 const RegisterPage = () => {
     const theme = ''
-    const [codes] = useOutletContext();
+    const [context] = useOutletContext()
+    const [anonCharID, setAnonCharID] = useState(context.user.currentCharID)
+
     const navigate = useNavigate()
     const { back = '' } = useParams()
     const [email, setEmail] = useState("")
@@ -25,20 +28,39 @@ const RegisterPage = () => {
     const confirmPasswordAlert = "Please confirm your passwords match"
 
     useEffect(() => {
-        if (loading) {
-            return;
-        }
-        if (user) navigate(`/${back}`);
-        if (codes.registerLock) {
-            alert(lockAlert)
-            navigate(`/`)
-        }
-    }, [user, loading, codes]);
+        // if (loading) {
+        //     return;
+        // }
+        if (!auth.currentUser.isAnonymous) navigate(`/${back}`);
+        // if (codes.registerLock) {
+        //     alert(lockAlert)
+        //     navigate(`/`)
+        // }
+    }, [user]);
+
+    useEffect(() => {
+        console.log('anonCharID', anonCharID)
+        setAnonCharID(context.user.currentCharID)
+        console.log('set Anon', context.user.currentCharID)
+    }, [])
 
 
     const registerCheck = () => {
         if (password === confirmPassword) {
-            registerWithEmailAndPassword(email, password)
+            const credential = EmailAuthProvider.credential(email, password)
+            linkWithCredential(auth.currentUser, credential)
+                .then((usercred) => {
+                    const user = usercred.user;
+                    console.log('success!', user)
+                    return user
+                })
+                .then((user) => {
+                    startUpdateCurrentCharID({ uid: user.uid, currentCharID: anonCharID })
+                })
+                .catch((error) => {
+                    alert(error)
+                })
+            // registerWithEmailAndPassword(email, password)
         } else {
             alert(confirmPasswordAlert)
         }

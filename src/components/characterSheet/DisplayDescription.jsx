@@ -1,7 +1,7 @@
 import React from "react";
 import DisplayHeritage from "./DisplayHeritage";
 
-const DisplayDescription = ({ char, dispatchChar, heritage }) => {
+const DisplayDescription = ({ char, heritage }) => {
 
 
     // Eventually add more story-driven fields in the Display Heritage section
@@ -9,9 +9,8 @@ const DisplayDescription = ({ char, dispatchChar, heritage }) => {
     return (
         <div className="displayDescription__container">
             <DisplayHeritage
+                char={char}
                 heritage={heritage}
-                trade={char.trade}
-                dispatchChar={dispatchChar}
             />
         </div>
     )

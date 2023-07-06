@@ -36,14 +36,14 @@
 // Produce an object with two arrays of weapon groups
 // one array is locked, the character gains automatically
 // the other array is unlocked, and the character can pick one
-const sortWGs = ({ allTraits, weaponGroups }) => {
+const sortWGs = ({ selectedTraits, weaponGroups }) => {
     const defaultWGIDs = []
     const defaultWGs = []
     const availWGs = []
 
     // If the user selected one or more traits that automatically provide 
     // weapon groups, add those weapon groups (once) to the defaultWGIDs array
-    allTraits.forEach(trait => {
+    selectedTraits.forEach(trait => {
         if (
             trait.tWeaponGroupID
             &&
@@ -64,7 +64,7 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
             ||
             // OR if the wgID being evaluated IS the wgID that provides the Unarmed weapon group
             // AND if the list of traits don't include the Powerful Claws weapon group
-            (!allTraits.map(trait => trait.tID).includes('-NV0jYp3gMM1_J07zoU2'))) {
+            (!selectedTraits.map(trait => trait.tID).includes('-NV0jYp3gMM1_J07zoU2'))) {
             // put it in the default array
             const foundWG = weaponGroups.find(wg => wg.wgID === wgID)
             defaultWGs.push(foundWG)
@@ -87,7 +87,7 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
             !(
                 // If the list of traits includes the 
                 // Karhu Powerful Claws trait ID
-                allTraits
+                selectedTraits
                     .map(trait => trait.tID)
                     .includes('-NV0jYp3gMM1_J07zoU2')
                 &&
@@ -101,7 +101,7 @@ const sortWGs = ({ allTraits, weaponGroups }) => {
             !(
                 // If the list of traits includes the
                 // Fey Bow Mastery trait ID
-                allTraits
+                selectedTraits
                     .map(trait => trait.tID)
                     .includes('-NV0g5_XAfqCb0Y9079M')
                 &&

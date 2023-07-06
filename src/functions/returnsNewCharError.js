@@ -11,7 +11,7 @@ const chooseFamiliar = 'familiar'
 const chooseBackstory = 'backstory'
 
 const pleaseSelectA = 'Please select a '
-const pleaseDescribeYour = 'Please describe your '
+const pleaseNameDescribeYour = 'Please name and describe your '
 const pleaseDesignA = 'Please design a '
 const pleaseDesign = 'Please design '
 const orSelectA = 'or select a '
@@ -37,7 +37,7 @@ const returnsNewCharError = ({ urlStub }) => {
         case chooseWeapon:
             return weaponError
         case chooseFamiliar:
-            return (pleaseDescribeYour + chooseFamiliar)
+            return (pleaseNameDescribeYour + chooseFamiliar)
         case chooseBackstory:
             return (pleaseDesignA + chooseBackstory)
         default:

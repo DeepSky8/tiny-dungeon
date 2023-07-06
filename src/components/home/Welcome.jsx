@@ -1,30 +1,30 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useLocalStorageState from "use-local-storage-state";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import Footer from "./Footer";
 import { off, onValue, ref } from "firebase/database";
 import { auth, db } from "../../api/firebase";
-import { defaultUserState, userReducer } from "../../reducers/userReducer";
-import { loadUser } from "../../actions/userActions";
+import returnsURLStub from "../../functions/returnsURLStub";
+import { newCharStepOrder } from "../../reducers/nextStepReducer";
+import { charReducer, defaultChar } from "../../reducers/charReducer";
+import { loadChar } from "../../actions/charActions";
 
 const Welcome = () => {
+    const [context] = useOutletContext()
     let navigate = useNavigate();
-    const [localChar, , { removeItem: removeLocalChar }] = useLocalStorageState('localChar')
-    const [localCode, , { removeItem: removeLocalCode }] = useLocalStorageState('localCode')
     const [charCreated, setCharCreated] = useState(false)
-    // const [user, dispatchUser] = useReducer(userReducer, defaultUserState)
-
-    // useEffect(() => {
-    //     console.log('user', user)
-    //     console.log('auth', auth.currentUser)
-    // }, [user])
+    const [tempChar, dispatchTempChar] = useReducer(charReducer, defaultChar)
 
     useEffect(() => {
-        if (auth.currentUser) {
+        console.log('tempChar', tempChar)
+    }, [tempChar])
 
-            onValue(ref(db, `users/${auth.currentUser.uid}/currentCharID`), snapshot => {
+    useEffect(() => {
+        if (context.user.currentCharID) {
+
+            onValue(ref(db, `characters/${context.user.currentCharID}`), snapshot => {
                 if (snapshot.exists()) {
-                    setCharCreated(true)
+                    dispatchTempChar(loadChar(snapshot.val()))
+
                 } else {
                     setCharCreated(false)
                 }
@@ -33,30 +33,32 @@ const Welcome = () => {
 
         return (() => {
             if (auth.currentUser) {
-                off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
+                off(ref(db, `characters/${context.user.currentCharID}`))
             }
         })
-    }, [auth.currentUser])
+    }, [context.user.currentCharID])
 
     useEffect(() => {
-        if (
-            (localChar !== undefined)
-            &&
-            (localChar.charName.length > 0 && localChar.trade.length > 0 & localChar.belief.length > 0)
-        ) {
-            setCharCreated(true)
-        } else {
-            setCharCreated(false)
-        }
-    }, [localChar])
+        const charComplete = (
+            returnsURLStub(
+                {
+                    char: tempChar,
+                    newCharStepOrder: newCharStepOrder,
+                    currentStep: 'backstory'
+                }
+            ) === 'end'
+        )
+        setCharCreated(charComplete)
+    }, [tempChar])
+
 
     const newCharClick = () => {
-        navigate('/newCharacter/heritage')
+        navigate(`/newCharacter/heritage/${tempChar.charID}`)
     }
 
     const charSheetClick = () => {
         if (charCreated) {
-            navigate('/characterSheet')
+            navigate(`/characterSheet/${tempChar.charID}`)
         }
     }
 

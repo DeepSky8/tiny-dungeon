@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import Field from "../display/FieldPencil";
-import { updateFamiliarID } from "../../actions/charActions";
 import { defaultFamiliar, familiarReducer } from "../../reducers/familiarReducer";
 import { updateFDescription, updateFName } from "../../actions/familiarActions";
 import DisplayRational from "../createCharacter/DisplayRational";
@@ -12,8 +11,8 @@ const DisplayFamiliar = ({ char, dispatchChar }) => {
     const [familiar, dispatchFamiliar] = useReducer(familiarReducer, localFamiliar)
 
     const handleSaveFamiliar = () => {
-        dispatchChar(updateFamiliarID(familiar.fID))
-        setLocalFamiliar(familiar)
+        // dispatchChar(updateFamiliarID(familiar.fID))
+        // setLocalFamiliar(familiar)
     }
 
     useEffect(() => {

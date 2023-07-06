@@ -89,7 +89,7 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
         //     });
         // })
 
-    }, [])
+    }, [char.traitIDs])
 
 
     const protoMenuObjects = [
@@ -97,7 +97,6 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
             title: 'Heritage',
             display: <DisplayDescription
                 char={char}
-                dispatchChar={dispatchChar}
                 heritage={heritage}
             />,
             traitID: '',

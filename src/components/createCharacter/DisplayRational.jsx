@@ -26,7 +26,7 @@ const displayText = {
         title: "--Weapon Ranges--",
         1: "CLOSE: You can reach out and touch, strike, or aid without moving or unbalancing yourself",
         2: "NEAR: Just out of reach. You can use one action to move to bring someone at near range to close range",
-        3: "FAR: Anything longer than near. It takes at least two actions to move and bring the closest enemies at Far into close range, though depending on how far they are it can take more move actions (the GM will tell you)"
+        3: "FAR: Anything longer than near. It takes at least two actions to move and bring the closest enemies at FAR into CLOSE range, though depending on how far they are it can take more move actions (the GM will tell you)"
     },
 
     familiar: {

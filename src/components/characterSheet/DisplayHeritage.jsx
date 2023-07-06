@@ -10,14 +10,12 @@ import {
 import { defaultDisplay, displayReducer } from "../../reducers/displayReducer";
 import ClickDescription from "../display/ClickDescription";
 import Field from "../display/FieldPencil";
-import { updateTrade } from "../../actions/charActions";
+import { startUpdateTrade } from "../../actions/charActions";
 import TapOpen from "../TapOpen";
 import DisplayRational from "../createCharacter/DisplayRational";
 
 
-
-
-const DisplayHeritage = ({ heritage, dispatchChar, trade }) => {
+const DisplayHeritage = ({ char, heritage }) => {
     const {
         hTitle,
         hDescription,
@@ -26,10 +24,10 @@ const DisplayHeritage = ({ heritage, dispatchChar, trade }) => {
         hAltText
     } = heritage
     const [show, dispatch] = useReducer(displayReducer, defaultDisplay)
-    const [localTrade, setLocalTrade] = useState(trade)
+    const [localTrade, setLocalTrade] = useState(char.trade)
 
     const handleSaveBackstory = () => {
-        dispatchChar(updateTrade(localTrade))
+        startUpdateTrade({ uid: char.userID, charID: char.charID, trade: localTrade })
     }
 
     return (

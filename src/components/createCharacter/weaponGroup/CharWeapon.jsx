@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 import DisplayRational from "../DisplayRational";
 import DisplayWeapon from "./DisplayWeapon";
 import { off, onValue, ref } from "firebase/database";
-import { db } from "../../../api/firebase";
+import { auth, db } from "../../../api/firebase";
 import DisplayUnarmed from "./DisplayUnarmed";
 import DisplayMagicRanged from "./DisplayMagicRanged";
 import alphabetizeTitles from "../../../functions/alphabetizeTitles";
 import TapOpen from "../../TapOpen";
 import returnsTitleText from "../../../functions/returnsTitleText";
+import { useReducer } from "react";
+import { charReducer, defaultChar } from "../../../reducers/charReducer";
+import { loadChar } from "../../../actions/charActions";
 
 
 // // Bow Mastery - Heritage Trait
@@ -53,7 +56,9 @@ import returnsTitleText from "../../../functions/returnsTitleText";
 
 
 const CharWeapon = () => {
-    const [char, dispatchChar] = useOutletContext()
+    const { charID } = useParams()
+    const [session] = useOutletContext()
+    const [char, dispatchChar] = useReducer(charReducer, defaultChar)
     const [weaponGroups, setWeaponGroups] = useState([])
     const [weapons, setWeapons] = useState([])
 
@@ -61,22 +66,101 @@ const CharWeapon = () => {
     // const areWeapons = ['Ranged', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
 
 
-    // Get Weapon Group object per selected Weapon Group ID
     useEffect(() => {
+        console.log('char', char)
+    }, [char])
+
+    useEffect(() => {
+        console.log('weaponGroups', weaponGroups)
+    }, [weaponGroups])
+
+    useEffect(() => {
+        console.log('weapons', weapons)
+    }, [weapons])
+
+
+    useEffect(() => {
+        if (charID && charID !== 0) {
+            onValue(ref(db, `characters/${charID}`), snapshot => {
+
+                if (
+                    snapshot.exists()
+                    &&
+                    snapshot.val().userID === auth.currentUser.uid
+                ) {
+                    dispatchChar(loadChar(snapshot.val()))
+
+                    // let tempArray = [];
+
+                    // snapshot.val().weaponGroupObjects.forEach(wgO => {
+                    //     onValue(ref(db, `weaponGroups/${wgO.wgID}`), snapshot => {
+                    //         if (snapshot.exists()) {
+                    //             tempArray.push(snapshot.val())
+                    //         }
+                    //     }
+                    //         , {
+                    //             onlyOnce: true
+                    //         }
+                    //     )
+                    // });
+                    // const sortedWGs = alphabetizeTitles({ objectArray: tempArray, titlePrefix: 'wg' })
+                    // console.log('setting weaponGroups',)
+                    // setWeaponGroups(sortedWGs)
+                }
+
+            })
+        }
+
+        return (() => {
+
+            if (charID && charID !== 0) {
+                off(ref(db, `characters/${charID}`))
+            }
+        })
+    }, [charID])
+
+    // // Get Weapon Group object per selected Weapon Group ID
+    // useEffect(() => {
+    //     if (char.weaponGroupObjects.length > 0) {
+
+    //         let tempArray = [];
+
+    //         char.weaponGroupObjects.forEach(wgIDO => {
+    //             onValue(ref(db, `weaponGroups/${wgIDO.wgID}`), snapshot => {
+    //                 if (snapshot.exists()) {
+    //                     tempArray.push(snapshot.val())
+    //                 }
+    //             }
+    //                 , {
+    //                     onlyOnce: true
+    //                 }
+    //             )
+    //         });
+    //         const sortedWGs = alphabetizeTitles({ objectArray: tempArray, titlePrefix: 'wg' })
+    //         setWeaponGroups(sortedWGs)
+
+    //     } else {
+    //         console.log('wgo length is: ', char.weaponGroupObjects.length)
+    //     }
+
+    // }, [char.weaponGroupObjects])
+
+    // Get all Weapon Group objects
+    useEffect(() => {
+
         let tempArray = [];
 
-        char.weaponGroupObjects.forEach(wgIDO => {
-            onValue(ref(db, `weaponGroups/${wgIDO.wgID}`), snapshot => {
-                if (snapshot.exists()) {
-                    tempArray.push(snapshot.val())
-                }
-            }, {
-                onlyOnce: true
+        onValue(ref(db, `weaponGroups`), snapshot => {
+            if (snapshot.exists()) {
+                tempArray.push(snapshot.val())
             }
-            )
-        });
+        }, {
+            onlyOnce: true
+        })
+
         const sortedWGs = alphabetizeTitles({ objectArray: tempArray, titlePrefix: 'wg' })
         setWeaponGroups(sortedWGs)
+        console.log('sortedWGs', sortedWGs)
 
     }, [])
 

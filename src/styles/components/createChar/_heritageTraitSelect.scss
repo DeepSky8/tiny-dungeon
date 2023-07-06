@@ -1,19 +1,19 @@
-.bulletedSelect__container {
+.heritageTraitSelect__container {
     margin: 5px 0;
     user-select: none;
 }
 
-.bulletedSelect__header {
+.heritageTraitSelect__header {
     font-weight: bold;
     text-align: center;
 }
 
-.bulletedSelect__container--button {
+.heritageTraitSelect__container--button {
     text-align: center;
     margin-bottom: $s-size;
 }
 
-.bulletedSelect__button {
+.heritageTraitSelect__button {
     background-color: $menu-yellow;
     @include button--border;
     font-size: $calcFontSizeLarge;
@@ -24,7 +24,7 @@
     }
 }
 
-.bulletedSelect__container--text {
+.heritageTraitSelect__container--text {
     color: $text-brown;
 
     &.notSelected {
@@ -35,7 +35,7 @@
 
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
-    .bulletedSelect__button {
+    .heritageTraitSelect__button {
         background-color: $menu-yellow;
         @include button--border;
         font-size: $calcFontSize;

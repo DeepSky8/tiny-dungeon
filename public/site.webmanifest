@@ -31,7 +31,7 @@
             "purpose": "maskable"
         }
     ],
-    "start_url": "https://tiny-dungeon.surge.sh/",
+    "start_url": "https://tinydungeon.app/",
     "theme_color": "#000000",
     "background_color": "#cfbc7c",
     "display": "standalone",

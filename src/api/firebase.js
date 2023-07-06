@@ -10,14 +10,15 @@ import {
     signOut
 } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import { startCreateUser, startUpdateUserAccessDate } from "../actions/userActions";
+import { startCreateUser, startUpdateCurrentCharID, startUpdateUserAccessDate } from "../actions/userActions";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDLmK0XBussQqLFL48pLZBlVQ9Qycf7_gw",
-    authDomain: "tinydungeon-85b41.firebaseapp.com",
+    // authDomain: "tinydungeon-85b41.firebaseapp.com",
+    authDomain: "tinydungeon.app",
     projectId: "tinydungeon-85b41",
     storageBucket: "tinydungeon-85b41.appspot.com",
     messagingSenderId: "318938211048",
@@ -56,12 +57,17 @@ const signInWithGoogle = async () => {
     }
 };
 
-const logInWithEmailAndPassword = async (email, password) => {
+const logInWithEmailAndPassword = async ({ email, password, anonCharID }) => {
     try {
         await signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 if (result) {
                     startUpdateUserAccessDate({ uid: result.user.uid })
+                        .then((result) => {
+                            if (anonCharID) {
+                                startUpdateCurrentCharID({ uid: result.user.uid, currentCharID: anonCharID })
+                            }
+                        })
                 }
             })
     } catch (err) {
@@ -111,6 +117,7 @@ const logout = () => {
 export {
     auth,
     db,
+    googleProvider,
     logInWithEmailAndPassword,
     logout,
     registerWithEmailAndPassword,
