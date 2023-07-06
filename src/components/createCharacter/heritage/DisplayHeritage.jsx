@@ -12,6 +12,7 @@ import ClickDescription from "../../display/ClickDescription";
 import BulletedSelect from "../../display/BulletedSelect";
 import { off, onValue, ref } from "firebase/database";
 import { db } from "../../../api/firebase";
+import HeritageTraitSelect from "./HeritageTraitSelect";
 
 const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTraitID }) => {
     const {
@@ -67,7 +68,7 @@ const DisplayHeritage = ({ heritages, heritageID, dispatchCharHeritageID, hTrait
                     bodyText={
                         <div className="clickDescription--stats">
                             <div>Health: {hHP}</div>
-                            <BulletedSelect
+                            <HeritageTraitSelect
                                 objectArray={traits}
                                 IDArray={hTraitIDs}
                                 IDKey={'tID'}

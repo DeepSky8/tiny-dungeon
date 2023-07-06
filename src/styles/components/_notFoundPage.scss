@@ -1,12 +1,18 @@
-
-#notFoundPage{
+#notFoundPage {
     font-size: $calcFontSizeLarge;
     text-align: center;
+    h1 {
+        margin-top: 0;
+    }
 }
 
 @media only screen and (min-device-width: $desktop-breakpoint) {
-    #notFoundPage{
+    #notFoundPage {
         font-size: $calcFontSize;
         text-align: center;
+
+        h1 {
+            margin-top: 0;
+        }
     }
 }

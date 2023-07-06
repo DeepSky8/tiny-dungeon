@@ -20,7 +20,7 @@
         min-width: 98%;
         text-align: center;
         user-select: contain;
-        overflow: auto;
+        overflow: hidden auto;
         position: relative;
     }
     input:focus {
@@ -47,7 +47,7 @@
         @include button--border;
         text-align: center;
         user-select: contain;
-        overflow: auto;
+        overflow: hidden auto;
         position: relative;
         max-width: 40%;
     }
@@ -99,7 +99,7 @@
         // max-width: 100%;
         min-height: max-content;
         user-select: contain;
-        overflow: auto;
+        overflow: hidden auto;
         z-index: 20;
     }
 
@@ -130,7 +130,7 @@
         // max-width: 98%;
         text-align: center;
         user-select: contain;
-        overflow: hidden;
+        overflow: hidden auto;
 
         &.title {
             width: 100%;
