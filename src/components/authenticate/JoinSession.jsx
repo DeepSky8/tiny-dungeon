@@ -46,7 +46,7 @@ const JoinSession = () => {
 
     const enterSession = (user = auth.currentUser) => {
         // startUpdateSessionCode({ uid: user.uid, session: parseInt(enteredCode) })
-        setLocalSessionCode(enteredCode)
+        setLocalSessionCode(parseInt(enteredCode))
         setMessage(successMessage)
 
         if (nextLink === "/characterSheet") {

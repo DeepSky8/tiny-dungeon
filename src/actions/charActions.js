@@ -196,6 +196,17 @@ export const startUpdateCharInfo = async ({ gameCode, charID, charData }) => {
         })
 }
 
+export const startMarkCharComplete = async ({ charID, charData }) => {
+    const updates = {};
+
+    updates[`characters/${charID}`] = { ...charData, charID, charCreated: Date.now() }
+
+    update(ref(db), updates)
+        .catch((error) => {
+            console.log('Did not create character', error)
+        })
+}
+
 export const startClearCharData = async ({ gameCode, charID }) => {
     const updates = {};
 

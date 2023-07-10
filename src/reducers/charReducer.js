@@ -62,7 +62,7 @@ const defaultChar = {
         //     sAmount: 1
         // }
     ],                          // Identified by sID
-    charCreated: Date.now(),
+    charCreated: 0,
     charUpdated: 0,
     charNotes: '',
 }

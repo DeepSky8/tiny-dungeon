@@ -81,7 +81,7 @@ export const startUpdateSessionCode = ({ uid, session }) => {
 
 
 
-export const startUpdateUser = ({ uid, admin, gm }) => {
+export const startUpdateUserRoles = ({ uid, admin, gm }) => {
     const updates = {};
 
     updates[`users/${uid}/admin`] = admin

@@ -56,7 +56,7 @@ const Footer = ({ }) => {
         } else if (auth.currentUser && authStatus === 'lock_open') {
             // Connections established on NewCharacter
             off(ref(db, `users/${auth.currentUser.uid}`))
-            off(ref(db, `users/${auth.currentUser.uid}/currentCharID`))
+            off(ref(db, `users/${auth.currentUser.uid}/charID`))
 
             setAuthStatus('lock')
             logout()
