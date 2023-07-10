@@ -1,12 +1,16 @@
 import React from "react";
 import { Navigate, Outlet, useOutletContext } from "react-router";
 import useLocalStorageState from "use-local-storage-state";
+import strung from "../../functions/strung";
 
 const AuthWrapper = () => {
-    const [codes] = useOutletContext();
+    const [context] = useOutletContext();
     const [localCode,] = useLocalStorageState('localCode')
+    const nextLocation = strung(location.pathname.split('/'), '(')
 
-    if (localCode !== undefined && codes.auth.includes(parseInt(localCode))) {
+
+
+    if (localCode !== undefined && context.sessions.includes(parseInt(localCode))) {
         return (
             <div>
                 <Outlet />
@@ -14,7 +18,7 @@ const AuthWrapper = () => {
         )
     } else {
         return (
-            <Navigate to={'/settings'} />
+            <Navigate to={`/settings/${nextLocation}`} />
         )
     }
 }

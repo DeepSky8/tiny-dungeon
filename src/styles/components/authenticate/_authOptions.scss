@@ -1,0 +1,25 @@
+.authOptions__container {
+    user-select: none;
+}
+
+.authOptions__text {
+    padding: $s-size;
+}
+
+.authOptions__menu {
+    margin: auto;
+    justify-content: space-around;
+    display: flex;
+    padding-bottom: $xs-size;
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .authOptions__text {
+        padding: $l-size;
+    }
+
+    .authOptions__menu {
+        padding-bottom: $m-size;
+    }
+    
+}

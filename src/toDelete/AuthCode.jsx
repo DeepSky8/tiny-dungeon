@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
-import Field from "../display/Field";
+import { db } from "../api/firebase";
+import Field from "../components/display/Field";
 import { useNavigate, useParams } from "react-router";
 import useLocalStorageState from "use-local-storage-state";
-import strung from "../../functions/strung";
+import strung from "../functions/strung";
 
 const AuthCode = () => {
     let navigate = useNavigate()

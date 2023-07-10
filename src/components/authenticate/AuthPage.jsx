@@ -24,30 +24,37 @@ const AuthPage = () => {
     const returnApp = 'Return to App'
 
 
-    useEffect(() => {
-        if (loading) {
-            return;
-        }
-        if (user) {
-            removeItem();
-            navigate(`/${back}`)
-        };
-    }, [user, loading]);
+    // useEffect(() => {
+    //     if (loading) {
+    //         return;
+    //     }
+    //     if (user) {
+    //         removeItem();
+    //         navigate(`/${back}`)
+    //     };
+    // }, [user, loading]);
 
 
 
     const loginEmail = () => {
         logInWithEmailAndPassword(email, password)
+            .then(() => {
+                navigate(`/${back}`)
+                // if (user) {
+                // }
+                // else {
+                //     alert('User not found')
+                // }
+            })
     }
 
     return (
         <div className={`authPage__container`}>
+            <hr className="hr__brown" />
 
             <div className={`authPage__container--title ${theme}`}>
                 <h3>{loginTitle}</h3>
             </div>
-
-            <hr className="hr__brown" />
 
             <div className={`authPage__container--login ${theme}`}>
                 <Field
@@ -104,7 +111,7 @@ const AuthPage = () => {
                     <button
                         className={`authPage__login--button ${theme}`}
                         onClick={() => {
-                            navigate(`/reset`)
+                            navigate(`/authenticate/reset`)
                         }}
                     >
                         {resetPasswordText}
@@ -115,7 +122,7 @@ const AuthPage = () => {
                     <button
                         className={`authPage__login--button ${theme}`}
                         onClick={() => {
-                            navigate(`/register/${back}`)
+                            navigate(`/authenticate/register/${back}`)
                         }}>
                         {newAccountText}
                     </button>
@@ -139,3 +146,4 @@ const AuthPage = () => {
 }
 
 export default AuthPage
+

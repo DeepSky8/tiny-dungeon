@@ -22,7 +22,6 @@ import DisplayWeapons from "../components/editItems/DisplayWeapons.jsx";
 import DisplayScrolls from "../components/editItems/DisplayScrolls.jsx";
 import Welcome from "../components/home/Welcome.jsx";
 import Attribution from "../components/home/Attribution.jsx";
-import AuthCode from "../components/authenticate/AuthCode.jsx";
 import AuthWrapper from "../components/authenticate/AuthWrapper.jsx";
 import AuthWrapperCreate from "../components/authenticate/AuthWrapperCreate.jsx";
 import AdminPage from "../components/admin/AdminPage.jsx";
@@ -32,6 +31,8 @@ import RegisterPage from "../components/authenticate/RegisterPage.jsx";
 import ResetPage from "../components/authenticate/ResetPage.jsx";
 import Settings from "../components/admin/Settings.jsx";
 import CharactersOverview from "../components/gameMom/CharactersOverview.jsx";
+import AuthOptions from "../components/authenticate/AuthOptions.jsx";
+import JoinSession from "../components/authenticate/JoinSession.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -47,11 +48,6 @@ const AppRouter = createBrowserRouter([
 
             },
             {
-                path: '/settings',
-                errorElement: <NotFoundPage />,
-                element: <Settings />,
-            },
-            {
                 path: "/attribution",
                 errorElement: <NotFoundPage />,
                 element: <Attribution />
@@ -59,22 +55,42 @@ const AppRouter = createBrowserRouter([
             {
                 path: "/authenticate/:back?",
                 errorElement: <NotFoundPage />,
-                element: <AuthPage />
+                element: <AuthOptions />,
+                children: [
+                    {
+                        path: "joinSession/:back?",
+                        errorElement: <NotFoundPage />,
+                        element: <JoinSession />,
+                    },
+                    {
+                        path: "signIn/:back?",
+                        errorElement: <NotFoundPage />,
+                        element: <AuthPage />,
+                    },
+                    {
+                        path: "register/:back?",
+                        errorElement: <NotFoundPage />,
+                        element: <RegisterPage />
+                    },
+                    {
+                        path: "reset/:back?",
+                        errorElement: <NotFoundPage />,
+                        element: <ResetPage />
+                    },
+                ]
             },
-            {
-                path: "/register/:back?",
-                errorElement: <NotFoundPage />,
-                element: <RegisterPage />
-            },
-            {
-                path: "/reset/:back?",
-                errorElement: <NotFoundPage />,
-                element: <ResetPage />
-            },
+
             {
                 path: "/settings/:back?",
                 errorElement: <NotFoundPage />,
-                element: <Settings />
+                element: <Settings />,
+                children: [
+                    {
+                        index: true,
+                        errorElement: <NotFoundPage />,
+                        element: <JoinSession />
+                    }
+                ]
             },
             {
                 element: <AuthWrapper />,

@@ -9,8 +9,8 @@ import Field from "../display/FieldPencil";
 import { auth, registerWithEmailAndPassword } from "../../api/firebase";
 
 const RegisterPage = () => {
-    const theme = ''
-    const [codes] = useOutletContext();
+    // const theme = ''
+    // const [codes] = useOutletContext();
     const navigate = useNavigate()
     const { back = '' } = useParams()
     const [email, setEmail] = useState("")
@@ -24,21 +24,17 @@ const RegisterPage = () => {
     const lockAlert = 'Account Registration is currently locked'
     const confirmPasswordAlert = "Please confirm your passwords match"
 
-    useEffect(() => {
-        if (loading) {
-            return;
-        }
-        if (user) navigate(`/${back}`);
-        if (codes.registerLock) {
-            alert(lockAlert)
-            navigate(`/`)
-        }
-    }, [user, loading, codes]);
-
 
     const registerCheck = () => {
         if (password === confirmPassword) {
             registerWithEmailAndPassword(email, password)
+                .then(() => {
+                    if (user) {
+                        navigate(`/`)
+                    } else {
+                        alert('User not found')
+                    }
+                })
         } else {
             alert(confirmPasswordAlert)
         }
@@ -48,14 +44,14 @@ const RegisterPage = () => {
 
     return (
         <div className={`authPage__container`}>
+            <hr className="hr__brown" />
 
-            <div className={`authPage__container--title ${theme}`}>
+            <div className={`authPage__container--title`}>
                 <h3>{registerTitle}</h3>
             </div>
 
-            <hr className="hr__brown" />
 
-            <div className={`authPage__container--login ${theme}`}>
+            <div className={`authPage__container--login`}>
                 <Field
                     label={'Email'}
                     id={'email'}
@@ -103,7 +99,7 @@ const RegisterPage = () => {
 
                 <div className="authPage__container--button">
                     <button
-                        className={`authPage__login--button ${theme}`}
+                        className={`authPage__login--button`}
                         onClick={() => {
                             registerCheck()
                         }}
@@ -116,9 +112,9 @@ const RegisterPage = () => {
 
                 <div className="authPage__container--button">
                     <button
-                        className={`authPage__login--button ${theme}`}
+                        className={`authPage__login--button`}
                         onClick={() => {
-                            navigate(`/authenticate/${back}`)
+                            navigate(`/authenticate/signIn/${back}`)
                         }}>
                         {returnLogin}
                     </button>
@@ -126,7 +122,7 @@ const RegisterPage = () => {
 
                 <div className="authPage__container--button">
                     <button
-                        className={`authPage__login--button ${theme}`}
+                        className={`authPage__login--button`}
                         onClick={() => {
                             navigate(`/`)
                         }}>

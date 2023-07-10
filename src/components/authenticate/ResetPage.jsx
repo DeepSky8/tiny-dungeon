@@ -15,29 +15,21 @@ const ResetPage = () => {
     const { back = '' } = useParams()
     const [, setResetEmail] = useLocalStorageState('resetEmail', { defaultValue: "" })
     const [email, setEmail] = useState("");
-    const [user, loading,] = useAuthState(auth)
+    // const [user, loading,] = useAuthState(auth)
     const resetTitle = 'Password Reset'
     const sendResetEmail = 'Send Password Reset'
     const newAccountText = "Create Account"
     const returnLogin = 'Return to Login'
     const returnApp = 'Return to App'
 
-
-    useEffect(() => {
-        if (loading) {
-            return;
-        }
-        if (user) navigate(`/${back}`);
-    }, [user, loading]);
-
     return (
         <div className={`authPage__container`}>
+            <hr className="hr__brown" />
 
             <div className={`authPage__container--title ${theme}`}>
                 <h3>{resetTitle}</h3>
             </div>
 
-            <hr className="hr__brown" />
 
             <div className={`authPage__container--login ${theme}`}>
                 <Field
@@ -66,7 +58,7 @@ const ResetPage = () => {
                                     setResetEmail(email)
                                 })
                                 .then(() => {
-                                    navigate(`/authenticate/${back}`)
+                                    navigate(`/authenticate/signIn/${back}`)
                                 })
                         }}
                     >
@@ -80,7 +72,7 @@ const ResetPage = () => {
                     <button
                         className={`authPage__login--button ${theme}`}
                         onClick={() => {
-                            navigate(`/register/${back}`)
+                            navigate(`/authenticate/register/${back}`)
                         }}>
                         {newAccountText}
                     </button>
@@ -90,7 +82,7 @@ const ResetPage = () => {
                     <button
                         className={`authPage__login--button ${theme}`}
                         onClick={() => {
-                            navigate(`/authenticate/${back}`)
+                            navigate(`/authenticate/signIn/${back}`)
                         }}>
                         {returnLogin}
                     </button>

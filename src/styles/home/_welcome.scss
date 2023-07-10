@@ -32,6 +32,7 @@
     margin-right: auto;
     display: block;
     background-color: $text-brown-shadow;
+    cursor: pointer;
 
     &.faded {
         opacity: 0.6;

@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
+    createUserWithEmailAndPassword,
     GoogleAuthProvider,
     getAuth,
     sendPasswordResetEmail,
@@ -9,14 +10,15 @@ import {
     signOut
 } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import { startCreateUser, startUpdateUserAccessDate } from "../actions/authActions";
+import { startCreateUser, startUpdateUserAccessDate } from "../actions/userActions";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDLmK0XBussQqLFL48pLZBlVQ9Qycf7_gw",
-    authDomain: "tinydungeon-85b41.firebaseapp.com",
+    // authDomain: "tinydungeon-85b41.firebaseapp.com",
+    authDomain: "tinydungeon.app",
     projectId: "tinydungeon-85b41",
     storageBucket: "tinydungeon-85b41.appspot.com",
     messagingSenderId: "318938211048",

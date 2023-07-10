@@ -1,4 +1,6 @@
 import React from 'react';
+import { auth } from './api/firebase.js';
+import { onAuthStateChanged, signInAnonymously } from 'firebase/auth';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';
 import AppRouter from './routers/AppRouter.jsx';
@@ -17,3 +19,4 @@ appRoot.render(
     <RouterProvider router={AppRouter} />
   </React.StrictMode>
 )
+
