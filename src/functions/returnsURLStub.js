@@ -29,7 +29,7 @@ const check = {
 
 }
 
-const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
+const returnsURLStub = ({ char, newCharStepOrder, currentStep, initialTraits }) => {
     const {
 
         charName,
@@ -40,22 +40,24 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
         belief,             // Belief is user-defined text
         weaponGroupObjects,     // Identified by wgID and wgType
         weaponObjects,      // Identified by wID and wType
-        familiarID,         // Reference by fID
+        familiar,         // Reference by fID
     } = char
 
     // arrays used in evaluations
     const specialTraitArray = Object.values(check)
 
-    const specialTraitsSelected = traitIDs.filter(traitID => specialTraitArray.includes(traitID))
+    const specialTraitsSelected = traitIDs.filter(traitID => specialTraitArray.includes(traitID));
+    // const specialTraitsSelected = traitIDs.length > 0 ? traitIDs.filter(traitID => specialTraitArray.includes(traitID)) : [];
+
 
     // functions evaluating character elements
     const selectedHeritage = (heritageID !== "" && hTraitID !== "")
 
-    const selectedTraits = ({ hTraitID, traitIDs, extraTraitID }) => {
+    const selectedTraits = ({ hTraitID, traitIDs, extraTraitID, initialTraits }) => {
         return (
-            (hTraitID === extraTraitID && traitIDs.length === 4)
+            (hTraitID === extraTraitID && traitIDs.length === (parseInt(initialTraits) + 1))
             ||
-            (hTraitID !== extraTraitID && traitIDs.length === 3)
+            (hTraitID !== extraTraitID && traitIDs.length === initialTraits)
         )
     }
 
@@ -96,11 +98,11 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
         return (!foundType.includes(false))
     }
 
-    const selectedFamiliar = ({ specialTraitsSelected, familiarID, hasFamiliar }) => {
+    const selectedFamiliar = ({ specialTraitsSelected, familiar, hasFamiliar }) => {
         const shouldHaveFamiliar = specialTraitsSelected.includes(hasFamiliar)
         if (shouldHaveFamiliar) {
             // If user should have familiar and doesn't, return false
-            return (familiarID !== '')
+            return ((familiar.fName !== '') && (familiar.fDescription !== ''))
         } else {
             // user shouldn't have familiar, return 'skip' (move along)
             return 'skip'
@@ -120,10 +122,10 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep }) => {
     // Each test returns true if complete
     const trueIfComplete = [
         selectedHeritage,
-        selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID }),
+        selectedTraits({ hTraitID, traitIDs, extraTraitID: check.extraTraitID, initialTraits }),
         selectedWeaponGroups({ weaponGroupObjects }),
         selectedWeapons({ weaponGroupObjects, weaponObjects }),
-        selectedFamiliar({ specialTraitsSelected, familiarID, hasFamiliar: check.hasFamiliar }), // Returns 'skip' if it shouldn't be accessed
+        selectedFamiliar({ specialTraitsSelected, familiar: familiar, hasFamiliar: check.hasFamiliar }), // Returns 'skip' if it shouldn't be accessed
         selectedBackstory({ trade, belief, charName }),
         false
     ]

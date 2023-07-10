@@ -12,3 +12,7 @@ export const clearNextError = () => ({
     type: 'CLEAR_ERROR'
 })
 
+export const setStepInitialTraits = (initialTraits) => ({
+    type: 'SET_STEP_INITIALTRAITS',
+    initialTraits
+})

@@ -13,8 +13,8 @@ const Settings = () => {
 
     const [, , { removeItem: removeLocalChar }] = useLocalStorageState('localChar')
     const [, , { removeItem: removeLocalFamiliar }] = useLocalStorageState('familiar')
-    const [localCode,] = useLocalStorageState('localCode')
-    const [localCID,] = useLocalStorageState('localCID')
+    // const [localCode,] = useLocalStorageState('localCode')
+    // const [localCID,] = useLocalStorageState('localCID')
 
 
 

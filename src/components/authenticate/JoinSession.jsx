@@ -15,8 +15,8 @@ const JoinSession = () => {
     let navigate = useNavigate()
     const { back } = useParams()
     const nextLink = back ? strung(back.split('('), '/') : "/"
-    const [localSessionCode, setLocalSessionCode, { removeItem: removeLocalSessionCode }] = useLocalStorageState('localSessionCode')
-    const [enteredCode, setEnteredCode] = useState(localSessionCode ? localSessionCode : "")
+    const [sessionCode, setSessionCode, { removeItem: removeSession }] = useLocalStorageState('sessionCode')
+    const [enteredCode, setEnteredCode] = useState(sessionCode ? sessionCode : "")
     const [message, setMessage] = useState('')
 
     const errorMessage = 'Double-check that code, please'
@@ -46,7 +46,7 @@ const JoinSession = () => {
 
     const enterSession = (user = auth.currentUser) => {
         // startUpdateSessionCode({ uid: user.uid, session: parseInt(enteredCode) })
-        setLocalSessionCode(parseInt(enteredCode))
+        setSessionCode(parseInt(enteredCode))
         setMessage(successMessage)
 
         if (nextLink === "/characterSheet") {
@@ -106,7 +106,7 @@ const JoinSession = () => {
 
             <div className="authCode__container--text">
                 <div className="authCode__text">
-                    {localSessionCode ? currentSessionCode : enterSessionCode}
+                    {sessionCode ? currentSessionCode : enterSessionCode}
                 </div>
 
             </div>

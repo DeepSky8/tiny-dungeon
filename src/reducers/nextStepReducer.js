@@ -48,6 +48,7 @@ const defaultNextStep = {
     buttonText: 'Next',
     currentStep: 'heritage',
     error: '',
+    initialTraits: 3,
 }
 
 // Used to return URLStub for navigation
@@ -72,13 +73,14 @@ const nextStepReducer = (state, action) => {
                     char: action.char,
                     newCharStepOrder: newCharStepOrder,
                     currentStep: state.currentStep,
+                    initialTraits: state.initialTraits,
                 }
             )
             const currentError = returnsNewCharError({ urlStub: urlStub })
 
             return {
+                ...state,
                 pathRoot: urlStub === 'end' ? '/characterSheet' : '/newCharacter',
-                buttonText: 'Next',
                 currentStep: urlStub === 'end' ? '' : urlStub,
                 error: state.currentStep === urlStub ? currentError : '',
             }
@@ -98,7 +100,11 @@ const nextStepReducer = (state, action) => {
                 pathRoot: '/newCharacter',
                 currentStep: urlStubBack,
             }
-
+        case 'SET_STEP_INITIALTRAITS':
+            return {
+                ...state,
+                initialTraits: action.initialTraits
+            }
         case 'CLEAR_ERROR':
             return {
                 ...state,
