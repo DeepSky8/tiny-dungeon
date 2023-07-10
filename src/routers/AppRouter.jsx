@@ -33,6 +33,8 @@ import Settings from "../components/admin/Settings.jsx";
 import CharactersOverview from "../components/gameMom/CharactersOverview.jsx";
 import AuthOptions from "../components/authenticate/AuthOptions.jsx";
 import JoinSession from "../components/authenticate/JoinSession.jsx";
+import { get, onValue, ref } from "firebase/database";
+import { db } from "../api/firebase.js";
 
 const AppRouter = createBrowserRouter([
 

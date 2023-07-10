@@ -10,7 +10,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 
 const JoinSession = () => {
-    const [sessions] = useOutletContext();
+    const [sessionCodes] = useOutletContext();
     const [user, loading, error] = useAuthState(auth)
     let navigate = useNavigate()
     const { back } = useParams()
@@ -26,9 +26,9 @@ const JoinSession = () => {
     const currentSessionCode = 'Current session'
 
 
-    useEffect(() => {
-        console.log('sessions', sessions)
-    }, [sessions])
+    // useEffect(() => {
+    //     console.log('sessions', sessions)
+    // }, [sessions])
     // useEffect(() => {
     //     console.log('context EnterSession', context)
     // }, [context])
@@ -82,7 +82,7 @@ const JoinSession = () => {
         // console.log('currentCharID', context.user.currentCharID)
         // console.log('user id', context.user.uid)
         // console.log('auth uid', auth.currentUser.uid)
-        if (sessions.includes(parseInt(enteredCode))) {
+        if (sessionCodes.includes(parseInt(enteredCode))) {
             if (!user) {
                 signInAnonymously(auth)
             }

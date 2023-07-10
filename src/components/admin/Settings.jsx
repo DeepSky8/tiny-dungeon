@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../home/Footer";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useOutletContext } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { startClearCharData } from "../../actions/charActions";
 import { off, onValue, ref } from "firebase/database";
@@ -8,8 +8,9 @@ import { db } from "../../api/firebase";
 
 
 const Settings = () => {
+    const [sessionCodes] = useOutletContext();
     let navigate = useNavigate()
-    const [sessions, setSessionCodes] = useState([])
+    // const [sessions, setSessionCodes] = useState([])
 
     const [, , { removeItem: removeLocalChar }] = useLocalStorageState('localChar')
     const [, , { removeItem: removeLocalFamiliar }] = useLocalStorageState('familiar')
@@ -18,20 +19,20 @@ const Settings = () => {
 
 
 
-    useEffect(() => {
-        onValue(ref(db, 'sessions'), snapshot => {
-            const tempArray = []
-            if (snapshot.exists()) {
-                snapshot.forEach(snap => { tempArray.push(snap.val()) })
-            }
-            setSessionCodes(tempArray)
-        })
+    // useEffect(() => {
+    //     onValue(ref(db, 'sessions'), snapshot => {
+    //         const tempArray = []
+    //         if (snapshot.exists()) {
+    //             snapshot.forEach(snap => { tempArray.push(snap.val()) })
+    //         }
+    //         setSessionCodes(tempArray)
+    //     })
 
 
-        return (() => {
-            off(ref(db, 'sessions'))
-        })
-    }, [])
+    //     return (() => {
+    //         off(ref(db, 'sessions'))
+    //     })
+    // }, [])
 
 
     const clearCharData = () => {
@@ -45,7 +46,7 @@ const Settings = () => {
 
     return (
         <div>
-            <Outlet context={[sessions]} />
+            <Outlet context={[sessionCodes]} />
             <hr className="hr__brown" />
             <div className="centered brown">
                 <Link to={'/admin'}>Admin</Link>

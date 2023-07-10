@@ -1,16 +1,18 @@
 import React from "react";
-import { Navigate, Outlet, useOutletContext } from "react-router";
+import { Navigate, Outlet, useLoaderData, useOutletContext } from "react-router";
 import useLocalStorageState from "use-local-storage-state";
 import strung from "../../functions/strung";
+import { onValue, ref } from "firebase/database";
+import { db } from "../../api/firebase";
 
 const AuthWrapper = () => {
-    const [context] = useOutletContext();
-    const [localCode,] = useLocalStorageState('localCode')
+    const [sessionCodes] = useOutletContext();
+    const [sessionCode,] = useLocalStorageState('sessionCode')
     const nextLocation = strung(location.pathname.split('/'), '(')
 
 
 
-    if (localCode !== undefined && context.sessions.includes(parseInt(localCode))) {
+    if (sessionCode !== undefined && sessionCodes.includes(parseInt(sessionCode))) {
         return (
             <div>
                 <Outlet />
@@ -24,4 +26,6 @@ const AuthWrapper = () => {
 }
 
 export default AuthWrapper
+
+
 

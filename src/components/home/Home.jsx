@@ -16,12 +16,28 @@ import { startCreateUser } from "../../actions/userActions";
 
 const Home = () => {
     const [localUser, setLocalUser, { removeItem: removeLocalUser }] = useLocalStorageState('localUser', { defaultValue: defaultUserState })
+    const [sessionCodes, setSessionCodes] = useState([])
 
     useEffect(() => {
         return (() => {
             if (localUser.email !== 'none provided') {
                 removeLocalUser()
             }
+        })
+    }, [])
+
+    useEffect(() => {
+        onValue(ref(db, 'sessions'), snapshot => {
+            const tempArray = []
+            if (snapshot.exists()) {
+                snapshot.forEach(snap => { tempArray.push(snap.val()) })
+            }
+            setSessionCodes(tempArray)
+        })
+
+
+        return (() => {
+            off(ref(db, 'sessions'))
         })
     }, [])
 
@@ -165,7 +181,7 @@ const Home = () => {
         <div className="home__container">
             <Header />
             <div className="home__spacer--desktop">
-                <Outlet />
+                <Outlet context={[sessionCodes]} />
             </div>
         </div>
     )

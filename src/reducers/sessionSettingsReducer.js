@@ -10,7 +10,7 @@ const sessionSettingsReducer = (state, action) => {
     switch (action.type) {
         case 'LOAD_SESSION':
             return {
-                ...defaultSession,
+                ...defaultSessionSettings,
                 ...state,
                 ...action.session
             }
