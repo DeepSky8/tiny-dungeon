@@ -24,6 +24,8 @@ export const startCreateUser = async ({ uid, authProvider, email = 'none provide
         email,
         admin: false,
         gm: false,
+        session: 0,
+        charID: "",
         lastAccess: Date.now(),
         dateCreated: Date.now()
     }

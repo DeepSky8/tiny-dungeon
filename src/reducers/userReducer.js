@@ -4,6 +4,8 @@ const defaultUserState = {
     uid: '',
     admin: false,
     gm: false,
+    session: 0,
+    charID:"",
     lastAccess: 0,
     dateCreated: 0,
 }

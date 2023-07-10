@@ -1,10 +1,11 @@
 import React from 'react';
-import { auth } from './api/firebase.js';
-import { onAuthStateChanged, signInAnonymously } from 'firebase/auth';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';
 import AppRouter from './routers/AppRouter.jsx';
 import './styles/styles.scss';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './api/firebase.js';
+import { startCreateUser } from './actions/userActions.js';
 
 // ReactDOM.createRoot(document.getElementById('root')).render(
 //   <React.StrictMode>
@@ -20,3 +21,10 @@ appRoot.render(
   </React.StrictMode>
 )
 
+
+onAuthStateChanged(auth, (user) => {
+  console.log('auth state changed', auth)
+  if (user && user.isAnonymous) {
+      startCreateUser({ uid: auth.currentUser.uid, authProvider: 'anonymous' })
+  }
+})

@@ -2,14 +2,35 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import Footer from "./Footer";
-import { auth } from "../../api/firebase";
+import { auth, db } from "../../api/firebase";
+import { off, onValue, ref } from "firebase/database";
+import { defaultChar } from "../../reducers/charReducer";
+import { defaultUserState } from "../../reducers/userReducer";
 
 const Welcome = () => {
     let navigate = useNavigate();
-    const [localChar,] = useLocalStorageState('localChar')
+    const [localUser,] = useLocalStorageState('localUser')
+    const [localChar, setLocalChar] = useLocalStorageState('localChar', { defaultValue: defaultChar })
+
     const [localCode,] = useLocalStorageState('localCode')
     const [charCreated, setCharCreated] = useState(false)
     // const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
+
+    // useEffect(() => {
+    //     onValue(ref(db, `/users/${auth.currentUser.uid}`), snapshot => {
+    //         if (snapshot.exists()) {
+    //             setLocalUser(snapshot.val())
+    //         }
+    //     })
+
+    //     return (() => {
+    //         if(auth.currentUser){
+    //             off(ref(db, `users/${auth.currentUser.uid}`))
+    //         }
+
+    //     })
+    // }, [auth.currentUser])
+
 
 
     useEffect(() => {

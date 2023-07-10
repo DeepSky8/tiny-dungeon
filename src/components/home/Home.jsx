@@ -15,7 +15,16 @@ import { onAuthStateChanged } from "firebase/auth";
 import { startCreateUser } from "../../actions/userActions";
 
 const Home = () => {
-    
+    const [localUser, setLocalUser, { removeItem: removeLocalUser }] = useLocalStorageState('localUser', { defaultValue: defaultUserState })
+
+    useEffect(() => {
+        return (() => {
+            if (localUser.email !== 'none provided') {
+                removeLocalUser()
+            }
+        })
+    }, [])
+
     // const [localCID, setLocalCID,] = useLocalStorageState('localCID', { defaultValue: '' })
     // const [localChar, setLocalChar] = useLocalStorageState('localChar', { defaultValue: defaultChar })
     // const [sessions, setSessionCodes] = useState([])
@@ -126,12 +135,31 @@ const Home = () => {
     // }
 
 
-    onAuthStateChanged(auth, (user) => {
-        console.log('user', user)
-        if (user && user.isAnonymous) {
-            startCreateUser({ uid: auth.currentUser.uid, authProvider: 'anonymous' })
-        }
-    })
+    // onAuthStateChanged(auth, (user) => {
+    //     console.log('auth state changed', user)
+    //     if (user && user.isAnonymous) {
+    //         startCreateUser({ uid: auth.currentUser.uid, authProvider: 'anonymous' })
+    //     }
+    // })
+
+    // useEffect(() => {
+    //     console.log('firing user listener',)
+    //     if (auth.currentUser) {
+    //         onValue(ref(db, `/users/${auth.currentUser.uid}`), snapshot => {
+    //             if (snapshot.exists()) {
+    //                 setLocalUser(snapshot.val())
+    //             }
+    //         })
+    //     }
+
+    //     return (() => {
+    //         if (auth.currentUser) {
+    //             off(ref(db, `users/${auth.currentUser.uid}`))
+    //         }
+    //         removeLocalUser()
+    //     })
+    // }, [auth.lastNotifiedUid])
+
 
     return (
         <div className="home__container">
