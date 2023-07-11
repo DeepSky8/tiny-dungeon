@@ -6,7 +6,6 @@ import StyledMenu from "../../display/StyledMenu";
 import DisplayHeritage from "./DisplayHeritage";
 import DisplayRational from "../DisplayRational";
 import { setCurrentHP, setHeritageHP, updateHTraitID, updateHeritageID } from "../../../actions/charActions";
-import TapOpen from "../../TapOpen";
 
 const CharHeritage = () => {
     const [char, dispatchChar] = useOutletContext();

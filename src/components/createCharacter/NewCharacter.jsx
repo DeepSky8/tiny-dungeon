@@ -1,14 +1,14 @@
 import React, { useEffect, useReducer } from "react";
 import useLocalStorageState from 'use-local-storage-state';
 import { charReducer, defaultChar } from "../../reducers/charReducer";
-import { Outlet, useLoaderData, useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import NewCharFooter from "../home/NewCharFooter";
 import { defaultNextStep, nextStepReducer } from "../../reducers/nextStepReducer";
 import { clearNextError, prevStep, setStepInitialTraits, takeNextStep } from "../../actions/nextStepActions";
-import { startUpdateCharInfo } from "../../actions/charActions";
+import { startNewCharKey, startUpdateChar, startUpdateCharID } from "../../actions/charActions";
 import { defaultSessionSettings, sessionSettingsReducer } from "../../reducers/sessionSettingsReducer";
 import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
+import { auth, db } from "../../api/firebase";
 import { loadSession } from "../../actions/sessionSettingsActions";
 
 const NewCharacter = () => {
@@ -66,7 +66,30 @@ const NewCharacter = () => {
     }, [nextStep.error])
 
     useEffect(() => {
-        navigate(nextStep.pathRoot + '/' + nextStep.currentStep)
+        if (nextStep.pathRoot === '/characterSheet') {
+            startNewCharKey()
+                .then((newCharID) => {
+                    startUpdateCharID({ uid: auth.currentUser.uid, charID: newCharID })
+                        .then(() => {
+                            startUpdateChar(
+                                {
+                                    uid: auth.currentUser.uid,
+                                    charData: {
+                                        ...char,
+                                        charCreated: Date.now(),
+                                        charID: newCharID
+                                    }
+                                }
+                            )
+                        })
+                })
+
+                .then(() => {
+                    navigate(nextStep.pathRoot + '/' + nextStep.currentStep)
+                })
+        } else {
+            navigate(nextStep.pathRoot + '/' + nextStep.currentStep)
+        }
     }, [nextStep.currentStep])
 
     return (

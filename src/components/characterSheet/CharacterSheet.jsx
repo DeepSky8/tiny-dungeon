@@ -9,7 +9,6 @@ import Field from "../display/FieldPencil";
 import { updateBelief } from "../../actions/charActions";
 import Display from "./Display";
 import { useNavigate } from "react-router";
-import { startUpdateCharInfo } from "../../actions/charActions";
 
 const CharacterSheet = () => {
     let navigate = useNavigate()
@@ -43,15 +42,15 @@ const CharacterSheet = () => {
 
     }, [])
 
-    useEffect(() => {
-        setLocalChar(char)
-        startUpdateCharInfo({ gameCode, charID, charData: char })
-        return () => {
-            // When unmounting component, save current char to local
-            setLocalChar(char)
-            startUpdateCharInfo({ gameCode, charID, charData: char })
-        }
-    }, [char])
+    // useEffect(() => {
+    //     setLocalChar(char)
+    //     startUpdateCharInfo({ gameCode, charID, charData: char })
+    //     return () => {
+    //         // When unmounting component, save current char to local
+    //         setLocalChar(char)
+    //         startUpdateCharInfo({ gameCode, charID, charData: char })
+    //     }
+    // }, [char])
 
     return (
         <div className="charSheet__container">
