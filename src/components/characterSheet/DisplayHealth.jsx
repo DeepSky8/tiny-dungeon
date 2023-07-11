@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useReducer } from "react";
 import {
     decreaseCurrentArmor,
     decreaseCurrentHP,
     increaseCurrentArmor,
     increaseCurrentHP,
-    setMaxArmor
+    setMaxArmor,
+    startUpdateCurrentArmor,
+    startUpdateCurrentHP,
+    startUpdateMaxArmor
 } from "../../actions/charActions";
+import { charReducer } from "../../reducers/charReducer";
+import { auth } from "../../api/firebase";
 
 const DisplayHealth = ({ char, dispatchChar }) => {
+    // const [local, dispatchLocal] = useReducer(charReducer, char)
     const { currentHP, hHP, tHP, maxArmor, currentArmor } = char
     const maxHP = parseInt(hHP) + parseInt(tHP)
     const lostHP = maxHP - parseInt(currentHP)
     const lostArmor = parseInt(maxArmor) - parseInt(currentArmor)
+
+    // const decreaseCurrentArmor = () => {
+
+    // }
 
 
     const displayHearts = (number, iconName, cssFlag) => {
@@ -29,20 +39,43 @@ const DisplayHealth = ({ char, dispatchChar }) => {
     }
 
     const reduceArmor = () => {
-        if (currentArmor - 1 >= 0) { dispatchChar(decreaseCurrentArmor()) }
+        if (currentArmor - 1 >= 0) {
+            // dispatchChar(decreaseCurrentArmor()) 
+            startUpdateCurrentArmor({ uid: auth.currentUser.uid, charData: char, newArmor: (currentArmor - 1) })
+        }
         if (currentArmor % 3 === 0 && lostArmor == 3) {
-            dispatchChar(setMaxArmor(char.maxArmor - 3))
-        } else if (currentArmor - 1 <= 0) { dispatchChar(setMaxArmor(0)) }
+            // dispatchChar(setMaxArmor(char.maxArmor - 3))
+            startUpdateMaxArmor({ uid: auth.currentUser.uid, charData: char, newArmor: (maxArmor - 3) })
+        } else if (currentArmor - 1 <= 0) {
+            // dispatchChar(setMaxArmor(0)) 
+            startUpdateMaxArmor({ uid: auth.currentUser.uid, charData: char, newArmor: 0 })
+        }
     }
 
     const increaseArmor = () => {
-        if (currentArmor + 1 <= maxArmor) { dispatchChar(increaseCurrentArmor()) }
-        if (currentArmor + 1 > maxArmor) { dispatchChar(setMaxArmor(char.maxArmor + 3)) }
+        if (currentArmor + 1 <= maxArmor) {
+            // dispatchChar(increaseCurrentArmor()) 
+            startUpdateCurrentArmor({ uid: auth.currentUser.uid, charData: char, newArmor: (currentArmor + 1) })
+        }
+        if (currentArmor + 1 > maxArmor) {
+            // dispatchChar(setMaxArmor(char.maxArmor + 3)) 
+            startUpdateMaxArmor({ uid: auth.currentUser.uid, charData: char, newArmor: (maxArmor + 3) })
+
+        }
     }
 
-    const reduceHP = () => { if (currentHP - 1 > -1) { dispatchChar(decreaseCurrentHP()) } }
+    const reduceHP = () => {
+        if (currentHP - 1 > -1) {
+            // dispatchChar(decreaseCurrentHP()) 
+            startUpdateCurrentHP({ uid: auth.currentUser.uid, charData: char, newHP: (currentHP - 1) })
+        }
+    }
 
-    const increaseHP = () => { if (currentHP + 1 <= maxHP) { dispatchChar(increaseCurrentHP()) } }
+    const increaseHP = () => {
+        if (currentHP + 1 <= maxHP) {
+            startUpdateCurrentHP({ uid: auth.currentUser.uid, charData: char, newHP: (currentHP + 1) })
+        }
+    }
 
     return (
         <div className="displayHealth__container">

@@ -23,7 +23,6 @@ appRoot.render(
 
 
 onAuthStateChanged(auth, (user) => {
-  console.log('auth state changed', auth)
   if (user && user.isAnonymous) {
       startCreateUser({ uid: auth.currentUser.uid, authProvider: 'anonymous' })
   }

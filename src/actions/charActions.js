@@ -250,16 +250,64 @@ export const startUpdateTrade = async ({ uid, charData, trade }) => {
         })
 }
 
-export const startMarkCharComplete = async ({ charID, charData }) => {
+export const startUpdateCurrentArmor = async ({ uid, charData, newArmor }) => {
     const updates = {};
+    updates[`characters/${charData.charID}/userID`] = uid
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
 
-    updates[`characters/${charID}`] = { ...charData, charID, charCreated: Date.now() }
+    updates[`characters/${charData.charID}/currentArmor`] = newArmor
 
     update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
         .catch((error) => {
-            console.log('Did not create character', error)
+            console.log('Did not update character', error)
         })
 }
+
+export const startUpdateMaxArmor = async ({ uid, charData, newArmor }) => {
+    const updates = {};
+    updates[`characters/${charData.charID}/userID`] = uid
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
+
+    updates[`characters/${charData.charID}/maxArmor`] = newArmor
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
+export const startUpdateCurrentHP = async ({ uid, charData, newHP }) => {
+    const updates = {};
+    updates[`characters/${charData.charID}/userID`] = uid
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
+
+    updates[`characters/${charData.charID}/currentHP`] = newHP
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
+// export const startMarkCharComplete = async ({ charID, charData }) => {
+//     const updates = {};
+
+//     updates[`characters/${charID}`] = { ...charData, charID, charCreated: Date.now() }
+
+//     update(ref(db), updates)
+//         .catch((error) => {
+//             console.log('Did not create character', error)
+//         })
+// }
 
 export const startClearCharData = async ({ gameCode, charID }) => {
     const updates = {};
