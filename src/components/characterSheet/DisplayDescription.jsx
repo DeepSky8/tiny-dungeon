@@ -9,9 +9,8 @@ const DisplayDescription = ({ char, dispatchChar, heritage }) => {
     return (
         <div className="displayDescription__container">
             <DisplayHeritage
+                char={char}
                 heritage={heritage}
-                trade={char.trade}
-                dispatchChar={dispatchChar}
             />
         </div>
     )

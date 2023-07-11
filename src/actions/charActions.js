@@ -218,6 +218,38 @@ export const startUpdateChar = async ({ uid, charData }) => {
         })
 }
 
+export const startUpdateBelief = async ({ uid, charData }) => {
+    const updates = {};
+    updates[`characters/${charData.charID}/userID`] = uid
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
+
+    updates[`characters/${charData.charID}/belief`] = charData.belief
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
+export const startUpdateTrade = async ({ uid, charData, trade }) => {
+    const updates = {};
+    updates[`characters/${charData.charID}/userID`] = uid
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
+
+    updates[`characters/${charData.charID}/trade`] = trade
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
 export const startMarkCharComplete = async ({ charID, charData }) => {
     const updates = {};
 

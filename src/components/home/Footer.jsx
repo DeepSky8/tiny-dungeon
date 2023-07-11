@@ -26,12 +26,10 @@ const Footer = ({ }) => {
     // }, [localUser])
 
     useEffect(() => {
-        console.log('firing user listener',)
         if (auth.currentUser) {
             onValue(ref(db, `/users/${auth.currentUser.uid}`), snapshot => {
                 if (snapshot.exists()) {
                     setLocalUser(snapshot.val())
-                    console.log('set snapshot', snapshot.val())
                     setAuthStatus('lock_open')
                 } else {
                     setAuthStatus('lock')

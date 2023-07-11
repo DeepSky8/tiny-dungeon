@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from "react-router";
 import NewCharFooter from "../home/NewCharFooter";
 import { defaultNextStep, nextStepReducer } from "../../reducers/nextStepReducer";
 import { clearNextError, prevStep, setStepInitialTraits, takeNextStep } from "../../actions/nextStepActions";
-import { startNewCharKey, startUpdateChar, startUpdateCharID } from "../../actions/charActions";
+import { startNewCharKey, startUpdateChar, startUpdateCharID, updateCharID } from "../../actions/charActions";
 import { defaultSessionSettings, sessionSettingsReducer } from "../../reducers/sessionSettingsReducer";
 import { off, onValue, ref } from "firebase/database";
 import { auth, db } from "../../api/firebase";
@@ -81,6 +81,9 @@ const NewCharacter = () => {
                                     }
                                 }
                             )
+                        })
+                        .then(() => {
+                            setLocalChar({ ...char, charID: newCharID })
                         })
                 })
 

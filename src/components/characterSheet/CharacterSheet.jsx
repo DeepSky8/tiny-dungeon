@@ -1,28 +1,35 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { charReducer } from "../../reducers/charReducer";
+import { charReducer, defaultChar } from "../../reducers/charReducer";
 import useLocalStorageState from "use-local-storage-state";
 import { defaultHeritage, heritageReducer } from "../../reducers/heritageReducer";
 import { off, onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
+import { auth, db } from "../../api/firebase";
 import { loadHeritage } from "../../actions/heritageActions";
 import Field from "../display/FieldPencil";
-import { updateBelief } from "../../actions/charActions";
+import { loadChar, startUpdateBelief, updateBelief } from "../../actions/charActions";
 import Display from "./Display";
 import { useNavigate } from "react-router";
 
 const CharacterSheet = () => {
     let navigate = useNavigate()
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
-    const [gameCode,] = useLocalStorageState('localCode')
-    const [charID,] = useLocalStorageState('localCID')
     const [char, dispatchChar] = useReducer(charReducer, localChar)
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
 
     useEffect(() => {
-        if (localChar === undefined) {
-            navigate('/')
+        onValue(ref(db, `characters/${char.charID}`), snapshot => {
+            if (snapshot.exists()) {
+                dispatchChar(loadChar(snapshot.val()))
+            } else {
+                navigate('/newCharacter/heritage')
+            }
+        })
+
+        return () => {
+            off(ref(db, `characters/${char.charID}`))
         }
-    }, [])
+    }, [localChar])
+
 
     // Get Heritage
     useEffect(() => {
@@ -42,15 +49,7 @@ const CharacterSheet = () => {
 
     }, [])
 
-    // useEffect(() => {
-    //     setLocalChar(char)
-    //     startUpdateCharInfo({ gameCode, charID, charData: char })
-    //     return () => {
-    //         // When unmounting component, save current char to local
-    //         setLocalChar(char)
-    //         startUpdateCharInfo({ gameCode, charID, charData: char })
-    //     }
-    // }, [char])
+
 
     return (
         <div className="charSheet__container">
@@ -68,7 +67,7 @@ const CharacterSheet = () => {
                             dispatchChar(updateBelief(e.target.value))
                         }}
                         blur={() => {
-                            setLocalChar(char)
+                            startUpdateBelief({ uid: auth.currentUser.uid, charData: char })
                         }}
                         theme={'italic'}
                         placeholder={char.charName + "'s belief"}
