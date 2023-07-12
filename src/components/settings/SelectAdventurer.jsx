@@ -7,13 +7,17 @@ import { off, onValue, ref } from "firebase/database";
 import { defaultChar } from "../../reducers/charReducer";
 import { startClearCharID, startSelectCharID } from "../../actions/userActions";
 import ClickDescriptionSelect from "../display/ClickDescriptionSelect";
+import CharacterSummary from "../gameMom/CharacterSummary";
+import alphabetizeKeys from "../../functions/alphabetizeKeys";
 
 const SelectAdventurer = () => {
     const navigate = useNavigate()
     const [characters, setCharacters] = useState([])
-    const [selectedChar, setSelectedChar] = useState(defaultChar)
     const [localChar, setLocalChar, { removeItem: removeLocalChar }] = useLocalStorageState('localChar')
+    const [selectedChar, setSelectedChar] = useState(localChar.charID ? localChar : defaultChar)
     const [anonymous, setAnonymous] = useState(true)
+    const [heritages, setHeritages] = useState([])
+    const [traits, setTraits] = useState([])
 
     const noUserAccount = 'To create more than one Tiny Dungeon adventurer, please create a Tiny Dungeon account'
 
@@ -44,6 +48,42 @@ const SelectAdventurer = () => {
         })
 
     }, [auth.currentUser])
+
+    useEffect(() => {
+        if (!anonymous) {
+
+            onValue(ref(db, 'heritages'), snapshot => {
+                const tempArray = []
+                if (snapshot.exists()) {
+                    snapshot.forEach(snap => { tempArray.push(snap.val()) })
+                }
+                const sortedArray = alphabetizeKeys({ objectArray: tempArray, key: 'hTitle' })
+                setHeritages(sortedArray.length > 0 ? sortedArray : tempArray)
+            })
+        }
+
+        return (() => {
+            off(ref(db, 'heritages'))
+        })
+    }, [anonymous])
+
+    useEffect(() => {
+        if (!anonymous) {
+
+            onValue(ref(db, 'traits'), snapshot => {
+                const tempArray = []
+                if (snapshot.exists()) {
+                    snapshot.forEach(snap => { tempArray.push(snap.val()) })
+                }
+                const sortedArray = alphabetizeKeys({ objectArray: tempArray, key: 'tTitle' })
+                setTraits(sortedArray.length > 0 ? sortedArray : tempArray)
+            })
+        }
+
+        return (() => {
+            off(ref(db, 'traits'))
+        })
+    }, [anonymous])
 
     const brandNewAdventurer = () => {
         if (!anonymous) {
@@ -83,14 +123,12 @@ const SelectAdventurer = () => {
             }
 
             <div className="selectAdventurer__container--menu">
+
                 <button
                     className={`selectAdventurer__brandNew` + (anonymous ? ` faded` : "")}
                     onClick={() => { brandNewAdventurer() }}
                 >Create New Adventurer</button>
-                <button
-                    className={`selectAdventurer__brandNew` + (anonymous ? ` faded` : "")}
-                    onClick={() => { loadAdventurer() }}
-                >Load Selected Adventurer</button>
+
             </div>
 
             {
@@ -106,7 +144,13 @@ const SelectAdventurer = () => {
                                 key={char.charID}
                                 itemID={char.charID}
                                 title={char.charName}
-                                description={'test'}
+                                description={
+                                    <CharacterSummary
+                                        charData={char}
+                                        heritageData={heritages}
+                                        traitData={traits}
+                                    />
+                                }
                                 changeHandler={() => {
                                     setSelectedChar(char)
                                 }}
@@ -116,6 +160,15 @@ const SelectAdventurer = () => {
                     })}
                 </div>
             }
+
+            <div className="selectAdventurer__container--menu">
+
+                <button
+                    className={`selectAdventurer__brandNew` + (anonymous ? ` faded` : "")}
+                    onClick={() => { loadAdventurer() }}
+                >Load Selected Adventurer</button>
+
+            </div>
         </div>
     )
 }

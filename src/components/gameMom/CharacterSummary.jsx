@@ -1,6 +1,7 @@
 import React from "react";
 import ClickDescriptionMultiple from "../display/ClickDescriptionMultiple";
 import ClickDescriptionCount from "../display/ClickDescriptionCount";
+import alphabetizeKeys from "../../functions/alphabetizeKeys";
 
 
 const CharacterSummary = ({ charData, heritageData, traitData }) => {
@@ -34,7 +35,7 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                     <div className="characterSummary__margin--right">
                         Trade:
                     </div>
-                    <div>{charData.trade}</div>
+                    <div className="characterSummary__align--right">{charData.trade}</div>
                 </div>
 
                 <div>
@@ -53,6 +54,7 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                     })}
                 </div>
                 <hr className="hr__brown" />
+                <div className="centered">Weapons</div>
 
                 <div>
                     {charData.weaponObjects.map(weapon => {
@@ -71,8 +73,8 @@ const CharacterSummary = ({ charData, heritageData, traitData }) => {
                     &&
                     <div className="characterSummary__scrolls">
                         <hr className="hr__brown" />
-
-                        {charData.scrolls.map(scroll => {
+                        <div className="centered">Spells</div>
+                        {alphabetizeKeys({ objectArray: charData.scrolls, key: 'sTitle' }).map(scroll => {
                             return (
                                 <ClickDescriptionCount
                                     key={scroll.sID}

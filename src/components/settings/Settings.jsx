@@ -47,7 +47,7 @@ const Settings = () => {
                         ({ isActive }) =>
                             ('navLink' + (isActive ? ' active' : ''))
                     }
-                >Adventurer</NavLink>
+                >Adventurers</NavLink>
             </div>
 
 
