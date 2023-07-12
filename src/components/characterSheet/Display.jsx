@@ -129,10 +129,7 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
         },
         {
             title: 'Scrolls',
-            display: <DisplayScrolls
-                scrolls={char.scrolls}
-                dispatchChar={dispatchChar}
-            />,
+            display: <DisplayScrolls char={char} />,
             traitID: scrollsTraitID,
         },
         {

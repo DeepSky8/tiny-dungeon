@@ -249,6 +249,22 @@ export const startUpdateWeapons = async ({ uid, charData }) => {
         })
 }
 
+export const startUpdateScrolls = async ({ uid, charData }) => {
+    const updates = {};
+
+    updates[`characters/${charData.charID}/scrolls`] = charData.scrolls
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
+
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
 export const startUpdateBelief = async ({ uid, charData }) => {
     const updates = {};
     updates[`characters/${charData.charID}/userID`] = uid

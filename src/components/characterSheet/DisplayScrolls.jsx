@@ -11,13 +11,13 @@ const sortScrolls = (scrolls) => {
     }))
 }
 
-const DisplayScrolls = ({ scrolls, dispatchChar }) => {
-    const ownedScrolls = scrolls.filter(scroll => scroll.sAmount > 0)
-    const usedScrolls = scrolls.filter(scroll => scroll.sAmount === 0)
+const DisplayScrolls = ({ char }) => {
+    const ownedScrolls = char.scrolls.filter(scroll => scroll.sAmount > 0)
+    const usedScrolls = char.scrolls.filter(scroll => scroll.sAmount === 0)
 
     return (
         <div className="displayScrolls__container">
-        <div className="charSheet__display--title centered bold">Scrolls</div>
+            <div className="charSheet__display--title centered bold">Scrolls</div>
 
             <TapOpen />
             {ownedScrolls.length > 0
@@ -26,8 +26,8 @@ const DisplayScrolls = ({ scrolls, dispatchChar }) => {
                     return (
                         <DisplayScroll
                             key={scroll.sID}
+                            char={char}
                             scrollData={scroll}
-                            dispatchChar={dispatchChar}
                         />
                     )
                 })}
@@ -41,8 +41,8 @@ const DisplayScrolls = ({ scrolls, dispatchChar }) => {
                     return (
                         <DisplayScroll
                             key={scroll.sID}
+                            char={char}
                             scrollData={scroll}
-                            dispatchChar={dispatchChar}
                         />
                     )
                 })}
