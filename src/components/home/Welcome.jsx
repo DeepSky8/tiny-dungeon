@@ -49,7 +49,7 @@ const Welcome = () => {
         if (sessionCode) {
             navigate('/newCharacter/heritage')
         } else {
-            navigate('/settings/(newCharacter(heritage')
+            navigate('/authenticate/(newCharacter(heritage')
         }
     }
 
@@ -65,7 +65,7 @@ const Welcome = () => {
                 navigate('/newCharacter/heritage')
             }
         } else if (localChar) {
-            navigate('/settings/(characterSheet')
+            navigate('/authenticate/(characterSheet')
         }
     }
 

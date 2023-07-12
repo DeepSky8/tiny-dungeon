@@ -29,12 +29,13 @@ import AdminCode from "../components/admin/AdminCode.jsx";
 import AuthPage from "../components/authenticate/AuthPage.jsx";
 import RegisterPage from "../components/authenticate/RegisterPage.jsx";
 import ResetPage from "../components/authenticate/ResetPage.jsx";
-import Settings from "../components/admin/Settings.jsx";
+import Settings from "../components/settings/Settings.jsx";
 import CharactersOverview from "../components/gameMom/CharactersOverview.jsx";
 import AuthOptions from "../components/authenticate/AuthOptions.jsx";
 import JoinSession from "../components/authenticate/JoinSession.jsx";
 import { get, onValue, ref } from "firebase/database";
 import { db } from "../api/firebase.js";
+import SelectAdventurer from "../components/settings/SelectAdventurer.jsx";
 
 const AppRouter = createBrowserRouter([
 
@@ -83,7 +84,7 @@ const AppRouter = createBrowserRouter([
             },
 
             {
-                path: "/settings/:back?",
+                path: "/settings",
                 errorElement: <NotFoundPage />,
                 element: <Settings />,
                 children: [
@@ -91,7 +92,12 @@ const AppRouter = createBrowserRouter([
                         index: true,
                         errorElement: <NotFoundPage />,
                         element: <JoinSession />
-                    }
+                    },
+                    {
+                        path: 'selectAdventurer',
+                        errorElement: <NotFoundPage />,
+                        element: <SelectAdventurer />
+                    },
                 ]
             },
             {
@@ -142,11 +148,11 @@ const AppRouter = createBrowserRouter([
                     },
                 ]
             },
-            {
-                path: '/adminAccess',
-                errorElement: <NotFoundPage />,
-                element: <AdminCode />,
-            },
+            // {
+            //     path: '/adminAccess',
+            //     errorElement: <NotFoundPage />,
+            //     element: <AdminCode />,
+            // },
             {
                 element: <AuthWrapperCreate />,
                 errorElement: <NotFoundPage />,

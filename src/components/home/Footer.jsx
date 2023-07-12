@@ -10,6 +10,7 @@ const Footer = ({ }) => {
     let navigate = useNavigate();
     let location = useLocation();
     const [localUser, setLocalUser, { removeItem: removeLocalUser }] = useLocalStorageState('localUser', { defaultValue: defaultUserState })
+    const [sessionCode, setSessionCode, { removeItem: removeSessionCode }] = useLocalStorageState('sessionCode')
     const here = location.pathname.split('/')[1]
     const useHere = here === 'authenticate' ? '' : here
     const [authStatus, setAuthStatus] = useState(localUser.uid ? 'lock_open' : 'lock')
@@ -46,6 +47,7 @@ const Footer = ({ }) => {
             setAuthStatus('lock')
             logout()
             removeLocalUser()
+            removeSessionCode()
         } else {
             navigate(`/authenticate/${useHere}`)
 

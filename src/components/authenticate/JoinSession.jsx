@@ -53,15 +53,17 @@ const JoinSession = () => {
     }
 
     return (
-        <div className="authCode__container authCode__spacer--xsmall centered">
+        <div className="joinSession__container joinSession__spacer centered">
 
-            <div className="authCode__container--text">
-                <div className="authCode__text">
+            <hr className="hr__brown" />
+
+            <div className="joinSession__container--text">
+                <div className="joinSession__text">
                     {enteredCode ? currentSessionCode : enterSessionCode}
                 </div>
 
             </div>
-            <div className="authCode__container--field">
+            <div className="joinSession__container--field">
                 <Field
                     label={''}
                     aria={'Game Code'}
@@ -80,15 +82,15 @@ const JoinSession = () => {
             </div>
 
 
-            <div className="authCode__spacer--medium">
+            <div className="joinSession__spacer--medium">
                 <button
-                    className="authCode__button--submit"
+                    className="joinSession__button--submit"
                     onClick={checkCode}
                 >Submit</button>
             </div>
 
-            <div className="authCode__container--text">
-                <div className="authCode__message">
+            <div className="joinSession__container--text">
+                <div className="joinSession__message">
                     {message}
                 </div>
             </div>

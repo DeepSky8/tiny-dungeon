@@ -47,7 +47,7 @@ export const startUpdateUserAccessDate = async ({ uid }) => {
         })
 }
 
-export const startRemoveUser = ({ uid }) => {
+export const startRemoveUser = async ({ uid }) => {
     const updates = {};
 
     updates[`users/${uid}`] = null
@@ -59,7 +59,7 @@ export const startRemoveUser = ({ uid }) => {
 }
 
 
-export const startUpdateSessionCode = ({ uid, session }) => {
+export const startUpdateSessionCode = async ({ uid, session }) => {
     const updates = {};
 
     updates[`users/${uid}/uid`] = uid
@@ -75,6 +75,19 @@ export const startUpdateSessionCode = ({ uid, session }) => {
         })
 }
 
+export const startSelectCharID = async ({ uid, charID }) => {
+    const updates = {};
+
+    updates[`users/${uid}/charID`] = charID
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid })
+        })
+        .catch((error) => {
+            console.log('Did not update access date', error)
+        })
+}
 
 
 

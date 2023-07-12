@@ -10,6 +10,7 @@ import { defaultSessionSettings, sessionSettingsReducer } from "../../reducers/s
 import { off, onValue, ref } from "firebase/database";
 import { auth, db } from "../../api/firebase";
 import { loadSession } from "../../actions/sessionSettingsActions";
+import saveAsNewChar from "../../functions/saveAsNewChar";
 
 const NewCharacter = () => {
     let navigate = useNavigate();
@@ -90,36 +91,42 @@ const NewCharacter = () => {
 
     useEffect(() => {
         if (nextStep.pathRoot === '/characterSheet' && localChar.charID === 0) {
-            startNewCharKey()
-                .then((newCharID) => {
-                    startUpdateCharID({ uid: auth.currentUser.uid, charID: newCharID })
-                    return newCharID
-                })
+            saveAsNewChar({ char: char })
                 .then((charID) => {
-                    console.log('reporting charID', charID)
-                    startUpdateChar(
-                        {
-                            uid: auth.currentUser.uid,
-                            charData: {
-                                ...char,
-                                charCreated: Date.now(),
-                                charID: charID
-                            }
-                        }
-                    )
-                    return charID
+                    setLocalChar({ ...char, charID })
                 })
-                .then((charID) => {
-                    dispatchChar(updateCharID(charID))
-                    setLocalChar({ ...char, charID: charID })
-                })
-
                 .then(() => {
                     navigate(nextStep.pathRoot + '/' + nextStep.currentStep)
                 })
-                .catch((error) => {
-                    console.log('Error encountered', error)
-                })
+            // startNewCharKey()
+            //     .then((newCharID) => {
+            //         startUpdateCharID({ uid: auth.currentUser.uid, charID: newCharID })
+            //         return newCharID
+            //     })
+            //     .then((charID) => {
+            //         startUpdateChar(
+            //             {
+            //                 uid: auth.currentUser.uid,
+            //                 charData: {
+            //                     ...char,
+            //                     charCreated: Date.now(),
+            //                     charID: charID
+            //                 }
+            //             }
+            //         )
+            //         return charID
+            //     })
+            //     .then((charID) => {
+            //         dispatchChar(updateCharID(charID))
+            //         setLocalChar({ ...char, charID: charID })
+            //     })
+
+            //     .then(() => {
+            //         navigate(nextStep.pathRoot + '/' + nextStep.currentStep)
+            //     })
+            //     .catch((error) => {
+            //         console.log('Error encountered', error)
+            //     })
         } else if (char.charID) {
             startUpdateChar({ uid: auth.currentUser.uid, charData: char })
                 .then(() => {
