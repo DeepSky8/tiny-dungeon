@@ -45,3 +45,10 @@
 .displayWeapon__container--weaponGroup {
     padding-bottom: $s-size;
 }
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .displayWeapon__range--body {
+        text-align: left;
+        margin: 0 0 0 $xl-size + $xl-size;
+    }
+}
