@@ -15,16 +15,16 @@ import { onAuthStateChanged } from "firebase/auth";
 import { startCreateUser } from "../../actions/userActions";
 
 const Home = () => {
-    const [localUser, setLocalUser, { removeItem: removeLocalUser }] = useLocalStorageState('localUser', { defaultValue: defaultUserState })
+    // const [localUser, setLocalUser, { removeItem: removeLocalUser }] = useLocalStorageState('localUser', { defaultValue: defaultUserState })
     const [sessionCodes, setSessionCodes] = useState([])
 
-    useEffect(() => {
-        return (() => {
-            if (localUser.email !== 'none provided') {
-                removeLocalUser()
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     return (() => {
+    //         if (localUser.email !== 'none provided') {
+    //             removeLocalUser()
+    //         }
+    //     })
+    // }, [])
 
     useEffect(() => {
         onValue(ref(db, 'sessions'), snapshot => {

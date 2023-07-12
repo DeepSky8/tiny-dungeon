@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLoaderData, useOutletContext } from "react-router"
 import useLocalStorageState from "use-local-storage-state";
 import strung from "../../functions/strung";
 import { onValue, ref } from "firebase/database";
-import { db } from "../../api/firebase";
+import { auth, db } from "../../api/firebase";
 
 const AuthWrapper = () => {
     const [sessionCodes] = useOutletContext();
@@ -12,7 +12,13 @@ const AuthWrapper = () => {
 
 
 
-    if (sessionCode !== undefined && sessionCodes.includes(parseInt(sessionCode))) {
+    if (
+        sessionCode !== undefined
+        &&
+        sessionCodes.includes(parseInt(sessionCode))
+        &&
+        auth.currentUser
+    ) {
         return (
             <div>
                 <Outlet />

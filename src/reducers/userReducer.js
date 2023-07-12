@@ -1,7 +1,7 @@
 const defaultUserState = {
     authProvider: '',
     email: '',
-    uid: '',
+    uid: false,
     admin: false,
     gm: false,
     session: 0,

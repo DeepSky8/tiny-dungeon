@@ -5,31 +5,31 @@ import Footer from "./Footer";
 import { auth, db } from "../../api/firebase";
 import { off, onValue, ref } from "firebase/database";
 import { defaultChar } from "../../reducers/charReducer";
-import { defaultUserState } from "../../reducers/userReducer";
 
 const Welcome = () => {
     let navigate = useNavigate();
-    const [localUser,] = useLocalStorageState('localUser')
+    const [localUser] = useLocalStorageState('localUser')
     const [localChar, setLocalChar] = useLocalStorageState('localChar', { defaultValue: defaultChar })
 
-    const [localCode,] = useLocalStorageState('localCode')
+    const [sessionCode,] = useLocalStorageState('sessionCode')
     const [charCreated, setCharCreated] = useState(false)
     // const [authStatus, setAuthStatus] = useState(auth.currentUser ? 'lock_open' : 'lock')
 
-    // useEffect(() => {
-    //     onValue(ref(db, `/users/${auth.currentUser.uid}`), snapshot => {
-    //         if (snapshot.exists()) {
-    //             setLocalUser(snapshot.val())
-    //         }
-    //     })
+    useEffect(() => {
+        if (localUser.charID) {
+            onValue(ref(db, `characters/${localUser.charID}`), snapshot => {
+                if (snapshot.exists()) {
+                    setLocalChar({ ...snapshot.val(), userID: "" })
+                }
+            })
+        }
 
-    //     return (() => {
-    //         if(auth.currentUser){
-    //             off(ref(db, `users/${auth.currentUser.uid}`))
-    //         }
-
-    //     })
-    // }, [auth.currentUser])
+        return () => {
+            if (localUser.charID) {
+                off(ref(db, `characters/${localUser.charID}`))
+            }
+        }
+    }, [localUser])
 
 
 
@@ -46,7 +46,7 @@ const Welcome = () => {
     }, [localChar])
 
     const newCharClick = () => {
-        if (localCode) {
+        if (sessionCode) {
             navigate('/newCharacter/heritage')
         } else {
             navigate('/settings/(newCharacter(heritage')
@@ -54,7 +54,7 @@ const Welcome = () => {
     }
 
     const charSheetClick = () => {
-        if (localCode) {
+        if (sessionCode) {
             if (
                 (localChar !== undefined)
                 &&

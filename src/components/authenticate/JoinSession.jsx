@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { auth } from "../../api/firebase";
-import { onAuthStateChanged, signInAnonymously } from "firebase/auth"
+import { signInAnonymously } from "firebase/auth"
 import { useAuthState } from "react-firebase-hooks/auth";
 import Field from "../display/Field";
 import { useNavigate, useOutletContext, useParams } from "react-router";
 import strung from "../../functions/strung";
-import { startCreateUser, startUpdateSessionCode } from "../../actions/userActions";
 import useLocalStorageState from "use-local-storage-state";
 
 
@@ -26,26 +25,12 @@ const JoinSession = () => {
     const currentSessionCode = 'Current session'
 
 
-    // useEffect(() => {
-    //     console.log('sessions', sessions)
-    // }, [sessions])
-    // useEffect(() => {
-    //     console.log('context EnterSession', context)
-    // }, [context])
-
-    // useEffect(() => {
-    //     if (context.user.gameSession !== 0) {
-    //         setEnteredCode(context.user.gameSession);
-    //     }
-    // }, [context.user.gameSession])
-
     const goNext = (location) => {
         setTimeout(() => { navigate(location) }, 2000)
 
     }
 
     const enterSession = (user = auth.currentUser) => {
-        // startUpdateSessionCode({ uid: user.uid, session: parseInt(enteredCode) })
         setSessionCode(parseInt(enteredCode))
         setMessage(successMessage)
 
@@ -56,46 +41,12 @@ const JoinSession = () => {
         }
     }
 
-    // onAuthStateChanged(auth, (user) => {
-    //     console.log('user', user)
-    //     if (user && user.isAnonymous) {
-    //         startCreateUser({ uid: auth.currentUser.uid, authProvider: 'anonymous' })
-    //             .then(() => {
-    //                 enterSession(user)
-    //             })
-    //     }
-    // })
-
-    // useEffect(() => {
-    //     if (auth.currentUser !== null && auth.currentUser.isAnonymous) {
-    //         startCreateUser({ uid: auth.currentUser.uid, authProvider: 'anonymous' })
-    //             // .then(() => {
-    //             //     enterSession(user)
-    //             // })
-    //     }
-    // }, [auth.currentUser])
-
-
-
     const checkCode = () => {
-        // console.log('nextLink', nextLink)
-        // console.log('currentCharID', context.user.currentCharID)
-        // console.log('user id', context.user.uid)
-        // console.log('auth uid', auth.currentUser.uid)
         if (sessionCodes.includes(parseInt(enteredCode))) {
             if (!user) {
                 signInAnonymously(auth)
             }
             enterSession();
-            // startUpdateSessionCode({ uid: auth.currentUser.uid, session: parseInt(enteredCode) })
-            // setMessage(successMessage)
-
-            // if (nextLink === "/characterSheet") {
-            //     goNext('/')
-            // } else {
-            //     goNext(nextLink)
-            // }
-
         } else {
             setMessage(errorMessage)
         }
@@ -106,7 +57,7 @@ const JoinSession = () => {
 
             <div className="authCode__container--text">
                 <div className="authCode__text">
-                    {sessionCode ? currentSessionCode : enterSessionCode}
+                    {enteredCode ? currentSessionCode : enterSessionCode}
                 </div>
 
             </div>

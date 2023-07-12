@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { charReducer, defaultChar } from "../../reducers/charReducer";
+import React, { useEffect, useReducer } from "react";
+import { charReducer } from "../../reducers/charReducer";
 import useLocalStorageState from "use-local-storage-state";
 import { defaultHeritage, heritageReducer } from "../../reducers/heritageReducer";
 import { off, onValue, ref } from "firebase/database";
@@ -20,6 +20,7 @@ const CharacterSheet = () => {
         onValue(ref(db, `characters/${char.charID}`), snapshot => {
             if (snapshot.exists()) {
                 dispatchChar(loadChar(snapshot.val()))
+                setLocalChar({ ...snapshot.val(), userID: "" })
             } else {
                 navigate('/newCharacter/heritage')
             }
@@ -28,7 +29,7 @@ const CharacterSheet = () => {
         return () => {
             off(ref(db, `characters/${char.charID}`))
         }
-    }, [localChar])
+    }, [])
 
 
     // Get Heritage
