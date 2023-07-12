@@ -1,3 +1,4 @@
+import { startNewCharKey, startUpdateChar, startUpdateCharID } from "../actions/charActions"
 import { auth } from "../api/firebase"
 
 const saveAsNewChar = async ({ char }) => {
@@ -18,10 +19,6 @@ const saveAsNewChar = async ({ char }) => {
                     }
                 }
             )
-            return charID
-        })
-        .then((charID) => {
-            dispatchChar(updateCharID(charID))
             return charID
         })
         .catch((error) => {

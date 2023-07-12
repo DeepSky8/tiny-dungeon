@@ -84,7 +84,7 @@ const AppRouter = createBrowserRouter([
             },
 
             {
-                path: "/settings",
+                path: "/settings/:back?",
                 errorElement: <NotFoundPage />,
                 element: <Settings />,
                 children: [
@@ -94,7 +94,7 @@ const AppRouter = createBrowserRouter([
                         element: <JoinSession />
                     },
                     {
-                        path: 'selectAdventurer',
+                        path: 'selectAdventurer/:back?',
                         errorElement: <NotFoundPage />,
                         element: <SelectAdventurer />
                     },

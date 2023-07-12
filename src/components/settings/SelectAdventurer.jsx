@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import saveAsNewChar from "../../functions/saveAsNewChar";
 import { off, onValue, ref } from "firebase/database";
 import { defaultChar } from "../../reducers/charReducer";
-import { startSelectCharID } from "../../actions/userActions";
+import { startClearCharID, startSelectCharID } from "../../actions/userActions";
+import ClickDescriptionSelect from "../display/ClickDescriptionSelect";
 
 const SelectAdventurer = () => {
     const navigate = useNavigate()
@@ -55,6 +56,7 @@ const SelectAdventurer = () => {
                 saveAsNewChar({ localChar })
             }
             removeLocalChar()
+            startClearCharID({ uid: auth.currentUser.uid })
             navigate('/newCharacter/heritage')
         }
     }
@@ -90,6 +92,30 @@ const SelectAdventurer = () => {
                     onClick={() => { loadAdventurer() }}
                 >Load Selected Adventurer</button>
             </div>
+
+            {
+                !anonymous
+                &&
+                characters.length > 0
+                &&
+                <div className="selectAdventurer__container--list">
+                    {characters.map((char) => {
+
+                        return (
+                            <ClickDescriptionSelect
+                                key={char.charID}
+                                itemID={char.charID}
+                                title={char.charName}
+                                description={'test'}
+                                changeHandler={() => {
+                                    setSelectedChar(char)
+                                }}
+                                isSelected={selectedChar.charID === char.charID}
+                            />
+                        )
+                    })}
+                </div>
+            }
         </div>
     )
 }

@@ -8,28 +8,31 @@ import { loadHeritage } from "../../actions/heritageActions";
 import Field from "../display/FieldPencil";
 import { loadChar, startUpdateBelief, updateBelief } from "../../actions/charActions";
 import Display from "./Display";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 const CharacterSheet = () => {
-    let navigate = useNavigate()
+    // let navigate = useNavigate()
     const [localChar, setLocalChar] = useLocalStorageState('localChar')
     const [char, dispatchChar] = useReducer(charReducer, localChar)
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
 
-    useEffect(() => {
-        onValue(ref(db, `characters/${char.charID}`), snapshot => {
-            if (snapshot.exists()) {
-                dispatchChar(loadChar(snapshot.val()))
-                setLocalChar({ ...snapshot.val(), userID: "" })
-            } else {
-                navigate('/newCharacter/heritage')
-            }
-        })
+    // useEffect(() => {
+    //     onValue(ref(db, `characters/${localChar.charID}`), snapshot => {
+    //         if (snapshot.exists()) {
+    //             dispatchChar(loadChar(snapshot.val()))
+    //             setLocalChar({ ...snapshot.val(), userID: "" })
+    //         } else {
+    //             setTimeout(() => {
+    //                 navigate('/newCharacter/heritage')
 
-        return () => {
-            off(ref(db, `characters/${char.charID}`))
-        }
-    }, [])
+    //             }, 5000)
+    //         }
+    //     })
+
+    //     return () => {
+    //         off(ref(db, `characters/${char.charID}`))
+    //     }
+    // }, [])
 
 
     // Get Heritage

@@ -93,9 +93,11 @@ const NewCharacter = () => {
         if (nextStep.pathRoot === '/characterSheet' && localChar.charID === 0) {
             saveAsNewChar({ char: char })
                 .then((charID) => {
+                    dispatchChar(updateCharID(charID))
                     setLocalChar({ ...char, charID })
                 })
                 .then(() => {
+                    console.log('nextStep', nextStep)
                     navigate(nextStep.pathRoot + '/' + nextStep.currentStep)
                 })
             // startNewCharKey()

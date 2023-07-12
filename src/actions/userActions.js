@@ -89,7 +89,19 @@ export const startSelectCharID = async ({ uid, charID }) => {
         })
 }
 
+export const startClearCharID = async ({ uid }) => {
+    const updates = {};
 
+    updates[`users/${uid}/charID`] = null
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid })
+        })
+        .catch((error) => {
+            console.log('Did not update access date', error)
+        })
+}
 
 
 
