@@ -8,6 +8,7 @@ const DisplayNotes = ({ char }) => {
     const [notes, setNotes] = useState(char.charNotes)
 
     const updateNotes = () => {
+        
         startUpdateNotes({ uid: auth.currentUser.uid, charData: { ...char, charNotes: notes } })
     }
 
