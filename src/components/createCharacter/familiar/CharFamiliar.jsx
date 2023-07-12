@@ -6,26 +6,30 @@ import Field from "../../display/FieldPencil";
 import DisplayRational from "../DisplayRational";
 import {
     updateFDescription,
+    updateFID,
     updateFName
 } from "../../../actions/familiarActions";
-import { updateFamiliarID } from "../../../actions/charActions";
+import { updateFamiliar } from "../../../actions/charActions";
+// import { updateFamiliarID } from "../../../actions/charActions";
 
 
 const CharFamiliar = () => {
     const [char, dispatchChar] = useOutletContext();
-    const [localFamiliar, setLocalFamiliar] = useLocalStorageState('familiar', { defaultValue: defaultFamiliar })
-    const [familiar, dispatchFamiliar] = useReducer(familiarReducer, localFamiliar)
+    // const [localChar, setLocalChar] = useLocalStorageState('localChar')
+
+    // const [localFamiliar, setLocalFamiliar] = useLocalStorageState('familiar', { defaultValue: defaultFamiliar })
+    const [familiar, dispatchFamiliar] = useReducer(familiarReducer, char.familiar)
 
     const handleSaveFamiliar = () => {
-        dispatchChar(updateFamiliarID(familiar.fID))
-        setLocalFamiliar(familiar)
+        dispatchChar(updateFamiliar(familiar))
+        // setLocalFamiliar(familiar)
     }
 
-    useEffect(() => {
-        if (familiar.fName && familiar.fDescription) {
-            handleSaveFamiliar()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (familiar.fName && familiar.fDescription) {
+    //         handleSaveFamiliar()
+    //     }
+    // }, [])
 
     return (
         <div className="charFamiliar__container">
@@ -39,7 +43,7 @@ const CharFamiliar = () => {
                     type={'text'}
                     value={familiar.fName}
                     change={(e) => {
-                        dispatchFamiliar(updateFName(e.target.value))
+                        dispatchFamiliar(updateFName(e.target.value));
                     }}
                     blur={() => {
                         handleSaveFamiliar()
