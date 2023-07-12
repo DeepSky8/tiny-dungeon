@@ -4,34 +4,43 @@ import { startUpdateScrolls } from "../../actions/charActions";
 import { auth } from "../../api/firebase";
 
 const DisplayScroll = ({ char, scrollData }) => {
-    const [scroll] = useReducer(scrollReducer, scrollData)
+    // const [scroll] = useReducer(scrollReducer, scrollData)
+    const [scroll, setScroll] = useState(scrollData)
     const [show, setShow] = useState(false)
 
-    const incrementedScroll = (scroll) => {
+    const incrementScroll = (scroll) => {
         const { sAmount } = scroll;
         const newAmount = sAmount + 1;
         return { ...scroll, sAmount: newAmount }
     }
 
-    const decrementedScroll = (scroll) => {
+    const decrementScroll = (scroll) => {
         const { sAmount } = scroll;
         const newAmount = sAmount - 1 > 0 ? sAmount - 1 : 0;
         return { ...scroll, sAmount: newAmount }
     }
 
     const increaseScroll = () => {
+        const incrementedScroll = incrementScroll(scroll)
+
+        setScroll(incrementedScroll)
+
         const updatedScrollArray = (
             (char.scrolls.filter(s => s.sID !== scroll.sID))
-                .concat([incrementedScroll(scroll)])
+                .concat([incrementedScroll])
         )
         startUpdateScrolls({ uid: auth.currentUser.uid, charData: { ...char, scrolls: updatedScrollArray } })
 
     }
 
     const decreaseScroll = () => {
+        const decrementedScroll = decrementScroll(scroll)
+
+        setScroll(decrementedScroll)
+
         const updatedScrollArray = (
             (char.scrolls.filter(s => s.sID !== scroll.sID))
-                .concat([decrementedScroll(scroll)])
+                .concat([decrementedScroll])
         )
 
         startUpdateScrolls({ uid: auth.currentUser.uid, charData: { ...char, scrolls: updatedScrollArray } })
