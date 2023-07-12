@@ -16,23 +16,28 @@ const CharacterSheet = () => {
     const [char, dispatchChar] = useReducer(charReducer, localChar)
     const [heritage, dispatchHeritage] = useReducer(heritageReducer, defaultHeritage)
 
-    // useEffect(() => {
-    //     onValue(ref(db, `characters/${localChar.charID}`), snapshot => {
-    //         if (snapshot.exists()) {
-    //             dispatchChar(loadChar(snapshot.val()))
-    //             setLocalChar({ ...snapshot.val(), userID: "" })
-    //         } else {
-    //             setTimeout(() => {
-    //                 navigate('/newCharacter/heritage')
+    useEffect(() => {
+        if (localChar.charID !== 0) {
+            onValue(ref(db, `characters/${localChar.charID}`), snapshot => {
+                if (snapshot.exists()) {
+                    dispatchChar(loadChar(snapshot.val()))
+                    setLocalChar({ ...snapshot.val(), userID: "" })
+                }
+            })
+        } else {
+            onValue(ref(db, `users/${auth.currentUser.uid}/charID`), snapshot => {
+                if (snapshot.exists()) {
+                    setLocalChar({ ...localChar, charID: snapshot.val(), userID: "" })
+                }
+            }, {
+                onlyOnce: true
+            })
+        }
 
-    //             }, 5000)
-    //         }
-    //     })
-
-    //     return () => {
-    //         off(ref(db, `characters/${char.charID}`))
-    //     }
-    // }, [])
+        return () => {
+            off(ref(db, `characters/${char.charID}`))
+        }
+    }, [localChar.charID])
 
 
     // Get Heritage
