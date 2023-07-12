@@ -139,10 +139,7 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
         },
         {
             title: 'Notes',
-            display: <DisplayNotes
-                charNotes={char.charNotes}
-                dispatchChar={dispatchChar}
-            />,
+            display: <DisplayNotes char={char} />,
             traitID: '',
         },
     ]
