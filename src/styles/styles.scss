@@ -1,8 +1,8 @@
 @import "../styles/base/presets";
 @import "../styles/mixins/styledMenuMixins";
+@import "../styles/mixins/generalMixins";
 @import "../styles/base/base";
 @import "../styles/base/materialSymbols";
-@import "../styles/mixins/generalMixins";
 @import "../styles/components/notFoundPage";
 
 @import "../styles/home/home";
@@ -22,8 +22,11 @@
 @import "../styles/components/fieldPencil";
 
 @import "../styles/components/admin/adminPage";
+@import "../styles/components/settings/settings";
+@import "../styles/components/settings/selectAdventurer";
 
 @import "../styles/components/authenticate/authCode";
+@import "../styles/components/authenticate/joinSession";
 @import "../styles/components/authenticate/authPage";
 @import "../styles/components/authenticate/authOptions";
 

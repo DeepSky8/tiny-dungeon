@@ -6,13 +6,14 @@
 }
 
 .sMenu__button {
-    @include button--border;
-    background-color: $menu-yellow;
-    color: $text-brown;
-    display: block;
-    font-weight: bold;
-    padding: 2px;
-    @include button--shadow;
+    @include button--base;
+    // @include button--border;
+    // background-color: $menu-yellow;
+    // color: $text-brown;
+    // display: block;
+    // font-weight: bold;
+    // padding: 2px;
+    // @include button--shadow;
 }
 
 .sMenu__tray {
@@ -69,15 +70,15 @@
     }
 }
 
-@media only screen and (min-device-width: $desktop-breakpoint) {
-    // .sMenu__container {
-    //     width: 50%;
-    //     margin: auto;
-    //     margin-top: $s-size;
-    // }
-    .sMenu__button {
-        // font-size: $calcFontSizeMed;
-        // width: 50%;
-        // margin: auto;
-    }
-}
+// @media only screen and (min-device-width: $desktop-breakpoint) {
+//     .sMenu__container {
+//         width: 50%;
+//         margin: auto;
+//         margin-top: $s-size;
+//     }
+//     .sMenu__button {
+//         font-size: $calcFontSizeMed;
+//         width: 50%;
+//         margin: auto;
+//     }
+// }

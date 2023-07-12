@@ -1,0 +1,23 @@
+.settings__container {
+    user-select: none;
+}
+
+.settings__menu {
+    margin: auto;
+    justify-content: space-around;
+    text-align: center;
+    display: flex;
+    padding: $m-size 0;
+}
+
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .settings__menu {
+        margin: auto;
+        justify-content: space-around;
+        text-align: center;
+        display: flex;
+        padding: $l-size 0;
+    }
+
+}

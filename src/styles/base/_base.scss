@@ -89,10 +89,16 @@ body {
 
 .navLink {
   color: $text-brown;
+  text-decoration: none;
+  @include button--shadow;
+  @include button--border;
+  padding: 0 5px;
+  background-color: $menu-yellow;
 
   &.active {
     font-weight: bold;
     color: $text-brown;
+    // text-decoration: underline;
   }
 }
 

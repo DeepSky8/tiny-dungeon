@@ -20,7 +20,16 @@
     box-shadow: 0 10px 20px 2px $text-brown;
 }
 
-@mixin footer--shadow{
+@mixin footer--shadow {
     box-shadow: 0 -4px 7px 2px $text-brown;
+}
 
+@mixin button--base {
+    @include button--border;
+    @include button--shadow;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    display: block;
+    font-weight: bold;
+    padding: 2px;
 }

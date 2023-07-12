@@ -1,0 +1,51 @@
+.joinSession__container {
+    user-select: none;
+}
+
+.joinSession__spacer--xsmall {
+    margin: $xs-size;
+}
+
+.joinSession__spacer {
+    margin: 0 $s-size;
+}
+
+.joinSession__spacer--medium {
+    margin: 0 $m-size;
+}
+
+.joinSession__container--text {
+    padding-top: $m-size;
+}
+
+.joinSession__container--field {
+    margin-top: $m-size;
+    position: relative;
+    display: block;
+    // text-align: center;
+}
+
+.joinSession__button--submit {
+    @include button--border;
+    background-color: $menu-yellow;
+    color: $text-brown;
+    font-size: $calcFontSize;
+    font-weight: bold;
+    padding: $xs-size;
+    width: 50%;
+    margin: $xs-size;
+    text-align: center;
+    user-select: none;
+    justify-content: space-around;
+    @include button--shadow;
+
+    &:focus {
+        outline-color: $text-brown;
+    }
+}
+
+@media only screen and (min-device-width: $desktop-breakpoint) {
+    .joinSession__spacer {
+        margin: 0 $l-size;
+    }
+}
