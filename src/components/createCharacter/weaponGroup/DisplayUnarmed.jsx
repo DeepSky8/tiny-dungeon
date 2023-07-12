@@ -14,7 +14,6 @@ const DisplayUnarmed = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
 
     const martialArtist = {
         wID: 'martialArtist',
-        wCharID: char.charID,
         wType: 'u',             // Corresponds to weaponGroup letter
         wTitle: '',             // User-defined text
         wDescription: '',       // User-defined text, if any

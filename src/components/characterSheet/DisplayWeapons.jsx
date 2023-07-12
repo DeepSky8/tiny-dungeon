@@ -6,11 +6,13 @@ import TapOpen from "../TapOpen";
 import DisplayRational from "../createCharacter/DisplayRational";
 import returnsTitleText from "../../functions/returnsTitleText";
 
-const DisplayWeapons = ({ char, dispatchChar }) => {
+const DisplayWeapons = ({ char }) => {
     const { weaponGroupObjects: weaponGroups, weaponObjects: weapons } = char
     const sortedWeaponGroups = alphabetizeTitles({ objectArray: weaponGroups, titlePrefix: 'wg' })
     // const notWeapons = ['Unarmed', 'Powerful Claw', 'Magical Ranged']
     // const areWeapons = ['Ranged', 'Shield', 'Improvised', 'Heavy Melee', 'Light Melee']
+
+
 
     return (
         <div className="displayWeapons__container">
@@ -53,7 +55,6 @@ const DisplayWeapons = ({ char, dispatchChar }) => {
                                             weaponGroup={wg}
                                             weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
                                             char={char}
-                                            dispatchChar={dispatchChar}
                                         />
                                     )
                                     :
@@ -63,7 +64,6 @@ const DisplayWeapons = ({ char, dispatchChar }) => {
                                             weaponGroup={wg}
                                             weapons={weapons.filter(weapon => (weapon.wType === wg.wgType))}
                                             char={char}
-                                            dispatchChar={dispatchChar}
                                         />
                                     )
                             )

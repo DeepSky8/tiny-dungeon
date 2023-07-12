@@ -233,6 +233,22 @@ export const startUpdateFamiliar = async ({ uid, charData }) => {
         })
 }
 
+export const startUpdateWeapons = async ({ uid, charData }) => {
+    const updates = {};
+
+    updates[`characters/${charData.charID}/weaponObjects`] = charData.weaponObjects
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
+
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
 export const startUpdateBelief = async ({ uid, charData }) => {
     const updates = {};
     updates[`characters/${charData.charID}/userID`] = uid

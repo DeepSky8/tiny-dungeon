@@ -2,18 +2,23 @@ import React, { useReducer, useState } from "react";
 import { defaultWeaponMastered, weaponsMasteredReducer } from "../../reducers/weaponReducer";
 import { updateWDescription, updateWTitle } from "../../actions/weaponActions";
 import Field from "../display/FieldPencil";
-import { addWeaponObject } from "../../actions/charActions";
+import { addWeaponObject, startUpdateWeapons } from "../../actions/charActions";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
 import TapOpen from "../TapOpen";
+import { auth } from "../../api/firebase";
 
-const DisplayWeapon = ({ weaponGroup: wG, char, dispatchChar }) => {
+const DisplayWeapon = ({ weaponGroup: wG, char }) => {
     const [wgName,] = useState(wG.wgTitle);
     const weaponMatch = (char.weaponObjects.find(wO => wO.wType === wG.wgType))
     const [weapon, dispatchWeapon] = useReducer(weaponsMasteredReducer, (weaponMatch === undefined ? defaultWeaponMastered : weaponMatch))
     const [show, setShow] = useState(false)
 
     const handleSaveWeapon = () => {
-        dispatchChar(addWeaponObject(weapon))
+        const newWGOs = [weapon].concat(
+            char.weaponObjects.filter(wO =>
+                wO.wType !== weapon.wType
+            ))
+        startUpdateWeapons({ uid: auth.currentUser.uid, charData: { ...char, weaponObjects: newWGOs } })
     }
 
     const rangeName = (range) => {

@@ -5,10 +5,11 @@ import {
     updateWTitle,
 } from "../../actions/weaponActions";
 import Field from "../display/FieldPencil";
-import { addWeaponObject } from "../../actions/charActions";
+import { startUpdateWeapons } from "../../actions/charActions";
 import ClickDescriptionCentered from "../display/ClickDescriptionCentered";
+import { auth } from "../../api/firebase";
 
-const DisplayUnarmed = ({ weaponGroup: wG, char, dispatchChar }) => {
+const DisplayUnarmed = ({ weaponGroup: wG, char }) => {
     const [wgName,] = useState(wG.wgTitle); // Will always be Unarmed
     const weaponMatch = (char.weaponObjects.find(wO => wO.wType === wG.wgType))
 
@@ -16,7 +17,11 @@ const DisplayUnarmed = ({ weaponGroup: wG, char, dispatchChar }) => {
     const [show, setShow] = useState(false)
 
     const handleSaveWeapon = () => {
-        dispatchChar(addWeaponObject(weapon))
+        const newWGOs = [weapon].concat(
+            char.weaponObjects.filter(wO =>
+                wO.wType !== weapon.wType
+            ))
+        startUpdateWeapons({ uid: auth.currentUser.uid, charData: { ...char, weaponObjects: newWGOs } })
     }
 
     const rangeName = (range) => {

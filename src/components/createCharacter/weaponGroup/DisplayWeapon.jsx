@@ -17,7 +17,6 @@ const DisplayWeapon = ({ weaponGroup: wG, weapons, char, dispatchChar }) => {
 
     const otherWeapon = {
         wID: `custom${wG.wgType}`,
-        wCharID: char.charID,
         wType: wG.wgType,       // Corresponds to weaponGroup letter
         wTitle: '',             // User-defined text
         wDescription: '',       // User-defined text

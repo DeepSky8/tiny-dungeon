@@ -113,23 +113,18 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
             title: 'Traits',
             display: <DisplayTraits
                 heritageTrait={hTrait}
-                traits={traits} />,
+                traits={traits}
+            />,
             traitID: '',
         },
         {
             title: 'Familiar',
-            display: <DisplayFamiliar
-                char={char}
-                dispatchChar={dispatchChar}
-            />,
+            display: <DisplayFamiliar char={char} />,
             traitID: hasFamiliarID,
         },
         {
             title: 'Weapons',
-            display: <DisplayWeapons
-                char={char}
-                dispatchChar={dispatchChar}
-            />,
+            display: <DisplayWeapons char={char} />,
             traitID: '',
         },
         {
