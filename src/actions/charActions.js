@@ -143,9 +143,9 @@ export const updateGearID = (gearID) => ({
     gearID
 })
 
-export const updateFamiliarID = (familiarID) => ({
-    type: 'UPDATE_FAMILIARID',
-    familiarID
+export const updateFamiliar = (familiar) => ({
+    type: 'UPDATE_FAMILIAR',
+    familiar
 })
 
 export const updateXP = (XP) => ({
@@ -193,7 +193,6 @@ export const startUpdateCharID = async ({ uid, charID }) => {
     updates[`characters/${charID}/charID`] = charID
     updates[`characters/${charID}/userID`] = uid
 
-
     update(ref(db), updates)
         .then(() => {
             startUpdateUserAccessDate({ uid: uid })
@@ -208,6 +207,22 @@ export const startUpdateChar = async ({ uid, charData }) => {
     const updates = {};
 
     updates[`characters/${charData.charID}`] = { ...charData, charUpdated: Date.now(), userID: uid }
+
+    update(ref(db), updates)
+        .then(() => {
+            startUpdateUserAccessDate({ uid: uid })
+        })
+        .catch((error) => {
+            console.log('Did not update character', error)
+        })
+}
+
+export const startUpdateFamiliar = async ({ uid, charData }) => {
+    const updates = {};
+
+    updates[`characters/${charData.charID}/familiar`] = charData.familiar
+    updates[`characters/${charData.charID}/charUpdated`] = Date.now()
+
 
     update(ref(db), updates)
         .then(() => {

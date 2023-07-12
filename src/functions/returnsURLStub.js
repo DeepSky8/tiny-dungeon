@@ -40,7 +40,7 @@ const returnsURLStub = ({ char, newCharStepOrder, currentStep, initialTraits }) 
         belief,             // Belief is user-defined text
         weaponGroupObjects,     // Identified by wgID and wgType
         weaponObjects,      // Identified by wID and wType
-        familiar,         // Reference by fID
+        familiar,         
     } = char
 
     // arrays used in evaluations

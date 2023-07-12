@@ -1,26 +1,18 @@
-import React, { useEffect, useReducer } from "react";
-import useLocalStorageState from "use-local-storage-state";
+import React, { useReducer } from "react";
 import Field from "../display/FieldPencil";
-import { updateFamiliarID } from "../../actions/charActions";
-import { defaultFamiliar, familiarReducer } from "../../reducers/familiarReducer";
+import { familiarReducer } from "../../reducers/familiarReducer";
 import { updateFDescription, updateFName } from "../../actions/familiarActions";
 import DisplayRational from "../createCharacter/DisplayRational";
+import { startUpdateFamiliar } from "../../actions/charActions";
+import { auth } from "../../api/firebase";
 
 
-const DisplayFamiliar = ({ char, dispatchChar }) => {
-    const [localFamiliar, setLocalFamiliar] = useLocalStorageState('familiar', { defaultValue: defaultFamiliar })
-    const [familiar, dispatchFamiliar] = useReducer(familiarReducer, localFamiliar)
+const DisplayFamiliar = ({ char }) => {
+    const [familiar, dispatchFamiliar] = useReducer(familiarReducer, char.familiar)
 
     const handleSaveFamiliar = () => {
-        dispatchChar(updateFamiliarID(familiar.fID))
-        setLocalFamiliar(familiar)
+        startUpdateFamiliar({ uid: auth.currentUser.uid, charData: { ...char, familiar: { ...familiar } } })
     }
-
-    useEffect(() => {
-        if (familiar.fName && familiar.fDescription) {
-            handleSaveFamiliar()
-        }
-    }, [])
 
     return (
         <div className="displayFamiliar__container">

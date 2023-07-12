@@ -1,5 +1,5 @@
 const defaultFamiliar = {
-    fID: 'familiar',
+    fID: 0,
     fName: '',
     fCharID: '',
     fDescription: ''

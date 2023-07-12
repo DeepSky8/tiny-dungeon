@@ -1,4 +1,5 @@
 import defaultGear from "../objectsArrays/defaultGear";
+import { defaultFamiliar } from "./familiarReducer";
 
 
 const defaultChar = {
@@ -52,7 +53,13 @@ const defaultChar = {
 
     gold: 10,
 
-    familiarID: '',             // Reference by fID
+    familiar: {
+        ...defaultFamiliar
+        // fID: 0,
+        // fName: '',
+        // fCharID: '',
+        // fDescription: ''
+    },             
     XP: 0,
     scrolls: [
         // {
@@ -113,7 +120,7 @@ const charReducer = (state, action) => {
                 traitIDs: newTraitIDs,
                 weaponGroupObjects: [],
                 weaponObjects: [],
-                familiarID: '',
+                familiar: {},
             }
         case 'CLEAR_TRAITIDS':
             return {
@@ -121,7 +128,7 @@ const charReducer = (state, action) => {
                 traitIDs: [],
                 weaponGroupObjects: [],
                 weaponObjects: [],
-                familiarID: '',
+                familiar: {},
             }
         case 'SET_HERITAGEHP':
             return {
@@ -262,10 +269,10 @@ const charReducer = (state, action) => {
                 ...state,
                 // Gear cannot currently be updated
             }
-        case 'UPDATE_FAMILIARID':
+        case 'UPDATE_FAMILIAR':
             return {
                 ...state,
-                familiarID: action.familiarID
+                familiar: action.familiar
             }
         case 'UPDATE_XP':
             const newXP = parseInt(state.XP) + parseInt(action.XP)

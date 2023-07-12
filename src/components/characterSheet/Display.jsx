@@ -120,7 +120,7 @@ const Display = ({ char, dispatchChar, fadeArray = [], maxPerRow = 3, theme = ''
             title: 'Familiar',
             display: <DisplayFamiliar
                 char={char}
-                dispatchChar={dispatchChar} q
+                dispatchChar={dispatchChar}
             />,
             traitID: hasFamiliarID,
         },
