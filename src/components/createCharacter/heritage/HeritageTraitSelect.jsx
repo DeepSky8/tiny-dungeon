@@ -1,4 +1,5 @@
 import React from "react";
+import { updateHTraitID } from "../../../actions/charActions";
 
 const HeritageTraitSelect = (
     {
@@ -54,7 +55,7 @@ const HeritageTraitSelect = (
                                             <button
                                                 className={`heritageTraitSelect__button ${notSelected}`}
                                                 onClick={() => {
-                                                    dispatchCharHeritageID(object[`${IDKey}`])
+                                                    dispatchCharHeritageID(updateHTraitID(object[`${IDKey}`]))
                                                 }}
                                             >
                                                 {
